@@ -1,0 +1,80 @@
+% Bai 02
+\chapter{Bài 2: Cơ bản về ngôn ngữ lập trình Python}
+
+% Gợi ý: bạn thay thế/điền các bài đúng theo notebook `python_basic.ipynb` hoặc `my_lession2.ipynb`.
+
+\section{Bài 2.1: Nhập/xuất và biểu thức tính toán}
+\subsection{Mô tả bài tập và ý tưởng giải quyết}
+\begin{itemize}
+  \item Nhập dữ liệu từ bàn phím bằng \texttt{input()} và ép kiểu.
+  \item Tính toán biểu thức theo đề bài, sử dụng thư viện \texttt{math} khi cần.
+  \item In kết quả theo định dạng yêu cầu.
+\end{itemize}
+
+\subsection{Code cài đặt}
+\begin{lstlisting}
+import math
+
+x = float(input("Moi ban nhap vao gia tri cua bien so x: "))
+f_x = x + (x ** 5) / math.factorial(5) + math.sqrt(abs(x)) / (x ** (3.0 / 2))
+print(f"Gia tri cua ham so f({x}) = {f_x:.2f}.")
+\end{lstlisting}
+
+\subsection{Kết quả chạy và giải thích}
+\ScreenshotFigure{assets/screenshots/bai02_b1_f_of_x.png}{Kết quả nhập \(x\) và tính \(f(x)\) (screenshot).}
+
+\textbf{Giải thích:} Chương trình nhận \(x\), tính theo công thức đề bài và in kết quả làm tròn 2 chữ số thập phân.
+
+\section{Bài 2.2: Cấu trúc lựa chọn (if/elif/else)}
+\subsection{Mô tả bài tập và ý tưởng giải quyết}
+\begin{itemize}
+  \item Xét các trường hợp của phương trình bậc nhất \(ax + b = 0\).
+  \item Nếu \(a=0\): xét tiếp \(b\) để kết luận vô nghiệm/vô số nghiệm.
+  \item Nếu \(a\\neq0\): tính nghiệm \(x=-b/a\).
+\end{itemize}
+
+\subsection{Code cài đặt}
+\begin{lstlisting}
+a = float(input("Moi ban nhap he so a: "))
+b = float(input("Moi ban nhap he so b: "))
+
+s = f"Phuong trinh {a}x + {b} = 0"
+if a == 0:
+    if b == 0:
+        print(f"{s} vo so nghiem.")
+    else:
+        print(f"{s} vo nghiem.")
+else:
+    x = -b / a
+    print(f"{s} co 1 nghiem x = {x:.2f}.")
+\end{lstlisting}
+
+\subsection{Kết quả chạy và giải thích}
+\ScreenshotFigure{assets/screenshots/bai02_b3_pt_bac1.png}{Giải phương trình bậc nhất (screenshot).}
+
+\textbf{Giải thích:} Kết quả phụ thuộc vào giá trị \(a, b\). Chương trình xử lý đầy đủ 3 trường hợp: vô nghiệm, vô số nghiệm, hoặc 1 nghiệm duy nhất.
+
+\section{Bài 2.3: Cấu trúc lặp (for/while)}
+\subsection{Mô tả bài tập và ý tưởng giải quyết}
+\begin{itemize}
+  \item Sinh dãy số từ 1 đến \(n\), duyệt và cộng dồn các số thoả điều kiện.
+  \item Dùng toán tử \% để kiểm tra chẵn/lẻ.
+\end{itemize}
+
+\subsection{Code cài đặt}
+\begin{lstlisting}
+n = int(input("Moi ban nhap so nguyen n: "))
+s = 0
+for i in range(1, n + 1):
+    if i % 2 == 0:
+        s += i
+print(f"Tong cac so chan tu 1 den {n} la {s}.")
+\end{lstlisting}
+
+\subsection{Kết quả chạy và giải thích}
+\ScreenshotFigure{assets/screenshots/bai02_b5_tong_chan.png}{Tính tổng các số chẵn (screenshot).}
+
+\textbf{Giải thích:} Vòng lặp duyệt qua các số 1..\(n\), chỉ cộng các số chẵn nên tổng thu được đúng theo yêu cầu.
+
+\clearpage
+

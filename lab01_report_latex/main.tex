@@ -1,0 +1,92 @@
+% !TeX program = xelatex
+\documentclass[12pt,a4paper]{report}
+
+% Vietnamese (XeLaTeX)
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{vietnamese}
+\setotherlanguage{english}
+
+% Fonts
+% Keep defaults to avoid missing system fonts in different environments (local/Overleaf).
+
+% Page layout
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% Figures / tables
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{fancyvrb}
+
+% Screenshot helper (so the project compiles even if screenshots are not uploaded yet)
+\newcommand{\ScreenshotFigure}[2]{%
+  \begin{figure}[H]
+    \centering
+    \IfFileExists{#1}{%
+      \includegraphics[width=0.95\textwidth]{#1}%
+    }{%
+      \fbox{\parbox{0.92\textwidth}{\textbf{Thiếu ảnh screenshot:}\\\texttt{\detokenize{#1}}\\Vui lòng chụp màn hình output trong notebook và upload vào đúng đường dẫn.}}%
+    }%
+    \caption{#2}
+  \end{figure}
+}
+
+% Links + ToC
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue
+}
+
+% Code listings (no shell-escape needed)
+\usepackage{xcolor}
+\usepackage{listings}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{220,220,220}
+\definecolor{codekw}{RGB}{0,92,197}
+\definecolor{codestr}{RGB}{170,0,0}
+\definecolor{codecmt}{RGB}{0,128,0}
+
+\lstdefinestyle{python}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{codekw}\bfseries,
+  stringstyle=\color{codestr},
+  commentstyle=\color{codecmt}\itshape,
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  frameround=tttt,
+  breaklines=true,
+  breakatwhitespace=true,
+  columns=fullflexible,
+  showstringspaces=false,
+  tabsize=4,
+  upquote=true
+}
+\lstset{style=python}
+
+% Paragraph spacing
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\input{tex/cover}
+
+\tableofcontents
+\clearpage
+
+\input{tex/intro}
+\input{tex/bai01}
+\input{tex/bai02}
+\input{tex/bai03}
+
+\end{document}
+

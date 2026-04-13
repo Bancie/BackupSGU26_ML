@@ -1,0 +1,69 @@
+% Bai 03
+\chapter{Bài 3: Kỹ thuật lập trình Python (NumPy, Matplotlib)}
+
+% Gợi ý: bạn thay thế/điền các bài đúng theo notebook `python_advance.ipynb` hoặc `my_lesson3.ipynb`.
+
+\section{Bài 3.1: Tính toán trên dãy số với NumPy}
+\subsection{Mô tả bài tập và ý tưởng giải quyết}
+\begin{itemize}
+  \item Tạo mảng NumPy \(a\) gồm \(N=10\) phần tử.
+  \item Thực hiện các phép toán: bình phương, tìm max/min/mean, tính phương sai và độ lệch chuẩn.
+  \item In kết quả ra màn hình để kiểm tra.
+\end{itemize}
+
+\subsection{Code cài đặt}
+\begin{lstlisting}
+import numpy as np
+
+a = np.array([120, 183, 160, 175, 145, 162, 190, 160, 152, 162])
+a2 = a * a
+
+v_max = np.max(a)
+v_min = np.min(a)
+v_avg = np.average(a)
+
+v_mean = np.sum(a) / len(a)
+v_sigma2 = np.sum((a - v_mean) ** 2) / (len(a) - 1)
+v_var = np.sqrt(v_sigma2)
+
+print("Day so a:", a)
+print("Binh phuong a:", a2)
+print("Max:", v_max, "Min:", v_min, "Mean:", v_avg)
+print("Phuong sai:", v_sigma2, "Do lech chuan:", v_var)
+\end{lstlisting}
+
+\subsection{Kết quả chạy và giải thích}
+\ScreenshotFigure{assets/screenshots/bai03_b1_numpy_array_ops.png}{Kết quả thao tác mảng NumPy (screenshot).}
+
+\textbf{Giải thích:} NumPy hỗ trợ thao tác vector hoá nên các phép tính max/min/mean/variance thực hiện nhanh và gọn.
+
+\section{Bài 3.2: Vẽ đồ thị với Matplotlib}
+\subsection{Mô tả bài tập và ý tưởng giải quyết}
+\begin{itemize}
+  \item Sinh dữ liệu hàm số (ví dụ: \(\sin(x)\), \(\cos(x)\)) trong khoảng \(x\in[-\pi,\pi]\).
+  \item Vẽ 2 đường trên cùng biểu đồ, gắn nhãn và hiển thị.
+  \item Chụp lại hình kết quả từ notebook.
+\end{itemize}
+
+\subsection{Code cài đặt}
+\begin{lstlisting}
+import numpy as np
+import matplotlib.pyplot as plt
+
+X = np.linspace(-np.pi, np.pi, 256, endpoint=True)
+C, S = np.cos(X), np.sin(X)
+
+plt.plot(X, C, label="cos(x)")
+plt.plot(X, S, label="sin(x)")
+plt.legend()
+plt.grid(True)
+plt.show()
+\end{lstlisting}
+
+\subsection{Kết quả chạy và giải thích}
+\ScreenshotFigure{assets/screenshots/bai03_b2_plot_sin_cos.png}{Đồ thị \(\sin(x)\) và \(\cos(x)\) (screenshot).}
+
+\textbf{Giải thích:} Đồ thị thể hiện đúng tính chất tuần hoàn của hai hàm lượng giác và sự lệch pha giữa \(\sin\) và \(\cos\).
+
+\clearpage
+
