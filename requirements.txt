@@ -6,3 +6,4 @@ marimo
 pandas
 seaborn
 scikit-learn
+ipywidgets
