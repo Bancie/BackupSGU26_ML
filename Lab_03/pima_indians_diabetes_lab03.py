@@ -37,92 +37,12 @@ def _(mo):
 def _():
     from pathlib import Path
 
-    import ast
-    import json
     import matplotlib.pyplot as plt
     import numpy as np
     import pandas as pd
     import seaborn as sns
-    import time
 
-    return Path, ast, json, np, pd, plt, sns, time
-
-
-@app.cell
-def _(Path, json, time):
-    debug_log_path = Path("/Users/chibangnguyen/ayai/BackupSGU26_ML/.cursor/debug-802d3e.log")
-
-    def agent_debug_log(run_id, hypothesis_id, location, message, data):
-        # region agent log
-        try:
-            payload = {
-                "sessionId": "802d3e",
-                "runId": run_id,
-                "hypothesisId": hypothesis_id,
-                "location": location,
-                "message": message,
-                "data": data,
-                "timestamp": int(time.time() * 1000),
-            }
-            with debug_log_path.open("a", encoding="utf-8") as f:
-                f.write(json.dumps(payload, ensure_ascii=True) + "\n")
-        except Exception:
-            pass
-        # endregion
-    return (agent_debug_log,)
-
-
-@app.cell
-def _(Path, agent_debug_log, ast):
-    source_path = Path(__file__).resolve()
-    source_text = source_path.read_text(encoding="utf-8")
-    tree = ast.parse(source_text)
-
-    assigned_names = []
-    for node in tree.body:
-        if isinstance(node, ast.FunctionDef):
-            has_cell_decorator = any(
-                isinstance(d, ast.Attribute) and d.attr == "cell" for d in node.decorator_list
-            )
-            if not has_cell_decorator:
-                continue
-            for sub in ast.walk(node):
-                if isinstance(sub, ast.Assign):
-                    for target in sub.targets:
-                        if isinstance(target, ast.Name):
-                            assigned_names.append(target.id)
-                        elif isinstance(target, ast.Tuple):
-                            for elt in target.elts:
-                                if isinstance(elt, ast.Name):
-                                    assigned_names.append(elt.id)
-
-    duplicate_counts = {}
-    for name in assigned_names:
-        duplicate_counts[name] = duplicate_counts.get(name, 0) + 1
-    duplicates = {k: v for k, v in duplicate_counts.items() if v > 1}
-
-    # region agent log
-    agent_debug_log(
-        run_id="pre-fix",
-        hypothesis_id="H1",
-        location="pima_indians_diabetes_lab03.py:diagnostic_ast_scan",
-        message="Duplicate assigned symbols across marimo cells",
-        data={"duplicates": duplicates, "assigned_count": len(assigned_names)},
-    )
-    # endregion
-
-    # region agent log
-    agent_debug_log(
-        run_id="pre-fix",
-        hypothesis_id="H2",
-        location="pima_indians_diabetes_lab03.py:diagnostic_ast_scan",
-        message="Marimo source context",
-        data={"source_path": str(source_path), "source_len": len(source_text)},
-    )
-    # endregion
-
-    duplicates
-    return
+    return Path, np, pd, plt, sns
 
 
 @app.cell
@@ -204,16 +124,7 @@ def _(df, mo):
 
 
 @app.cell
-def _(agent_debug_log, class_distribution, plt, sns):
-    # region agent log
-    agent_debug_log(
-        run_id="pre-fix",
-        hypothesis_id="H3",
-        location="pima_indians_diabetes_lab03.py:class_distribution_plot_cell",
-        message="Entered class distribution plot cell",
-        data={"rows": int(class_distribution["count"].sum())},
-    )
-    # endregion
+def _(class_distribution, plt, sns):
     fig_class_dist, ax_class_dist = plt.subplots(figsize=(6, 4))
     sns.barplot(
         x=class_distribution.index.astype(str),
@@ -317,20 +228,7 @@ def _(df, df_masked, feature_selector, mask_zero_toggle):
 
 
 @app.cell
-def _(agent_debug_log, bins_slider, plot_df, plt, selected_feature, sns):
-    # region agent log
-    agent_debug_log(
-        run_id="pre-fix",
-        hypothesis_id="H4",
-        location="pima_indians_diabetes_lab03.py:histplot_cell",
-        message="Entered histogram cell",
-        data={
-            "feature": selected_feature,
-            "bins": int(bins_slider.value),
-            "plot_rows": int(plot_df.shape[0]),
-        },
-    )
-    # endregion
+def _(bins_slider, plot_df, plt, selected_feature, sns):
     fig_hist, ax_hist = plt.subplots(figsize=(7, 4))
     sns.histplot(
         data=plot_df,
