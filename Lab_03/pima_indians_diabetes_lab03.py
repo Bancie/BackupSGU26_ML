@@ -37,12 +37,92 @@ def _(mo):
 def _():
     from pathlib import Path
 
+    import ast
+    import json
     import matplotlib.pyplot as plt
     import numpy as np
     import pandas as pd
     import seaborn as sns
+    import time
 
-    return Path, np, pd, plt, sns
+    return Path, ast, json, np, pd, plt, sns, time
+
+
+@app.cell
+def _(Path, json, time):
+    debug_log_path = Path("/Users/chibangnguyen/ayai/BackupSGU26_ML/.cursor/debug-802d3e.log")
+
+    def agent_debug_log(run_id, hypothesis_id, location, message, data):
+        # region agent log
+        try:
+            payload = {
+                "sessionId": "802d3e",
+                "runId": run_id,
+                "hypothesisId": hypothesis_id,
+                "location": location,
+                "message": message,
+                "data": data,
+                "timestamp": int(time.time() * 1000),
+            }
+            with debug_log_path.open("a", encoding="utf-8") as f:
+                f.write(json.dumps(payload, ensure_ascii=True) + "\n")
+        except Exception:
+            pass
+        # endregion
+    return (agent_debug_log,)
+
+
+@app.cell
+def _(Path, agent_debug_log, ast):
+    source_path = Path(__file__).resolve()
+    source_text = source_path.read_text(encoding="utf-8")
+    tree = ast.parse(source_text)
+
+    assigned_names = []
+    for node in tree.body:
+        if isinstance(node, ast.FunctionDef):
+            has_cell_decorator = any(
+                isinstance(d, ast.Attribute) and d.attr == "cell" for d in node.decorator_list
+            )
+            if not has_cell_decorator:
+                continue
+            for sub in ast.walk(node):
+                if isinstance(sub, ast.Assign):
+                    for target in sub.targets:
+                        if isinstance(target, ast.Name):
+                            assigned_names.append(target.id)
+                        elif isinstance(target, ast.Tuple):
+                            for elt in target.elts:
+                                if isinstance(elt, ast.Name):
+                                    assigned_names.append(elt.id)
+
+    duplicate_counts = {}
+    for name in assigned_names:
+        duplicate_counts[name] = duplicate_counts.get(name, 0) + 1
+    duplicates = {k: v for k, v in duplicate_counts.items() if v > 1}
+
+    # region agent log
+    agent_debug_log(
+        run_id="pre-fix",
+        hypothesis_id="H1",
+        location="pima_indians_diabetes_lab03.py:diagnostic_ast_scan",
+        message="Duplicate assigned symbols across marimo cells",
+        data={"duplicates": duplicates, "assigned_count": len(assigned_names)},
+    )
+    # endregion
+
+    # region agent log
+    agent_debug_log(
+        run_id="pre-fix",
+        hypothesis_id="H2",
+        location="pima_indians_diabetes_lab03.py:diagnostic_ast_scan",
+        message="Marimo source context",
+        data={"source_path": str(source_path), "source_len": len(source_text)},
+    )
+    # endregion
+
+    duplicates
+    return
 
 
 @app.cell
@@ -124,7 +204,16 @@ def _(df, mo):
 
 
 @app.cell
-def _(class_distribution, plt, sns):
+def _(agent_debug_log, class_distribution, plt, sns):
+    # region agent log
+    agent_debug_log(
+        run_id="pre-fix",
+        hypothesis_id="H3",
+        location="pima_indians_diabetes_lab03.py:class_distribution_plot_cell",
+        message="Entered class distribution plot cell",
+        data={"rows": int(class_distribution["count"].sum())},
+    )
+    # endregion
     fig_class_dist, ax_class_dist = plt.subplots(figsize=(6, 4))
     sns.barplot(
         x=class_distribution.index.astype(str),
@@ -228,7 +317,20 @@ def _(df, df_masked, feature_selector, mask_zero_toggle):
 
 
 @app.cell
-def _(bins_slider, plot_df, plt, selected_feature, sns):
+def _(agent_debug_log, bins_slider, plot_df, plt, selected_feature, sns):
+    # region agent log
+    agent_debug_log(
+        run_id="pre-fix",
+        hypothesis_id="H4",
+        location="pima_indians_diabetes_lab03.py:histplot_cell",
+        message="Entered histogram cell",
+        data={
+            "feature": selected_feature,
+            "bins": int(bins_slider.value),
+            "plot_rows": int(plot_df.shape[0]),
+        },
+    )
+    # endregion
     fig_hist, ax_hist = plt.subplots(figsize=(7, 4))
     sns.histplot(
         data=plot_df,
@@ -411,46 +513,6 @@ def _(data_path, mo):
     4. `project-0-BackupSGU26_ML-mcp-server-ds.load_csv` + `run_script`
        - Chạy script kiểm tra tuyến tính nhiều bước (không tạo chart, không overwrite dataframe cũ).
     """)
-    return
-
-
-@app.cell
-def _(mo):
-    mo.md("""
-    ### MCP verification notes (đã kiểm chứng trong phiên làm việc này)
-
-    - `read_metadata_tool` trên file CSV gốc cho thấy tool đang suy diễn hàng đầu là header
-      (`rows=767`, tên cột thành `6, 148, 72, ...`), nên cần cẩn thận khi so sánh trực tiếp.
-    - `run_pandas_code_tool` với `header=None` + danh sách cột chuẩn trả về:
-      - shape: `768 x 9`
-      - outcome counts: `{0: 500, 1: 268}`
-      - zero counts: `glucose=5, blood_pressure=35, skin_thickness=227, insulin=374, bmi=11`
-    - `mcp-server-ds.load_csv` mặc định cũng suy diễn header, nên nếu dùng DS server để đối chiếu
-      cần chuẩn hóa lại bước nạp dữ liệu (hoặc chuyển sang pandas-mcp code path có chỉ định schema).
-    """)
-    return
-
-
-@app.cell
-def _(column_names, data_path, mo, zero_as_missing_columns):
-    mcp_reference_payload = {
-        "csv_path": str(data_path.resolve()),
-        "column_names": column_names,
-        "zero_as_missing_columns": zero_as_missing_columns,
-        "pandas_mcp_sample_code": (
-            "import pandas as pd\n"
-            "cols = ['pregnancies','glucose','blood_pressure','skin_thickness','insulin','bmi',"
-            "'diabetes_pedigree_function','age','outcome']\n"
-            "df = pd.read_csv('<ABS_PATH>', header=None, names=cols)\n"
-            "result = {\n"
-            "  'shape': df.shape,\n"
-            "  'outcome_counts': df['outcome'].value_counts().to_dict(),\n"
-            "  'zero_counts': (df[['glucose','blood_pressure','skin_thickness','insulin','bmi']] == 0).sum().to_dict(),\n"
-            "}"
-        ),
-    }
-    mo.md("### MCP payload template (for quick copy)")
-    mcp_reference_payload
     return
 
 
