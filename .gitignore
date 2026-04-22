@@ -201,6 +201,9 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# MCP: vendored third-party servers and their .venv (workspace MCP config stays tracked under .cursor/)
+tools/mcp/
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
