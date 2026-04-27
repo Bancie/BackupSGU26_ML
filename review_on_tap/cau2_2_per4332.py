@@ -2,7 +2,7 @@
 PER-4332 — Câu 2.2: thang đo Stevens & đối chiếu W1..W6 với V.
 
 Sub-issues: PER-4333 … PER-4339 (từng W & thang đo V).
-Giải tay: `README_cau2_2.md`
+Giải tay: mục «Câu 2.2» trong `README.md` cùng thư mục.
 Chạy: python cau2_2_per4332.py
 """
 

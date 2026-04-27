@@ -1,7 +1,7 @@
 """
 PER-4322 — Câu 2.1: tập dữ liệu thuộc tính tuổi (n = 27, đã sắp tăng dần).
 
-Giải tay (thi trên giấy): `README.md` cùng thư mục.
+Giải tay (thi trên giấy): mục «Câu 2.1» trong `README.md` cùng thư mục.
 Chạy: python cau2_1_per4322.py — in (a)–(d) và lưu boxplot để đối chiếu.
 """
 

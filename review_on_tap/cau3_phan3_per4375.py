@@ -2,7 +2,7 @@
 PER-4375 — Phần 3: Câu 3.1 (PER-4340) … 3.4 (PER-4364).
 
 Chạy: python cau3_phan3_per4375.py
-Giải tay: README_phan3_per4375.md
+Giải tay: mục «Phần 3» trong `README.md` cùng thư mục.
 """
 
 from __future__ import annotations
