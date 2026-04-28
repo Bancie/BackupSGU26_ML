@@ -1,12 +1,13 @@
 # Tài liệu ôn tập — `review_on_tap`
 
-Giải tay (thi trên giấy) kèm script Python để đối chiếu số. **Mục lục:** Câu 2.1 · Câu 2.2 · Phần 3.
+Giải tay (thi trên giấy) kèm script Python để đối chiếu số. **Mục lục:** Câu 2.1 · Câu 2.2 · Phần 3 · **Bài tập 02**.
 
 | Nội dung                          | Linear                                                                   | Script                  |
 | --------------------------------- | ------------------------------------------------------------------------ | ----------------------- |
 | Câu 2.1 — thống kê mô tả (tuổi)   | [PER-4322](https://linear.app/bancie/issue/PER-4322/cau-21)              | `cau2_1_per4322.py`     |
 | Câu 2.2 — thang đo Stevens        | [PER-4332](https://linear.app/bancie/issue/PER-4332/cau-22)              | `cau2_2_per4332.py`     |
 | Phần 3 — ma trận nhầm lẫn & độ đo | [PER-4375](https://linear.app/bancie/issue/PER-4375/checklist-on-phan-3) | `cau3_phan3_per4375.py` |
+| Bài tập 02 — EDA & tiền xử lý     | [PER-4377](https://linear.app/bancie/issue/PER-4377)                     | [`README_baitap02_per4377.md`](README_baitap02_per4377.md) · `bai_tap02_per4377.py` |
 
 ---
 
