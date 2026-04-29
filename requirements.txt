@@ -1,9 +1,8 @@
 numpy
+pandas
+scikit-learn
 matplotlib
+seaborn
 ipython
 jupyter
 marimo
-pandas
-seaborn
-scikit-learn
-ipywidgets

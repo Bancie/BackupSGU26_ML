@@ -1,25 +1,85 @@
-# BackupSGU26_ML
+# SGU26_ML
 
-## MCP (Cursor)
+Repo môn **Máy học** - lưu bài tập lý thuyết, thực hành và đề tài.
 
-Workspace MCP is defined in [`.cursor/mcp.json`](.cursor/mcp.json): **pandas-mcp** and **mcp-server-ds** (data exploration).
+## Giới thiệu bản thân
 
-### One-time setup
+- **Họ tên:** Nguyễn Chí Bằng
+- **Mã số sinh viên:** 3122480004
+- **Khóa:** K22 - **Ngành:** Toán ứng dụng
+- **Trường:** Đại học Sài Gòn
 
-1. Install [uv](https://github.com/astral-sh/uv) and Python **3.10+** (3.13 recommended if your default is 3.14; see below).
+## Giới thiệu môn học
 
-2. Clone both servers and install dependencies:
+Môn **Máy học** (Machine Learning) trang bị kiến thức và kỹ năng về các phương pháp học máy, từ lý thuyết đến thực hành. Sinh viên làm bài cá nhân và nhóm, có đề tài challenge, và được yêu cầu quản lý mã nguồn trên GitHub minh bạch.
 
-```bash
-mkdir -p tools/mcp && cd tools/mcp
-git clone https://github.com/marlonluo2018/pandas-mcp-server.git
-git clone https://github.com/reading-plus-ai/mcp-server-data-exploration.git
-cd pandas-mcp-server && uv sync && cd ..
-cd mcp-server-data-exploration && uv python pin 3.13 && uv sync && cd ../..
+### Đánh giá môn học
+
+| Thành phần                       | Tỷ lệ   | Ghi chú                               |
+| -------------------------------- | ------- | ------------------------------------- |
+| **Thi cuối kỳ**                  | **50%** | 90 phút, đề đóng                      |
+| **Chuyên cần**                   | 10%     | Xem quy định bên dưới                 |
+| **Kiểm tra giữa kỳ (lý thuyết)** | 10%     | Đề đóng                               |
+| **Đề tài challenge**             | 15%     | Nhóm tối đa 4 sinh viên               |
+| **Bài tập + quá trình**          | 15%     | GitHub cá nhân + nhóm, bài tập đầy đủ |
+
+**Tóm tắt:** Thi cuối kỳ chiếm **nửa điểm (50%)** — phần quan trọng nhất. Các phần còn lại chia cho chuyên cần, giữa kỳ, đề tài và bài tập (khoảng 10–15% mỗi phần).
+
+#### Chuyên cần (10%)
+
+- Nghỉ **≤ 2 buổi:** khoảng **80%** điểm chuyên cần (theo quy định lớp).
+- Nghỉ **≥ 4 buổi:** **0 điểm** chuyên cần.
+- **Phải báo trước** khi vắng.
+
+#### Đề tài challenge (15%)
+
+- Làm **nhóm**, tối đa **4 sinh viên**.
+
+#### Bài tập + quá trình (15%)
+
+- **GitHub cá nhân:** lưu toàn bộ bài (lý thuyết + thực hành), tổ chức theo bài (ví dụ `Bai01` → `Bai09`, `DuAn`, …).
+- **GitHub nhóm:** dùng cho bài nhóm / đề tài.
+- Có thêm các bài tập khác theo yêu cầu giảng viên.
+
+### Thiết lập GitHub
+
+- **Tên repo:** `SGU26_ML` (private).
+- **Chia sẻ** với tài khoản: `dntai`.
+
+### Cấu trúc thư mục (gợi ý)
+
+```
+SGU26_ML/
+├── BaiTap01/
+├── BaiTap02/
+├── ...
+└── DeTai/
 ```
 
-`mcp-server-data-exploration` pins **Python 3.13** because its dependency stack (e.g. `pydantic-core` via older `mcp`) may not build on **Python 3.14** yet. `pandas-mcp-server` can use the default interpreter from `uv sync`.
+### Quy ước commit
 
-3. Reload the Cursor window (**Developer: Reload Window**), then enable the MCP servers under **Settings → MCP**.
+- Ghi rõ dạng: `BaiTap??/Phan??/Noi dung`  
+  (thay `??` và nội dung cho đúng bài, phần và mô tả ngắn).
 
-`tools/mcp/` is listed in `.gitignore`; only `.cursor/mcp.json` is meant to be committed so each machine runs its own clones and virtualenvs.
+### Chấm điểm liên quan GitHub
+
+- Điểm có thể **dựa vào hoạt động trên GitHub** (tính vào chuyên cần thực hành).
+- Thiết lập repo đúng, commit rõ ràng, làm bài đầy đủ → **ảnh hưởng trực tiếp** đến phần chuyên cần.
+
+### Ghi chú khác
+
+- Phải **đăng ký môn** (theo file đính kèm / quy định lớp).
+- Có **repo mẫu** và **tài liệu tham khảo** do giảng viên cung cấp - nên xem để đồng bộ format và yêu cầu.
+
+---
+
+## Nhật ký làm việc
+
+_(Cập nhật theo lịch sử commit trên repo.)_
+
+| Ngày       | Nội dung                                                                                           |
+| ---------- | -------------------------------------------------------------------------------------------------- |
+| 12/04/2026 | **BaiTap01** – Phần 02 và 03: notebook `python_basic`, `python_advance`, `my_lesson` và hình plot. |
+| 08/04/2026 | **BaiTap01** – Phần 01: `ex2_scientific1` và `ex4_scientific2`.                                    |
+| 06/04/2026 | Bổ sung giới thiệu cá nhân, môn học và nhật ký trên README.                                        |
+| 06/04/2026 | Khởi tạo repo.                                                                                     |
