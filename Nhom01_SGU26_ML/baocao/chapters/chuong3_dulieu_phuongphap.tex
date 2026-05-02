@@ -1,14 +1,21 @@
 \chapter{Dữ liệu và phương pháp đề xuất}
 
 \section{Nguồn dữ liệu}
-Dữ liệu được sử dụng trong bài này gồm:
+Nghiên cứu sử dụng bộ dữ liệu chuẩn \textit{Pima Indians Diabetes} trong học phần, bao gồm hai tệp:
 \begin{itemize}[leftmargin=1.5em]
     \item \texttt{Lab\_03/data/pima-indians-diabetes.csv}
     \item \texttt{Lab\_03/data/pima-indians-diabetes.names}
 \end{itemize}
-Theo file mô tả, bộ dữ liệu có 768 quan sát, 8 thuộc tính số học và 1 biến mục tiêu \texttt{outcome}.
+
+Tệp \texttt{.csv} chứa dữ liệu định lượng đã được cấu trúc theo hàng--cột; tệp \texttt{.names} mô tả ý nghĩa
+thuộc tính và bối cảnh thu thập dữ liệu. Theo mô tả gốc, bộ dữ liệu gồm 768 quan sát, 8 thuộc tính đầu vào dạng số
+và 1 biến mục tiêu nhị phân \texttt{outcome}. Việc lựa chọn bộ dữ liệu này phù hợp với mục tiêu xây dựng baseline
+vì dữ liệu có kích thước vừa phải, đủ để thử nghiệm nhiều chiến lược tiền xử lý nhưng vẫn kiểm soát tốt khả năng tái lập.
 
 \section{Mô tả thuộc tính}
+Các biến đầu vào đại diện cho nhóm chỉ số nhân trắc và sinh lý cơ bản thường dùng trong đánh giá nguy cơ đái tháo đường.
+Bảng \ref{tab:pima_features} tóm tắt ý nghĩa từng thuộc tính trong bộ dữ liệu.
+
 \begin{table}[H]
 \centering
 \caption{Mô tả các thuộc tính trong bộ dữ liệu Pima}
@@ -30,10 +37,18 @@ outcome & Nhãn phân lớp (0/1)\\
 \end{tabular}
 \end{table}
 
+\noindent
+Về mặt phân tích, có thể tạm chia các biến thành ba nhóm: (i) đặc điểm nhân khẩu học (\texttt{age}),
+(ii) đặc điểm tiền sử (\texttt{pregnancies}, \texttt{diabetes\_pedigree\_function}),
+và (iii) đặc điểm sinh lý cận lâm sàng (\texttt{glucose}, \texttt{blood\_pressure},
+\texttt{skin\_thickness}, \texttt{insulin}, \texttt{bmi}). Cách phân nhóm này giúp định hướng rõ hơn
+cho EDA và xử lý missing theo ngữ cảnh y sinh.
+
 \section{Kiểm tra chất lượng dữ liệu}
-Kết quả tái lập từ notebook cho thấy \textbf{không có dòng trùng lặp} và \textbf{không có NaN tường minh}
-trong CSV gốc. Tuy nhiên, nhiều cột sinh lý chứa giá trị \texttt{0} bất thường, được xem như missing ẩn
-theo chính sách \textit{zero-as-missing}.
+Kết quả tái lập từ notebook cho thấy bộ dữ liệu không có dòng trùng lặp và không có giá trị
+\texttt{NaN} tường minh trong tệp CSV gốc. Tuy nhiên, kiểm tra ngữ nghĩa dữ liệu cho thấy nhiều biến sinh lý
+chứa giá trị \texttt{0} không hợp lý về mặt lâm sàng. Vì vậy, nghiên cứu áp dụng chính sách
+\textit{zero-as-missing} để xem các giá trị này là missing ẩn, tránh làm lệch thống kê mô tả và quá trình huấn luyện.
 
 \begin{table}[H]
 \centering
@@ -59,8 +74,24 @@ glucose & 5 & 0.65\\
 \label{fig:missing_zero_report}
 \end{figure}
 
+\noindent
+Từ Bảng \ref{tab:zero_rate_focus} có thể thấy mức độ missing ẩn phân bố không đồng đều giữa các biến.
+\texttt{insulin} và \texttt{skin\_thickness} là hai biến bị ảnh hưởng mạnh nhất, trong khi \texttt{glucose}
+và \texttt{bmi} có tỷ lệ thấp hơn. Quan sát này là cơ sở để không dùng một chiến lược nội suy duy nhất theo mặc định,
+mà so sánh nhiều phương án imputation trong cùng thiết kế thực nghiệm.
+
+\noindent
+Trong Hình \ref{fig:missing_zero_report}, có thể thấy cấu trúc thiếu dữ liệu mang tính hệ thống chứ không ngẫu nhiên.
+Cụ thể, các cột liên quan đến cơ chế chuyển hóa (\texttt{insulin}) và đo nếp da (\texttt{skin\_thickness}) xuất hiện cột missing vượt trội so
+với các biến còn lại, hàm ý rằng mức độ khó thu thập hoặc thiếu nhất quán quy trình đo có thể cao hơn ở các chỉ số này.
+Insight quan trọng là nếu giữ nguyên giá trị \texttt{0} như quan sát hợp lệ, mô hình sẽ có xu hướng học một ``tín hiệu giả'' rằng
+``insulin cực thấp'' hoặc ``độ dày nếp da bằng 0'' xảy ra thường xuyên trong thực tế, từ đó làm méo ranh giới phân lớp.
+Do đó, hình này không chỉ có ý nghĩa mô tả mà còn là bằng chứng phương pháp luận cho quyết định \textit{zero-as-missing} và việc
+so sánh đa chiến lược imputation ở phần thực nghiệm.
+
 \section{Thiết kế thực nghiệm và tái lập}
-Thiết kế thực nghiệm giữ nguyên theo notebook để đảm bảo tái lập:
+Để bảo đảm tính công bằng khi so sánh mô hình, nghiên cứu giữ nguyên thiết kế thực nghiệm theo notebook gốc
+và triển khai thống nhất trên mọi cấu hình:
 \begin{enumerate}[leftmargin=1.8em]
     \item Chuyển \texttt{0 -> NaN} cho các biến sinh lý bất thường.
     \item Chia dữ liệu theo tỉ lệ train/validation/test = 60/20/20 với \texttt{stratify}
@@ -68,6 +99,11 @@ Thiết kế thực nghiệm giữ nguyên theo notebook để đảm bảo tái
     \item Tạo pipeline kết hợp \textit{imputer + scaler + model}.
     \item So sánh 12 tổ hợp cấu hình (3 imputer x 2 scaler x 2 model).
 \end{enumerate}
+
+\noindent
+Việc chia tập theo \texttt{stratify} giúp duy trì tỷ lệ lớp dương/âm tương đối ổn định giữa các tập, nhờ đó
+kết quả đánh giá ít bị nhiễu bởi sai lệch phân bố lớp. Bảng \ref{tab:data_split} cho thấy tỷ lệ \texttt{outcome=1}
+giữa train, validation và test gần như tương đương.
 
 \begin{table}[H]
 \centering
@@ -84,8 +120,31 @@ Test & 154 & 0.3506\\
 \end{tabular}
 \end{table}
 
+\subsection{Không gian cấu hình thực nghiệm}
+Mỗi thí nghiệm được xác định bởi một tổ hợp \textit{imputer + scaler + model}. Cụ thể:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Imputer:} Median, KNN, Iterative (MICE).
+    \item \textbf{Scaler:} StandardScaler, MinMaxScaler.
+    \item \textbf{Model:} Logistic Regression, Random Forest.
+\end{itemize}
+
+Tổng cộng có \(3 \times 2 \times 2 = 12\) cấu hình. Tất cả cấu hình được huấn luyện trên cùng tập train,
+chọn theo validation và báo cáo cuối cùng trên test để giảm rủi ro overfitting trong khâu lựa chọn mô hình.
+
+\subsection{Nguyên tắc tái lập}
+Để tăng khả năng tái lập kết quả giữa các lần chạy và giữa các môi trường máy khác nhau, nghiên cứu áp dụng:
+\begin{itemize}[leftmargin=1.5em]
+    \item Cố định \texttt{random\_state=42} cho các bước có ngẫu nhiên.
+    \item Dùng pipeline thống nhất để mọi phép biến đổi đều học từ train và áp dụng cho validation/test.
+    \item So sánh mô hình trên cùng một bộ chỉ số và cùng cách chia dữ liệu.
+\end{itemize}
+
 \section{EDA chuyên sâu theo nhóm biến}
-Để phản ánh đầy đủ các phân tích trong notebook, báo cáo bổ sung các hình chuyên sâu:
+Để phản ánh đầy đủ các phân tích trong notebook, nghiên cứu tổ chức EDA theo nhóm biến thay vì khảo sát rời rạc từng cột.
+Cách tiếp cận theo nhóm giúp bộc lộ rõ hơn mối quan hệ giữa đặc trưng và \texttt{outcome}, đồng thời liên kết trực tiếp
+với giả thuyết mô hình hóa ở các bước sau.
+
+Ba cụm phân tích chính gồm:
 \begin{itemize}[leftmargin=1.5em]
     \item Nhóm Age: tương quan theo biến và hồi quy Age-Glucose.
     \item Nhóm DPF: phân phối theo outcome và tỷ lệ mắc bệnh theo quartile.
@@ -99,12 +158,26 @@ Test & 154 & 0.3506\\
 \label{fig:age_glucose_analysis}
 \end{figure}
 
+\noindent
+Trong Hình \ref{fig:age_glucose_analysis}, có thể quan sát hai lớp thông tin quan trọng. Thứ nhất, ở phần tương quan, \texttt{age} có liên hệ dương với
+\texttt{outcome} nhưng mức độ không quá mạnh, cho thấy tuổi tác là yếu tố rủi ro nền chứ không phải biến quyết định duy nhất. Thứ hai,
+ở đồ thị hồi quy Age--Glucose, xu hướng tăng nhẹ của glucose theo tuổi phản ánh mối liên hệ chuyển hóa hợp lý về mặt sinh học, nhưng
+độ phân tán điểm lớn cho thấy cùng một nhóm tuổi có thể tồn tại nhiều mức glucose khác nhau. Insight rút ra là mô hình tuyến tính đơn giản
+theo một biến sẽ khó đủ sức phân tách lớp; thay vào đó cần học quan hệ đa biến (tuổi, glucose, BMI, insulin...) và cả tương tác giữa chúng.
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\linewidth]{figures/dpf_and_focus_scatter.png}
 \caption{Phân phối DPF theo outcome và các scatter trọng điểm}
 \label{fig:dpf_focus_scatter}
 \end{figure}
+
+\noindent
+Trong Hình \ref{fig:dpf_focus_scatter}, vai trò của \texttt{diabetes\_pedigree\_function} (DPF) được thể hiện như một chỉ báo rủi ro nền theo tiền sử gia đình.
+Phân phối DPF giữa hai lớp có xu hướng dịch chuyển: nhóm \texttt{outcome=1} thường tập trung nhiều hơn ở các khoảng DPF cao, dù vẫn tồn tại vùng chồng lấp.
+Sự chồng lấp này là một insight quan trọng: DPF có giá trị phân biệt nhưng không đủ để phân lớp độc lập. Các scatter trọng điểm cho thấy khi DPF cao đồng thời
+đi kèm glucose hoặc BMI cao, mật độ điểm lớp dương tăng rõ hơn. Điều này củng cố giả thuyết rằng nguy cơ đái tháo đường là kết quả của tương tác nhiều yếu tố,
+không phải tác động tuyến tính một chiều.
 
 \begin{figure}[H]
 \centering
@@ -113,7 +186,18 @@ Test & 154 & 0.3506\\
 \label{fig:glucose_bmi_insulin}
 \end{figure}
 
+\noindent
+Trong Hình \ref{fig:glucose_bmi_insulin}, \texttt{glucose} là trục phân tách nổi bật nhất giữa hai lớp, phù hợp với kết quả tương quan
+ở Bảng \ref{tab:corr_outcome} (corr = 0.4947). Tuy nhiên, biên phân tách không tuyến tính tuyệt đối: trong vùng glucose trung gian,
+hai lớp còn chồng lấp đáng kể và cần thêm thông tin từ BMI/insulin để tăng độ phân biệt. Một quan sát quan trọng khác là sau khi áp dụng
+\textit{zero-as-missing} và nội suy, cấu trúc phân tán trở nên ``liên tục'' hơn, giảm cụm điểm bất thường tại giá trị 0 ở insulin.
+Insight thực nghiệm từ hình này là cấu hình tiền xử lý ảnh hưởng trực tiếp đến hình học không gian đặc trưng; khi hình học dữ liệu hợp lý hơn,
+mô hình học máy có điều kiện tốt hơn để học ranh giới quyết định ổn định.
+
 \section{Quy trình tiền xử lý đề xuất}
+Quy trình tiền xử lý được thiết kế theo nguyên tắc \textit{thống nhất -- mô-đun -- tái lập}. Thay vì xử lý rời từng bước,
+nghiên cứu đóng gói toàn bộ chuỗi biến đổi vào pipeline để giảm lỗi thao tác thủ công và hạn chế rò rỉ dữ liệu.
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.62\linewidth]{figures/fig_preprocess_pipeline.png}
@@ -121,8 +205,26 @@ Test & 154 & 0.3506\\
 \label{fig:preprocess_pipeline}
 \end{figure}
 
-Ngoài ma trận tương quan đầy đủ, notebook còn xuất bảng tương quan theo \texttt{outcome}
-để ưu tiên biến khi diễn giải:
+\noindent
+Trong Hình \ref{fig:preprocess_pipeline}, luồng kỹ thuật từ dữ liệu thô đến đánh giá mô hình được tổ chức dưới dạng pipeline khép kín.
+Ý nghĩa cốt lõi của kiến trúc này là tách bạch rõ các pha \textit{fit} và \textit{transform}: imputer/scaler chỉ học tham số trên train,
+sau đó áp dụng sang validation/test. Nhờ vậy, nghiên cứu tránh được lỗi rò rỉ dữ liệu (data leakage) -- một lỗi phổ biến khiến chỉ số
+đánh giá ``đẹp giả'' nhưng không tái lập khi triển khai thực tế. Ở góc độ vận hành, pipeline còn giúp đảm bảo mọi cấu hình thử nghiệm
+được chạy trên cùng quy trình xử lý, làm cho so sánh giữa 12 tổ hợp trở nên công bằng và có ý nghĩa thống kê hơn.
+
+\subsection{Luồng xử lý kỹ thuật}
+Pipeline tiền xử lý và huấn luyện được thực hiện theo chuỗi:
+\begin{enumerate}[leftmargin=1.8em]
+    \item Chuẩn hóa dữ liệu đầu vào và chuyển missing ẩn theo chính sách \textit{zero-as-missing}.
+    \item Áp dụng imputation để khôi phục giá trị thiếu.
+    \item Chuẩn hóa thang đo đặc trưng.
+    \item Huấn luyện mô hình và sinh xác suất dự đoán.
+    \item Đánh giá theo bộ chỉ số phân lớp và phân tích ngưỡng.
+\end{enumerate}
+
+\subsection{Ưu tiên biến cho diễn giải}
+Ngoài ma trận tương quan đầy đủ, notebook còn xuất bảng tương quan riêng theo \texttt{outcome}
+để ưu tiên biến trong phần diễn giải kết quả:
 \begin{table}[H]
 \centering
 \caption{Tương quan của biến đầu vào với outcome (zero-masked)}
@@ -140,3 +242,8 @@ pregnancies & 0.2219\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\noindent
+Kết quả ở Bảng \ref{tab:corr_outcome} cho thấy \texttt{glucose} có mức tương quan cao nhất với biến mục tiêu,
+tiếp theo là \texttt{bmi} và \texttt{insulin}. Tuy nhiên, nghiên cứu không loại bỏ sớm các biến có tương quan thấp hơn,
+vì các mô hình phi tuyến như Random Forest có thể khai thác tương tác biến mà tương quan tuyến tính đơn biến không phản ánh đầy đủ.

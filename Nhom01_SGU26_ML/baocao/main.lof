@@ -2,15 +2,15 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Thống kê missing ẩn và giá trị 0 theo thuộc tính}}{20}{figure.caption.10}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Tương quan của Age và quan hệ hồi quy Age-Glucose}}{21}{figure.caption.12}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Phân phối DPF theo outcome và các scatter trọng điểm}}{22}{figure.caption.13}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Quan hệ Glucose-BMI-Insulin theo outcome}}{22}{figure.caption.14}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Pipeline tiền xử lý và đánh giá mô hình}}{23}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Thống kê missing ẩn và giá trị 0 theo thuộc tính}}{22}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Tương quan của Age và quan hệ hồi quy Age-Glucose}}{24}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Phân phối DPF theo outcome và các scatter trọng điểm}}{25}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Quan hệ Glucose-BMI-Insulin theo outcome}}{25}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Pipeline tiền xử lý và đánh giá mô hình}}{26}{figure.caption.15}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Phân bố lớp trong dữ liệu Pima}}{26}{figure.caption.17}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Ma trận tương quan sau khi áp dụng zero-as-missing}}{26}{figure.caption.18}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces So sánh các cấu hình tiền xử lý + mô hình}}{27}{figure.caption.20}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Confusion matrix của cấu hình được chọn}}{29}{figure.caption.21}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Đường cong ROC cho các cấu hình dẫn đầu}}{30}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Phân bố lớp trong dữ liệu Pima}}{29}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Ma trận tương quan sau khi áp dụng zero-as-missing}}{29}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces So sánh các cấu hình tiền xử lý + mô hình}}{30}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Confusion matrix của cấu hình được chọn}}{32}{figure.caption.21}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Đường cong ROC cho các cấu hình dẫn đầu}}{33}{figure.caption.22}%
 \addvspace {10\p@ }
