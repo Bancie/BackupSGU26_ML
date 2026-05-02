@@ -1,0 +1,42 @@
+\chapter{Tong quan van de}
+
+\section{Ly do chon de tai}
+Benh tieu duong la mot trong nhung benh man tinh pho bien va co xu huong gia tang.
+Viec xay dung mo hinh ho tro du doan nguy co dua tren du lieu y sinh co y nghia thuc tien
+trong sang loc som. Bo du lieu Pima Indians Diabetes duoc su dung rong rai trong giao duc
+va nghien cuu vi co cau truc gon, de tai lap va phu hop de trinh bay day du quy trinh
+rut trich du lieu va tien xu ly.
+
+\section{Muc tieu nghien cuu}
+\begin{itemize}[leftmargin=1.5em]
+    \item Xay dung quy trinh phan tich va tien xu ly du lieu Pima co the tai lap.
+    \item Danh gia anh huong cua cac chien luoc xu ly missing (Median, KNN, Iterative/MICE)
+    va chuan hoa (StandardScaler, MinMaxScaler).
+    \item So sanh hieu nang giua hai mo hinh baseline: Logistic Regression va Random Forest.
+\end{itemize}
+
+\section{Cau hoi nghien cuu}
+\begin{enumerate}[leftmargin=1.8em]
+    \item Chinh sach \textit{zero-as-missing} co cai thien tinh hop ly thong ke va ket qua mo hinh hay khong?
+    \item To hop \textit{imputer + scaler + model} nao phu hop nhat voi du lieu Pima trong dieu kien baseline?
+    \item Trade-off giua precision va recall thay doi nhu the nao khi dieu chinh threshold?
+\end{enumerate}
+
+\section{Doi tuong va pham vi}
+Doi tuong nghien cuu la bo du lieu \texttt{pima-indians-diabetes.csv} (768 mau, 8 thuoc tinh dau vao va 1 nhan dau ra).
+Bao cao gioi han trong pham vi xu ly du lieu, EDA va danh gia baseline; chua mo rong sang
+hyperparameter tuning toan dien hoac bo du lieu ngoai.
+
+\section{Phuong phap tong quat}
+Nhom su dung Python notebook de trien khai toan bo quy trinh: nap du lieu, phan tich mo ta,
+lam sach du lieu, tao pipeline tien xu ly, chia tap train/validation/test va so sanh dinh luong.
+
+\section{Ket cau bao cao}
+Bao cao gom 5 chuong:
+\begin{itemize}[leftmargin=1.5em]
+    \item Chuong 1: Tong quan van de.
+    \item Chuong 2: Co so ly thuyet va cac khai niem lien quan.
+    \item Chuong 3: Du lieu va phuong phap de xuat.
+    \item Chuong 4: Thuc nghiem va ket qua dat duoc.
+    \item Chuong 5: Ket luan va khuyen nghi.
+\end{itemize}

@@ -1,0 +1,118 @@
+\chapter{Thuc nghiem va ket qua dat duoc}
+
+\section{Thiet lap thuc nghiem}
+\subsection{Chien luoc chia du lieu}
+Du lieu duoc chia theo ti le 60/20/20 voi \textit{stratify} tren nhan \texttt{outcome}
+de giu on dinh ti le lop duong tinh giua cac tap.
+\begin{itemize}[leftmargin=1.5em]
+    \item Train: 460 mau
+    \item Validation: 154 mau
+    \item Test: 154 mau
+\end{itemize}
+
+\subsection{To hop cau hinh duoc so sanh}
+\begin{itemize}[leftmargin=1.5em]
+    \item Imputation: Median, KNN, Iterative(MICE)
+    \item Scaling: StandardScaler, MinMaxScaler
+    \item Model: Logistic Regression, Random Forest
+\end{itemize}
+Tong cong 12 cau hinh duoc danh gia voi cung mot seed va cung mot split de dam bao cong bang.
+
+\section{Ket qua EDA chinh}
+\subsection{Tong quan bo du lieu}
+Bo du lieu co 768 dong va 9 cot (8 bien dau vao va 1 bien dau ra).
+Phan bo lop: class 0 = 500 mau (\~65.1\%), class 1 = 268 mau (\~34.9\%).
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox[c][5cm][c]{0.85\linewidth}{\centering
+Placeholder Figure\\
+Phan bo lop outcome}}
+\caption{Phan bo lop trong du lieu Pima}
+\label{fig:class_distribution}
+\end{figure}
+
+\subsection{Nhan xet ve quality data}
+So dong trung lap bang 0. Cac cot co so luong \texttt{0} cao nhat la \texttt{insulin}
+va \texttt{skin\_thickness}, do do can xu ly missing an truoc huan luyen.
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox[c][5cm][c]{0.85\linewidth}{\centering
+Placeholder Figure\\
+Heatmap tuong quan cac bien}}
+\caption{Ma tran tuong quan sau khi ap dung zero-as-missing}
+\label{fig:corr_heatmap}
+\end{figure}
+
+\section{So sanh mo hinh va chien luoc tien xu ly}
+\subsection{Xep hang theo ROC-AUC}
+Ket qua trong notebook cho thay cac cau hinh dan dau (theo test ROC-AUC) tap trung o
+to hop KNN imputer + Random Forest.
+
+\begin{table}[H]
+\centering
+\caption{Top cau hinh theo test ROC-AUC (trich tu notebook)}
+\label{tab:top_configs}
+\begin{tabular}{p{3cm}p{2.5cm}p{3cm}c}
+\toprule
+\textbf{Imputer} & \textbf{Scaler} & \textbf{Model} & \textbf{Test ROC-AUC}\\
+\midrule
+KNN & MinMax & Random Forest & 0.8170\\
+KNN & Standard & Random Forest & 0.8168\\
+Median & Standard & Logistic Regression & 0.8167\\
+Iterative & MinMax & Random Forest & 0.8156\\
+KNN & Standard & Logistic Regression & 0.8154\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox[c][5cm][c]{0.85\linewidth}{\centering
+Placeholder Figure\\
+Barplot top strategies theo ROC-AUC va F1}}
+\caption{So sanh cac cau hinh tien xu ly + mo hinh}
+\label{fig:strategy_comparison}
+\end{figure}
+
+\subsection{Cau hinh de xuat}
+Cau hinh tot nhat theo test ROC-AUC:
+\textbf{KNN Imputer + MinMaxScaler + Random Forest}.
+\begin{itemize}[leftmargin=1.5em]
+    \item Validation ROC-AUC: 0.8700
+    \item Test ROC-AUC: 0.8170
+    \item Test F1: 0.6078
+    \item Test Precision: 0.6458
+    \item Test Recall: 0.5741
+\end{itemize}
+
+\section{Phan tich sai so va trade-off}
+\subsection{Confusion matrix va ROC}
+\begin{figure}[H]
+\centering
+\fbox{\parbox[c][5cm][c]{0.85\linewidth}{\centering
+Placeholder Figure\\
+Confusion matrix cho cau hinh tot nhat}}
+\caption{Confusion matrix cua cau hinh duoc chon}
+\label{fig:confusion_best}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox[c][5cm][c]{0.85\linewidth}{\centering
+Placeholder Figure\\
+ROC cua top 3 cau hinh}}
+\caption{Duong cong ROC cho cac cau hinh dan dau}
+\label{fig:roc_top3}
+\end{figure}
+
+\subsection{Trade-off theo threshold}
+Notebook da thuc hien quet threshold va chi ra rang threshold 0.50 chua chac toi uu.
+Diem can bang F1 tot nhat trong qua trinh quet nam quanh threshold xap xi 0.30,
+cho thay neu uu tien phat hien ca duong tinh thi co the danh doi precision de tang recall.
+
+\subsection{Nhan dinh overfitting/underfitting}
+Chenh lech \texttt{val\_roc\_auc - test\_roc\_auc} xap xi 0.053.
+Dieu nay cho thay dau hieu overfitting nhe den trung binh, can tiep tuc kiem chung bang
+cross-validation va tuning he thong trong buoc tiep theo.

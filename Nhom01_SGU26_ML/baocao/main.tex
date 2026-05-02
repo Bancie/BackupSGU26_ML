@@ -1,0 +1,104 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[numbers,sort&compress]{natbib}
+
+\geometry{left=3cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+\setstretch{1.25}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue}
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{1.2em}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\Large}
+  {CHUONG \thechapter}
+  {0.5em}
+  {\LARGE}
+
+\begin{document}
+
+% Cover
+\begin{titlepage}
+    \centering
+    {\large TRUONG DAI HOC SAI GON\par}
+    {\large KHOA CONG NGHE THONG TIN\par}
+    \vspace{2.0cm}
+    {\Large\bfseries BAO CAO TIEU LUAN\\MON PHAN TICH DU LIEU\par}
+    \vspace{1.5cm}
+    {\Large\bfseries DE TAI\par}
+    \vspace{0.5cm}
+    {\LARGE\bfseries RUT TRICH DU LIEU VA TIEN XU LY\\DU LIEU PIMA INDIANS DIABETES\par}
+    \vspace{1.5cm}
+    \begin{flushleft}
+        \textbf{Giang vien huong dan:} ........................................\\
+        \textbf{Nhom thuc hien:} Nhom01\_SGU26\_ML\\
+        \textbf{Hoc phan:} Hoc phan thay the khoa luan
+    \end{flushleft}
+    \vfill
+    {TP. Ho Chi Minh, 2026\par}
+\end{titlepage}
+
+% Assignment
+\chapter*{Phan cong thanh vien}
+\addcontentsline{toc}{chapter}{Phan cong thanh vien}
+\begin{longtable}{>{\raggedright\arraybackslash}p{3cm} >{\raggedright\arraybackslash}p{7.5cm} >{\centering\arraybackslash}p{2cm}}
+\toprule
+\textbf{Thanh vien} & \textbf{Nhiem vu chinh} & \textbf{Ty le}\\
+\midrule
+Chibang & Tong hop notebook, xay dung pipeline tien xu ly, tong hop bao cao & 25\%\\
+Duybao & Ho tro kiem tra notebook, doi chieu ket qua va markdown dien giai & 25\%\\
+Tranhuyvu & Phan tich sau cho nhom bien BMI/Insulin, gop y truc quan hoa & 25\%\\
+Truongphat & Phan tich sau cho nhom bien Age/DPF, gop y dien giai ket qua & 25\%\\
+\bottomrule
+\end{longtable}
+
+% Instructor comments
+\chapter*{Nhan xet cua giang vien}
+\addcontentsline{toc}{chapter}{Nhan xet cua giang vien}
+\vspace{6cm}
+\noindent\hrulefill\\[1.2cm]
+\noindent\hrulefill\\[1.2cm]
+\noindent\hrulefill
+
+% Intro and thanks
+\chapter*{Loi mo dau}
+\addcontentsline{toc}{chapter}{Loi mo dau}
+Bao cao nay trinh bay ket qua thuc hien bai tap Lab 03 voi du lieu Pima Indians Diabetes.
+Nhom tap trung vao hai muc tieu: (1) xay dung quy trinh rut trich va tien xu ly du lieu co the tai lap;
+(2) danh gia cac chien luoc tien xu ly duoi goc nhin mo hinh hoc may baseline.
+
+\chapter*{Loi cam on}
+\addcontentsline{toc}{chapter}{Loi cam on}
+Nhom xin chan thanh cam on giang vien huong dan da cung cap yeu cau, tai lieu tham khao
+va nhung gop y quan trong de nhom hoan thien notebook va bao cao.
+
+% TOC/Lists
+\tableofcontents
+\listoffigures
+\listoftables
+\clearpage
+
+% Chapters
+\input{chapters/chuong1_tongquan}
+\input{chapters/chuong2_cosolythuyet}
+\input{chapters/chuong3_dulieu_phuongphap}
+\input{chapters/chuong4_thucnghiem_ketqua}
+\input{chapters/chuong5_ketluan_khuyennghi}
+
+% References
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\end{document}

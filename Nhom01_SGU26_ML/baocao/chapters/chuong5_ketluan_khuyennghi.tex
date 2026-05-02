@@ -1,0 +1,39 @@
+\chapter{Ket luan va khuyen nghi}
+
+\section{Ket luan chung}
+Bao cao da hoan thanh quy trinh rut trich du lieu va tien xu ly cho bai toan
+du doan tieu duong tren bo du lieu Pima. Ket qua cho thay viec ket hop
+\textit{zero-as-missing} voi pipeline imputation + scaling la can thiet de nang cao
+tinh nhat quan cua du lieu va hieu nang mo hinh baseline.
+
+\section{Tom tat ket qua dat duoc}
+\begin{itemize}[leftmargin=1.5em]
+    \item Hoan thien notebook phan tich theo huong bao cao hoc thuat.
+    \item So sanh 12 cau hinh tien xu ly va mo hinh tren cung dieu kien chia du lieu.
+    \item De xuat cau hinh KNN + MinMax + Random Forest cho ket qua test ROC-AUC cao nhat.
+    \item Bo sung phan tich confusion matrix, ROC va threshold trade-off.
+\end{itemize}
+
+\section{Dong gop cua de tai}
+\begin{itemize}[leftmargin=1.5em]
+    \item Chuan hoa quy trinh thuc hanh tu EDA den danh gia mo hinh baseline.
+    \item Cung cap khung danh gia de tai lap cho cac bai toan phan lop y sinh tuong tu.
+    \item Tang tinh bao cao hoa cua notebook de phuc vu trinh bay hoc phan.
+\end{itemize}
+
+\section{Han che nghien cuu}
+\begin{enumerate}[leftmargin=1.8em]
+    \item Quy mo du lieu con nho (768 mau), chua dai dien cho nhieu quan the benh nhan.
+    \item Gia dinh \textit{zero-as-missing} co the gay sai lech neu ton tai truong hop do thuc su bang 0.
+    \item Danh gia hien tai dua tren mot lan chia train/validation/test, chua co CV lap lai.
+    \item Chua tien hanh tuning tham so he thong va calibration xac suat.
+\end{enumerate}
+
+\section{Huong phat trien va kien nghi}
+\begin{enumerate}[leftmargin=1.8em]
+    \item Ap dung Stratified K-Fold CV de kiem chung do on dinh ket qua.
+    \item Mo rong tuning tham so cho Logistic Regression va Random Forest.
+    \item Thu nghiem them cac mo hinh boosting (XGBoost/LightGBM) va ky thuat can bang lop.
+    \item Mo rong bo du lieu va kiem tra external validity tren nguon doc lap.
+    \item Dong goi pipeline suy luan va tao bao cao tu dong de tang kha nang trien khai.
+\end{enumerate}

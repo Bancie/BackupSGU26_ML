@@ -1,0 +1,52 @@
+\chapter{Co so ly thuyet va nghien cuu lien quan}
+
+\section{Tong quan phan tich du lieu trong bai toan phan lop}
+Voi bai toan phan lop nhi phan, quy trinh phan tich du lieu thuong gom:
+(1) kiem tra chat luong du lieu; (2) phan tich mo ta va truc quan hoa;
+(3) xu ly missing/outlier; (4) xay dung va danh gia mo hinh.
+Bo du lieu Pima la mot benchmark pho bien trong cong bo hoc may y sinh \cite{pima_uci,smith1988adap}.
+
+\section{Phan tich kham pha du lieu (EDA)}
+EDA giup xac dinh tinh chat du lieu truoc khi huan luyen:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Thong ke mo ta}: trung binh, do lech chuan, quartile.
+    \item \textbf{Phan bo lop}: muc do can bang giua lop am va duong.
+    \item \textbf{Tuong quan}: xac dinh bien co lien he manh voi bien muc tieu.
+\end{itemize}
+
+\section{Xu ly missing data}
+Trong bo Pima, mot so bien y sinh co gia tri \texttt{0} khong hop ly ve sinh ly
+(\texttt{glucose, blood\_pressure, skin\_thickness, insulin, bmi}).
+Do do, bao cao ap dung quy uoc \textit{zero-as-missing} va so sanh 3 chien luoc noi suy:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Median Imputation}: don gian, ben vung voi phan bo lech.
+    \item \textbf{KNN Imputation}: noi suy dua tren mau lan can.
+    \item \textbf{Iterative Imputation (MICE)}: noi suy lap dua tren quan he giua cac bien.
+\end{itemize}
+
+\section{Chuan hoa du lieu}
+Do thang do cac bien khac nhau, bao cao so sanh:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{StandardScaler}: dua ve trung binh 0, do lech chuan 1.
+    \item \textbf{MinMaxScaler}: dua ve khoang [0,1].
+\end{itemize}
+Buoc nay giup mo hinh hoc may (dac biet mo hinh dua tren khoang cach/gradient)
+hoat dong on dinh va cong bang hon giua cac bien.
+
+\section{Chi so danh gia mo hinh}
+Bao cao su dung cac chi so:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Accuracy}: ty le du doan dung tong quat.
+    \item \textbf{Precision}: do chinh xac cua du doan duong tinh.
+    \item \textbf{Recall}: kha nang phat hien duong tinh thuc te.
+    \item \textbf{F1-score}: can bang giua precision va recall.
+    \item \textbf{ROC-AUC}: nang luc phan biet hai lop tren nhieu threshold.
+\end{itemize}
+
+\section{Mo hinh baseline}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Logistic Regression}: mo hinh tuyen tinh de dien giai va lam moc so sanh.
+    \item \textbf{Random Forest}: mo hinh phi tuyen, manh trong boi canh quan he bien phuc tap.
+\end{itemize}
+Khung trien khai duoc xay dung tren thu vien scikit-learn \cite{pedregosa2011sklearn},
+trong khi cac nguyen ly danh gia va mo hinh hoa tham khao theo tai lieu kinh dien \cite{hastie2009elements}.
