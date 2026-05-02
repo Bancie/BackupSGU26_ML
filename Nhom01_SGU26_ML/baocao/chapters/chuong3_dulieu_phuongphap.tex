@@ -31,12 +31,26 @@ outcome & Nhãn phân lớp (0/1)\\
 \end{table}
 
 \section{Kiểm tra chất lượng dữ liệu}
-Kết quả từ notebook cho thấy:
-\begin{itemize}[leftmargin=1.5em]
-    \item Số dòng trùng lặp: 0.
-    \item Không có NaN tường minh trong CSV gốc, nhưng có nhiều giá trị \texttt{0} bất thường sinh lý.
-    \item Các cột có tỷ lệ \texttt{0} cao: \texttt{insulin} và \texttt{skin\_thickness}.
-\end{itemize}
+Kết quả tái lập từ notebook cho thấy \textbf{không có dòng trùng lặp} và \textbf{không có NaN tường minh}
+trong CSV gốc. Tuy nhiên, nhiều cột sinh lý chứa giá trị \texttt{0} bất thường, được xem như missing ẩn
+theo chính sách \textit{zero-as-missing}.
+
+\begin{table}[H]
+\centering
+\caption{Tỷ lệ giá trị \texttt{0} ở các biến sinh lý trọng điểm}
+\label{tab:zero_rate_focus}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Biến} & \textbf{Số lượng 0} & \textbf{Tỷ lệ (\%)}\\
+\midrule
+insulin & 374 & 48.70\\
+skin\_thickness & 227 & 29.56\\
+blood\_pressure & 35 & 4.56\\
+bmi & 11 & 1.43\\
+glucose & 5 & 0.65\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{figure}[H]
 \centering
@@ -45,18 +59,84 @@ Kết quả từ notebook cho thấy:
 \label{fig:missing_zero_report}
 \end{figure}
 
-\section{Quy trình tiền xử lý đề xuất}
-Quy trình được đề xuất và triển khai trong notebook:
+\section{Thiết kế thực nghiệm và tái lập}
+Thiết kế thực nghiệm giữ nguyên theo notebook để đảm bảo tái lập:
 \begin{enumerate}[leftmargin=1.8em]
     \item Chuyển \texttt{0 -> NaN} cho các biến sinh lý bất thường.
-    \item Chia dữ liệu theo tỉ lệ train/validation/test = 60/20/20 (stratified).
+    \item Chia dữ liệu theo tỉ lệ train/validation/test = 60/20/20 với \texttt{stratify}
+    và \texttt{random\_state=42}.
     \item Tạo pipeline kết hợp \textit{imputer + scaler + model}.
     \item So sánh 12 tổ hợp cấu hình (3 imputer x 2 scaler x 2 model).
 \end{enumerate}
 
+\begin{table}[H]
+\centering
+\caption{Tỉ lệ chia tập và tỷ lệ lớp dương}
+\label{tab:data_split}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Tập dữ liệu} & \textbf{Số mẫu} & \textbf{Tỷ lệ outcome=1}\\
+\midrule
+Train & 460 & 0.3478\\
+Validation & 154 & 0.3506\\
+Test & 154 & 0.3506\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{EDA chuyên sâu theo nhóm biến}
+Để phản ánh đầy đủ các phân tích trong notebook, báo cáo bổ sung các hình chuyên sâu:
+\begin{itemize}[leftmargin=1.5em]
+    \item Nhóm Age: tương quan theo biến và hồi quy Age-Glucose.
+    \item Nhóm DPF: phân phối theo outcome và tỷ lệ mắc bệnh theo quartile.
+    \item Nhóm Glucose-BMI-Insulin: phân tán theo outcome sau khi áp dụng zero-masked.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/age_glucose_correlation.jpg}
+\caption{Tương quan của Age và quan hệ hồi quy Age-Glucose}
+\label{fig:age_glucose_analysis}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/dpf_and_focus_scatter.jpg}
+\caption{Phân phối DPF theo outcome và các scatter trọng điểm}
+\label{fig:dpf_focus_scatter}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/glucose_bmi_insulin_scatter.jpg}
+\caption{Quan hệ Glucose-BMI-Insulin theo outcome}
+\label{fig:glucose_bmi_insulin}
+\end{figure}
+
+\section{Quy trình tiền xử lý đề xuất}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.62\linewidth]{figures/fig_preprocess_pipeline.png}
 \caption{Pipeline tiền xử lý và đánh giá mô hình}
 \label{fig:preprocess_pipeline}
 \end{figure}
+
+Ngoài ma trận tương quan đầy đủ, notebook còn xuất bảng tương quan theo \texttt{outcome}
+để ưu tiên biến khi diễn giải:
+\begin{table}[H]
+\centering
+\caption{Tương quan của biến đầu vào với outcome (zero-masked)}
+\label{tab:corr_outcome}
+\begin{tabular}{lc}
+\toprule
+\textbf{Biến} & \textbf{Corr với outcome}\\
+\midrule
+glucose & 0.4947\\
+bmi & 0.3137\\
+insulin & 0.3035\\
+skin\_thickness & 0.2595\\
+age & 0.2384\\
+pregnancies & 0.2219\\
+\bottomrule
+\end{tabular}
+\end{table}

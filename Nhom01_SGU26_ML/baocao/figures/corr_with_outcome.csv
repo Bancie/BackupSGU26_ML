@@ -1,0 +1,10 @@
+,outcome
+outcome,1.0
+glucose,0.4947
+bmi,0.3137
+insulin,0.3035
+skin_thickness,0.2595
+age,0.2384
+pregnancies,0.2219
+diabetes_pedigree_function,0.1738
+blood_pressure,0.1706

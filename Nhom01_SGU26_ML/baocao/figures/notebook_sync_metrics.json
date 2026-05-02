@@ -1,0 +1,35 @@
+{
+  "shape": [
+    768,
+    9
+  ],
+  "class_counts": {
+    "0": 500,
+    "1": 268
+  },
+  "class_rates": {
+    "0": 0.651,
+    "1": 0.349
+  },
+  "duplicate_count": 0,
+  "split": {
+    "train": 460,
+    "val": 154,
+    "test": 154,
+    "train_pos": 0.3478,
+    "val_pos": 0.3506,
+    "test_pos": 0.3506
+  },
+  "best": {
+    "imputer": "knn",
+    "scaler": "minmax",
+    "model": "random_forest",
+    "val_roc_auc": 0.87,
+    "test_roc_auc": 0.817,
+    "test_f1": 0.6078,
+    "test_precision": 0.6458,
+    "test_recall": 0.5741,
+    "test_accuracy": 0.7403
+  },
+  "gap_auc": 0.053
+}

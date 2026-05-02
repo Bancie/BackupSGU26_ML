@@ -1,0 +1,5 @@
+,pregnancies,pregnancies,pregnancies,glucose,glucose,glucose,blood_pressure,blood_pressure,blood_pressure,skin_thickness,skin_thickness,skin_thickness,insulin,insulin,insulin,bmi,bmi,bmi,diabetes_pedigree_function,diabetes_pedigree_function,diabetes_pedigree_function,age,age,age
+,mean,median,std,mean,median,std,mean,median,std,mean,median,std,mean,median,std,mean,median,std,mean,median,std,mean,median,std
+outcome,,,,,,,,,,,,,,,,,,,,,,,,
+0,3.298,2.0,3.017,109.98,107.0,26.141,68.184,70.0,18.063,19.664,21.0,14.89,68.792,39.0,98.865,30.304,30.05,7.69,0.43,0.336,0.299,31.19,27.0,11.668
+1,4.866,4.0,3.741,141.257,140.0,31.94,70.825,74.0,21.492,22.164,27.0,17.68,100.336,0.0,138.689,35.143,34.25,7.263,0.55,0.449,0.372,37.067,36.0,10.968

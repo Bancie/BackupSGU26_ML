@@ -3,6 +3,10 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {3.1}{\ignorespaces Mô tả các thuộc tính trong bộ dữ liệu Pima}}{13}{table.caption.8}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Tỷ lệ giá trị \texttt {0} ở các biến sinh lý trọng điểm}}{14}{table.caption.9}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Tỉ lệ chia tập và tỷ lệ lớp dương}}{15}{table.caption.11}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Tương quan của biến đầu vào với outcome (zero-masked)}}{19}{table.caption.16}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Top cấu hình theo test ROC-AUC (trích từ notebook)}}{18}{table.caption.13}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Kết quả đầy đủ 12 cấu hình tiền xử lý + mô hình}}{22}{table.caption.19}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Precision-Recall-F1 theo ngưỡng của cấu hình tốt nhất}}{25}{table.caption.23}%
 \addvspace {10\p@ }

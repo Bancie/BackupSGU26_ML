@@ -14,6 +14,19 @@ tính nhất quán của dữ liệu và hiệu năng mô hình baseline.
     \item Bổ sung phân tích confusion matrix, ROC và threshold trade-off.
 \end{itemize}
 
+\section{Trả lời trực tiếp câu hỏi nghiên cứu (Q1/Q2/Q3)}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Q1 -- Zero-as-missing có hữu ích không?}
+    Có. Việc chuyển \texttt{0 -> NaN} cho các biến sinh lý giúp mô hình đạt mức AUC ổn định
+    (test ROC-AUC quanh 0.81) thay vì để nhiễu từ giá trị 0 phi sinh lý.
+    \item \textbf{Q2 -- Tổ hợp preprocessing/model nào tốt nhất?}
+    Cấu hình tốt nhất là \textbf{KNN + MinMax + Random Forest} với
+    \texttt{val\_roc\_auc=0.8700}, \texttt{test\_roc\_auc=0.8170}, \texttt{test\_accuracy=0.7403}.
+    \item \textbf{Q3 -- Trade-off precision/recall thay đổi ra sao theo threshold?}
+    Khi giảm ngưỡng từ 0.50 xuống 0.30, recall tăng mạnh từ 0.5741 lên 0.8148, trong khi precision
+    giảm từ 0.6458 xuống 0.5789; F1 cải thiện từ 0.6078 lên 0.6769.
+\end{itemize}
+
 \section{Đóng góp của đề tài}
 \begin{itemize}[leftmargin=1.5em]
     \item Chuẩn hóa quy trình thực hành từ EDA đến đánh giá mô hình baseline.

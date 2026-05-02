@@ -1,0 +1,10 @@
+,nan_count,nan_rate_pct,zero_count,zero_rate_pct
+pregnancies,0,0.0,111,14.45
+glucose,0,0.0,5,0.65
+blood_pressure,0,0.0,35,4.56
+skin_thickness,0,0.0,227,29.56
+insulin,0,0.0,374,48.7
+bmi,0,0.0,11,1.43
+diabetes_pedigree_function,0,0.0,0,0.0
+age,0,0.0,0,0.0
+outcome,0,0.0,500,65.1
