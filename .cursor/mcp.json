@@ -21,6 +21,10 @@
     "eda-faiss": {
       "command": "${workspaceFolder}/.venv/bin/python",
       "args": ["${workspaceFolder}/mcp/eda.py"]
+    },
+    "ptdl-khaosatbds-faiss": {
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": ["${workspaceFolder}/mcp/PTDL_khaosatbds.py"]
     }
   }
 }
