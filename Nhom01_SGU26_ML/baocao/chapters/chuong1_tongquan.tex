@@ -1,42 +1,143 @@
 \chapter{Tổng quan vấn đề}
 
 \section{Lý do chọn đề tài}
-Bệnh tiểu đường là một trong những bệnh mạn tính phổ biến và có xu hướng gia tăng.
-Việc xây dựng mô hình hỗ trợ dự đoán nguy cơ dựa trên dữ liệu y sinh có ý nghĩa thực tiễn
-trong sàng lọc sớm. Bộ dữ liệu Pima Indians Diabetes được sử dụng rộng rãi trong giáo dục
-và nghiên cứu vì có cấu trúc gọn, dễ tái lập và phù hợp để trình bày đầy đủ quy trình
-rút trích dữ liệu và tiền xử lý.
+Đái tháo đường là một bệnh mạn tính có tốc độ gia tăng nhanh, đồng thời tạo áp lực lớn lên hệ thống
+y tế do chi phí theo dõi và điều trị kéo dài. Không chỉ dừng lại ở bài toán kiểm soát đường huyết,
+bệnh còn liên quan chặt chẽ đến nhiều biến chứng nguy hiểm như tim mạch, suy thận, tổn thương thần kinh
+và giảm chất lượng sống lâu dài. Vì vậy, ở góc độ phòng ngừa và quản lý sức khỏe cộng đồng, phát hiện
+sớm nhóm bệnh nhân có nguy cơ cao luôn được xem là một ưu tiên quan trọng.
+
+Trong thực hành lâm sàng hằng ngày, quyết định đánh giá nguy cơ thường dựa trên sự kết hợp của nhiều chỉ số
+y sinh và đặc điểm cá nhân như glucose huyết tương, chỉ số khối cơ thể (BMI), huyết áp, độ tuổi hoặc tiền sử
+gia đình. Tuy nhiên, dữ liệu thực tế thường có nhiều thách thức: phân phối không đồng đều, tồn tại giá trị bất
+thường và thiếu dữ liệu ẩn. Các yếu tố này khiến quá trình diễn giải nguy cơ trở nên phức tạp nếu chỉ dựa vào
+quan sát thủ công hoặc các ngưỡng đơn biến riêng lẻ.
+
+Sự phát triển của khoa học dữ liệu và học máy mở ra một hướng tiếp cận phù hợp cho bài toán này. Thay vì xem
+từng biến độc lập, mô hình học máy có khả năng học từ quan hệ đa biến và lượng hóa xác suất rủi ro trên toàn bộ
+tập đặc trưng. Trong bối cảnh đó, mô hình không thay thế chẩn đoán của chuyên gia y tế, nhưng có thể đóng vai trò
+công cụ hỗ trợ ra quyết định, giúp tăng tính nhất quán và tính tái lập trong quá trình sàng lọc.
+
+Từ góc nhìn học thuật, đề tài cũng phản ánh một bài toán điển hình trong phân tích dữ liệu y sinh: dữ liệu có kích thước
+vừa phải nhưng đòi hỏi quy trình tiền xử lý chặt chẽ, kiểm soát sai lệch và đánh giá mô hình cẩn trọng. Đây là môi trường
+phù hợp để kiểm chứng các lựa chọn kỹ thuật quan trọng, chẳng hạn cách xử lý missing data, chuẩn hóa đặc trưng và lựa chọn
+điểm cân bằng giữa precision và recall theo mục tiêu ứng dụng.
+
+Bộ dữ liệu \textit{Pima Indians Diabetes} được lựa chọn vì có tính chuẩn mực trong giáo dục và nghiên cứu \cite{pima_uci,smith1988adap},
+cấu trúc rõ ràng, dễ tái lập thực nghiệm, và phù hợp để minh họa trọn vẹn một quy trình phân tích dữ liệu từ giai đoạn khám phá
+dữ liệu, tiền xử lý, xây dựng pipeline đến đánh giá mô hình. Việc chọn một bộ dữ liệu kinh điển còn giúp so sánh kết quả của nhóm
+với những nghiên cứu cùng dòng, qua đó nâng cao tính tham chiếu và tính học thuật của báo cáo.
 
 \section{Mục tiêu nghiên cứu}
+Đề tài hướng đến mục tiêu tổng quát là xây dựng một quy trình phân tích dữ liệu y sinh có tính hệ thống và khả năng tái lập
+nhằm dự đoán nguy cơ đái tháo đường trên bộ dữ liệu Pima. Quy trình này không chỉ tập trung vào hiệu năng dự báo, mà còn nhấn
+mạnh tính minh bạch trong từng bước xử lý để có thể kiểm chứng và mở rộng trong các nghiên cứu tiếp theo.
+
+Từ mục tiêu tổng quát, nhóm triển khai các mục tiêu cụ thể theo các lớp công việc chính như sau:
 \begin{itemize}[leftmargin=1.5em]
-    \item Xây dựng quy trình phân tích và tiền xử lý dữ liệu Pima có thể tái lập.
-    \item Đánh giá ảnh hưởng của các chiến lược xử lý missing (Median, KNN, Iterative/MICE)
-    và chuẩn hóa (StandardScaler, MinMaxScaler).
-    \item So sánh hiệu năng giữa hai mô hình baseline: Logistic Regression và Random Forest.
+    \item \textbf{Mục tiêu về dữ liệu:} Chuẩn hóa và kiểm soát chất lượng dữ liệu đầu vào, đặc biệt là xử lý các giá trị
+    \texttt{0} bất thường ở biến sinh lý theo hướng \textit{zero-as-missing}, nhằm giảm sai lệch diễn giải y học.
+
+    \item \textbf{Mục tiêu về tiền xử lý:} Đánh giá tác động của các chiến lược nội suy thiếu dữ liệu (Median, KNN,
+    Iterative/MICE) kết hợp với các phương pháp chuẩn hóa (StandardScaler, MinMaxScaler), từ đó xác định cấu hình tiền xử lý
+    phù hợp cho bài toán phân lớp nhị phân.
+
+    \item \textbf{Mục tiêu về mô hình hóa:} So sánh hai mô hình baseline là Logistic Regression và Random Forest trên cùng
+    một thiết kế thực nghiệm để đánh giá khác biệt giữa mô hình tuyến tính dễ diễn giải và mô hình phi tuyến linh hoạt.
+
+    \item \textbf{Mục tiêu về đánh giá:} Phân tích đầy đủ các chỉ số Accuracy, Precision, Recall, F1-score và ROC-AUC,
+    đồng thời thảo luận trade-off giữa precision và recall khi thay đổi ngưỡng dự đoán theo định hướng sàng lọc nguy cơ.
+
+    \item \textbf{Mục tiêu về tái lập:} Tổ chức thực nghiệm theo pipeline thống nhất và thông số cố định (\texttt{random\_state},
+    tỷ lệ chia tập, cấu hình tiền xử lý), bảo đảm người đọc có thể tái tạo kết quả một cách nhất quán.
 \end{itemize}
 
 \section{Câu hỏi nghiên cứu}
+Tương ứng với các mục tiêu nêu trên, nghiên cứu tập trung trả lời các câu hỏi sau:
 \begin{enumerate}[leftmargin=1.8em]
-    \item Chính sách \textit{zero-as-missing} có cải thiện tính hợp lý thống kê và kết quả mô hình hay không?
-    \item Tổ hợp \textit{imputer + scaler + model} nào phù hợp nhất với dữ liệu Pima trong điều kiện baseline?
-    \item Trade-off giữa precision và recall thay đổi như thế nào khi điều chỉnh threshold?
+    \item Việc chuyển các giá trị \texttt{0} bất thường sang missing ẩn có giúp dữ liệu hợp lý hơn về mặt thống kê
+    và có cải thiện chất lượng dự báo so với cách giữ nguyên dữ liệu thô hay không?
+
+    \item Trong các tổ hợp \textit{imputer + scaler}, cấu hình nào mang lại sự cân bằng tốt nhất giữa độ ổn định của mô hình
+    và hiệu năng dự báo trên dữ liệu chưa thấy?
+
+    \item Khi đặt trong cùng điều kiện thực nghiệm, Logistic Regression và Random Forest khác nhau như thế nào về khả năng
+    tổng quát hóa, độ nhạy phát hiện lớp dương và mức độ ổn định giữa tập validation và test?
+
+    \item Khi thay đổi ngưỡng phân loại, trade-off giữa precision và recall biến thiên ra sao, và ngưỡng nào phù hợp hơn
+    cho mục tiêu ưu tiên phát hiện sớm ca có nguy cơ?
+
+    \item Từ kết quả thực nghiệm, có thể rút ra khuyến nghị nào cho một quy trình baseline đáng tin cậy, làm nền cho các
+    nghiên cứu mở rộng trong tương lai?
 \end{enumerate}
 
 \section{Đối tượng và phạm vi}
-Đối tượng nghiên cứu là bộ dữ liệu \texttt{pima-indians-diabetes.csv} (768 mẫu, 8 thuộc tính đầu vào và 1 nhãn đầu ra).
-Báo cáo giới hạn trong phạm vi xử lý dữ liệu, EDA và đánh giá baseline; chưa mở rộng sang
-hyperparameter tuning toàn diện hoặc bộ dữ liệu ngoài.
+Đối tượng nghiên cứu là bộ dữ liệu \texttt{pima-indians-diabetes.csv}, gồm 768 quan sát, 8 thuộc tính đầu vào dạng số và
+1 biến mục tiêu nhị phân \texttt{outcome}. Các thuộc tính phản ánh thông tin nhân trắc và chỉ số sinh lý phổ biến như
+\texttt{glucose}, \texttt{blood\_pressure}, \texttt{insulin}, \texttt{bmi}, \texttt{age}, cùng một số biến liên quan đến tiền sử.
+
+Phạm vi nghiên cứu được xác định theo các chiều sau:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Phạm vi dữ liệu:} Chỉ sử dụng bộ dữ liệu Pima được cung cấp trong học phần, không kết hợp thêm nguồn dữ liệu
+    bệnh án thực tế hoặc dữ liệu từ các hệ thống bệnh viện.
+
+    \item \textbf{Phạm vi bài toán:} Tập trung vào phân lớp nhị phân (\texttt{outcome = 0/1}) cho mục tiêu sàng lọc nguy cơ;
+    không thực hiện dự báo tiến triển theo thời gian và không xây dựng hệ thống chẩn đoán lâm sàng hoàn chỉnh.
+
+    \item \textbf{Phạm vi phương pháp:} Ưu tiên các mô hình baseline có tính chuẩn mực trong học máy ứng dụng (Logistic Regression,
+    Random Forest), kết hợp các kỹ thuật tiền xử lý phổ biến và dễ tái lập.
+
+    \item \textbf{Phạm vi đánh giá:} Đánh giá trên các chỉ số phân lớp chuẩn và phân tích định lượng trade-off theo ngưỡng;
+    không thực hiện kiểm định trên dữ liệu ngoại viện hoặc thử nghiệm triển khai thời gian thực.
+\end{itemize}
+
+Ngoài ra, nghiên cứu cũng xác định rõ các giới hạn: chưa đi sâu vào tối ưu siêu tham số quy mô lớn, chưa khảo sát các mô hình
+học sâu, chưa thực hiện hiệu chỉnh xác suất (probability calibration), và chưa đánh giá tác động công bằng mô hình theo từng nhóm
+dân số. Việc nêu rõ giới hạn giúp khoanh vùng đúng đóng góp của đề tài và tạo nền tảng cho định hướng phát triển ở các chương sau.
 
 \section{Phương pháp tổng quát}
-Nhóm sử dụng Python notebook để triển khai toàn bộ quy trình: nạp dữ liệu, phân tích mô tả,
-làm sạch dữ liệu, tạo pipeline tiền xử lý, chia tập train/validation/test và so sánh định lượng.
+Toàn bộ nghiên cứu được triển khai bằng Python notebook theo một luồng kỹ thuật thống nhất, bảo đảm tính tái lập và khả năng
+kiểm tra chéo ở từng bước:
+\begin{enumerate}[leftmargin=1.8em]
+    \item \textbf{Khảo sát dữ liệu ban đầu:} Nạp dữ liệu, kiểm tra kiểu dữ liệu, thống kê mô tả, tỷ lệ lớp, giá trị trùng lặp
+    và các bất thường hiển nhiên.
+
+    \item \textbf{Xử lý missing ẩn theo ngữ cảnh y sinh:} Chuyển các giá trị \texttt{0} không hợp lý ở nhóm biến sinh lý sang
+    giá trị thiếu để tránh làm sai lệch phân phối và ước lượng.
+
+    \item \textbf{Phân tích khám phá dữ liệu (EDA):} Trực quan hóa phân bố từng biến, phân tích tương quan giữa đặc trưng với
+    \texttt{outcome}, và so sánh khác biệt giữa các nhóm lớp nhằm hình thành giả thuyết mô hình hóa.
+
+    \item \textbf{Thiết kế pipeline tiền xử lý:} Kết hợp có hệ thống giữa kỹ thuật nội suy thiếu dữ liệu và chuẩn hóa đặc trưng.
+    Cách tổ chức theo pipeline giúp giảm nguy cơ rò rỉ dữ liệu và bảo đảm cùng một quy trình được áp dụng nhất quán giữa train,
+    validation và test.
+
+    \item \textbf{Huấn luyện và so sánh mô hình baseline:} Triển khai các tổ hợp \textit{imputer + scaler + model} theo cùng thiết kế,
+    sau đó đánh giá trên nhiều chỉ số thay vì chỉ dựa vào một độ đo đơn lẻ.
+
+    \item \textbf{Phân tích ngưỡng và diễn giải kết quả:} Khảo sát độ nhạy của kết quả theo ngưỡng phân loại để lựa chọn cấu hình
+    phù hợp hơn cho mục tiêu sàng lọc, đồng thời thảo luận ý nghĩa thực tiễn của các chỉ số đạt được.
+\end{enumerate}
+
+Về mặt công cụ, nghiên cứu sử dụng hệ sinh thái Python và các thư viện chuẩn cho phân tích dữ liệu, trực quan hóa và học máy.
+Khung triển khai được xây dựng trên scikit-learn \cite{pedregosa2011sklearn}, trong khi nguyên lý mô hình hóa và đánh giá tham chiếu
+theo các tài liệu kinh điển \cite{hastie2009elements}. Cách tiếp cận này giúp cân bằng giữa tính học thuật và tính thực thi trong báo cáo.
 
 \section{Kết cấu báo cáo}
-Báo cáo gồm 5 chương:
+Báo cáo được tổ chức thành 5 chương liên kết theo mạch từ tổng quan, cơ sở lý thuyết, triển khai thực nghiệm đến kết luận:
 \begin{itemize}[leftmargin=1.5em]
-    \item Chương 1: Tổng quan vấn đề.
-    \item Chương 2: Cơ sở lý thuyết và các khái niệm liên quan.
-    \item Chương 3: Dữ liệu và phương pháp đề xuất.
-    \item Chương 4: Thực nghiệm và kết quả đạt được.
-    \item Chương 5: Kết luận và khuyến nghị.
+    \item \textbf{Chương 1 -- Tổng quan vấn đề:} Trình bày bối cảnh, lý do chọn đề tài, mục tiêu, câu hỏi nghiên cứu,
+    phạm vi thực hiện và phương pháp tổng quát.
+
+    \item \textbf{Chương 2 -- Cơ sở lý thuyết và nghiên cứu liên quan:} Hệ thống hóa các khái niệm nền tảng của phân tích dữ liệu
+    và học máy trong bài toán phân lớp y sinh, đồng thời tóm lược các kỹ thuật được sử dụng.
+
+    \item \textbf{Chương 3 -- Dữ liệu và phương pháp đề xuất:} Mô tả chi tiết nguồn dữ liệu, đặc trưng đầu vào, quy trình kiểm tra
+    chất lượng dữ liệu, thiết kế thực nghiệm và pipeline tiền xử lý.
+
+    \item \textbf{Chương 4 -- Thực nghiệm và kết quả đạt được:} Trình bày kết quả EDA, kết quả so sánh các cấu hình mô hình,
+    phân tích định lượng theo chỉ số và thảo luận các điểm mạnh, điểm hạn chế.
+
+    \item \textbf{Chương 5 -- Kết luận và khuyến nghị:} Tổng kết đóng góp chính, nêu giới hạn của đề tài và đề xuất các hướng phát triển
+    tiếp theo để nâng cao khả năng ứng dụng.
 \end{itemize}
