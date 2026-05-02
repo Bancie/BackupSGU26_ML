@@ -25,7 +25,7 @@ Phân bố lớp: class 0 = 500 mẫu (\~65.1\%), class 1 = 268 mẫu (\~34.9\%)
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\linewidth]{../../parsing/nhom01/c54b3ca7603d65d4589151bc3a49d054_img.jpg}
+\includegraphics[width=0.75\linewidth]{figures/class_distribution.png}
 \caption{Phân bố lớp trong dữ liệu Pima}
 \label{fig:class_distribution}
 \end{figure}
@@ -36,7 +36,7 @@ và \texttt{skin\_thickness}, do đó cần xử lý missing ẩn trước huấ
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.82\linewidth]{../../parsing/nhom01/398674b42e3466add6d47f420c136494_img.jpg}
+\includegraphics[width=0.82\linewidth]{figures/corr_heatmap.png}
 \caption{Ma trận tương quan sau khi áp dụng zero-as-missing}
 \label{fig:corr_heatmap}
 \end{figure}
@@ -65,7 +65,7 @@ KNN & Standard & Logistic Regression & 0.8154\\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.92\linewidth]{../../parsing/nhom01/3102c32204f998dba666e1e915d5babf_img.jpg}
+\includegraphics[width=0.92\linewidth]{figures/strategy_comparison.png}
 \caption{So sánh các cấu hình tiền xử lý + mô hình}
 \label{fig:strategy_comparison}
 \end{figure}
@@ -85,14 +85,14 @@ Cấu hình tốt nhất theo test ROC-AUC:
 \subsection{Confusion matrix và ROC}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.92\linewidth]{../../parsing/nhom01/3102c32204f998dba666e1e915d5babf_img.jpg}
+\includegraphics[width=0.92\linewidth]{figures/confusion_best.png}
 \caption{Confusion matrix của cấu hình được chọn}
 \label{fig:confusion_best}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.92\linewidth]{../../parsing/nhom01/3102c32204f998dba666e1e915d5babf_img.jpg}
+\includegraphics[width=0.92\linewidth]{figures/roc_top3.png}
 \caption{Đường cong ROC cho các cấu hình dẫn đầu}
 \label{fig:roc_top3}
 \end{figure}

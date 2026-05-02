@@ -31,7 +31,7 @@
 \contentsline {subsection}{\numberline {4.2.2}Nhận xét về quality data}{17}{subsection.4.2.2}%
 \contentsline {section}{\numberline {4.3}So sánh mô hình và chiến lược tiền xử lý}{18}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Xếp hạng theo ROC-AUC}{18}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Cấu hình đề xuất}{19}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.2}Cấu hình đề xuất}{18}{subsection.4.3.2}%
 \contentsline {section}{\numberline {4.4}Phân tích sai số và trade-off}{19}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}Confusion matrix và ROC}{19}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}Trade-off theo threshold}{20}{subsection.4.4.2}%

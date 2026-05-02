@@ -1,16 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1777737266.84842 "main.aux" "main.bbl" "main" 1777737268.50017 0
+["bibtex main"] 1777738188.83454 "main.aux" "main.bbl" "main" 1777738210.81685 0
   "./references.bib" 1777734396.15925 1162 ca78729c27adfd43e6303e58ec30f0d6 ""
   "/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/bibtex/bst/natbib/unsrtnat.bst" 1741388039 24550 a41a6405f4de768c43e871d9fbce2bc8 ""
-  "main.aux" 1777737268.17437 9655 49b57304ee31c3e4b61de723d24f4e9c "pdflatex"
+  "main.aux" 1777738210.31172 9655 b30b4d84f3388d6c412ad9fc93359dc5 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1777737266.95242 "main.tex" "main.pdf" "main" 1777737268.50037 0
-  "../../parsing/nhom01/3102c32204f998dba666e1e915d5babf_img.jpg" 1777736067.85228 49421 3aa5b40deb158db0c1f4ba0d5e8ad485 ""
-  "../../parsing/nhom01/398674b42e3466add6d47f420c136494_img.jpg" 1777736067.85108 34166 05fe2af82aef3171e5b3873bd4cdf7bc ""
-  "../../parsing/nhom01/c54b3ca7603d65d4589151bc3a49d054_img.jpg" 1777736067.84891 19216 93c1dd822f60a6dcee408ab10163518d ""
+["pdflatex"] 1777738208.19701 "main.tex" "main.pdf" "main" 1777738210.81714 0
   "/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1741388039 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/map/fontname/texfonts.map" 1741388039 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/map/pdftex/updmap/pdftex.map" 1741388039 5466553 2748998d7db8078826afa1f272036265 ""
@@ -114,18 +111,23 @@
   "/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-var/web2c/pdftex/pdflatex.fmt" 1741388039 3346125 851abcc596872d7f7285a006ccee0040 ""
   "chapters/chuong1_tongquan.tex" 1777735980.76767 2570 dcd5709be4a9ff63209896c06b7ffc9d ""
   "chapters/chuong2_cosolythuyet.tex" 1777735980.76779 3105 7d665566310bfe4d6f4d4d1c972f3894 ""
-  "chapters/chuong3_dulieu_phuongphap.tex" 1777737254.42229 2446 285618f1eb27d70556bae17e484aabfd ""
-  "chapters/chuong4_thucnghiem_ketqua.tex" 1777736310.07842 4353 7f242fa961d3d17e3d209b9f850e23ea ""
+  "chapters/chuong3_dulieu_phuongphap.tex" 1777738197.73966 2450 2dfbcf46e9e11a5ebcaa4f56478623bf ""
+  "chapters/chuong4_thucnghiem_ketqua.tex" 1777738155.20475 4179 51f35ad9e7cbfa810523b02358a8c1fe ""
   "chapters/chuong5_ketluan_khuyennghi.tex" 1777735980.76767 2444 03e647464a742821dd33567ea11ae0ce ""
+  "figures/class_distribution.png" 1777737590.2763 12081 40c20611ccaff466c363e9fb30741b87 ""
+  "figures/confusion_best.png" 1777737908.72326 66820 453376d9f244680b1aae2d81dcd91aa3 ""
+  "figures/corr_heatmap.png" 1777737639.05071 36309 3efe03617280f4f6573046430e116902 ""
   "figures/fig_missing_zero_report.png" 1777737220.79425 68935 476e33475ce6d9f2fc2f1275481401c3 ""
-  "figures/fig_preprocess_pipeline.png" 1777737220.98763 59867 4865214bb2456a19cd4d0a1219b8fcd8 ""
-  "main.aux" 1777737268.17437 9655 49b57304ee31c3e4b61de723d24f4e9c "pdflatex"
-  "main.bbl" 1777737266.94917 1390 50403775519a765aeae8a0ed7b46d571 "bibtex main"
-  "main.lof" 1777737268.17796 1067 d7f533da54c8ee9e874ae63e5cd5bbfe "pdflatex"
-  "main.lot" 1777737268.178 403 0a365c9457f480a5f7d89fcbe87470c6 "pdflatex"
-  "main.out" 1777737268.17738 8367 0cc5bf3b38d9bdcf7b70a739406e2b90 "pdflatex"
+  "figures/fig_preprocess_pipeline.png" 1777738142.97702 144469 09f5eebd9aace9ad1bb2a1c21ec43765 ""
+  "figures/roc_top3.png" 1777737952.10916 164405 890f949626f134e5184c1219321ce053 ""
+  "figures/strategy_comparison.png" 1777737752.52352 39622 767254dcad5198e9d78bec7dc673b2e8 ""
+  "main.aux" 1777738210.31172 9655 b30b4d84f3388d6c412ad9fc93359dc5 "pdflatex"
+  "main.bbl" 1777738188.94426 1390 50403775519a765aeae8a0ed7b46d571 "bibtex main"
+  "main.lof" 1777738210.31604 1067 d7f533da54c8ee9e874ae63e5cd5bbfe "pdflatex"
+  "main.lot" 1777738210.31611 403 0a365c9457f480a5f7d89fcbe87470c6 "pdflatex"
+  "main.out" 1777738210.31474 8367 0cc5bf3b38d9bdcf7b70a739406e2b90 "pdflatex"
   "main.tex" 1777735980.76771 3742 c5a4e5757ccd08df7ac21b8bac2a365e ""
-  "main.toc" 1777737268.17791 3948 3f5245b7e8d412893a55dce2ce4cba10 "pdflatex"
+  "main.toc" 1777738210.31554 3948 4087f5d9ca86905ad11b151d83c4bafb "pdflatex"
   (generated)
   "main.aux"
   "main.lof"
