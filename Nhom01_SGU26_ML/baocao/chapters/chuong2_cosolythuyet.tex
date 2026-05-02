@@ -1,52 +1,139 @@
 \chapter{Cơ sở lý thuyết và nghiên cứu liên quan}
 
-\section{Tổng quan phân tích dữ liệu trong bài toán phân lớp}
-Với bài toán phân lớp nhị phân, quy trình phân tích dữ liệu thường gồm:
-(1) kiểm tra chất lượng dữ liệu; (2) phân tích mô tả và trực quan hóa;
-(3) xử lý missing/outlier; (4) xây dựng và đánh giá mô hình.
-Bộ dữ liệu Pima là một benchmark phổ biến trong công bố học máy y sinh \cite{pima_uci,smith1988adap}.
+\section{Tổng quan bài toán phân lớp trong dự đoán nguy cơ đái tháo đường}
+Bài toán dự đoán nguy cơ đái tháo đường trong nghiên cứu này được mô hình hóa dưới dạng phân lớp nhị phân:
+với mỗi quan sát lâm sàng, mô hình cần dự đoán nhãn \texttt{outcome} thuộc lớp âm tính (\(0\)) hoặc dương tính (\(1\)).
+Về bản chất, đây là bài toán học có giám sát (supervised learning), trong đó dữ liệu huấn luyện đã có sẵn nhãn mục tiêu.
+
+Khác với các bài toán phân lớp ảnh hoặc văn bản, dữ liệu y sinh dạng bảng thường có số chiều không lớn nhưng chứa nhiều đặc điểm
+thống kê đặc thù: phân phối lệch, nhiễu đo lường, outlier, missing ẩn và tương quan chéo giữa các biến. Do vậy, hiệu quả mô hình
+không chỉ phụ thuộc vào thuật toán học máy mà còn phụ thuộc mạnh vào chất lượng tiền xử lý và thiết kế quy trình đánh giá.
+
+Bộ dữ liệu \textit{Pima Indians Diabetes} là một benchmark kinh điển trong học máy y sinh \cite{pima_uci,smith1988adap},
+được sử dụng rộng rãi để kiểm chứng các chiến lược tiền xử lý và mô hình phân lớp. Việc lựa chọn bộ dữ liệu này giúp nghiên cứu
+đảm bảo tính so sánh, tính tái lập và phù hợp với mục tiêu xây dựng một baseline đáng tin cậy.
 
 \section{Phân tích khám phá dữ liệu (EDA)}
-EDA giúp xác định tính chất dữ liệu trước khi huấn luyện:
+Phân tích khám phá dữ liệu (Exploratory Data Analysis -- EDA) là bước nền tảng trước khi huấn luyện mô hình. Mục tiêu của EDA
+là hiểu rõ cấu trúc dữ liệu, phát hiện bất thường, và hình thành giả thuyết ban đầu về mối quan hệ giữa biến đầu vào và biến mục tiêu.
+Trong bối cảnh y sinh, EDA còn đóng vai trò kiểm tra tính hợp lý của dữ liệu theo ngữ cảnh chuyên ngành, tránh diễn giải sai lệch.
+
+Các thành phần EDA chính trong bài toán này bao gồm:
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{Thống kê mô tả}: trung bình, độ lệch chuẩn, quartile.
-    \item \textbf{Phân bố lớp}: mức độ cân bằng giữa lớp âm và dương.
-    \item \textbf{Tương quan}: xác định biến có liên hệ mạnh với biến mục tiêu.
+    \item \textbf{Thống kê mô tả:} giá trị trung bình, trung vị, độ lệch chuẩn, khoảng tứ phân vị và biên min--max cho từng biến.
+    \item \textbf{Phân bố theo biến:} trực quan hóa histogram/boxplot để nhận diện phân phối lệch, đuôi dài và outlier.
+    \item \textbf{Phân bố lớp mục tiêu:} đánh giá mức độ cân bằng giữa hai lớp \texttt{outcome} để dự báo rủi ro thiên lệch mô hình.
+    \item \textbf{Tương quan và quan hệ đa biến:} xây dựng ma trận tương quan để xác định biến có liên hệ mạnh với \texttt{outcome},
+    đồng thời rà soát khả năng đa cộng tuyến.
 \end{itemize}
 
-\section{Xử lý missing data}
-Trong bộ Pima, một số biến y sinh có giá trị \texttt{0} không hợp lý về sinh lý
-(\texttt{glucose, blood\_pressure, skin\_thickness, insulin, bmi}).
-Do đó, báo cáo áp dụng quy ước \textit{zero-as-missing} và so sánh 3 chiến lược nội suy:
+Kết quả EDA không chỉ phục vụ mô tả dữ liệu, mà còn định hướng trực tiếp cho các quyết định kỹ thuật ở các bước sau:
+chọn chiến lược xử lý missing, chọn phương pháp chuẩn hóa, và xác định kỳ vọng hợp lý cho hiệu năng mô hình baseline.
+
+\section{Cơ sở lý thuyết tiền xử lý dữ liệu}
+\subsection{Missing ẩn và chính sách \textit{zero-as-missing}}
+Trong bộ dữ liệu Pima, một số biến sinh lý có giá trị \texttt{0} không hợp lý về mặt y học, điển hình là
+\texttt{glucose}, \texttt{blood\_pressure}, \texttt{skin\_thickness}, \texttt{insulin}, \texttt{bmi}.
+Những giá trị này thường phản ánh dữ liệu thiếu hoặc lỗi đo lường hơn là giá trị thực của bệnh nhân.
+
+Nếu giữ nguyên các giá trị này như quan sát hợp lệ, các chỉ số thống kê có thể bị lệch đáng kể, kéo theo sai lệch ở bước học mô hình.
+Vì vậy, nghiên cứu áp dụng chính sách \textit{zero-as-missing}: chuyển các giá trị \texttt{0} bất thường về dạng thiếu dữ liệu
+trước khi nội suy. Đây là một bước quan trọng để đưa dữ liệu về gần hơn với thực tế lâm sàng.
+
+\subsection{Các chiến lược nội suy thiếu dữ liệu}
+Sau khi xác định missing ẩn, nghiên cứu so sánh ba chiến lược nội suy phổ biến:
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{Median Imputation}: đơn giản, bền vững với phân bố lệch.
-    \item \textbf{KNN Imputation}: nội suy dựa trên mẫu lân cận.
-    \item \textbf{Iterative Imputation (MICE)}: nội suy lặp dựa trên quan hệ giữa các biến.
+    \item \textbf{Median Imputation:} thay giá trị thiếu bằng trung vị của biến. Phương pháp này đơn giản, ổn định và ít nhạy cảm
+    với outlier, phù hợp khi dữ liệu có phân phối lệch.
+    \item \textbf{KNN Imputation:} ước lượng giá trị thiếu dựa trên các quan sát gần nhất trong không gian đặc trưng.
+    Cách tiếp cận này có thể bảo toàn cấu trúc cục bộ của dữ liệu nhưng phụ thuộc vào lựa chọn khoảng cách và mức chuẩn hóa.
+    \item \textbf{Iterative Imputation (MICE):} nội suy lặp bằng cách mô hình hóa từng biến thiếu dựa trên các biến còn lại.
+    Phương pháp này tận dụng quan hệ đa biến tốt hơn, nhưng chi phí tính toán cao hơn và nhạy với cấu hình mô hình phụ trợ.
 \end{itemize}
 
-\section{Chuẩn hóa dữ liệu}
-Do thang đo các biến khác nhau, báo cáo so sánh:
+\subsection{Chuẩn hóa đặc trưng}
+Do các biến đầu vào có thang đo khác nhau (ví dụ glucose, insulin, age), việc chuẩn hóa là cần thiết để tránh hiện tượng
+một số biến có độ lớn tuyệt đối chi phối quá trình học. Nghiên cứu khảo sát hai lựa chọn chuẩn hóa:
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{StandardScaler}: đưa về trung bình 0, độ lệch chuẩn 1.
-    \item \textbf{MinMaxScaler}: đưa về khoảng [0,1].
-\end{itemize}
-Bước này giúp mô hình học máy (đặc biệt mô hình dựa trên khoảng cách/gradient)
-hoạt động ổn định và công bằng hơn giữa các biến.
-
-\section{Chỉ số đánh giá mô hình}
-Báo cáo sử dụng các chỉ số:
-\begin{itemize}[leftmargin=1.5em]
-    \item \textbf{Accuracy}: tỷ lệ dự đoán đúng tổng quát.
-    \item \textbf{Precision}: độ chính xác của dự đoán dương tính.
-    \item \textbf{Recall}: khả năng phát hiện dương tính thực tế.
-    \item \textbf{F1-score}: cân bằng giữa precision và recall.
-    \item \textbf{ROC-AUC}: năng lực phân biệt hai lớp trên nhiều threshold.
+    \item \textbf{StandardScaler:} đưa dữ liệu về trung bình \(0\), độ lệch chuẩn \(1\), công thức
+    \[
+        x' = \frac{x - \mu}{\sigma}
+    \]
+    phù hợp khi dữ liệu gần phân phối chuẩn hoặc cần ổn định gradient.
+    \item \textbf{MinMaxScaler:} ánh xạ dữ liệu về khoảng \([0,1]\), công thức
+    \[
+        x' = \frac{x - x_{\min}}{x_{\max} - x_{\min}}
+    \]
+    phù hợp khi muốn giữ nguyên thứ tự và biên tương đối của biến.
 \end{itemize}
 
-\section{Mô hình baseline}
+Trong thực nghiệm, chuẩn hóa luôn được đặt trong pipeline để bảo đảm phép biến đổi được học từ tập train và áp dụng nhất quán
+cho validation/test, hạn chế rò rỉ dữ liệu.
+
+\section{Mô hình học máy baseline}
+\subsection{Logistic Regression}
+Logistic Regression là mô hình phân lớp tuyến tính phổ biến, ước lượng xác suất thuộc lớp dương thông qua hàm sigmoid:
+\[
+    P(y=1|x) = \sigma(z) = \frac{1}{1 + e^{-z}}, \quad z = \beta_0 + \beta_1x_1 + \dots + \beta_nx_n
+\]
+Ưu điểm của Logistic Regression là dễ diễn giải, tốc độ huấn luyện nhanh và thường hoạt động tốt trên dữ liệu tabular cỡ vừa.
+Trong bối cảnh nghiên cứu, mô hình này đóng vai trò chuẩn tham chiếu tuyến tính để so sánh với các mô hình phi tuyến.
+
+\subsection{Random Forest}
+Random Forest là phương pháp ensemble kết hợp nhiều cây quyết định được huấn luyện trên các mẫu bootstrap và tập đặc trưng ngẫu nhiên.
+Kết quả dự đoán cuối cùng được tổng hợp theo cơ chế bỏ phiếu đa số (classification). Nhờ cơ chế tổ hợp, Random Forest thường:
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{Logistic Regression}: mô hình tuyến tính để diễn giải và làm mốc so sánh.
-    \item \textbf{Random Forest}: mô hình phi tuyến, mạnh trong bối cảnh quan hệ biến phức tạp.
+    \item giảm overfitting so với cây quyết định đơn lẻ;
+    \item nắm bắt tốt quan hệ phi tuyến và tương tác giữa các biến;
+    \item ít yêu cầu giả định phân phối dữ liệu;
+    \item cung cấp chỉ báo \textit{feature importance} phục vụ diễn giải.
 \end{itemize}
-Khung triển khai được xây dựng trên thư viện scikit-learn \cite{pedregosa2011sklearn},
-trong khi các nguyên lý đánh giá và mô hình hóa tham khảo theo tài liệu kinh điển \cite{hastie2009elements}.
+
+Tuy nhiên, đổi lại mô hình có thể khó diễn giải hơn Logistic Regression và nhạy cảm với lựa chọn siêu tham số
+(số cây, độ sâu cây, tiêu chí chia nhánh).
+
+\section{Chỉ số đánh giá mô hình phân lớp}
+Đánh giá mô hình trong bài toán y sinh cần đa tiêu chí thay vì chỉ dựa trên một chỉ số đơn lẻ. Với ma trận nhầm lẫn gồm
+\(TP, TN, FP, FN\), các chỉ số được sử dụng như sau:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Accuracy:}
+    \[
+        \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+    \]
+    đo tỷ lệ dự đoán đúng tổng quát.
+    \item \textbf{Precision:}
+    \[
+        \text{Precision} = \frac{TP}{TP + FP}
+    \]
+    phản ánh mức độ tin cậy của dự đoán dương tính.
+    \item \textbf{Recall (Sensitivity):}
+    \[
+        \text{Recall} = \frac{TP}{TP + FN}
+    \]
+    phản ánh khả năng phát hiện đúng ca dương tính thực sự.
+    \item \textbf{F1-score:}
+    \[
+        F1 = 2 \cdot \frac{\text{Precision}\cdot\text{Recall}}{\text{Precision} + \text{Recall}}
+    \]
+    cân bằng giữa precision và recall.
+    \item \textbf{ROC-AUC:} diện tích dưới đường cong ROC, đo khả năng phân biệt hai lớp trên nhiều ngưỡng khác nhau.
+\end{itemize}
+
+Trong bối cảnh sàng lọc nguy cơ, recall thường được ưu tiên để giảm bỏ sót ca bệnh tiềm năng; tuy nhiên precision cũng cần được
+theo dõi để tránh tăng quá nhiều cảnh báo sai. Vì vậy, nghiên cứu sử dụng đồng thời nhiều chỉ số để lựa chọn cấu hình phù hợp nhất.
+
+\section{Nghiên cứu liên quan}
+Nghiên cứu ứng dụng học máy cho bài toán dự đoán đái tháo đường đã được quan tâm từ sớm. Công trình của Smith và cộng sự
+\cite{smith1988adap} là một trong những nghiên cứu tiêu biểu sử dụng dữ liệu Pima để dự báo nguy cơ khởi phát bệnh, qua đó đặt nền
+tảng cho hướng tiếp cận dựa trên dữ liệu trong bối cảnh y sinh.
+
+Trong các nghiên cứu sau này, bộ dữ liệu Pima tiếp tục được dùng rộng rãi để so sánh các kỹ thuật tiền xử lý và thuật toán phân lớp.
+Một xu hướng nhất quán là hiệu năng mô hình chịu ảnh hưởng lớn bởi chất lượng xử lý dữ liệu đầu vào, đặc biệt là cách xử lý missing,
+chuẩn hóa biến và chiến lược đánh giá theo ngưỡng. Nhiều nghiên cứu ghi nhận các mô hình phi tuyến như Random Forest có thể đạt độ chính
+xác cao hơn mô hình tuyến tính trong dữ liệu có tương tác biến phức tạp; ngược lại, Logistic Regression vẫn giữ vai trò quan trọng nhờ
+tính diễn giải và tính ổn định khi thiết lập baseline.
+
+So với các công bố chỉ tập trung vào so sánh thuật toán, báo cáo này nhấn mạnh cách tiếp cận theo pipeline tái lập:
+kết hợp phân tích EDA, xử lý missing theo ngữ cảnh y sinh, so sánh nhiều cấu hình \textit{imputer + scaler + model}, và phân tích trade-off
+chỉ số theo mục tiêu ứng dụng. Hướng tiếp cận này phù hợp với tinh thần thực nghiệm chặt chẽ trong các tài liệu học máy kinh điển
+\cite{hastie2009elements} và triển khai thực tiễn trên hệ sinh thái scikit-learn \cite{pedregosa2011sklearn}.
