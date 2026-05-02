@@ -1,39 +1,39 @@
-\chapter{Ket luan va khuyen nghi}
+\chapter{Kết luận và khuyến nghị}
 
-\section{Ket luan chung}
-Bao cao da hoan thanh quy trinh rut trich du lieu va tien xu ly cho bai toan
-du doan tieu duong tren bo du lieu Pima. Ket qua cho thay viec ket hop
-\textit{zero-as-missing} voi pipeline imputation + scaling la can thiet de nang cao
-tinh nhat quan cua du lieu va hieu nang mo hinh baseline.
+\section{Kết luận chung}
+Báo cáo đã hoàn thành quy trình rút trích dữ liệu và tiền xử lý cho bài toán
+dự đoán tiểu đường trên bộ dữ liệu Pima. Kết quả cho thấy việc kết hợp
+\textit{zero-as-missing} với pipeline imputation + scaling là cần thiết để nâng cao
+tính nhất quán của dữ liệu và hiệu năng mô hình baseline.
 
-\section{Tom tat ket qua dat duoc}
+\section{Tóm tắt kết quả đạt được}
 \begin{itemize}[leftmargin=1.5em]
-    \item Hoan thien notebook phan tich theo huong bao cao hoc thuat.
-    \item So sanh 12 cau hinh tien xu ly va mo hinh tren cung dieu kien chia du lieu.
-    \item De xuat cau hinh KNN + MinMax + Random Forest cho ket qua test ROC-AUC cao nhat.
-    \item Bo sung phan tich confusion matrix, ROC va threshold trade-off.
+    \item Hoàn thiện notebook phân tích theo hướng báo cáo học thuật.
+    \item So sánh 12 cấu hình tiền xử lý và mô hình trên cùng điều kiện chia dữ liệu.
+    \item Đề xuất cấu hình KNN + MinMax + Random Forest cho kết quả test ROC-AUC cao nhất.
+    \item Bổ sung phân tích confusion matrix, ROC và threshold trade-off.
 \end{itemize}
 
-\section{Dong gop cua de tai}
+\section{Đóng góp của đề tài}
 \begin{itemize}[leftmargin=1.5em]
-    \item Chuan hoa quy trinh thuc hanh tu EDA den danh gia mo hinh baseline.
-    \item Cung cap khung danh gia de tai lap cho cac bai toan phan lop y sinh tuong tu.
-    \item Tang tinh bao cao hoa cua notebook de phuc vu trinh bay hoc phan.
+    \item Chuẩn hóa quy trình thực hành từ EDA đến đánh giá mô hình baseline.
+    \item Cung cấp khung đánh giá dễ tái lập cho các bài toán phân lớp y sinh tương tự.
+    \item Tăng tính báo cáo hóa của notebook để phục vụ trình bày học phần.
 \end{itemize}
 
-\section{Han che nghien cuu}
+\section{Hạn chế nghiên cứu}
 \begin{enumerate}[leftmargin=1.8em]
-    \item Quy mo du lieu con nho (768 mau), chua dai dien cho nhieu quan the benh nhan.
-    \item Gia dinh \textit{zero-as-missing} co the gay sai lech neu ton tai truong hop do thuc su bang 0.
-    \item Danh gia hien tai dua tren mot lan chia train/validation/test, chua co CV lap lai.
-    \item Chua tien hanh tuning tham so he thong va calibration xac suat.
+    \item Quy mô dữ liệu còn nhỏ (768 mẫu), chưa đại diện cho nhiều quần thể bệnh nhân.
+    \item Giả định \textit{zero-as-missing} có thể gây sai lệch nếu tồn tại trường hợp đo thực sự bằng 0.
+    \item Đánh giá hiện tại dựa trên một lần chia train/validation/test, chưa có CV lặp lại.
+    \item Chưa tiến hành tuning tham số hệ thống và calibration xác suất.
 \end{enumerate}
 
-\section{Huong phat trien va kien nghi}
+\section{Hướng phát triển và kiến nghị}
 \begin{enumerate}[leftmargin=1.8em]
-    \item Ap dung Stratified K-Fold CV de kiem chung do on dinh ket qua.
-    \item Mo rong tuning tham so cho Logistic Regression va Random Forest.
-    \item Thu nghiem them cac mo hinh boosting (XGBoost/LightGBM) va ky thuat can bang lop.
-    \item Mo rong bo du lieu va kiem tra external validity tren nguon doc lap.
-    \item Dong goi pipeline suy luan va tao bao cao tu dong de tang kha nang trien khai.
+    \item Áp dụng Stratified K-Fold CV để kiểm chứng độ ổn định kết quả.
+    \item Mở rộng tuning tham số cho Logistic Regression và Random Forest.
+    \item Thử nghiệm thêm các mô hình boosting (XGBoost/LightGBM) và kỹ thuật cân bằng lớp.
+    \item Mở rộng bộ dữ liệu và kiểm tra external validity trên nguồn độc lập.
+    \item Đóng gói pipeline suy luận và tạo báo cáo tự động để tăng khả năng triển khai.
 \end{enumerate}

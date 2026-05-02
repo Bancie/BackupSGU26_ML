@@ -1,66 +1,62 @@
-\chapter{Du lieu va phuong phap de xuat}
+\chapter{Dữ liệu và phương pháp đề xuất}
 
-\section{Nguon du lieu}
-Du lieu duoc su dung trong bai nay gom:
+\section{Nguồn dữ liệu}
+Dữ liệu được sử dụng trong bài này gồm:
 \begin{itemize}[leftmargin=1.5em]
     \item \texttt{Lab\_03/data/pima-indians-diabetes.csv}
     \item \texttt{Lab\_03/data/pima-indians-diabetes.names}
 \end{itemize}
-Theo file mo ta, bo du lieu co 768 quan sat, 8 thuoc tinh so hoc va 1 bien muc tieu \texttt{outcome}.
+Theo file mô tả, bộ dữ liệu có 768 quan sát, 8 thuộc tính số học và 1 biến mục tiêu \texttt{outcome}.
 
-\section{Mo ta thuoc tinh}
+\section{Mô tả thuộc tính}
 \begin{table}[H]
 \centering
-\caption{Mo ta cac thuoc tinh trong bo du lieu Pima}
+\caption{Mô tả các thuộc tính trong bộ dữ liệu Pima}
 \label{tab:pima_features}
 \begin{tabular}{p{3.5cm}p{9cm}}
 \toprule
-\textbf{Thuoc tinh} & \textbf{Y nghia}\\
+\textbf{Thuộc tính} & \textbf{Ý nghĩa}\\
 \midrule
-pregnancies & So lan mang thai\\
-glucose & Nong do glucose huyet tuong (2h OGTT)\\
-blood\_pressure & Huyet ap tam truong (mm Hg)\\
-skin\_thickness & Do day nep da co tay sau (mm)\\
-insulin & Nong do insulin huyet thanh (2h)\\
-bmi & Chi so khoi co the\\
-diabetes\_pedigree\_function & He so tien su gia dinh\\
-age & Tuoi\\
-outcome & Nhan phan lop (0/1)\\
+pregnancies & Số lần mang thai\\
+glucose & Nồng độ glucose huyết tương (2h OGTT)\\
+blood\_pressure & Huyết áp tâm trương (mm Hg)\\
+skin\_thickness & Độ dày nếp da cơ tay sau (mm)\\
+insulin & Nồng độ insulin huyết thanh (2h)\\
+bmi & Chỉ số khối cơ thể\\
+diabetes\_pedigree\_function & Hệ số tiền sử gia đình\\
+age & Tuổi\\
+outcome & Nhãn phân lớp (0/1)\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\section{Kiem tra chat luong du lieu}
-Ket qua tu notebook cho thay:
+\section{Kiểm tra chất lượng dữ liệu}
+Kết quả từ notebook cho thấy:
 \begin{itemize}[leftmargin=1.5em]
-    \item So dong trung lap: 0.
-    \item Khong co NaN tuong minh trong CSV goc, nhung co nhieu gia tri \texttt{0} bat thuong sinh ly.
-    \item Cac cot co ty le \texttt{0} cao: \texttt{insulin} va \texttt{skin\_thickness}.
+    \item Số dòng trùng lặp: 0.
+    \item Không có NaN tường minh trong CSV gốc, nhưng có nhiều giá trị \texttt{0} bất thường sinh lý.
+    \item Các cột có tỷ lệ \texttt{0} cao: \texttt{insulin} và \texttt{skin\_thickness}.
 \end{itemize}
 
 \begin{figure}[H]
 \centering
-\fbox{\parbox[c][4.8cm][c]{0.85\linewidth}{\centering
-Placeholder Figure\\
-Bao cao missing/zero-rate theo thuoc tinh}}
-\caption{Thong ke missing an va gia tri 0 theo thuoc tinh}
+\includegraphics[width=0.82\linewidth]{figures/fig_missing_zero_report.png}
+\caption{Thống kê missing ẩn và giá trị 0 theo thuộc tính}
 \label{fig:missing_zero_report}
 \end{figure}
 
-\section{Quy trinh tien xu ly de xuat}
-Quy trinh duoc de xuat va trien khai trong notebook:
+\section{Quy trình tiền xử lý đề xuất}
+Quy trình được đề xuất và triển khai trong notebook:
 \begin{enumerate}[leftmargin=1.8em]
-    \item Chuyen \texttt{0 -> NaN} cho cac bien sinh ly bat thuong.
-    \item Chia du lieu theo ti le train/validation/test = 60/20/20 (stratified).
-    \item Tao pipeline ket hop \textit{imputer + scaler + model}.
-    \item So sanh 12 to hop cau hinh (3 imputer x 2 scaler x 2 model).
+    \item Chuyển \texttt{0 -> NaN} cho các biến sinh lý bất thường.
+    \item Chia dữ liệu theo tỉ lệ train/validation/test = 60/20/20 (stratified).
+    \item Tạo pipeline kết hợp \textit{imputer + scaler + model}.
+    \item So sánh 12 tổ hợp cấu hình (3 imputer x 2 scaler x 2 model).
 \end{enumerate}
 
 \begin{figure}[H]
 \centering
-\fbox{\parbox[c][4.8cm][c]{0.85\linewidth}{\centering
-Placeholder Figure\\
-So do pipeline tien xu ly va danh gia}}
-\caption{Pipeline tien xu ly va danh gia mo hinh}
+\includegraphics[width=\linewidth]{figures/fig_preprocess_pipeline.png}
+\caption{Pipeline tiền xử lý và đánh giá mô hình}
 \label{fig:preprocess_pipeline}
 \end{figure}

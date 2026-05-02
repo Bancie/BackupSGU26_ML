@@ -1,58 +1,54 @@
-\chapter{Thuc nghiem va ket qua dat duoc}
+\chapter{Thực nghiệm và kết quả đạt được}
 
-\section{Thiet lap thuc nghiem}
-\subsection{Chien luoc chia du lieu}
-Du lieu duoc chia theo ti le 60/20/20 voi \textit{stratify} tren nhan \texttt{outcome}
-de giu on dinh ti le lop duong tinh giua cac tap.
+\section{Thiết lập thực nghiệm}
+\subsection{Chiến lược chia dữ liệu}
+Dữ liệu được chia theo tỉ lệ 60/20/20 với \textit{stratify} trên nhãn \texttt{outcome}
+để giữ ổn định tỉ lệ lớp dương tính giữa các tập.
 \begin{itemize}[leftmargin=1.5em]
-    \item Train: 460 mau
-    \item Validation: 154 mau
-    \item Test: 154 mau
+    \item Train: 460 mẫu
+    \item Validation: 154 mẫu
+    \item Test: 154 mẫu
 \end{itemize}
 
-\subsection{To hop cau hinh duoc so sanh}
+\subsection{Tổ hợp cấu hình được so sánh}
 \begin{itemize}[leftmargin=1.5em]
     \item Imputation: Median, KNN, Iterative(MICE)
     \item Scaling: StandardScaler, MinMaxScaler
     \item Model: Logistic Regression, Random Forest
 \end{itemize}
-Tong cong 12 cau hinh duoc danh gia voi cung mot seed va cung mot split de dam bao cong bang.
+Tổng cộng 12 cấu hình được đánh giá với cùng một seed và cùng một split để đảm bảo công bằng.
 
-\section{Ket qua EDA chinh}
-\subsection{Tong quan bo du lieu}
-Bo du lieu co 768 dong va 9 cot (8 bien dau vao va 1 bien dau ra).
-Phan bo lop: class 0 = 500 mau (\~65.1\%), class 1 = 268 mau (\~34.9\%).
+\section{Kết quả EDA chính}
+\subsection{Tổng quan bộ dữ liệu}
+Bộ dữ liệu có 768 dòng và 9 cột (8 biến đầu vào và 1 biến đầu ra).
+Phân bố lớp: class 0 = 500 mẫu (\~65.1\%), class 1 = 268 mẫu (\~34.9\%).
 
 \begin{figure}[H]
 \centering
-\fbox{\parbox[c][5cm][c]{0.85\linewidth}{\centering
-Placeholder Figure\\
-Phan bo lop outcome}}
-\caption{Phan bo lop trong du lieu Pima}
+\includegraphics[width=0.75\linewidth]{../../parsing/nhom01/c54b3ca7603d65d4589151bc3a49d054_img.jpg}
+\caption{Phân bố lớp trong dữ liệu Pima}
 \label{fig:class_distribution}
 \end{figure}
 
-\subsection{Nhan xet ve quality data}
-So dong trung lap bang 0. Cac cot co so luong \texttt{0} cao nhat la \texttt{insulin}
-va \texttt{skin\_thickness}, do do can xu ly missing an truoc huan luyen.
+\subsection{Nhận xét về quality data}
+Số dòng trùng lặp bằng 0. Các cột có số lượng \texttt{0} cao nhất là \texttt{insulin}
+và \texttt{skin\_thickness}, do đó cần xử lý missing ẩn trước huấn luyện.
 
 \begin{figure}[H]
 \centering
-\fbox{\parbox[c][5cm][c]{0.85\linewidth}{\centering
-Placeholder Figure\\
-Heatmap tuong quan cac bien}}
-\caption{Ma tran tuong quan sau khi ap dung zero-as-missing}
+\includegraphics[width=0.82\linewidth]{../../parsing/nhom01/398674b42e3466add6d47f420c136494_img.jpg}
+\caption{Ma trận tương quan sau khi áp dụng zero-as-missing}
 \label{fig:corr_heatmap}
 \end{figure}
 
-\section{So sanh mo hinh va chien luoc tien xu ly}
-\subsection{Xep hang theo ROC-AUC}
-Ket qua trong notebook cho thay cac cau hinh dan dau (theo test ROC-AUC) tap trung o
-to hop KNN imputer + Random Forest.
+\section{So sánh mô hình và chiến lược tiền xử lý}
+\subsection{Xếp hạng theo ROC-AUC}
+Kết quả trong notebook cho thấy các cấu hình dẫn đầu (theo test ROC-AUC) tập trung ở
+tổ hợp KNN imputer + Random Forest.
 
 \begin{table}[H]
 \centering
-\caption{Top cau hinh theo test ROC-AUC (trich tu notebook)}
+\caption{Top cấu hình theo test ROC-AUC (trích từ notebook)}
 \label{tab:top_configs}
 \begin{tabular}{p{3cm}p{2.5cm}p{3cm}c}
 \toprule
@@ -69,15 +65,13 @@ KNN & Standard & Logistic Regression & 0.8154\\
 
 \begin{figure}[H]
 \centering
-\fbox{\parbox[c][5cm][c]{0.85\linewidth}{\centering
-Placeholder Figure\\
-Barplot top strategies theo ROC-AUC va F1}}
-\caption{So sanh cac cau hinh tien xu ly + mo hinh}
+\includegraphics[width=0.92\linewidth]{../../parsing/nhom01/3102c32204f998dba666e1e915d5babf_img.jpg}
+\caption{So sánh các cấu hình tiền xử lý + mô hình}
 \label{fig:strategy_comparison}
 \end{figure}
 
-\subsection{Cau hinh de xuat}
-Cau hinh tot nhat theo test ROC-AUC:
+\subsection{Cấu hình đề xuất}
+Cấu hình tốt nhất theo test ROC-AUC:
 \textbf{KNN Imputer + MinMaxScaler + Random Forest}.
 \begin{itemize}[leftmargin=1.5em]
     \item Validation ROC-AUC: 0.8700
@@ -87,32 +81,28 @@ Cau hinh tot nhat theo test ROC-AUC:
     \item Test Recall: 0.5741
 \end{itemize}
 
-\section{Phan tich sai so va trade-off}
-\subsection{Confusion matrix va ROC}
+\section{Phân tích sai số và trade-off}
+\subsection{Confusion matrix và ROC}
 \begin{figure}[H]
 \centering
-\fbox{\parbox[c][5cm][c]{0.85\linewidth}{\centering
-Placeholder Figure\\
-Confusion matrix cho cau hinh tot nhat}}
-\caption{Confusion matrix cua cau hinh duoc chon}
+\includegraphics[width=0.92\linewidth]{../../parsing/nhom01/3102c32204f998dba666e1e915d5babf_img.jpg}
+\caption{Confusion matrix của cấu hình được chọn}
 \label{fig:confusion_best}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\fbox{\parbox[c][5cm][c]{0.85\linewidth}{\centering
-Placeholder Figure\\
-ROC cua top 3 cau hinh}}
-\caption{Duong cong ROC cho cac cau hinh dan dau}
+\includegraphics[width=0.92\linewidth]{../../parsing/nhom01/3102c32204f998dba666e1e915d5babf_img.jpg}
+\caption{Đường cong ROC cho các cấu hình dẫn đầu}
 \label{fig:roc_top3}
 \end{figure}
 
 \subsection{Trade-off theo threshold}
-Notebook da thuc hien quet threshold va chi ra rang threshold 0.50 chua chac toi uu.
-Diem can bang F1 tot nhat trong qua trinh quet nam quanh threshold xap xi 0.30,
-cho thay neu uu tien phat hien ca duong tinh thi co the danh doi precision de tang recall.
+Notebook đã thực hiện quét threshold và chỉ ra rằng threshold 0.50 chưa chắc tối ưu.
+Điểm cân bằng F1 tốt nhất trong quá trình quét nằm quanh threshold xấp xỉ 0.30,
+cho thấy nếu ưu tiên phát hiện ca dương tính thì có thể đánh đổi precision để tăng recall.
 
-\subsection{Nhan dinh overfitting/underfitting}
-Chenh lech \texttt{val\_roc\_auc - test\_roc\_auc} xap xi 0.053.
-Dieu nay cho thay dau hieu overfitting nhe den trung binh, can tiep tuc kiem chung bang
-cross-validation va tuning he thong trong buoc tiep theo.
+\subsection{Nhận định overfitting/underfitting}
+Chênh lệch \texttt{val\_roc\_auc - test\_roc\_auc} xấp xỉ 0.053.
+Điều này cho thấy dấu hiệu overfitting nhẹ đến trung bình, cần tiếp tục kiểm chứng bằng
+cross-validation và tuning hệ thống trong bước tiếp theo.

@@ -1,12 +1,13 @@
+\babel@toc {vietnamese}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Thong ke missing an va gia tri 0 theo thuoc tinh}}{14}{figure.caption.9}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Pipeline tien xu ly va danh gia mo hinh}}{15}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Thống kê missing ẩn và giá trị 0 theo thuộc tính}}{14}{figure.caption.9}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Pipeline tiền xử lý và đánh giá mô hình}}{15}{figure.caption.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Phan bo lop trong du lieu Pima}}{17}{figure.caption.11}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Ma tran tuong quan sau khi ap dung zero-as-missing}}{17}{figure.caption.12}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces So sanh cac cau hinh tien xu ly + mo hinh}}{18}{figure.caption.14}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Confusion matrix cua cau hinh duoc chon}}{19}{figure.caption.15}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Duong cong ROC cho cac cau hinh dan dau}}{19}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Phân bố lớp trong dữ liệu Pima}}{17}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Ma trận tương quan sau khi áp dụng zero-as-missing}}{17}{figure.caption.12}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces So sánh các cấu hình tiền xử lý + mô hình}}{18}{figure.caption.14}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Confusion matrix của cấu hình được chọn}}{19}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Đường cong ROC cho các cấu hình dẫn đầu}}{20}{figure.caption.16}%
 \addvspace {10\p@ }

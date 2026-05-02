@@ -1,52 +1,52 @@
-\chapter{Co so ly thuyet va nghien cuu lien quan}
+\chapter{Cơ sở lý thuyết và nghiên cứu liên quan}
 
-\section{Tong quan phan tich du lieu trong bai toan phan lop}
-Voi bai toan phan lop nhi phan, quy trinh phan tich du lieu thuong gom:
-(1) kiem tra chat luong du lieu; (2) phan tich mo ta va truc quan hoa;
-(3) xu ly missing/outlier; (4) xay dung va danh gia mo hinh.
-Bo du lieu Pima la mot benchmark pho bien trong cong bo hoc may y sinh \cite{pima_uci,smith1988adap}.
+\section{Tổng quan phân tích dữ liệu trong bài toán phân lớp}
+Với bài toán phân lớp nhị phân, quy trình phân tích dữ liệu thường gồm:
+(1) kiểm tra chất lượng dữ liệu; (2) phân tích mô tả và trực quan hóa;
+(3) xử lý missing/outlier; (4) xây dựng và đánh giá mô hình.
+Bộ dữ liệu Pima là một benchmark phổ biến trong công bố học máy y sinh \cite{pima_uci,smith1988adap}.
 
-\section{Phan tich kham pha du lieu (EDA)}
-EDA giup xac dinh tinh chat du lieu truoc khi huan luyen:
+\section{Phân tích khám phá dữ liệu (EDA)}
+EDA giúp xác định tính chất dữ liệu trước khi huấn luyện:
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{Thong ke mo ta}: trung binh, do lech chuan, quartile.
-    \item \textbf{Phan bo lop}: muc do can bang giua lop am va duong.
-    \item \textbf{Tuong quan}: xac dinh bien co lien he manh voi bien muc tieu.
+    \item \textbf{Thống kê mô tả}: trung bình, độ lệch chuẩn, quartile.
+    \item \textbf{Phân bố lớp}: mức độ cân bằng giữa lớp âm và dương.
+    \item \textbf{Tương quan}: xác định biến có liên hệ mạnh với biến mục tiêu.
 \end{itemize}
 
-\section{Xu ly missing data}
-Trong bo Pima, mot so bien y sinh co gia tri \texttt{0} khong hop ly ve sinh ly
+\section{Xử lý missing data}
+Trong bộ Pima, một số biến y sinh có giá trị \texttt{0} không hợp lý về sinh lý
 (\texttt{glucose, blood\_pressure, skin\_thickness, insulin, bmi}).
-Do do, bao cao ap dung quy uoc \textit{zero-as-missing} va so sanh 3 chien luoc noi suy:
+Do đó, báo cáo áp dụng quy ước \textit{zero-as-missing} và so sánh 3 chiến lược nội suy:
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{Median Imputation}: don gian, ben vung voi phan bo lech.
-    \item \textbf{KNN Imputation}: noi suy dua tren mau lan can.
-    \item \textbf{Iterative Imputation (MICE)}: noi suy lap dua tren quan he giua cac bien.
+    \item \textbf{Median Imputation}: đơn giản, bền vững với phân bố lệch.
+    \item \textbf{KNN Imputation}: nội suy dựa trên mẫu lân cận.
+    \item \textbf{Iterative Imputation (MICE)}: nội suy lặp dựa trên quan hệ giữa các biến.
 \end{itemize}
 
-\section{Chuan hoa du lieu}
-Do thang do cac bien khac nhau, bao cao so sanh:
+\section{Chuẩn hóa dữ liệu}
+Do thang đo các biến khác nhau, báo cáo so sánh:
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{StandardScaler}: dua ve trung binh 0, do lech chuan 1.
-    \item \textbf{MinMaxScaler}: dua ve khoang [0,1].
+    \item \textbf{StandardScaler}: đưa về trung bình 0, độ lệch chuẩn 1.
+    \item \textbf{MinMaxScaler}: đưa về khoảng [0,1].
 \end{itemize}
-Buoc nay giup mo hinh hoc may (dac biet mo hinh dua tren khoang cach/gradient)
-hoat dong on dinh va cong bang hon giua cac bien.
+Bước này giúp mô hình học máy (đặc biệt mô hình dựa trên khoảng cách/gradient)
+hoạt động ổn định và công bằng hơn giữa các biến.
 
-\section{Chi so danh gia mo hinh}
-Bao cao su dung cac chi so:
+\section{Chỉ số đánh giá mô hình}
+Báo cáo sử dụng các chỉ số:
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{Accuracy}: ty le du doan dung tong quat.
-    \item \textbf{Precision}: do chinh xac cua du doan duong tinh.
-    \item \textbf{Recall}: kha nang phat hien duong tinh thuc te.
-    \item \textbf{F1-score}: can bang giua precision va recall.
-    \item \textbf{ROC-AUC}: nang luc phan biet hai lop tren nhieu threshold.
+    \item \textbf{Accuracy}: tỷ lệ dự đoán đúng tổng quát.
+    \item \textbf{Precision}: độ chính xác của dự đoán dương tính.
+    \item \textbf{Recall}: khả năng phát hiện dương tính thực tế.
+    \item \textbf{F1-score}: cân bằng giữa precision và recall.
+    \item \textbf{ROC-AUC}: năng lực phân biệt hai lớp trên nhiều threshold.
 \end{itemize}
 
-\section{Mo hinh baseline}
+\section{Mô hình baseline}
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{Logistic Regression}: mo hinh tuyen tinh de dien giai va lam moc so sanh.
-    \item \textbf{Random Forest}: mo hinh phi tuyen, manh trong boi canh quan he bien phuc tap.
+    \item \textbf{Logistic Regression}: mô hình tuyến tính để diễn giải và làm mốc so sánh.
+    \item \textbf{Random Forest}: mô hình phi tuyến, mạnh trong bối cảnh quan hệ biến phức tạp.
 \end{itemize}
-Khung trien khai duoc xay dung tren thu vien scikit-learn \cite{pedregosa2011sklearn},
-trong khi cac nguyen ly danh gia va mo hinh hoa tham khao theo tai lieu kinh dien \cite{hastie2009elements}.
+Khung triển khai được xây dựng trên thư viện scikit-learn \cite{pedregosa2011sklearn},
+trong khi các nguyên lý đánh giá và mô hình hóa tham khảo theo tài liệu kinh điển \cite{hastie2009elements}.

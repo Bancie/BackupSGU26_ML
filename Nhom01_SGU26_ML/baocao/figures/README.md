@@ -1,23 +1,14 @@
-# Figures Placeholder Guide
+# Figures Mapping Guide
 
-This report currently uses placeholder figure blocks in chapter files.
+The report now links several real images parsed from notebook outputs in `parsing/nhom01`.
 
-## Recommended replacement mapping
-- `fig:class_distribution` -> class distribution chart from notebook
-- `fig:missing_zero_report` -> zero/missing report table or chart
-- `fig:corr_heatmap` -> correlation heatmap
-- `fig:preprocess_pipeline` -> preprocessing pipeline flow
-- `fig:strategy_comparison` -> top strategies ROC-AUC/F1 chart
-- `fig:confusion_best` -> confusion matrix of best strategy
-- `fig:roc_top3` -> ROC curves of top 3 strategies
+## Current mapping in the report
+- `fig:class_distribution` -> `../../parsing/nhom01/c54b3ca7603d65d4589151bc3a49d054_img.jpg`
+- `fig:corr_heatmap` -> `../../parsing/nhom01/398674b42e3466add6d47f420c136494_img.jpg`
+- `fig:strategy_comparison` -> `../../parsing/nhom01/3102c32204f998dba666e1e915d5babf_img.jpg`
+- `fig:confusion_best` -> `../../parsing/nhom01/3102c32204f998dba666e1e915d5babf_img.jpg`
+- `fig:roc_top3` -> `../../parsing/nhom01/3102c32204f998dba666e1e915d5babf_img.jpg`
 
-## Naming suggestion for real assets
-- `fig_class_distribution.pdf`
-- `fig_missing_zero_report.pdf`
-- `fig_corr_heatmap.pdf`
-- `fig_preprocess_pipeline.pdf`
-- `fig_strategy_comparison.pdf`
-- `fig_confusion_best.pdf`
-- `fig_roc_top3.pdf`
-
-When real images are ready, replace placeholder boxes in chapter files with `\includegraphics`.
+## Generated locally from notebook data
+- `fig:missing_zero_report` -> `figures/fig_missing_zero_report.png`
+- `fig:preprocess_pipeline` -> `figures/fig_preprocess_pipeline.png`

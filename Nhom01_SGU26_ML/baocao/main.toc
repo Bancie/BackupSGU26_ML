@@ -1,43 +1,44 @@
-\contentsline {chapter}{Phan cong thanh vien}{1}{chapter*.1}%
-\contentsline {chapter}{Nhan xet cua giang vien}{2}{chapter*.2}%
-\contentsline {chapter}{Loi mo dau}{3}{chapter*.3}%
-\contentsline {chapter}{Loi cam on}{4}{chapter*.4}%
-\contentsline {chapter}{\numberline {1}Tong quan van de}{9}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Ly do chon de tai}{9}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Muc tieu nghien cuu}{9}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Cau hoi nghien cuu}{9}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Doi tuong va pham vi}{10}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Phuong phap tong quat}{10}{section.1.5}%
-\contentsline {section}{\numberline {1.6}Ket cau bao cao}{10}{section.1.6}%
-\contentsline {chapter}{\numberline {2}Co so ly thuyet va nghien cuu lien quan}{11}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Tong quan phan tich du lieu trong bai toan phan lop}{11}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Phan tich kham pha du lieu (EDA)}{11}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Xu ly missing data}{11}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Chuan hoa du lieu}{12}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Chi so danh gia mo hinh}{12}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Mo hinh baseline}{12}{section.2.6}%
-\contentsline {chapter}{\numberline {3}Du lieu va phuong phap de xuat}{13}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Nguon du lieu}{13}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Mo ta thuoc tinh}{13}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Kiem tra chat luong du lieu}{14}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Quy trinh tien xu ly de xuat}{14}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Thuc nghiem va ket qua dat duoc}{16}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Thiet lap thuc nghiem}{16}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Chien luoc chia du lieu}{16}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}To hop cau hinh duoc so sanh}{16}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Ket qua EDA chinh}{16}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Tong quan bo du lieu}{16}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Nhan xet ve quality data}{17}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}So sanh mo hinh va chien luoc tien xu ly}{17}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Xep hang theo ROC-AUC}{17}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Cau hinh de xuat}{18}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}Phan tich sai so va trade-off}{19}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Confusion matrix va ROC}{19}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Trade-off theo threshold}{19}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Nhan dinh overfitting/underfitting}{19}{subsection.4.4.3}%
-\contentsline {chapter}{\numberline {5}Ket luan va khuyen nghi}{20}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Ket luan chung}{20}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Tom tat ket qua dat duoc}{20}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Dong gop cua de tai}{20}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Han che nghien cuu}{21}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Huong phat trien va kien nghi}{21}{section.5.5}%
+\babel@toc {vietnamese}{}\relax 
+\contentsline {chapter}{Phân công thành viên}{1}{chapter*.1}%
+\contentsline {chapter}{Nhận xét của giảng viên}{2}{chapter*.2}%
+\contentsline {chapter}{Lời mở đầu}{3}{chapter*.3}%
+\contentsline {chapter}{Lời cảm ơn}{4}{chapter*.4}%
+\contentsline {chapter}{\numberline {1}Tổng quan vấn đề}{9}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Lý do chọn đề tài}{9}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Mục tiêu nghiên cứu}{9}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Câu hỏi nghiên cứu}{9}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Đối tượng và phạm vi}{10}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Phương pháp tổng quát}{10}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Kết cấu báo cáo}{10}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Cơ sở lý thuyết và nghiên cứu liên quan}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Tổng quan phân tích dữ liệu trong bài toán phân lớp}{11}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Phân tích khám phá dữ liệu (EDA)}{11}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Xử lý missing data}{11}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Chuẩn hóa dữ liệu}{12}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Chỉ số đánh giá mô hình}{12}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Mô hình baseline}{12}{section.2.6}%
+\contentsline {chapter}{\numberline {3}Dữ liệu và phương pháp đề xuất}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Nguồn dữ liệu}{13}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Mô tả thuộc tính}{13}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Kiểm tra chất lượng dữ liệu}{14}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Quy trình tiền xử lý đề xuất}{14}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Thực nghiệm và kết quả đạt được}{16}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Thiết lập thực nghiệm}{16}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Chiến lược chia dữ liệu}{16}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Tổ hợp cấu hình được so sánh}{16}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Kết quả EDA chính}{16}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Tổng quan bộ dữ liệu}{16}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Nhận xét về quality data}{17}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}So sánh mô hình và chiến lược tiền xử lý}{18}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Xếp hạng theo ROC-AUC}{18}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Cấu hình đề xuất}{19}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Phân tích sai số và trade-off}{19}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Confusion matrix và ROC}{19}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Trade-off theo threshold}{20}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Nhận định overfitting/underfitting}{20}{subsection.4.4.3}%
+\contentsline {chapter}{\numberline {5}Kết luận và khuyến nghị}{21}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Kết luận chung}{21}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Tóm tắt kết quả đạt được}{21}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Đóng góp của đề tài}{21}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Hạn chế nghiên cứu}{22}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Hướng phát triển và kiến nghị}{22}{section.5.5}%

@@ -1,6 +1,15 @@
 \documentclass[12pt,a4paper]{report}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T5]{fontenc}
+  \usepackage[vietnamese]{babel}
+\else
+  \usepackage{fontspec}
+  \usepackage{polyglossia}
+  \setdefaultlanguage{vietnamese}
+  \setmainfont{Times New Roman}
+\fi
 \usepackage{geometry}
 \usepackage{setspace}
 \usepackage{graphicx}
@@ -23,7 +32,7 @@
 
 \titleformat{\chapter}[display]
   {\normalfont\bfseries\Large}
-  {CHUONG \thechapter}
+  {CHƯƠNG \thechapter}
   {0.5em}
   {\LARGE}
 
@@ -32,57 +41,57 @@
 % Cover
 \begin{titlepage}
     \centering
-    {\large TRUONG DAI HOC SAI GON\par}
-    {\large KHOA CONG NGHE THONG TIN\par}
+    {\large TRƯỜNG ĐẠI HỌC SÀI GÒN\par}
+    {\large KHOA CÔNG NGHỆ THÔNG TIN\par}
     \vspace{2.0cm}
-    {\Large\bfseries BAO CAO TIEU LUAN\\MON PHAN TICH DU LIEU\par}
+    {\Large\bfseries BÁO CÁO TIỂU LUẬN\\MÔN PHÂN TÍCH DỮ LIỆU\par}
     \vspace{1.5cm}
-    {\Large\bfseries DE TAI\par}
+    {\Large\bfseries ĐỀ TÀI\par}
     \vspace{0.5cm}
-    {\LARGE\bfseries RUT TRICH DU LIEU VA TIEN XU LY\\DU LIEU PIMA INDIANS DIABETES\par}
+    {\LARGE\bfseries RÚT TRÍCH DỮ LIỆU VÀ TIỀN XỬ LÝ\\DỮ LIỆU PIMA INDIANS DIABETES\par}
     \vspace{1.5cm}
     \begin{flushleft}
-        \textbf{Giang vien huong dan:} ........................................\\
-        \textbf{Nhom thuc hien:} Nhom01\_SGU26\_ML\\
-        \textbf{Hoc phan:} Hoc phan thay the khoa luan
+        \textbf{Giảng viên hướng dẫn:} ........................................\\
+        \textbf{Nhóm thực hiện:} Nhom01\_SGU26\_ML\\
+        \textbf{Học phần:} Học phần thay thế khóa luận
     \end{flushleft}
     \vfill
-    {TP. Ho Chi Minh, 2026\par}
+    {TP. Hồ Chí Minh, 2026\par}
 \end{titlepage}
 
 % Assignment
-\chapter*{Phan cong thanh vien}
-\addcontentsline{toc}{chapter}{Phan cong thanh vien}
+\chapter*{Phân công thành viên}
+\addcontentsline{toc}{chapter}{Phân công thành viên}
 \begin{longtable}{>{\raggedright\arraybackslash}p{3cm} >{\raggedright\arraybackslash}p{7.5cm} >{\centering\arraybackslash}p{2cm}}
 \toprule
-\textbf{Thanh vien} & \textbf{Nhiem vu chinh} & \textbf{Ty le}\\
+\textbf{Thành viên} & \textbf{Nhiệm vụ chính} & \textbf{Tỷ lệ}\\
 \midrule
-Chibang & Tong hop notebook, xay dung pipeline tien xu ly, tong hop bao cao & 25\%\\
-Duybao & Ho tro kiem tra notebook, doi chieu ket qua va markdown dien giai & 25\%\\
-Tranhuyvu & Phan tich sau cho nhom bien BMI/Insulin, gop y truc quan hoa & 25\%\\
-Truongphat & Phan tich sau cho nhom bien Age/DPF, gop y dien giai ket qua & 25\%\\
+Chibang & Tổng hợp notebook, xây dựng pipeline tiền xử lý, tổng hợp báo cáo & 25\%\\
+Duybao & Hỗ trợ kiểm tra notebook, đối chiếu kết quả và markdown diễn giải & 25\%\\
+Tranhuyvu & Phân tích sâu cho nhóm biến BMI/Insulin, góp ý trực quan hóa & 25\%\\
+Truongphat & Phân tích sâu cho nhóm biến Age/DPF, góp ý diễn giải kết quả & 25\%\\
 \bottomrule
 \end{longtable}
 
 % Instructor comments
-\chapter*{Nhan xet cua giang vien}
-\addcontentsline{toc}{chapter}{Nhan xet cua giang vien}
+\chapter*{Nhận xét của giảng viên}
+\addcontentsline{toc}{chapter}{Nhận xét của giảng viên}
 \vspace{6cm}
 \noindent\hrulefill\\[1.2cm]
 \noindent\hrulefill\\[1.2cm]
 \noindent\hrulefill
 
 % Intro and thanks
-\chapter*{Loi mo dau}
-\addcontentsline{toc}{chapter}{Loi mo dau}
-Bao cao nay trinh bay ket qua thuc hien bai tap Lab 03 voi du lieu Pima Indians Diabetes.
-Nhom tap trung vao hai muc tieu: (1) xay dung quy trinh rut trich va tien xu ly du lieu co the tai lap;
-(2) danh gia cac chien luoc tien xu ly duoi goc nhin mo hinh hoc may baseline.
+\chapter*{Lời mở đầu}
+\addcontentsline{toc}{chapter}{Lời mở đầu}
+Báo cáo này trình bày kết quả thực hiện bài tập Lab 03 với dữ liệu Pima Indians Diabetes.
+Nhóm tập trung vào hai mục tiêu: (1) xây dựng quy trình rút trích và tiền xử lý dữ liệu có thể tái lập;
+(2) đánh giá các chiến lược tiền xử lý dưới góc nhìn mô hình học máy baseline.
 
-\chapter*{Loi cam on}
-\addcontentsline{toc}{chapter}{Loi cam on}
-Nhom xin chan thanh cam on giang vien huong dan da cung cap yeu cau, tai lieu tham khao
-va nhung gop y quan trong de nhom hoan thien notebook va bao cao.
+\chapter*{Lời cảm ơn}
+\addcontentsline{toc}{chapter}{Lời cảm ơn}
+Nhóm xin chân thành cảm ơn giảng viên hướng dẫn đã cung cấp yêu cầu, tài liệu tham khảo
+và những góp ý quan trọng để nhóm hoàn thiện notebook và báo cáo.
 
 % TOC/Lists
 \tableofcontents
