@@ -139,6 +139,58 @@ chọn theo validation và báo cáo cuối cùng trên test để giảm rủi 
     \item So sánh mô hình trên cùng một bộ chỉ số và cùng cách chia dữ liệu.
 \end{itemize}
 
+\subsection{Code mô tả quy trình dữ liệu}
+Để liên kết trực tiếp giữa mô tả phương pháp và mã triển khai, báo cáo trích một số đoạn code cốt lõi từ
+\texttt{Nhom01\_SGU26\_ML/Lab\_03/pima\_indians\_diabetes\_lab03.ipynb} và
+\texttt{Lab\_03/pima\_logistic\_baseline\_core.py}.
+
+\begin{lstlisting}[caption={Nạp dữ liệu, áp dụng zero-as-missing và chia train/val/test có stratify}]
+X = df[feature_columns].copy()
+y = df["outcome"].astype(int)
+
+X[zero_as_missing_columns] = X[zero_as_missing_columns].replace(0, np.nan)
+
+X_train_val, X_test, y_train_val, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=random_state, stratify=y
+)
+X_train, X_val, y_train, y_val = train_test_split(
+    X_train_val, y_train_val, test_size=0.25,
+    random_state=random_state, stratify=y_train_val
+)
+\end{lstlisting}
+
+\noindent
+Đoạn mã trên thể hiện ba quyết định kỹ thuật quan trọng: (i) tách rõ biến đầu vào và biến mục tiêu,
+(ii) chuyển missing ẩn theo quy tắc \textit{zero-as-missing}, và (iii) chia dữ liệu theo hai bước để đạt đúng tỉ lệ 60/20/20
+trong khi vẫn giữ phân bố lớp dương ổn định giữa train/validation/test.
+
+\begin{lstlisting}[caption={Định nghĩa pipeline baseline (imputer + scaler + Logistic Regression)}]
+def make_pipeline(penalty: str) -> Pipeline:
+    if penalty == "l2":
+        lr = LogisticRegression(
+            penalty="l2", solver="lbfgs", C=1.0,
+            max_iter=5000, random_state=RANDOM_STATE
+        )
+    elif penalty == "l1":
+        lr = LogisticRegression(
+            penalty="l1", solver="saga", C=1.0,
+            max_iter=10000, random_state=RANDOM_STATE
+        )
+
+    return Pipeline(
+        steps=[
+            ("imputer", SimpleImputer(strategy="median")),
+            ("scaler", StandardScaler()),
+            ("clf", lr),
+        ]
+    )
+\end{lstlisting}
+
+\noindent
+Code block này cho thấy cách nhóm đóng gói toàn bộ bước tiền xử lý và mô hình hóa trong một pipeline thống nhất.
+Cách làm này giúp loại bỏ sai khác do thao tác thủ công giữa các lần chạy, đồng thời hạn chế rò rỉ dữ liệu vì mọi phép biến đổi
+đều được \textit{fit} trên train trước khi áp dụng sang validation/test.
+
 \section{EDA chuyên sâu theo nhóm biến}
 Để phản ánh đầy đủ các phân tích trong notebook, nghiên cứu tổ chức EDA theo nhóm biến thay vì khảo sát rời rạc từng cột.
 Cách tiếp cận theo nhóm giúp bộc lộ rõ hơn mối quan hệ giữa đặc trưng và \texttt{outcome}, đồng thời liên kết trực tiếp

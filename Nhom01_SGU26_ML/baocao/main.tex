@@ -23,12 +23,31 @@
 \usepackage{enumitem}
 \usepackage{titlesec}
 \usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+\usepackage{listings}
 
 \geometry{left=3cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
 \setstretch{1.25}
 \hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue}
 \setlength{\parskip}{0.4em}
 \setlength{\parindent}{1.2em}
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue!70!black}\bfseries,
+  commentstyle=\color{green!40!black},
+  stringstyle=\color{orange!50!black},
+  numbers=left,
+  numberstyle=\scriptsize\color{gray},
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  rulecolor=\color{black!20},
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=4,
+  captionpos=b
+}
 
 \titleformat{\chapter}[display]
   {\normalfont\bfseries\Large}
