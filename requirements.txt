@@ -6,3 +6,7 @@ seaborn
 ipython
 jupyter
 marimo
+datalab-python-sdk
+mcp
+faiss-cpu
+sentence-transformers

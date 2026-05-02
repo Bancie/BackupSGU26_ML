@@ -17,6 +17,10 @@
         "${workspaceFolder}/tools/mcp/mcp-server-data-exploration",
         "mcp-server-ds"
       ]
+    },
+    "eda-faiss": {
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": ["${workspaceFolder}/mcp/eda.py"]
     }
   }
 }

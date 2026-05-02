@@ -204,6 +204,9 @@ cython_debug/
 # MCP: vendored third-party servers and their .venv (workspace MCP config stays tracked under .cursor/)
 tools/mcp/
 
+# FAISS / embedding index cache (mcp/eda.py)
+**/.eda_faiss_index/
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
