@@ -23,27 +23,27 @@
 \contentsline {section}{\numberline {3.3}Kiểm tra chất lượng dữ liệu}{14}{section.3.3}%
 \contentsline {section}{\numberline {3.4}Thiết kế thực nghiệm và tái lập}{14}{section.3.4}%
 \contentsline {section}{\numberline {3.5}EDA chuyên sâu theo nhóm biến}{15}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Quy trình tiền xử lý đề xuất}{18}{section.3.6}%
-\contentsline {chapter}{\numberline {4}Thực nghiệm và kết quả đạt được}{20}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Thiết lập thực nghiệm}{20}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Chiến lược chia dữ liệu}{20}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Tổ hợp cấu hình được so sánh}{20}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Kết quả EDA chính}{20}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Tổng quan bộ dữ liệu}{20}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Nhận xét về quality data}{21}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}So sánh mô hình và chiến lược tiền xử lý}{22}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Bảng tổng hợp đầy đủ 12 cấu hình}{22}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Xếp hạng theo ROC-AUC và F1}{22}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Cấu hình đề xuất}{22}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}So sánh theo họ mô hình (Logistic vs Random Forest)}{23}{subsection.4.3.4}%
-\contentsline {section}{\numberline {4.4}Phân tích sai số và trade-off}{24}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Confusion matrix và ROC}{24}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Trade-off theo threshold}{25}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Nhận định overfitting/underfitting}{26}{subsection.4.4.3}%
-\contentsline {chapter}{\numberline {5}Kết luận và khuyến nghị}{27}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Kết luận chung}{27}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Tóm tắt kết quả đạt được}{27}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Trả lời trực tiếp câu hỏi nghiên cứu (Q1/Q2/Q3)}{27}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Đóng góp của đề tài}{28}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Hạn chế nghiên cứu}{28}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Hướng phát triển và kiến nghị}{28}{section.5.6}%
+\contentsline {section}{\numberline {3.6}Quy trình tiền xử lý đề xuất}{17}{section.3.6}%
+\contentsline {chapter}{\numberline {4}Thực nghiệm và kết quả đạt được}{19}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Thiết lập thực nghiệm}{19}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Chiến lược chia dữ liệu}{19}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Tổ hợp cấu hình được so sánh}{19}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Kết quả EDA chính}{19}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Tổng quan bộ dữ liệu}{19}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Nhận xét về quality data}{20}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}So sánh mô hình và chiến lược tiền xử lý}{21}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Bảng tổng hợp đầy đủ 12 cấu hình}{21}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Xếp hạng theo ROC-AUC và F1}{21}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Cấu hình đề xuất}{21}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}So sánh theo họ mô hình (Logistic vs Random Forest)}{22}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Phân tích sai số và trade-off}{23}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Confusion matrix và ROC}{23}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Trade-off theo threshold}{24}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Nhận định overfitting/underfitting}{25}{subsection.4.4.3}%
+\contentsline {chapter}{\numberline {5}Kết luận và khuyến nghị}{26}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Kết luận chung}{26}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Tóm tắt kết quả đạt được}{26}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Trả lời trực tiếp câu hỏi nghiên cứu (Q1/Q2/Q3)}{26}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Đóng góp của đề tài}{27}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Hạn chế nghiên cứu}{27}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Hướng phát triển và kiến nghị}{27}{section.5.6}%

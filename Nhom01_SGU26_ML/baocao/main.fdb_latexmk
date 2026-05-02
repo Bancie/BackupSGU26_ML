@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1777738911.25165 "main.aux" "main.bbl" "main" 1777738913.86048 0
+["bibtex main"] 1777739335.13818 "main.aux" "main.bbl" "main" 1777739337.75239 0
   "./references.bib" 1777734396.15925 1162 ca78729c27adfd43e6303e58ec30f0d6 ""
   "/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/bibtex/bst/natbib/unsrtnat.bst" 1741388039 24550 a41a6405f4de768c43e871d9fbce2bc8 ""
-  "main.aux" 1777738913.40382 12596 ffbf53a5e8cb7cccd117facb53dd6eae "pdflatex"
+  "main.aux" 1777739337.42762 12596 b632992130d65aac6ae5fa2246fa6774 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1777738911.35597 "main.tex" "main.pdf" "main" 1777738913.86072 0
+["pdflatex"] 1777739335.26014 "main.tex" "main.pdf" "main" 1777739337.75259 0
   "/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1741388039 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/map/fontname/texfonts.map" 1741388039 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/map/pdftex/updmap/pdftex.map" 1741388039 5466553 2748998d7db8078826afa1f272036265 ""
@@ -115,26 +115,26 @@
   "/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-var/web2c/pdftex/pdflatex.fmt" 1741388039 3346125 851abcc596872d7f7285a006ccee0040 ""
   "chapters/chuong1_tongquan.tex" 1777735980.76767 2570 dcd5709be4a9ff63209896c06b7ffc9d ""
   "chapters/chuong2_cosolythuyet.tex" 1777735980.76779 3105 7d665566310bfe4d6f4d4d1c972f3894 ""
-  "chapters/chuong3_dulieu_phuongphap.tex" 1777738831.43565 4909 b534d738db6c312bf468ca83d8a9d6c9 ""
+  "chapters/chuong3_dulieu_phuongphap.tex" 1777739316.84472 4909 61d4c26c218db7ee8164b267b1335fda ""
   "chapters/chuong4_thucnghiem_ketqua.tex" 1777738870.43147 7029 7dd1b9b3122066105738b1b7ec2393fe ""
   "chapters/chuong5_ketluan_khuyennghi.tex" 1777738882.58978 3361 e709cec3ff1618850afcb872b90888e4 ""
-  "figures/age_glucose_correlation.jpg" 1777738806.16137 26127 b73d4efcb633351404552b335fb90aec ""
+  "figures/age_glucose_correlation.png" 1777739229.83565 105397 0ec3351505c425c39c368db23aca5be6 ""
   "figures/class_distribution.png" 1777737590.2763 12081 40c20611ccaff466c363e9fb30741b87 ""
   "figures/confusion_best.png" 1777737908.72326 66820 453376d9f244680b1aae2d81dcd91aa3 ""
   "figures/corr_heatmap.png" 1777737639.05071 36309 3efe03617280f4f6573046430e116902 ""
-  "figures/dpf_and_focus_scatter.jpg" 1777738806.16609 52122 e7a77455c2b7d546a12977b17395bdfe ""
+  "figures/dpf_and_focus_scatter.png" 1777739193.69852 48033 492b350d2ef9ea2ad644606d600625ea ""
   "figures/fig_missing_zero_report.png" 1777737220.79425 68935 476e33475ce6d9f2fc2f1275481401c3 ""
   "figures/fig_preprocess_pipeline.png" 1777738142.97702 144469 09f5eebd9aace9ad1bb2a1c21ec43765 ""
-  "figures/glucose_bmi_insulin_scatter.jpg" 1777738806.17027 65760 90d71a579d5c846e828cd28b5d08bf62 ""
+  "figures/glucose_bmi_insulin_scatter.png" 1777739144.12788 173314 48a48120f0c504d956bd5a3c4f6f726c ""
   "figures/roc_top3.png" 1777737952.10916 164405 890f949626f134e5184c1219321ce053 ""
   "figures/strategy_comparison.png" 1777737752.52352 39622 767254dcad5198e9d78bec7dc673b2e8 ""
-  "main.aux" 1777738913.40382 12596 ffbf53a5e8cb7cccd117facb53dd6eae "pdflatex"
-  "main.bbl" 1777738911.35246 1390 50403775519a765aeae8a0ed7b46d571 "bibtex main"
-  "main.lof" 1777738913.40818 1476 54ff54f2c1278314d9ebebd13ced854f "pdflatex"
-  "main.lot" 1777738913.40824 984 a11a0227b33cd864182e5cb6d5986a0a "pdflatex"
-  "main.out" 1777738913.40734 9858 382e6b7d5058e9d92da8c75c106c8078 "pdflatex"
+  "main.aux" 1777739337.42762 12596 b632992130d65aac6ae5fa2246fa6774 "pdflatex"
+  "main.bbl" 1777739335.24911 1390 50403775519a765aeae8a0ed7b46d571 "bibtex main"
+  "main.lof" 1777739337.43132 1476 dbcaeab7fa40fe7363d06eea25f5bb03 "pdflatex"
+  "main.lot" 1777739337.43138 984 d2452a790f7d366322eab3ea41c06885 "pdflatex"
+  "main.out" 1777739337.4307 9858 382e6b7d5058e9d92da8c75c106c8078 "pdflatex"
   "main.tex" 1777735980.76771 3742 c5a4e5757ccd08df7ac21b8bac2a365e ""
-  "main.toc" 1777738913.40798 4521 cd4a804a075e0b1e77cb988a5bda1c5a "pdflatex"
+  "main.toc" 1777739337.43115 4521 317f7f212e185419f30637aa29fca5fb "pdflatex"
   (generated)
   "main.aux"
   "main.lof"

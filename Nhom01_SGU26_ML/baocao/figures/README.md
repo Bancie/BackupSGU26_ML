@@ -10,9 +10,9 @@ All report figures are now loaded from PNG assets in `Nhom01_SGU26_ML/baocao/fig
 - `fig:strategy_comparison` -> `figures/strategy_comparison.png`
 - `fig:confusion_best` -> `figures/confusion_best.png`
 - `fig:roc_top3` -> `figures/roc_top3.png`
-- `fig:age_glucose_analysis` -> `figures/age_glucose_correlation.jpg`
-- `fig:dpf_focus_scatter` -> `figures/dpf_and_focus_scatter.jpg`
-- `fig:glucose_bmi_insulin` -> `figures/glucose_bmi_insulin_scatter.jpg`
+- `fig:age_glucose_analysis` -> `figures/age_glucose_correlation.png`
+- `fig:dpf_focus_scatter` -> `figures/dpf_and_focus_scatter.png`
+- `fig:glucose_bmi_insulin` -> `figures/glucose_bmi_insulin_scatter.png`
 
 ## Data extracts used for full-sync tables
 - `comparison_full_12.csv`
