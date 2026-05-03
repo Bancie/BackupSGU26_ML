@@ -1,0 +1,591 @@
+\documentclass[10pt]{beamer}
+\mode<presentation>
+\usepackage{beamerthemesplit}
+\usepackage{graphicx}
+\graphicspath{{../../SGU_UAVLocalization_NonGPS_2025-2/}}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{textpos}
+% \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{algorithm}
+% \usepackage{algpseudocode}
+\usepackage{algorithmic}
+% \usepackage[backend=biber, style=numeric]{biblatex}
+
+\usepackage[utf8]{inputenc}
+% import citation package
+\usepackage[backend=biber, style=numeric]{biblatex}
+\addbibresource{presentation.bib}
+\AtBeginBibliography{\small}
+
+\usetikzlibrary{shapes.geometric, arrows}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary {datavisualization} 
+\pgfplotsset{compat=1.18, width = 7cm}
+\usetikzlibrary{patterns}
+\usetheme{Ilmenau} % AnnArbor, Ilmenau, Darmstadt, Dresden, CambridgeUS, Frankfurt, Singapore
+\newtheorem{dn}{Định nghĩa}[section]
+\newtheorem{dl}{Định lý}[section]
+\newtheorem{tc}{Tính chất}[section]
+\newtheorem{hq}{Hệ quả}[section]
+\newtheorem{bd}{Bổ đề}[section]
+\newtheorem{md}{Mệnh đề}[section]
+\newtheorem{vd}{Ví dụ}[section]
+\newtheorem{nx}{Nhận xét}[section]
+\newtheorem{cy}{Chú ý}[section]
+\newcommand{\dom}{\text{{\rm dom}}}
+\newcommand{\epi}{\text{{\rm epi}}}
+\newcommand{\Min}{\text{{\rm Min}}}
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{definitions}[numbered]
+\setbeamertemplate{footline}[frame number]
+\usepackage{algorithm}
+\usepackage{color}
+\usepackage{algorithmic}
+\usepackage{footmisc}
+\usepackage{indentfirst} 
+\usepackage{comment}
+\AtBeginEnvironment{proof}{%
+  \setbeamercolor{block title}{use=example text,fg=white,bg=example text.fg!75!black}
+  \setbeamercolor{block body}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+}
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\usefonttheme{professionalfonts}
+\setbeamercolor{normal text}{bg=white,fg=black}
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\beamertemplatetransparentcoveredhigh
+\usetheme[progressbar=frametitle]{metropolis}
+\usepackage{appendixnumberbeamer}
+
+% \usepackage[utf8]{vietnam}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+
+\usepackage{xspace}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+\definecolor{mSybilaRed}{HTML}{990000}
+
+\setbeamercolor{title separator}{
+  fg=mSybilaRed
+}
+
+\setbeamercolor{progress bar}{%
+  fg=mSybilaRed,
+  bg=mSybilaRed!90!black!30
+}
+
+\setbeamercolor{progress bar in section page}{
+  use=progress bar,
+  parent=progress bar
+}
+
+\setbeamercolor{alerted text}{%
+  fg=mSybilaRed
+}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode
+  \hbox{
+  \begin{beamercolorbox}[wd=.15\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}
+  \end{beamercolorbox}
+
+  \begin{beamercolorbox}[wd=.7\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}
+    \usebeamerfont{author in head/foot}\insertshorttitle
+  \end{beamercolorbox}
+
+  \begin{beamercolorbox}[wd=.15\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}
+    \insertframenumber{} / \inserttotalframenumber
+  \end{beamercolorbox}
+  }
+}
+
+\title{Vision-Based UAV Self-Positioning \\in Low-Altitude Urban Environments\footnotemark}
+
+
+\titlegraphic{\hfill \includegraphics[height=1cm]{logohcmut.png}}
+%\titlegraphic{\hfill\includegraphics[height=0.6cm]{sybila-logo/new.png}}
+%\titlegraphic{\hfill\includegraphics[height=0.6cm]{sybila-logo/old.png}}
+%\titlegraphic{\hfill\includegraphics[height=0.6cm]{sybila-logo/old-flat.png}}
+
+\date{\today}
+\author{Supervisor: M.Sc. Nguyen Van Gia Thinh}
+% \institute{Sinh viên lớp: DTU1221, Khóa: 22 @ Trường Đại học Sài Gòn}
+
+%\title{Metropolis}
+\subtitle{C.B Nguyen, N.H Dang}
+% \date{\today}
+%\date{}
+%\author{Matthias Vogelgesang}
+%\institute{Center for modern beamer themes}
+%\titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+
+
+\begin{frame}
+  \centering
+  {\footnotesize
+  Ho Chi Minh University of Technology \\
+  Institute of Mathematical and Computational Sciences - IMACS}
+  \phantom{space}\\
+  \phantom{space}\\
+  {\normalsize RESEARCH REPORT}\\[-50pt]
+  \titlepage
+  \vspace{-3cm}
+  \footnotetext{\textcite{dai2023visionbaseduavselfpositioninglowaltitude}}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION: Evaluation Metrics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Evaluation Metrics}
+
+\begin{frame}{Evaluation Metrics - Overview}
+    After the training process, the model outputs an optimal representation $z_i$ for each input aerial image $i$.
+    
+    \begin{block}{Vector Space Model}
+        \begin{itemize}
+            \item Documents and queries are represented as vectors in high-dimensional space
+            \item Similarity between them is measured to retrieve the most similar documents
+            \item Each label in our dataset is treated as a document with representation $z_i$
+        \end{itemize}
+    \end{block}
+    
+    \begin{block}{Embedded Vector Database}
+        \[
+            Z = \{z_1, z_2, \ldots, z_N\}
+        \]
+        Used in the retrieval process with the query (real-time image from UAV).
+    \end{block}
+\end{frame}
+
+\begin{frame}{Pre-ranking Process}
+    \begin{center}
+    \begin{tikzpicture}[scale=0.85, every node/.style={scale=0.85},
+        node distance=0.5cm,
+        block/.style={rectangle, draw, thick, rounded corners=4pt, minimum width=2.5cm, text width=2.8cm, minimum height=0.9cm, text centered, font=\footnotesize, align=center},
+        norm/.style={block, fill=teal!20},
+        mlp/.style={block, fill=blue!30},
+        input/.style={block, fill=green!30}
+    ]
+        % Horizontal layout
+        \node[mlp, align=center] (linear_projection) {Trained Model};
+        \node[block, right=1.2cm of linear_projection, align=center] (patch_positional_embedding) {Embedded Vector $z_i$};
+        \node[input, right=1.2cm of patch_positional_embedding, align=center] (output) {Database $Z = \{z_1, \ldots, z_N\}$};
+        
+        \draw[-Stealth, thick] (linear_projection.east) -- (patch_positional_embedding.west);
+        \draw[-Stealth, thick] (patch_positional_embedding.east) -- (output.west);
+    \end{tikzpicture}
+    \end{center}
+    
+    \begin{block}{Two-Part Ranking Process}
+        \vspace{0.2cm}
+        \begin{enumerate}
+            \item \textbf{Evaluation}: Use queries from query dataset to evaluate model performance
+            \item \textbf{Real-time Retrieval}: Apply ranking for UAV self-positioning task
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Ranking Process
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Ranking Process}
+
+\begin{frame}{Cosine Similarity}
+    \begin{block}{Definition}
+        \[
+            \operatorname{sim}(l_i, l_j)
+            = \cos(\theta_{l_i, l_j})
+            = \frac{\vec{z_i}\cdot \vec{z_j}}{| \vec{z_i}| | \vec{z_j}|}
+        \]
+    \end{block}
+    
+            \begin{itemize}
+                \item $\theta_{z_i, z_j}$: angle between $z_i$ and $z_j$
+                \item Dot product: $\sum_{k=1}^{d} z_i[k] z_j[k]$
+                \item Euclidean length: $|\vec{z_i}| = \sqrt{\sum_{k=1}^{d} z_i[k]^2}$
+            \end{itemize}
+            \begin{block}{Normalized Form}
+                \vspace{0.2cm}
+                Let $\vec{v}(z_i) = \dfrac{\vec{z_i}}{|\vec{z_i}|}$, then:
+                \[
+                    \operatorname{sim}(l_i, l_j) = \vec{v}(z_i)\cdot \vec{v}(z_j)
+                \]
+            \end{block}
+\end{frame}
+
+\begin{frame}{Similarity Score}
+    \begin{block}{Score Function}
+        \vspace{0.2cm}
+        For query vector $z_q$ and embedded vector $z_i$:
+        \[
+            \operatorname{score}(l_q, l_i)
+            = \frac{\vec{V}(z_q)\cdot \vec{V}(z_i)}
+            {\lVert \vec{V}(z_q)\rVert \, \lVert \vec{V}(z_i)\rVert}
+            = \vec{v}(z_q)\cdot \vec{v}(z_i)
+        \]
+    \end{block}
+    
+    \begin{itemize}
+        \item Score function = cosine similarity $\cos(\theta_{l_q, l_i})$
+        \item $i = \overline{1, N}$ where $N$ = number of embedded vectors in database $Z$
+        \item \textbf{Higher similarity score} $\Rightarrow$ more similar vectors
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Cosine Similarity - Visual Illustration}
+    \begin{center}
+    \begin{tikzpicture}[scale=0.85]
+        % === Subfigure (a): Similar vectors ===
+        \begin{scope}[shift={(0,0)}]
+            \draw[->, thick] (-0.3,0) -- (2.2,0) node[right] {\tiny $d_1$};
+            \draw[->, thick] (0,-0.3) -- (0,2) node[above] {\tiny $d_2$};
+            \draw[->, very thick, blue] (0,0) -- (1.5,1.3) node[above left] {\tiny $\vec{v}(z_i)$};
+            \draw[->, very thick, red] (0,0) -- (1.7,0.9) node[right] {\tiny $\vec{v}(z_q)$};
+            \fill[red, opacity=0.3] (0,0) -- (40:0.7) arc[start angle=40, end angle=29, radius=0.7] -- cycle;
+            \node at (0.15,0.35) {\tiny $\theta$};
+            \node[below] at (0.9,-0.5) {\footnotesize \textbf{Similar} ($\cos\theta \approx 1$)};
+        \end{scope}
+        
+        % === Subfigure (b): Unrelated vectors ===
+        \begin{scope}[shift={(4.5,0)}]
+            \draw[->, thick] (-0.8,0) -- (2.2,0) node[right] {\tiny $d_1$};
+            \draw[->, thick] (0,-0.3) -- (0,2) node[above] {\tiny $d_2$};
+            \draw[->, very thick, blue] (0,0) -- (-0.4,1.7) node[above] {\tiny $\vec{v}(z_i)$};
+            \draw[->, very thick, red] (0,0) -- (1.7,0.2) node[right] {\tiny $\vec{v}(z_q)$};
+            \fill[red, opacity=0.3] (0,0) -- (103:0.5) arc[start angle=103, end angle=8, radius=0.5] -- cycle;
+            \node at (0.25,0.7) {\tiny $\theta$};
+            \node[below] at (0.7,-0.5) {\footnotesize \textbf{Unrelated} ($\cos\theta \approx 0$)};
+        \end{scope}
+        
+        % === Subfigure (c): Opposite vectors ===
+        \begin{scope}[shift={(10,0)}]
+            \draw[->, thick] (-2,0) -- (2.2,0) node[right] {\tiny $d_1$};
+            \draw[->, thick] (0,-1.3) -- (0,2) node[above] {\tiny $d_2$};
+            \draw[->, very thick, blue] (0,0) -- (-1.6,-0.8);
+            \node[left] at (-1.3,-1.1) {\tiny $\vec{v}(z_i)$};
+            \draw[->, very thick, red] (0,0) -- (1.7,0.8) node[right] {\tiny $\vec{v}(z_q)$};
+            \fill[red, opacity=0.3] (0,0) -- (27:0.8) arc[start angle=27, end angle=205, radius=0.8] -- cycle;
+            \node at (-0.6, 0.7) {\tiny $\theta$};
+            \node[below] at (0,-1.5) {\footnotesize \textbf{Opposite} ($\cos\theta \approx -1$)};
+        \end{scope}
+    \end{tikzpicture}
+    \end{center}
+    
+    \begin{block}{Key Insight}
+        \vspace{0.2cm}
+        When query vector $z_q$ is similar to embedded vector $z_i$, the query's location is also similar to the embedded vector's location.
+    \end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Spatial Discrete Index (R@K)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Spatial Discrete Index (R@K)}
+
+\begin{frame}{Precision vs Recall}
+            \begin{table}
+            \centering
+            \footnotesize
+            \begin{tabular}{|l|c|c|}
+            \hline
+                            & \textbf{Relevant} & \textbf{Nonrelevant} \\ \hline
+            \textbf{Retrieved}     & tp   & fp  \\ \hline
+            \textbf{Not retrieved} & fn   & tn  \\ \hline
+            \end{tabular}
+            \end{table}
+            \begin{block}{Definitions}
+                \[
+                    \mathrm{Precision} = \frac{tp}{tp + fp}
+                \]
+                \vspace{0.2cm}
+                \[
+                    \mathrm{Recall} = \frac{tp}{tp + fn}
+                \]
+            \end{block}
+    
+    \vspace{0.3cm}
+    \begin{alertblock}{Focus on Recall}
+        \vspace{0.2cm}
+        In UAV self-positioning and image retrieval, we are more interested in \textbf{Recall} evaluation.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Spatial Discrete Index - $\mathrm{R@K}$}
+    \begin{block}{Indicator Function}
+        \vspace{0.2cm}
+        Given query image with label $l_q$, for the $i$-th ranked embedded vector:
+        \[
+            I(l_q, l_i) =
+            \begin{cases}
+            1 & \text{if } \exists k \in \overline{1, i} \text{ such that } l_q = l_k \\
+            0 & \text{otherwise}
+            \end{cases}
+        \]
+    \end{block}
+    
+    \begin{block}{$\mathrm{R@K}$ Definition}
+        \vspace{0.2cm}
+        For a set of query images $Q$:
+        \[
+            \mathrm{R@K} = \frac{1}{\lVert Q \rVert} \sum_{q \in Q} I(l_q, l_K)
+        \]
+    \end{block}
+\end{frame}
+
+\begin{frame}{Indicator Function - Visual}
+    \begin{center}
+    \begin{tikzpicture}[scale=1.5]
+        % Draw axes
+        \draw[->, thick] (-0.3,0) -- (5,0) node[right] {$l_q, l_k, l_i$};
+        \draw[->, thick] (0,-0.3) -- (0,1.8) node[above] {$I(l_q, l_i)$};
+        
+        % Draw y-axis labels
+        \node[left] at (-0.05,-0.15) {\footnotesize $0$};
+        \node[left] at (-0.15,1.4) {\footnotesize $1$};
+        \draw[thick] (-0.08,1.4) -- (0.08,1.4);
+        
+        % Draw horizontal dashed line at y=1
+        \draw[dashed, gray] (0,1.4) -- (4.5,1.4);
+        
+        % Draw the function
+        \draw[very thick, blue] (0.3,0) -- (1.5,0);
+        \draw[very thick, blue] (2.5,0) -- (4.5,0);
+        
+        % Point at l_q = l_k (value = 1)
+        \fill[blue] (2,1.4) circle (2pt);
+        \node[above] at (2,1.5) {\footnotesize $l_q = l_k$};
+        
+        % Open circles at the discontinuity
+        \draw[blue, thick, fill=white] (1.5,0) circle (1.5pt);
+        \draw[blue, thick, fill=white] (2.5,0) circle (1.5pt);
+        
+        % Vertical dashed line
+        \draw[dashed, gray] (2,0) -- (2,1.4);
+        
+        % Labels
+        \node[below] at (0.9,-0.1) {\footnotesize $l_q \ne l_k$};
+        \node[below] at (3.5,-0.1) {\footnotesize $l_q \ne l_k$};
+    \end{tikzpicture}
+    \end{center}
+    
+    \begin{block}{$\mathrm{R@1}$ Interpretation}
+        \[
+            \mathrm{R@1} = \frac{1}{\lVert Q \rVert} \sum_{q \in Q} I(l_q, l_1)
+        \]
+        % \vspace{0.2cm}
+        Proportion of queries where the top-1 retrieved location matches the query's location.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Limitations of $\mathrm{R@K}$}
+    \begin{alertblock}{Main Disadvantage}
+        \vspace{0.2cm}
+        $\mathrm{R@K}$ is a \textbf{binary metric} - very rigid with a hard threshold:
+        \begin{itemize}
+            \item If retrieved location is even slightly incorrect $\Rightarrow$ indicator = 0
+            \item No tolerance for small errors
+        \end{itemize}
+    \end{alertblock}
+    
+    \vspace{0.3cm}
+    \begin{block}{Solution}
+        \vspace{0.2cm}
+        Propose $\mathrm{SDM@K}$ metric - a \textbf{continuous metric} that allows very small errors in the retrieved location.
+    \end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUBSECTION: Spatial Discretization Matrix (SDM@K)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Spatial Discretization Matrix (SDM@K)}
+
+\begin{frame}{$\mathrm{SDM@K}$ - Continuous Metric}
+    \begin{block}{Modified Indicator Function}
+        \vspace{0.2cm}
+        Replace discrete indicator with continuous smooth function using $e^{-x}$:
+        \[
+            \mathrm{SDM}_k = (K - k + 1) \times e^{-s \times d_k} = \frac{K - k + 1}{e^{s \times d_k}}
+        \]
+    \end{block}
+
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item $K - k + 1$: weight for higher ranks
+                \item $s = 5 \times 10^3$: scaling factor
+                \item $d_k$: distance to $k$-th embedded vector
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{block}{Distance $d_k$}
+                \[
+                    d_k = \sqrt{(x_q - x_k)^2 + (y_q - y_k)^2}
+                \]
+                $(x_q, y_q)$: query location \\
+                $(x_k, y_k)$: $k$-th vector location
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{SDM Weighting - Visualization}
+    \begin{center}
+    \begin{tikzpicture}[scale=0.9, every node/.style={scale=0.9}]
+        \begin{axis}[
+            width=9cm,
+            height=5.5cm,
+            xlabel={Distance $d$},
+            ylabel={SDM value},
+            xmin=0.0005,
+            xmax=0.01,
+            ymin=0,
+            ymax=0.01,
+            grid=both,
+            grid style={line width=0.1pt, draw=gray!30},
+            major grid style={line width=0.2pt, draw=gray!50},
+            legend pos=north east,
+            legend style={font=\tiny},
+            samples=100,
+            smooth,
+            thick,
+            restrict y to domain=0:0.015
+        ]
+            % f(x) = e^(-5000x) - Blue (rank 10)
+            \addplot[blue, line width=1.2pt, domain=0.0008:0.01] {exp(-5000*x)};
+            \addlegendentry{Rank 10: $e^{-5000x}$}
+            
+            % g(x) = 5 * e^(-5000x) - Orange (rank 5)
+            \addplot[orange, line width=1.2pt, domain=0.001:0.01] {5*exp(-5000*x)};
+            \addlegendentry{Rank 5: $5e^{-5000x}$}
+            
+            % h(x) = 10 * e^(-5000x) - Purple (rank 1)
+            \addplot[violet, line width=1.2pt, domain=0.0012:0.01] {10*exp(-5000*x)};
+            \addlegendentry{Rank 1: $10e^{-5000x}$}
+        \end{axis}
+    \end{tikzpicture}
+    \end{center}
+    
+    \begin{block}{Key Insight}
+        \vspace{0.2cm}
+        Higher-ranked vectors get more weight and greater acceptable error tolerance.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Normalized $\mathrm{SDM@K}$}
+    \begin{block}{Final Formula}
+        \vspace{0.2cm}
+        Normalized to range $[0, 1]$:
+        \[
+            \mathrm{SDM@K} = \frac{\sum_{i=1}^{K} \dfrac{K - i + 1}{e^{s \times d_i}}}{\sum_{i=1}^{K} (K - i + 1)}
+        \]
+    \end{block}
+    
+    \begin{block}{Evaluation on Query Set $Q$}
+        \vspace{0.2cm}
+        Compute $\mathrm{SDM@K}$ for each query image in $Q$ and divide by total number of queries.
+    \end{block}
+    
+    \begin{alertblock}{Main Advantage}
+        \vspace{0.2cm}
+        $\mathrm{SDM@K}$ is a \textbf{continuous metric} - not as rigid as $\mathrm{R@K}$ and allows for very small errors in the retrieved location.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Comparison: $\mathrm{R@K}$ vs $\mathrm{SDM@K}$}
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \begin{block}{$\mathrm{R@K}$}
+                \begin{itemize}
+                    \item Binary metric (0 or 1)
+                    \item Hard threshold
+                    \item No tolerance for small errors
+                    \item Simple interpretation
+                \end{itemize}
+            \end{block}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{block}{$\mathrm{SDM@K}$}
+                \begin{itemize}
+                    \item Continuous metric
+                    \item Smooth decay with distance
+                    \item Tolerates small errors
+                    \item Weighted by rank
+                \end{itemize}
+            \end{block}
+        \end{column}
+    \end{columns}
+    
+    \vspace{0.3cm}
+    \begin{center}
+        \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Property} & \textbf{R@K} & \textbf{SDM@K} \\ \hline
+        Type & Discrete & Continuous \\ \hline
+        Error tolerance & None & Yes \\ \hline
+        Rank weighting & No & Yes \\ \hline
+        Range & $\{0, 1\}$ & $[0, 1]$ \\ \hline
+        \end{tabular}
+    \end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks, noframenumbering]
+    \frametitle{References}
+    \nocite{*}
+    \printbibliography[heading=none]
+\end{frame}
+
+\begin{frame}
+    \begin{block}{}
+    \medskip
+    \center{\huge \it \textcolor[rgb]{0.37, 0.150, 0.190}{Thanks for listening!}}
+    \medskip
+    \end{block}	
+\end{frame}    
+\end{document}

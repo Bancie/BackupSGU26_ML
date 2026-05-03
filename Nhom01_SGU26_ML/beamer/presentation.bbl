@@ -1,0 +1,180 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{dai2023visionbaseduavselfpositioninglowaltitude}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=2f80b6b0e728b6b1713354d97815f579}{%
+           family={Dai},
+           familyi={D\bibinitperiod},
+           given={Ming},
+           giveni={M\bibinitperiod}}}%
+        {{hash=f0e21f1f5c4b3d093f90fd2efa5cb037}{%
+           family={Zheng},
+           familyi={Z\bibinitperiod},
+           given={Enhui},
+           giveni={E\bibinitperiod}}}%
+        {{hash=581df4987cb48be7bca564652fcb8f6b}{%
+           family={Feng},
+           familyi={F\bibinitperiod},
+           given={Zhenhua},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=a66befecbee13bd5f55b07cc8f3d370f}{%
+           family={Qi},
+           familyi={Q\bibinitperiod},
+           given={Lei},
+           giveni={L\bibinitperiod}}}%
+        {{hash=d2cd83a0fc21497f13997f258bce0b67}{%
+           family={Zhuang},
+           familyi={Z\bibinitperiod},
+           given={Jiedong},
+           giveni={J\bibinitperiod}}}%
+        {{hash=f0d566688f8ace36fba22c1f9ddcfcab}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Wankou},
+           giveni={W\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{dd94c08833bafb4790c1e98688872b51}
+      \strng{fullhash}{bbcd09fd8ffa9f5b020124ef7f92e1b9}
+      \strng{fullhashraw}{bbcd09fd8ffa9f5b020124ef7f92e1b9}
+      \strng{bibnamehash}{dd94c08833bafb4790c1e98688872b51}
+      \strng{authorbibnamehash}{dd94c08833bafb4790c1e98688872b51}
+      \strng{authornamehash}{dd94c08833bafb4790c1e98688872b51}
+      \strng{authorfullhash}{bbcd09fd8ffa9f5b020124ef7f92e1b9}
+      \strng{authorfullhashraw}{bbcd09fd8ffa9f5b020124ef7f92e1b9}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Image Processing}
+      \field{title}{Vision-Based UAV Self-Positioning in Low-Altitude Urban Environments}
+      \field{volume}{33}
+      \field{year}{2024}
+      \field{pages}{493\bibrangedash 508}
+      \range{pages}{16}
+    \endentry
+    \entry{manning2008introduction}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=2214edb8305f7ccd7cdc310b3a8ae1b4}{%
+           family={Manning},
+           familyi={M\bibinitperiod},
+           given={Christopher\bibnamedelima D.},
+           giveni={C\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=68f523934985e2f967ab2b15f4ded07c}{%
+           family={Raghavan},
+           familyi={R\bibinitperiod},
+           given={Prabhakar},
+           giveni={P\bibinitperiod}}}%
+        {{hash=9a80de0e5ec6df57363aaf321a5d05be}{%
+           family={Schütze},
+           familyi={S\bibinitperiod},
+           given={Hinrich},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, UK}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{fullhash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{fullhashraw}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{bibnamehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authorbibnamehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authornamehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authorfullhash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authorfullhashraw}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Class-tested and coherent, this textbook teaches classical and web information retrieval, including web search and the related areas of text classification and text clustering from basic concepts. It gives an up-to-date treatment of all aspects of the design and implementation of systems for gathering, indexing, and searching documents; methods for evaluating systems; and an introduction to the use of machine learning methods on text collections. All the important ideas are explained using examples and figures, making it perfect for introductory courses in information retrieval for advanced undergraduates and graduate students in computer science. Based on feedback from extensive classroom experience, the book has been carefully structured in order to make teaching more natural and effective.}
+      \field{isbn}{978-0-521-86571-5}
+      \field{title}{Introduction to Information Retrieval}
+      \field{year}{2008}
+      \true{nocite}
+      \verb{urlraw}
+      \verb http://nlp.stanford.edu/IR-book/information-retrieval-book.html
+      \endverb
+      \verb{url}
+      \verb http://nlp.stanford.edu/IR-book/information-retrieval-book.html
+      \endverb
+      \keyw{book information introduction ir retrieval}
+    \endentry
+    \entry{Zheng_2015_ICCV}{inproceedings}{}{}
+      \name{author}{6}{}{%
+        {{hash=7f1ed47c0c1b22e46324b0745b5b65eb}{%
+           family={Zheng},
+           familyi={Z\bibinitperiod},
+           given={Liang},
+           giveni={L\bibinitperiod}}}%
+        {{hash=b19f349549b3f4fa2369e8029d5e8f69}{%
+           family={Shen},
+           familyi={S\bibinitperiod},
+           given={Liyue},
+           giveni={L\bibinitperiod}}}%
+        {{hash=c1e94d69d00ff9962d0675a90adaa7d5}{%
+           family={Tian},
+           familyi={T\bibinitperiod},
+           given={Lu},
+           giveni={L\bibinitperiod}}}%
+        {{hash=ee9eef9295a174fc1778569bd56008f9}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Shengjin},
+           giveni={S\bibinitperiod}}}%
+        {{hash=06b47d0dcf324aeafa35d1a8666637ba}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Jingdong},
+           giveni={J\bibinitperiod}}}%
+        {{hash=9632951617f2079b7d7fa6a955341020}{%
+           family={Tian},
+           familyi={T\bibinitperiod},
+           given={Qi},
+           giveni={Q\bibinitperiod}}}%
+      }
+      \strng{namehash}{a31b94cb92e806d670abc48f75c4ea42}
+      \strng{fullhash}{cc3ab733ca040a7ac1271c7bd5f19b33}
+      \strng{fullhashraw}{cc3ab733ca040a7ac1271c7bd5f19b33}
+      \strng{bibnamehash}{a31b94cb92e806d670abc48f75c4ea42}
+      \strng{authorbibnamehash}{a31b94cb92e806d670abc48f75c4ea42}
+      \strng{authornamehash}{a31b94cb92e806d670abc48f75c4ea42}
+      \strng{authorfullhash}{cc3ab733ca040a7ac1271c7bd5f19b33}
+      \strng{authorfullhashraw}{cc3ab733ca040a7ac1271c7bd5f19b33}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the IEEE International Conference on Computer Vision (ICCV)}
+      \field{month}{12}
+      \field{title}{Scalable Person Re-Identification: A Benchmark}
+      \field{year}{2015}
+      \true{nocite}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
