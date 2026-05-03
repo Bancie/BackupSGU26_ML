@@ -1,4 +1,7 @@
-\beamer@sectionintoc {1}{Evaluation Metrics}{3}{0}{1}
-\beamer@subsectionintoc {1}{1}{Ranking Process}{6}{0}{1}
-\beamer@subsectionintoc {1}{2}{Spatial Discrete Index (R@K)}{9}{0}{1}
-\beamer@subsectionintoc {1}{3}{Spatial Discretization Matrix (SDM@K)}{13}{0}{1}
+\babel@toc {vietnamese}{}\relax 
+\beamer@sectionintoc {1}{Chương 1 - Tổng quan vấn đề}{4}{0}{1}
+\beamer@sectionintoc {2}{Chương 2 - Cơ sở lý thuyết và nghiên cứu liên quan}{8}{0}{2}
+\beamer@sectionintoc {3}{Chương 3 - Dữ liệu và phương pháp đề xuất}{12}{0}{3}
+\beamer@sectionintoc {4}{Chương 4 - Thực nghiệm và kết quả đạt được}{19}{0}{4}
+\beamer@sectionintoc {5}{Chương 5 - Kết luận và khuyến nghị}{28}{0}{5}
+\beamer@sectionintoc {6}{Phụ lục}{32}{1}{6}

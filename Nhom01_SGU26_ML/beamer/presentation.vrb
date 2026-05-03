@@ -1,64 +1,14 @@
-\frametitle{Transformer Encoder Block Architecture}
-    \begin{figure}
-        \centering
-        \resizebox{0.75\textwidth}{!}{%
-        \begin{tikzpicture}[
-            node distance=0.6cm,
-            block/.style={rectangle, draw, thick, rounded corners=5pt, minimum width=2.2cm, minimum height=0.6cm, text centered, font=\footnotesize},
-            norm/.style={block, fill=teal!20},
-            attention/.style={block, fill=red!20},
-            mlp/.style={block, fill=green!20},
-            input/.style={block, fill=orange!15},
-            add/.style={circle, draw, thick, minimum size=0.3cm, inner sep=0pt}
-        ]
-            % Input
-            \node[input] (input) {Embedded Patches};
-
-            % First Norm
-            \node[norm, above=0.4cm of input] (norm1) {Norm};
-
-            % Multi-Head Attention
-            \node[attention, above=0.4cm of norm1] (attn) {Multi-Head Attention};
-
-            % First addition
-            \node[add, right=1cm of attn] (add1) {$+$};
-
-            % Second Norm
-            \node[norm, above=0.4cm of add1] (norm2) {Norm};
-
-            % MLP
-            \node[mlp, above=0.4cm of norm2] (mlp) {MLP};
-
-            % Second addition
-            \node[add, right=1cm of mlp] (add2) {$+$};
-
-            % Representation
-            \node[input, above=0.4cm of add2] (representation) {Representation};
-
-            % Background box
-            \begin{pgfonlayer}{background}
-                \coordinate (box-sw) at ($(input.south west) + (-0.4cm, 0.5cm)$);
-                \coordinate (box-ne) at ($(representation.north east) + (0.4cm, -0.5cm)$);
-                \draw[brown!30, dashed, line width=0.5pt, fill=brown!5, rounded corners=6pt] (box-sw) rectangle (box-ne);
-            \end{pgfonlayer}
-            \node[font=\footnotesize\bfseries, left=2.2cm of mlp] {$L \times$};
-
-            % Arrows
-            \draw[thick] (input) -- (norm1);
-            \draw[-{Stealth[length=2mm, width=1.5mm]}, thick] (norm1) -- (attn);
-            \draw[thick] (attn) -- (add1);
-            \draw[thick] (input) -- coordinate[pos=0.6] (res-branch) (norm1);
-            \draw[-{Stealth[length=2mm, width=1.5mm]}, thick] (res-branch) -| (add1.south);
-            \draw[thick] (add1) -- (norm2);
-            \draw[-{Stealth[length=2mm, width=1.5mm]}, thick] (norm2) -- (mlp);
-            \draw[thick] (mlp) -- (add2);
-            \draw[thick] (add1) -- coordinate[pos=0.6] (res-branch2) (norm2);
-            \draw[-{Stealth[length=2mm, width=1.5mm]}, thick] (res-branch2) -| (add2.south);
-            \draw[-{Stealth[length=2mm, width=1.5mm]}, thick] (add2) -- (representation);
-
-            % Title
-            \node[font=\footnotesize\bfseries, align=center] at ($(current bounding box.north west)+(2.5cm,-0.3cm)$) {Transformer Encoder Block};
-        \end{tikzpicture}%
-        }
-        \caption{Architecture of a Transformer Encoder block. $L$ is the number of stacked layers.}
-    \end{figure}
+\frametitle{Code block: quét threshold}
+\begin{lstlisting}
+thresholds = np.arange(0.30, 0.75, 0.05)
+rows = []
+for thr in thresholds:
+    pred_thr = (best_artifacts["y_test_prob"] >= thr).astype(int)
+    rows.append({
+      "threshold": thr,
+      "precision": precision_score(y_test, pred_thr),
+      "recall": recall_score(y_test, pred_thr),
+      "f1": f1_score(y_test, pred_thr),
+    })
+threshold_df = pd.DataFrame(rows)
+\end{lstlisting}

@@ -1,591 +1,486 @@
 \documentclass[10pt]{beamer}
-\mode<presentation>
-\usepackage{beamerthemesplit}
-\usepackage{graphicx}
-\graphicspath{{../../SGU_UAVLocalization_NonGPS_2025-2/}}
-\usepackage{booktabs}
-\usepackage{amsmath}
-\usepackage{textpos}
-% \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
-\usepackage{pgfplots}
-\usepackage{tikz}
-\usepackage{hyperref}
-\usepackage{caption}
-\usepackage{listings}
-\usepackage{algorithm}
-% \usepackage{algpseudocode}
-\usepackage{algorithmic}
-% \usepackage[backend=biber, style=numeric]{biblatex}
 
 \usepackage[utf8]{inputenc}
-% import citation package
-\usepackage[backend=biber, style=numeric]{biblatex}
-\addbibresource{presentation.bib}
-\AtBeginBibliography{\small}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
 
-\usetikzlibrary{shapes.geometric, arrows}
-\usetikzlibrary{arrows.meta}
-\usetikzlibrary{positioning}
-\usetikzlibrary{calc}
-\usetikzlibrary{backgrounds}
-\usetikzlibrary {datavisualization} 
-\pgfplotsset{compat=1.18, width = 7cm}
-\usetikzlibrary{patterns}
-\usetheme{Ilmenau} % AnnArbor, Ilmenau, Darmstadt, Dresden, CambridgeUS, Frankfurt, Singapore
-\newtheorem{dn}{Định nghĩa}[section]
-\newtheorem{dl}{Định lý}[section]
-\newtheorem{tc}{Tính chất}[section]
-\newtheorem{hq}{Hệ quả}[section]
-\newtheorem{bd}{Bổ đề}[section]
-\newtheorem{md}{Mệnh đề}[section]
-\newtheorem{vd}{Ví dụ}[section]
-\newtheorem{nx}{Nhận xét}[section]
-\newtheorem{cy}{Chú ý}[section]
-\newcommand{\dom}{\text{{\rm dom}}}
-\newcommand{\epi}{\text{{\rm epi}}}
-\newcommand{\Min}{\text{{\rm Min}}}
-\setbeamertemplate{theorems}[numbered]
-\setbeamertemplate{definitions}[numbered]
-\setbeamertemplate{footline}[frame number]
-\usepackage{algorithm}
-\usepackage{color}
-\usepackage{algorithmic}
-\usepackage{footmisc}
-\usepackage{indentfirst} 
-\usepackage{comment}
-\AtBeginEnvironment{proof}{%
-  \setbeamercolor{block title}{use=example text,fg=white,bg=example text.fg!75!black}
-  \setbeamercolor{block body}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
-}
-\renewcommand{\thefootnote}{\arabic{footnote}}
-\usefonttheme{professionalfonts}
-\setbeamercolor{normal text}{bg=white,fg=black}
-\renewcommand{\thefootnote}{\arabic{footnote}}
-\beamertemplatetransparentcoveredhigh
 \usetheme[progressbar=frametitle]{metropolis}
-\usepackage{appendixnumberbeamer}
+\usecolortheme{default}
+\setbeamertemplate{footline}[frame number]
 
-% \usepackage[utf8]{vietnam}
-
+\usepackage{graphicx}
+\graphicspath{{../baocao/figures/}{./}}
 \usepackage{booktabs}
-\usepackage[scale=2]{ccicons}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{array}
 
-\usepackage{pgfplots}
-\usepgfplotslibrary{dateplot}
+\definecolor{accentRed}{HTML}{990000}
+\setbeamercolor{title separator}{fg=accentRed}
+\setbeamercolor{progress bar}{fg=accentRed,bg=accentRed!30}
+\setbeamercolor{alerted text}{fg=accentRed}
 
-\usepackage{xspace}
-\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
-\definecolor{mSybilaRed}{HTML}{990000}
-
-\setbeamercolor{title separator}{
-  fg=mSybilaRed
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!70!black}\bfseries,
+  commentstyle=\color{green!40!black},
+  stringstyle=\color{orange!50!black},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=6pt,
+  frame=single,
+  rulecolor=\color{black!20},
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2
 }
 
-\setbeamercolor{progress bar}{%
-  fg=mSybilaRed,
-  bg=mSybilaRed!90!black!30
-}
-
-\setbeamercolor{progress bar in section page}{
-  use=progress bar,
-  parent=progress bar
-}
-
-\setbeamercolor{alerted text}{%
-  fg=mSybilaRed
-}
-
-\setbeamertemplate{footline}
-{
-  \leavevmode
-  \hbox{
-  \begin{beamercolorbox}[wd=.15\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}
-  \end{beamercolorbox}
-
-  \begin{beamercolorbox}[wd=.7\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}
-    \usebeamerfont{author in head/foot}\insertshorttitle
-  \end{beamercolorbox}
-
-  \begin{beamercolorbox}[wd=.15\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}
-    \insertframenumber{} / \inserttotalframenumber
-  \end{beamercolorbox}
-  }
-}
-
-\title{Vision-Based UAV Self-Positioning \\in Low-Altitude Urban Environments\footnotemark}
-
-
-\titlegraphic{\hfill \includegraphics[height=1cm]{logohcmut.png}}
-%\titlegraphic{\hfill\includegraphics[height=0.6cm]{sybila-logo/new.png}}
-%\titlegraphic{\hfill\includegraphics[height=0.6cm]{sybila-logo/old.png}}
-%\titlegraphic{\hfill\includegraphics[height=0.6cm]{sybila-logo/old-flat.png}}
-
+\title{Rút trích dữ liệu và tiền xử lý\\dữ liệu Pima Indians Diabetes}
+\subtitle{Báo cáo học phần thay thế khóa luận}
+\author{Nhóm 01}
+\institute{Khoa Toán Ứng dụng - Trường Đại học Sài Gòn}
 \date{\today}
-\author{Supervisor: M.Sc. Nguyen Van Gia Thinh}
-% \institute{Sinh viên lớp: DTU1221, Khóa: 22 @ Trường Đại học Sài Gòn}
-
-%\title{Metropolis}
-\subtitle{C.B Nguyen, N.H Dang}
-% \date{\today}
-%\date{}
-%\author{Matthias Vogelgesang}
-%\institute{Center for modern beamer themes}
-%\titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
-
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-
-\lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
-}
-
-\lstset{style=mystyle}
+\titlegraphic{\hfill\includegraphics[height=0.8cm]{logohcmut.png}}
 
 \begin{document}
 
-
 \begin{frame}
-  \centering
-  {\footnotesize
-  Ho Chi Minh University of Technology \\
-  Institute of Mathematical and Computational Sciences - IMACS}
-  \phantom{space}\\
-  \phantom{space}\\
-  {\normalsize RESEARCH REPORT}\\[-50pt]
   \titlepage
-  \vspace{-3cm}
-  \footnotetext{\textcite{dai2023visionbaseduavselfpositioninglowaltitude}}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Outline}
-    \tableofcontents
+\begin{frame}{Mục tiêu buổi trình bày}
+  \begin{itemize}
+    \item Trình bày đầy đủ quy trình nghiên cứu từ dữ liệu đến kết quả mô hình.
+    \item Giải thích rõ các quyết định kỹ thuật (missing ẩn, imputation, scaling, baseline).
+    \item Tổng hợp insight thực nghiệm để trả lời trực tiếp các câu hỏi nghiên cứu.
+    \item Đưa ra kết luận, hạn chế và khuyến nghị triển khai trong thực tế.
+  \end{itemize}
 \end{frame}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION: Evaluation Metrics
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Evaluation Metrics}
-
-\begin{frame}{Evaluation Metrics - Overview}
-    After the training process, the model outputs an optimal representation $z_i$ for each input aerial image $i$.
-    
-    \begin{block}{Vector Space Model}
-        \begin{itemize}
-            \item Documents and queries are represented as vectors in high-dimensional space
-            \item Similarity between them is measured to retrieve the most similar documents
-            \item Each label in our dataset is treated as a document with representation $z_i$
-        \end{itemize}
-    \end{block}
-    
-    \begin{block}{Embedded Vector Database}
-        \[
-            Z = \{z_1, z_2, \ldots, z_N\}
-        \]
-        Used in the retrieval process with the query (real-time image from UAV).
-    \end{block}
+\begin{frame}{Outline}
+  \tableofcontents
 \end{frame}
 
-\begin{frame}{Pre-ranking Process}
-    \begin{center}
-    \begin{tikzpicture}[scale=0.85, every node/.style={scale=0.85},
-        node distance=0.5cm,
-        block/.style={rectangle, draw, thick, rounded corners=4pt, minimum width=2.5cm, text width=2.8cm, minimum height=0.9cm, text centered, font=\footnotesize, align=center},
-        norm/.style={block, fill=teal!20},
-        mlp/.style={block, fill=blue!30},
-        input/.style={block, fill=green!30}
-    ]
-        % Horizontal layout
-        \node[mlp, align=center] (linear_projection) {Trained Model};
-        \node[block, right=1.2cm of linear_projection, align=center] (patch_positional_embedding) {Embedded Vector $z_i$};
-        \node[input, right=1.2cm of patch_positional_embedding, align=center] (output) {Database $Z = \{z_1, \ldots, z_N\}$};
-        
-        \draw[-Stealth, thick] (linear_projection.east) -- (patch_positional_embedding.west);
-        \draw[-Stealth, thick] (patch_positional_embedding.east) -- (output.west);
-    \end{tikzpicture}
-    \end{center}
-    
-    \begin{block}{Two-Part Ranking Process}
-        \vspace{0.2cm}
-        \begin{enumerate}
-            \item \textbf{Evaluation}: Use queries from query dataset to evaluate model performance
-            \item \textbf{Real-time Retrieval}: Apply ranking for UAV self-positioning task
-        \end{enumerate}
-    \end{block}
+\section{Chương 1 - Tổng quan vấn đề}
+
+\begin{frame}{Lý do chọn đề tài}
+  \begin{itemize}
+    \item Đái tháo đường là bệnh mạn tính có xu hướng gia tăng và nhiều biến chứng nặng.
+    \item Nhu cầu sàng lọc sớm đòi hỏi cách tiếp cận định lượng, tái lập và nhất quán.
+    \item Dữ liệu y sinh thực tế có nhiễu, missing ẩn và quan hệ đa biến phức tạp.
+    \item Học máy phù hợp để mô hình hóa xác suất nguy cơ, hỗ trợ quyết định ban đầu.
+  \end{itemize}
+  \vspace{0.3em}
+  \textbf{Bộ dữ liệu lựa chọn:} Pima Indians Diabetes (benchmark kinh điển).
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Ranking Process
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Ranking Process}
-
-\begin{frame}{Cosine Similarity}
-    \begin{block}{Definition}
-        \[
-            \operatorname{sim}(l_i, l_j)
-            = \cos(\theta_{l_i, l_j})
-            = \frac{\vec{z_i}\cdot \vec{z_j}}{| \vec{z_i}| | \vec{z_j}|}
-        \]
-    \end{block}
-    
-            \begin{itemize}
-                \item $\theta_{z_i, z_j}$: angle between $z_i$ and $z_j$
-                \item Dot product: $\sum_{k=1}^{d} z_i[k] z_j[k]$
-                \item Euclidean length: $|\vec{z_i}| = \sqrt{\sum_{k=1}^{d} z_i[k]^2}$
-            \end{itemize}
-            \begin{block}{Normalized Form}
-                \vspace{0.2cm}
-                Let $\vec{v}(z_i) = \dfrac{\vec{z_i}}{|\vec{z_i}|}$, then:
-                \[
-                    \operatorname{sim}(l_i, l_j) = \vec{v}(z_i)\cdot \vec{v}(z_j)
-                \]
-            \end{block}
+\begin{frame}{Mục tiêu và câu hỏi nghiên cứu}
+  \textbf{Mục tiêu chính}
+  \begin{itemize}
+    \item Xây dựng pipeline phân tích dữ liệu y sinh có khả năng tái lập.
+    \item So sánh các chiến lược \textit{imputer + scaler + model} trong cùng điều kiện.
+    \item Tối ưu quyết định vận hành thông qua phân tích threshold trade-off.
+  \end{itemize}
+  \vspace{0.4em}
+  \textbf{3 câu hỏi cốt lõi}
+  \begin{enumerate}
+    \item \textit{zero-as-missing} có cải thiện kết quả không?
+    \item Tổ hợp preprocessing + model nào phù hợp nhất?
+    \item Precision/Recall biến thiên thế nào khi thay đổi threshold?
+  \end{enumerate}
 \end{frame}
 
-\begin{frame}{Similarity Score}
-    \begin{block}{Score Function}
-        \vspace{0.2cm}
-        For query vector $z_q$ and embedded vector $z_i$:
-        \[
-            \operatorname{score}(l_q, l_i)
-            = \frac{\vec{V}(z_q)\cdot \vec{V}(z_i)}
-            {\lVert \vec{V}(z_q)\rVert \, \lVert \vec{V}(z_i)\rVert}
-            = \vec{v}(z_q)\cdot \vec{v}(z_i)
-        \]
-    \end{block}
-    
+\begin{frame}{Đối tượng, phạm vi và luồng tổng quát}
+  \begin{itemize}
+    \item Dữ liệu: 768 mẫu, 8 biến đầu vào, nhãn nhị phân \texttt{outcome}.
+    \item Phạm vi: EDA, tiền xử lý, baseline (Logistic Regression, Random Forest).
+    \item Không bao gồm: deep learning, external dataset, tuning quy mô lớn.
+  \end{itemize}
+  \begin{block}{Luồng kỹ thuật}
+    Khảo sát dữ liệu $\rightarrow$ xử lý missing ẩn $\rightarrow$ EDA $\rightarrow$ pipeline tiền xử lý
+    $\rightarrow$ huấn luyện baseline $\rightarrow$ đánh giá đa chỉ số và phân tích ngưỡng.
+  \end{block}
+\end{frame}
+
+\section{Chương 2 - Cơ sở lý thuyết và nghiên cứu liên quan}
+
+\begin{frame}{Khung lý thuyết bài toán phân lớp y sinh}
+  \begin{itemize}
+    \item Bài toán phân lớp nhị phân: dự đoán \texttt{outcome} \(\in \{0,1\}\).
+    \item Dữ liệu tabular y sinh có:
+      \begin{itemize}
+        \item phân phối lệch,
+        \item outlier và missing ẩn,
+        \item tương tác biến không thuần tuyến tính.
+      \end{itemize}
+    \item Hiệu năng mô hình phụ thuộc mạnh vào chất lượng tiền xử lý.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Xử lý dữ liệu: zero-as-missing, imputation, scaling}
+  \textbf{Zero-as-missing}
+  \begin{itemize}
+    \item Chuyển các giá trị \texttt{0} phi sinh lý ở \texttt{glucose, blood\_pressure, skin\_thickness, insulin, bmi} thành missing.
+  \end{itemize}
+  \textbf{Imputation}
+  \begin{itemize}
+    \item Median, KNN, Iterative (MICE).
+  \end{itemize}
+  \textbf{Scaling}
+  \begin{itemize}
+    \item StandardScaler và MinMaxScaler để đồng nhất thang đo.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Mô hình baseline và chỉ số đánh giá}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \column{0.52\textwidth}
+    \textbf{Mô hình}
     \begin{itemize}
-        \item Score function = cosine similarity $\cos(\theta_{l_q, l_i})$
-        \item $i = \overline{1, N}$ where $N$ = number of embedded vectors in database $Z$
-        \item \textbf{Higher similarity score} $\Rightarrow$ more similar vectors
+      \item Logistic Regression: baseline tuyến tính, dễ diễn giải.
+      \item Random Forest: mô hình phi tuyến, bắt tương tác biến tốt.
     \end{itemize}
+    \column{0.48\textwidth}
+    \textbf{Chỉ số}
+    \begin{itemize}
+      \item Accuracy
+      \item Precision
+      \item Recall
+      \item F1-score
+      \item ROC-AUC
+    \end{itemize}
+  \end{columns}
+  \begin{alertblock}{Lưu ý}
+    Với bài toán sàng lọc, Recall và F1 thường quan trọng hơn Accuracy đơn lẻ.
+  \end{alertblock}
 \end{frame}
 
-\begin{frame}{Cosine Similarity - Visual Illustration}
-    \begin{center}
-    \begin{tikzpicture}[scale=0.85]
-        % === Subfigure (a): Similar vectors ===
-        \begin{scope}[shift={(0,0)}]
-            \draw[->, thick] (-0.3,0) -- (2.2,0) node[right] {\tiny $d_1$};
-            \draw[->, thick] (0,-0.3) -- (0,2) node[above] {\tiny $d_2$};
-            \draw[->, very thick, blue] (0,0) -- (1.5,1.3) node[above left] {\tiny $\vec{v}(z_i)$};
-            \draw[->, very thick, red] (0,0) -- (1.7,0.9) node[right] {\tiny $\vec{v}(z_q)$};
-            \fill[red, opacity=0.3] (0,0) -- (40:0.7) arc[start angle=40, end angle=29, radius=0.7] -- cycle;
-            \node at (0.15,0.35) {\tiny $\theta$};
-            \node[below] at (0.9,-0.5) {\footnotesize \textbf{Similar} ($\cos\theta \approx 1$)};
-        \end{scope}
-        
-        % === Subfigure (b): Unrelated vectors ===
-        \begin{scope}[shift={(4.5,0)}]
-            \draw[->, thick] (-0.8,0) -- (2.2,0) node[right] {\tiny $d_1$};
-            \draw[->, thick] (0,-0.3) -- (0,2) node[above] {\tiny $d_2$};
-            \draw[->, very thick, blue] (0,0) -- (-0.4,1.7) node[above] {\tiny $\vec{v}(z_i)$};
-            \draw[->, very thick, red] (0,0) -- (1.7,0.2) node[right] {\tiny $\vec{v}(z_q)$};
-            \fill[red, opacity=0.3] (0,0) -- (103:0.5) arc[start angle=103, end angle=8, radius=0.5] -- cycle;
-            \node at (0.25,0.7) {\tiny $\theta$};
-            \node[below] at (0.7,-0.5) {\footnotesize \textbf{Unrelated} ($\cos\theta \approx 0$)};
-        \end{scope}
-        
-        % === Subfigure (c): Opposite vectors ===
-        \begin{scope}[shift={(10,0)}]
-            \draw[->, thick] (-2,0) -- (2.2,0) node[right] {\tiny $d_1$};
-            \draw[->, thick] (0,-1.3) -- (0,2) node[above] {\tiny $d_2$};
-            \draw[->, very thick, blue] (0,0) -- (-1.6,-0.8);
-            \node[left] at (-1.3,-1.1) {\tiny $\vec{v}(z_i)$};
-            \draw[->, very thick, red] (0,0) -- (1.7,0.8) node[right] {\tiny $\vec{v}(z_q)$};
-            \fill[red, opacity=0.3] (0,0) -- (27:0.8) arc[start angle=27, end angle=205, radius=0.8] -- cycle;
-            \node at (-0.6, 0.7) {\tiny $\theta$};
-            \node[below] at (0,-1.5) {\footnotesize \textbf{Opposite} ($\cos\theta \approx -1$)};
-        \end{scope}
-    \end{tikzpicture}
-    \end{center}
-    
-    \begin{block}{Key Insight}
-        \vspace{0.2cm}
-        When query vector $z_q$ is similar to embedded vector $z_i$, the query's location is also similar to the embedded vector's location.
-    \end{block}
+\section{Chương 3 - Dữ liệu và phương pháp đề xuất}
+
+\begin{frame}{Nguồn dữ liệu và thuộc tính}
+  \begin{itemize}
+    \item \texttt{Lab\_03/data/pima-indians-diabetes.csv}
+    \item \texttt{Lab\_03/data/pima-indians-diabetes.names}
+  \end{itemize}
+  \vspace{0.3em}
+  \begin{table}
+    \centering
+    \scriptsize
+    \begin{tabular}{p{2.6cm}p{4.8cm}}
+      \toprule
+      \textbf{Biến tiêu biểu} & \textbf{Ý nghĩa} \\
+      \midrule
+      \texttt{glucose} & Nồng độ glucose huyết tương \\
+      \texttt{insulin} & Nồng độ insulin huyết thanh \\
+      \texttt{bmi} & Chỉ số khối cơ thể \\
+      \texttt{age} & Tuổi bệnh nhân \\
+      \texttt{outcome} & Nhãn phân lớp (0/1) \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Spatial Discrete Index (R@K)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Spatial Discrete Index (R@K)}
-
-\begin{frame}{Precision vs Recall}
-            \begin{table}
-            \centering
-            \footnotesize
-            \begin{tabular}{|l|c|c|}
-            \hline
-                            & \textbf{Relevant} & \textbf{Nonrelevant} \\ \hline
-            \textbf{Retrieved}     & tp   & fp  \\ \hline
-            \textbf{Not retrieved} & fn   & tn  \\ \hline
-            \end{tabular}
-            \end{table}
-            \begin{block}{Definitions}
-                \[
-                    \mathrm{Precision} = \frac{tp}{tp + fp}
-                \]
-                \vspace{0.2cm}
-                \[
-                    \mathrm{Recall} = \frac{tp}{tp + fn}
-                \]
-            \end{block}
-    
-    \vspace{0.3cm}
-    \begin{alertblock}{Focus on Recall}
-        \vspace{0.2cm}
-        In UAV self-positioning and image retrieval, we are more interested in \textbf{Recall} evaluation.
-    \end{alertblock}
+\begin{frame}{Kiểm tra chất lượng dữ liệu}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \column{0.58\textwidth}
+    \includegraphics[width=\linewidth]{fig_missing_zero_report.png}
+    \column{0.42\textwidth}
+    \textbf{Nhận xét chính}
+    \begin{itemize}
+      \item Không có dòng trùng lặp.
+      \item Không có NaN tường minh trong file gốc.
+      \item Missing ẩn tập trung ở \texttt{insulin}, \texttt{skin\_thickness}.
+      \item Cần chuyển \texttt{0} bất thường thành missing trước huấn luyện.
+    \end{itemize}
+  \end{columns}
 \end{frame}
 
-\begin{frame}{Spatial Discrete Index - $\mathrm{R@K}$}
-    \begin{block}{Indicator Function}
-        \vspace{0.2cm}
-        Given query image with label $l_q$, for the $i$-th ranked embedded vector:
-        \[
-            I(l_q, l_i) =
-            \begin{cases}
-            1 & \text{if } \exists k \in \overline{1, i} \text{ such that } l_q = l_k \\
-            0 & \text{otherwise}
-            \end{cases}
-        \]
-    \end{block}
-    
-    \begin{block}{$\mathrm{R@K}$ Definition}
-        \vspace{0.2cm}
-        For a set of query images $Q$:
-        \[
-            \mathrm{R@K} = \frac{1}{\lVert Q \rVert} \sum_{q \in Q} I(l_q, l_K)
-        \]
-    \end{block}
+\begin{frame}[fragile]{Code block: chia dữ liệu có stratify}
+\begin{lstlisting}
+X = df[feature_columns].copy()
+y = df["outcome"].astype(int)
+X[zero_as_missing_columns] = X[zero_as_missing_columns].replace(0, np.nan)
+
+X_train_val, X_test, y_train_val, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+X_train, X_val, y_train, y_val = train_test_split(
+    X_train_val, y_train_val, test_size=0.25,
+    random_state=42, stratify=y_train_val
+)
+\end{lstlisting}
+  \textbf{Insight:} Chia 2 bước giúp đạt đúng tỉ lệ 60/20/20 và giữ ổn định tỷ lệ lớp dương trên mọi tập.
 \end{frame}
 
-\begin{frame}{Indicator Function - Visual}
-    \begin{center}
-    \begin{tikzpicture}[scale=1.5]
-        % Draw axes
-        \draw[->, thick] (-0.3,0) -- (5,0) node[right] {$l_q, l_k, l_i$};
-        \draw[->, thick] (0,-0.3) -- (0,1.8) node[above] {$I(l_q, l_i)$};
-        
-        % Draw y-axis labels
-        \node[left] at (-0.05,-0.15) {\footnotesize $0$};
-        \node[left] at (-0.15,1.4) {\footnotesize $1$};
-        \draw[thick] (-0.08,1.4) -- (0.08,1.4);
-        
-        % Draw horizontal dashed line at y=1
-        \draw[dashed, gray] (0,1.4) -- (4.5,1.4);
-        
-        % Draw the function
-        \draw[very thick, blue] (0.3,0) -- (1.5,0);
-        \draw[very thick, blue] (2.5,0) -- (4.5,0);
-        
-        % Point at l_q = l_k (value = 1)
-        \fill[blue] (2,1.4) circle (2pt);
-        \node[above] at (2,1.5) {\footnotesize $l_q = l_k$};
-        
-        % Open circles at the discontinuity
-        \draw[blue, thick, fill=white] (1.5,0) circle (1.5pt);
-        \draw[blue, thick, fill=white] (2.5,0) circle (1.5pt);
-        
-        % Vertical dashed line
-        \draw[dashed, gray] (2,0) -- (2,1.4);
-        
-        % Labels
-        \node[below] at (0.9,-0.1) {\footnotesize $l_q \ne l_k$};
-        \node[below] at (3.5,-0.1) {\footnotesize $l_q \ne l_k$};
-    \end{tikzpicture}
-    \end{center}
-    
-    \begin{block}{$\mathrm{R@1}$ Interpretation}
-        \[
-            \mathrm{R@1} = \frac{1}{\lVert Q \rVert} \sum_{q \in Q} I(l_q, l_1)
-        \]
-        % \vspace{0.2cm}
-        Proportion of queries where the top-1 retrieved location matches the query's location.
-    \end{block}
+\begin{frame}[fragile]{Code block: pipeline baseline}
+\begin{lstlisting}
+Pipeline(steps=[
+  ("imputer", SimpleImputer(strategy="median")),
+  ("scaler", StandardScaler()),
+  ("clf", LogisticRegression(max_iter=5000, random_state=42))
+])
+\end{lstlisting}
+  \begin{itemize}
+    \item Tất cả phép biến đổi được fit trên train.
+    \item Giảm data leakage và tăng tính tái lập.
+    \item Dễ mở rộng sang nhiều cấu hình khác nhau.
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{Limitations of $\mathrm{R@K}$}
-    \begin{alertblock}{Main Disadvantage}
-        \vspace{0.2cm}
-        $\mathrm{R@K}$ is a \textbf{binary metric} - very rigid with a hard threshold:
-        \begin{itemize}
-            \item If retrieved location is even slightly incorrect $\Rightarrow$ indicator = 0
-            \item No tolerance for small errors
-        \end{itemize}
-    \end{alertblock}
-    
-    \vspace{0.3cm}
-    \begin{block}{Solution}
-        \vspace{0.2cm}
-        Propose $\mathrm{SDM@K}$ metric - a \textbf{continuous metric} that allows very small errors in the retrieved location.
-    \end{block}
+\begin{frame}{EDA chuyên sâu theo nhóm biến}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \column{0.33\textwidth}
+    \includegraphics[width=\linewidth]{age_glucose_correlation.png}
+    \column{0.33\textwidth}
+    \includegraphics[width=\linewidth]{dpf_and_focus_scatter.png}
+    \column{0.33\textwidth}
+    \includegraphics[width=\linewidth]{glucose_bmi_insulin_scatter.png}
+  \end{columns}
+  \vspace{0.4em}
+  \begin{itemize}
+    \item \texttt{glucose} thể hiện khả năng phân tách lớp rõ nhất.
+    \item DPF, BMI, insulin bổ sung tín hiệu rủi ro khi kết hợp đa biến.
+    \item Quan hệ không thuần tuyến tính $\Rightarrow$ cần so sánh mô hình phi tuyến.
+  \end{itemize}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSECTION: Spatial Discretization Matrix (SDM@K)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Spatial Discretization Matrix (SDM@K)}
-
-\begin{frame}{$\mathrm{SDM@K}$ - Continuous Metric}
-    \begin{block}{Modified Indicator Function}
-        \vspace{0.2cm}
-        Replace discrete indicator with continuous smooth function using $e^{-x}$:
-        \[
-            \mathrm{SDM}_k = (K - k + 1) \times e^{-s \times d_k} = \frac{K - k + 1}{e^{s \times d_k}}
-        \]
-    \end{block}
-
-    \begin{columns}[T]
-        \begin{column}{0.5\textwidth}
-            \begin{itemize}
-                \item $K - k + 1$: weight for higher ranks
-                \item $s = 5 \times 10^3$: scaling factor
-                \item $d_k$: distance to $k$-th embedded vector
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \begin{block}{Distance $d_k$}
-                \[
-                    d_k = \sqrt{(x_q - x_k)^2 + (y_q - y_k)^2}
-                \]
-                $(x_q, y_q)$: query location \\
-                $(x_k, y_k)$: $k$-th vector location
-            \end{block}
-        \end{column}
-    \end{columns}
+\begin{frame}{Pipeline tiền xử lý đề xuất}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \column{0.55\textwidth}
+    \includegraphics[width=\linewidth]{fig_preprocess_pipeline.png}
+    \column{0.45\textwidth}
+    \begin{enumerate}
+      \item Chuẩn hóa dữ liệu đầu vào.
+      \item Xử lý missing ẩn.
+      \item Imputation.
+      \item Scaling.
+      \item Huấn luyện + đánh giá.
+    \end{enumerate}
+    \vspace{0.2em}
+    \textbf{Thông điệp:} Quy trình thống nhất giúp so sánh công bằng và giảm lỗi thao tác thủ công.
+  \end{columns}
 \end{frame}
 
-\begin{frame}{SDM Weighting - Visualization}
-    \begin{center}
-    \begin{tikzpicture}[scale=0.9, every node/.style={scale=0.9}]
-        \begin{axis}[
-            width=9cm,
-            height=5.5cm,
-            xlabel={Distance $d$},
-            ylabel={SDM value},
-            xmin=0.0005,
-            xmax=0.01,
-            ymin=0,
-            ymax=0.01,
-            grid=both,
-            grid style={line width=0.1pt, draw=gray!30},
-            major grid style={line width=0.2pt, draw=gray!50},
-            legend pos=north east,
-            legend style={font=\tiny},
-            samples=100,
-            smooth,
-            thick,
-            restrict y to domain=0:0.015
-        ]
-            % f(x) = e^(-5000x) - Blue (rank 10)
-            \addplot[blue, line width=1.2pt, domain=0.0008:0.01] {exp(-5000*x)};
-            \addlegendentry{Rank 10: $e^{-5000x}$}
-            
-            % g(x) = 5 * e^(-5000x) - Orange (rank 5)
-            \addplot[orange, line width=1.2pt, domain=0.001:0.01] {5*exp(-5000*x)};
-            \addlegendentry{Rank 5: $5e^{-5000x}$}
-            
-            % h(x) = 10 * e^(-5000x) - Purple (rank 1)
-            \addplot[violet, line width=1.2pt, domain=0.0012:0.01] {10*exp(-5000*x)};
-            \addlegendentry{Rank 1: $10e^{-5000x}$}
-        \end{axis}
-    \end{tikzpicture}
-    \end{center}
-    
-    \begin{block}{Key Insight}
-        \vspace{0.2cm}
-        Higher-ranked vectors get more weight and greater acceptable error tolerance.
-    \end{block}
+\section{Chương 4 - Thực nghiệm và kết quả đạt được}
+
+\begin{frame}{Thiết lập thực nghiệm}
+  \textbf{Chiến lược chia dữ liệu}
+  \begin{itemize}
+    \item Train: 460 mẫu
+    \item Validation: 154 mẫu
+    \item Test: 154 mẫu
+  \end{itemize}
+  \textbf{Không gian so sánh}
+  \begin{itemize}
+    \item Imputation: Median, KNN, Iterative
+    \item Scaling: Standard, MinMax
+    \item Model: Logistic Regression, Random Forest
+  \end{itemize}
+  \textbf{Tổng cộng:} 12 cấu hình trên cùng seed và cùng split.
 \end{frame}
 
-\begin{frame}{Normalized $\mathrm{SDM@K}$}
-    \begin{block}{Final Formula}
-        \vspace{0.2cm}
-        Normalized to range $[0, 1]$:
-        \[
-            \mathrm{SDM@K} = \frac{\sum_{i=1}^{K} \dfrac{K - i + 1}{e^{s \times d_i}}}{\sum_{i=1}^{K} (K - i + 1)}
-        \]
-    \end{block}
-    
-    \begin{block}{Evaluation on Query Set $Q$}
-        \vspace{0.2cm}
-        Compute $\mathrm{SDM@K}$ for each query image in $Q$ and divide by total number of queries.
-    \end{block}
-    
-    \begin{alertblock}{Main Advantage}
-        \vspace{0.2cm}
-        $\mathrm{SDM@K}$ is a \textbf{continuous metric} - not as rigid as $\mathrm{R@K}$ and allows for very small errors in the retrieved location.
-    \end{alertblock}
+\begin{frame}{Phân bố lớp và tương quan chính}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \column{0.48\textwidth}
+    \includegraphics[width=\linewidth]{class_distribution.png}
+    \column{0.48\textwidth}
+    \includegraphics[width=\linewidth]{corr_heatmap.png}
+  \end{columns}
+  \vspace{0.4em}
+  \begin{itemize}
+    \item Lớp âm chiếm ưu thế nhẹ $\Rightarrow$ cần theo dõi Recall/F1.
+    \item \texttt{glucose} có tương quan mạnh nhất với \texttt{outcome}.
+    \item Không có biến đơn lẻ đủ quyết định nhãn $\Rightarrow$ cần mô hình đa biến.
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{Comparison: $\mathrm{R@K}$ vs $\mathrm{SDM@K}$}
-    \begin{columns}[T]
-        \begin{column}{0.5\textwidth}
-            \begin{block}{$\mathrm{R@K}$}
-                \begin{itemize}
-                    \item Binary metric (0 or 1)
-                    \item Hard threshold
-                    \item No tolerance for small errors
-                    \item Simple interpretation
-                \end{itemize}
-            \end{block}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \begin{block}{$\mathrm{SDM@K}$}
-                \begin{itemize}
-                    \item Continuous metric
-                    \item Smooth decay with distance
-                    \item Tolerates small errors
-                    \item Weighted by rank
-                \end{itemize}
-            \end{block}
-        \end{column}
-    \end{columns}
-    
-    \vspace{0.3cm}
-    \begin{center}
-        \begin{tabular}{|l|c|c|}
-        \hline
-        \textbf{Property} & \textbf{R@K} & \textbf{SDM@K} \\ \hline
-        Type & Discrete & Continuous \\ \hline
-        Error tolerance & None & Yes \\ \hline
-        Rank weighting & No & Yes \\ \hline
-        Range & $\{0, 1\}$ & $[0, 1]$ \\ \hline
-        \end{tabular}
-    \end{center}
+\begin{frame}[fragile]{Code block: đánh giá một cấu hình}
+\begin{lstlisting}
+def evaluate_strategy(imputer_name, scaler_name, model_name):
+    pipe = Pipeline([...])
+    pipe.fit(X_train, y_train)
+    y_val_pred = pipe.predict(X_val)
+    y_val_prob = pipe.predict_proba(X_val)[:, 1]
+    y_test_pred = pipe.predict(X_test)
+    y_test_prob = pipe.predict_proba(X_test)[:, 1]
+    return {
+      "val_f1": f1_score(y_val, y_val_pred),
+      "val_roc_auc": roc_auc_score(y_val, y_val_prob),
+      "test_f1": f1_score(y_test, y_test_pred),
+      "test_roc_auc": roc_auc_score(y_test, y_test_prob),
+    }
+\end{lstlisting}
+  \textbf{Insight:} Mọi tổ hợp dùng cùng pipeline đánh giá, đảm bảo tính công bằng trong bảng xếp hạng.
 \end{frame}
 
-\begin{frame}[allowframebreaks, noframenumbering]
-    \frametitle{References}
-    \nocite{*}
-    \printbibliography[heading=none]
+\begin{frame}{Kết quả 12 cấu hình (tóm tắt)}
+  \scriptsize
+  \begin{table}
+    \centering
+    \begin{tabular}{lllcc}
+      \toprule
+      \textbf{Imputer} & \textbf{Scaler} & \textbf{Model} & \textbf{Test AUC} & \textbf{F1}\\
+      \midrule
+      KNN & MinMax & Random Forest & 0.8170 & 0.6078\\
+      KNN & Standard & Random Forest & 0.8168 & 0.6078\\
+      Median & Standard & Logistic Reg. & 0.8167 & 0.5455\\
+      Iterative & MinMax & Random Forest & 0.8156 & 0.5882\\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+  \vspace{0.3em}
+  \begin{itemize}
+    \item Nhóm Random Forest ổn định hơn về F1.
+    \item KNN Imputer thường xuất hiện ở top theo ROC-AUC.
+  \end{itemize}
 \end{frame}
 
-\begin{frame}
-    \begin{block}{}
-    \medskip
-    \center{\huge \it \textcolor[rgb]{0.37, 0.150, 0.190}{Thanks for listening!}}
-    \medskip
-    \end{block}	
-\end{frame}    
+\begin{frame}{So sánh chiến lược và cấu hình đề xuất}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \column{0.56\textwidth}
+    \includegraphics[width=\linewidth]{strategy_comparison.png}
+    \column{0.44\textwidth}
+    \textbf{Cấu hình đề xuất}
+    \begin{itemize}
+      \item KNN + MinMax + Random Forest
+      \item Val AUC: 0.8700
+      \item Test AUC: 0.8170
+      \item Test F1: 0.6078
+      \item Test Recall: 0.5741
+    \end{itemize}
+    \textbf{Nhận xét}
+    \begin{itemize}
+      \item AUC top khá sát nhau.
+      \item Cần chọn theo mục tiêu nghiệp vụ, không chỉ theo 1 chỉ số.
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Phân tích sai số: Confusion matrix + ROC}
+  \begin{columns}[T,totalwidth=\textwidth]
+    \column{0.5\textwidth}
+    \includegraphics[width=\linewidth]{confusion_best.png}
+    \column{0.5\textwidth}
+    \includegraphics[width=\linewidth]{roc_top3.png}
+  \end{columns}
+  \vspace{0.3em}
+  \begin{itemize}
+    \item Tại ngưỡng 0.5: TN=86, FP=17, FN=23, TP=31.
+    \item Vẫn bỏ sót ca dương đáng kể $\Rightarrow$ cần tối ưu threshold cho sàng lọc.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Code block: quét threshold}
+\begin{lstlisting}
+thresholds = np.arange(0.30, 0.75, 0.05)
+rows = []
+for thr in thresholds:
+    pred_thr = (best_artifacts["y_test_prob"] >= thr).astype(int)
+    rows.append({
+      "threshold": thr,
+      "precision": precision_score(y_test, pred_thr),
+      "recall": recall_score(y_test, pred_thr),
+      "f1": f1_score(y_test, pred_thr),
+    })
+threshold_df = pd.DataFrame(rows)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Trade-off theo threshold}
+  \scriptsize
+  \begin{table}
+    \centering
+    \begin{tabular}{cccc}
+      \toprule
+      Threshold & Precision & Recall & F1 \\
+      \midrule
+      0.30 & 0.5789 & 0.8148 & 0.6769 \\
+      0.40 & 0.6167 & 0.6852 & 0.6491 \\
+      0.50 & 0.6458 & 0.5741 & 0.6078 \\
+      0.60 & 0.6944 & 0.4630 & 0.5556 \\
+      0.70 & 0.7500 & 0.3333 & 0.4615 \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+  \begin{alertblock}{Kết luận vận hành}
+    Ngưỡng 0.30 phù hợp hơn cho pha sàng lọc ban đầu vì Recall cao (0.8148), chấp nhận đánh đổi Precision.
+  \end{alertblock}
+\end{frame}
+
+\section{Chương 5 - Kết luận và khuyến nghị}
+
+\begin{frame}{Kết luận chính}
+  \begin{enumerate}
+    \item \textit{zero-as-missing} có tác động thực chất đến chất lượng mô hình.
+    \item KNN + MinMax + Random Forest cho test ROC-AUC cao nhất.
+    \item Random Forest ổn định hơn Logistic Regression về F1 trong dữ liệu phi tuyến.
+    \item Điều chỉnh threshold giúp cải thiện mạnh mục tiêu sàng lọc.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Trả lời trực tiếp Q1/Q2/Q3}
+  \textbf{Q1 -- Zero-as-missing có hữu ích không?}\\
+  Có, giúp giảm nhiễu từ giá trị phi sinh lý và ổn định AUC quanh 0.81 trên test.
+  \vspace{0.4em}
+
+  \textbf{Q2 -- Tổ hợp tốt nhất?}\\
+  KNN Imputer + MinMaxScaler + Random Forest.
+  \vspace{0.4em}
+
+  \textbf{Q3 -- Trade-off theo threshold?}\\
+  Giảm threshold từ 0.5 xuống 0.3 làm Recall tăng rõ (0.5741 $\rightarrow$ 0.8148),
+  F1 cũng tăng (0.6078 $\rightarrow$ 0.6769).
+\end{frame}
+
+\begin{frame}{Đóng góp, hạn chế và khuyến nghị}
+  \textbf{Đóng góp}
+  \begin{itemize}
+    \item Chuẩn hóa pipeline tái lập từ EDA đến đánh giá baseline.
+    \item Cung cấp benchmark 12 cấu hình trong cùng điều kiện thực nghiệm.
+  \end{itemize}
+  \textbf{Hạn chế}
+  \begin{itemize}
+    \item Dữ liệu nhỏ (768 mẫu), chưa có external validation.
+    \item Chưa tuning hệ thống và chưa calibration xác suất.
+  \end{itemize}
+  \textbf{Khuyến nghị}
+  \begin{itemize}
+    \item Ngắn hạn: Stratified K-Fold + tuning + calibration.
+    \item Trung hạn: thử boosting và kỹ thuật cân bằng lớp.
+    \item Dài hạn: mở rộng dữ liệu, đóng gói pipeline triển khai.
+  \end{itemize}
+\end{frame}
+
+\appendix
+\section{Phụ lục}
+
+\begin{frame}{Bảng đầy đủ 12 cấu hình (appendix)}
+  \tiny
+  \begin{tabular}{lllcc}
+    \toprule
+    Imputer & Scaler & Model & Test AUC & F1\\
+    \midrule
+    KNN & MinMax & Random Forest & 0.8170 & 0.6078\\
+    KNN & Standard & Random Forest & 0.8168 & 0.6078\\
+    Median & Standard & Logistic Regression & 0.8167 & 0.5455\\
+    Iterative & MinMax & Random Forest & 0.8156 & 0.5882\\
+    KNN & Standard & Logistic Regression & 0.8154 & 0.5510\\
+    Iterative & Standard & Random Forest & 0.8153 & 0.5882\\
+    Median & MinMax & Random Forest & 0.8149 & 0.5941\\
+    Iterative & Standard & Logistic Regression & 0.8148 & 0.5417\\
+    Median & Standard & Random Forest & 0.8136 & 0.5941\\
+    KNN & MinMax & Logistic Regression & 0.8117 & 0.5474\\
+    Median & MinMax & Logistic Regression & 0.8098 & 0.5532\\
+    Iterative & MinMax & Logistic Regression & 0.8093 & 0.5567\\
+    \bottomrule
+  \end{tabular}
+\end{frame}
+
+\begin{frame}[standout]
+  Cảm ơn thầy/cô và các bạn đã theo dõi.
+\end{frame}
+
 \end{document}
