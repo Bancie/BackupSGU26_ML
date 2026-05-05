@@ -61,8 +61,8 @@ def fit(
 
     candidates: list[tuple[float, float, float, str]] = []
     for f in feats:
-        _ip_c, weighted, gn = gain(df, f, target, criterion)
-        candidates.append((gn, weighted, ip_c, f))
+        ip_parent, weighted, gn = gain(df, f, target, criterion)
+        candidates.append((gn, weighted, ip_parent, f))
 
     # Gain lớn nhất; nếu hòa: entropy có trọng số nhỏ hơn; rồi tên thuộc tính âm học
     candidates.sort(key=lambda row: (-row[0], row[1], str(row[-1])))
