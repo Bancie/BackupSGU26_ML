@@ -1,0 +1,344 @@
+\section*{Bài tập 06 --- Rule-based learning}
+
+\subsection*{Câu 1. PRISM Algorithm}
+
+Mục tiêu phân lớp: \(\text{Job Offer} \in \{\text{Yes}, \text{No}\}\).
+Theo PRISM, tại mỗi bước chọn literal có
+\[
+P(\text{class} \mid \text{literal})=\frac{\#(\text{literal và class})}{\#(\text{literal})}
+\]
+lớn nhất; nếu bằng nhau thì chọn literal cover nhiều mẫu hơn.
+
+\subsubsection*{a) Sinh luật cho lớp \(\text{Job Offer}=\text{Yes}\)}
+
+\textbf{Rule 1:}
+trên tập \(U\) ban đầu (10 mẫu), các literal tốt nhất có accuracy \(=1\):
+\[
+\text{CGPA}>8:\frac{4}{4},\quad
+\text{Practical Knowledge=Very good}:\frac{2}{2},\quad
+\text{Communication Skills=Moderate}:\frac{3}{3}.
+\]
+Chọn literal cover nhiều hơn \(\Rightarrow \text{CGPA}>8\).
+\[
+R_1:\ \text{IF CGPA}>8\ \text{THEN Job Offer=Yes}.
+\]
+
+\textbf{Rule 2:}
+loại các mẫu dương đã cover bởi \(R_1\), khi đó literal tốt nhất là
+\(\text{Practical Knowledge=Very good}\) với \(\frac{2}{2}=1\):
+\[
+R_2:\ \text{IF Practical Knowledge=Very good THEN Job Offer=Yes}.
+\]
+
+\textbf{Rule 3:}
+tiếp tục loại mẫu dương đã cover bởi \(R_2\), còn 1 mẫu dương.
+Literal tốt nhất:
+\[
+\text{Communication Skills=Moderate}:\frac{1}{1}=1.
+\]
+Suy ra:
+\[
+R_3:\ \text{IF Communication Skills=Moderate THEN Job Offer=Yes}.
+\]
+
+\subsubsection*{b) Sinh luật cho lớp \(\text{Job Offer}=\text{No}\)}
+
+\textbf{Rule 4:}
+trên tập ban đầu, literal tốt nhất:
+\[
+\text{Communication Skills=Poor}:\frac{2}{2}=1.
+\]
+\[
+R_4:\ \text{IF Communication Skills=Poor THEN Job Offer=No}.
+\]
+
+\textbf{Rule 5:}
+loại mẫu âm đã cover bởi \(R_4\), còn lại literal tốt nhất:
+\[
+\text{CGPA}<8:\frac{1}{1}=1.
+\]
+\[
+R_5:\ \text{IF CGPA}<8\ \text{THEN Job Offer=No}.
+\]
+
+\subsubsection*{c) Rule set cuối cho Câu 1}
+\[
+\begin{aligned}
+R_1&:\ \text{IF CGPA}>8\ \text{THEN Job Offer=Yes},\\
+R_2&:\ \text{IF Practical Knowledge=Very good THEN Job Offer=Yes},\\
+R_3&:\ \text{IF Communication Skills=Moderate THEN Job Offer=Yes},\\
+R_4&:\ \text{IF Communication Skills=Poor THEN Job Offer=No},\\
+R_5&:\ \text{IF CGPA}<8\ \text{THEN Job Offer=No}.
+\end{aligned}
+\]
+
+\subsection*{Câu 2. Xây dựng luật phân lớp bằng PRISM}
+
+Tập dữ liệu có 10 mẫu, nhãn \(\text{Result} \in \{\text{Pass},\text{Fail}\}\).
+
+\subsubsection*{a) Luật cho lớp \(\text{Result}=\text{Pass}\)}
+
+\textbf{Rule 1:}
+trên tập ban đầu,
+\[
+\text{Attendance=Good}:\frac{5}{5}=1
+\]
+là literal tốt nhất.
+\[
+R_1:\ \text{IF Attendance=Good THEN Result=Pass}.
+\]
+
+\textbf{Rule 2:}
+sau khi bỏ các mẫu dương đã được \(R_1\) cover, literal tốt nhất:
+\[
+\text{Project Submitted=Yes}:\frac{1}{2}=0.5.
+\]
+Tập con sau literal này còn lẫn lớp, nên tinh chỉnh tiếp:
+\[
+\text{Attendance=Average}:\frac{1}{1}=1.
+\]
+Suy ra:
+\[
+R_2:\ \text{IF Project Submitted=Yes AND Attendance=Average THEN Result=Pass}.
+\]
+
+\subsubsection*{b) Luật cho lớp \(\text{Result}=\text{Fail}\)}
+
+\textbf{Rule 3:}
+\[
+\text{Communication Skill=Poor}:\frac{3}{3}=1
+\]
+\[
+R_3:\ \text{IF Communication Skill=Poor THEN Result=Fail}.
+\]
+
+\textbf{Rule 4:}
+sau khi loại mẫu âm đã cover bởi \(R_3\), literal tốt nhất:
+\[
+\text{Attendance=Poor}:\frac{1}{1}=1
+\]
+\[
+R_4:\ \text{IF Attendance=Poor THEN Result=Fail}.
+\]
+
+\subsubsection*{c) Viết tập luật IF--THEN cuối cùng}
+\[
+\begin{aligned}
+R_1&:\ \text{IF Attendance=Good THEN Result=Pass},\\
+R_2&:\ \text{IF Project Submitted=Yes AND Attendance=Average THEN Result=Pass},\\
+R_3&:\ \text{IF Communication Skill=Poor THEN Result=Fail},\\
+R_4&:\ \text{IF Attendance=Poor THEN Result=Fail}.
+\end{aligned}
+\]
+
+\subsubsection*{d) Coverage và Accuracy của từng luật}
+
+Theo đề:
+\[
+\text{Coverage}=\frac{\#\text{mẫu thỏa antecedent}}{\#\text{tổng mẫu}},\qquad
+\text{Accuracy}=\frac{\#\text{mẫu thỏa antecedent và consequent}}{\#\text{mẫu thỏa antecedent}}.
+\]
+
+Với tổng mẫu \(=10\), ta có:
+
+\begin{center}
+\begin{tabular}{@{}clcc@{}}
+\toprule
+Luật & Dạng luật & Coverage & Accuracy \\
+\midrule
+\(R_1\) & IF Attendance=Good THEN Result=Pass & \(5/10=0.50\) & \(5/5=1.00\) \\
+\(R_2\) & IF Project Submitted=Yes AND Attendance=Average THEN Result=Pass & \(1/10=0.10\) & \(1/1=1.00\) \\
+\(R_3\) & IF Communication Skill=Poor THEN Result=Fail & \(3/10=0.30\) & \(3/3=1.00\) \\
+\(R_4\) & IF Attendance=Poor THEN Result=Fail & \(2/10=0.20\) & \(2/2=1.00\) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection*{e) Conflict resolution}
+
+Trong tập hiện tại, không có mẫu nào cùng lúc khớp các luật có kết luận trái nhau
+(một số mẫu có thể khớp nhiều luật nhưng cùng nhãn Fail).
+Nếu có conflict, có thể xử lý:
+\begin{itemize}
+  \item \textbf{Rule ordering:} ưu tiên luật đứng trước trong rule set.
+  \item \textbf{Priority list:} gán mức ưu tiên cố định cho từng luật/lớp.
+  \item \textbf{Accuracy ordering:} chọn luật có accuracy cao hơn (nếu hòa, xét coverage).
+\end{itemize}
+
+\subsubsection*{f) Câu hỏi mở rộng}
+\begin{enumerate}
+  \item \textbf{PRISM là attribute-oriented hay rule-oriented?}\\
+  PRISM là \textbf{rule-oriented}: học trực tiếp từng luật IF--THEN cho từng lớp.
+  \item \textbf{PRISM khác Decision Tree ID3 ở điểm nào?}\\
+  ID3 tạo cây quyết định phân hoạch toàn bộ dữ liệu theo cấu trúc cây;
+  PRISM tạo tập luật độc lập, có thể chồng lấp, và cần cơ chế ưu tiên khi xung đột.
+  \item \textbf{Vì sao PRISM thuộc Sequential Covering Algorithm?}\\
+  Vì PRISM học \textbf{từng luật một}, sau đó loại các mẫu dương đã được luật đó cover,
+  rồi lặp lại cho tới khi không còn mẫu dương chưa cover.
+\end{enumerate}
+
+\subsection*{Câu 3. Tính FOIL-Gain và sinh luật bằng FOIL}
+
+Target class: \(\text{Job Offer}=\text{Yes}\).
+Tập dữ liệu có \(5\) mẫu:
+\[
+|P|=2,\quad |N|=3,\quad R_0=\{\}.
+\]
+
+FOIL-Gain:
+\[
+\text{FOIL-Gain}(R,\ell)=p_1\left[\log_2\frac{p_1}{p_1+n_1}-\log_2\frac{p_0}{p_0+n_0}\right].
+\]
+
+\subsubsection*{a) Vòng lặp 1: tính gain cho các literal khả dụng}
+
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Literal & \(p_0\) & \(n_0\) & \(p_1,n_1\) & FOIL-Gain \\
+\midrule
+CGPA \(>9\) & 2 & 3 & \(1,1\) & \(0.3219\) \\
+CGPA \(<8\) & 2 & 3 & \(1,1\) & \(0.3219\) \\
+Interactiveness = Yes & 2 & 3 & \(2,2\) & \(0.6439\) \\
+Practical Knowledge = Good & 2 & 3 & \(2,2\) & \(0.6439\) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Các literal có \(p_1=0\) (như Interactiveness=No, Practical Knowledge=Average)
+không được chọn.
+Literal tốt nhất vòng 1: \(\text{Interactiveness=Yes}\).
+
+\subsubsection*{b) Cập nhật luật sau literal thứ nhất}
+
+\[
+R:\ \text{IF Interactiveness=Yes THEN Job Offer=Yes}.
+\]
+Sau lọc còn:
+\[
+p_0=2,\quad n_0=2.
+\]
+
+\subsubsection*{c) Vòng lặp 2}
+
+Trên tập đã lọc, literal tốt nhất là \(\text{CGPA}<8\) với gain \(=1.0000\).
+\[
+R_1:\ \text{IF Interactiveness=Yes AND CGPA}<8\ \text{THEN Job Offer=Yes}.
+\]
+Luật này đã loại hết mẫu âm trong tập hiện tại của \(R_1\), nên kết thúc \(R_1\).
+
+\subsubsection*{d) Lặp để cover các mẫu dương còn lại}
+
+Còn 1 mẫu dương chưa cover, FOIL sinh tiếp:
+\[
+R_2:\ \text{IF CGPA}>9\ \text{AND Practical Knowledge=Good THEN Job Offer=Yes}.
+\]
+
+\subsubsection*{e) Tập luật IF--THEN cuối cùng (FOIL)}
+\[
+\begin{aligned}
+R_1&:\ \text{IF Interactiveness=Yes AND CGPA}<8\ \text{THEN Job Offer=Yes},\\
+R_2&:\ \text{IF CGPA}>9\ \text{AND Practical Knowledge=Good THEN Job Offer=Yes}.
+\end{aligned}
+\]
+
+Khi dự đoán nhị phân, có thể dùng \textbf{default rule}: nếu không khớp luật nào ở trên
+thì gán \(\text{Job Offer}=\text{No}\).
+\section*{Bài tập 06 --- Rule-based learning}
+
+Dữ liệu PRISM dùng **7 mẫu (ID 4--10)** như tài liệu (trang 2). Mỗi lần PRISM tính
+\[
+\text{Accuracy}(c \mid a_i)=\frac{\#\text{(thỏa }a_i\text{ và thuộc lớp }c)}{\#\text{(thỏa }a_i)}
+\]
+trên tập \(U\) hiện tại; chọn cặp có accuracy **cao nhất**, hòa thì chọn cặp **phủ nhiều mẫu hơn**. Sau mỗi luật hoàn chỉnh, **loại khỏi \(U\)** mọi mẫu thỏa luật đó rồi học luật kế tiếp cho cùng lớp.
+
+Với \(T\) toàn tập (\(|T|=7\)):
+\[
+\text{Coverage}(R)=\frac{\#\text{(antecedent)}}{|T|},\qquad
+\text{Accuracy}(R)=\frac{\#\text{(antecedent }\land\text{ consequent)}}{\#\text{(antecedent)}}.
+\]
+
+%--------------------------------------------------------------------
+\subsection*{PRISM --- lớp Result = Pass}
+
+\textbf{Bước 1} trên \(U=T\): cặp tốt nhất là \textbf{Feature 1 = Good} (accuracy \(1\), phủ \(3\) mẫu, ID 5,\,7,\,10). Luật đã tinh khiết \textbf{chỉ Pass} --- dừng mở rộng luật này.
+
+Loại ba mẫu khỏi \(U\). Trên \(U\) còn lại, \textbf{một} mẫu Pass duy nhất (ID 6).
+
+\textbf{Bước 1} trên \(U\) mới: các cặp có accuracy \(0{,}5\) với độ phủ \(2\) (Feature 1 = Average; Feature 3 = Yes; Feature 4 = Good). Theo quy ước sắp khi hòa, chọn \textbf{Feature 1 = Average}.
+
+Thu hẹp tập xét còn ID 6 và 9; cần bỏ các ca Fail. \textbf{Bước 2}: \textbf{Feature 3 = Yes} cho accuracy \(1\) trên nhánh này (chỉ ID 6).
+
+\medskip
+\noindent\textbf{Luật Pass:}
+\begin{itemize}\setlength\itemsep{0pt}
+  \item \textbf{R1:} IF Feature 1 = Good THEN Result = Pass.
+  \item \textbf{R2:} IF Feature 1 = Average AND Feature 3 = Yes THEN Result = Pass.
+\end{itemize}
+
+%--------------------------------------------------------------------
+\subsection*{PRISM --- lớp Result = Fail}
+
+\textbf{Vòng 1} trên \(U=T\): \textbf{Feature 1 = Poor} và \textbf{Feature 4 = Poor} đều có accuracy \(1\) và cùng phủ **hai** mẫu; theo thứ tự tên thuộc tính (tie-break) chọn \textbf{Feature 1 = Poor} trước.
+
+Loại 4,\,8. Trên \(U=\{5,6,7,9,10\}\), chỉ còn Fail ở ID 9.
+
+\textbf{Vòng 2}: \textbf{Feature 4 = Poor} có accuracy \(1\) (chỉ ID 9 trong \(U\)).
+
+\medskip
+\noindent\textbf{Luật Fail:}
+\begin{itemize}\setlength\itemsep{0pt}
+  \item \textbf{R1:} IF Feature 1 = Poor THEN Result = Fail.
+  \item \textbf{R2:} IF Feature 4 = Poor THEN Result = Fail.
+\end{itemize}
+
+%--------------------------------------------------------------------
+\subsection*{PRISM --- Coverage \& Accuracy (trên $|T|=7$)}
+
+\begin{center}
+\begin{tabular}{@{}lcc@{}}\toprule
+Luật & Coverage & Accuracy \\\midrule
+Pass R1 (Good) & $3/7\approx 0{,}4286$ & $1$ \\
+Pass R2 (Average $\land$ Att3=Yes) & $1/7\approx 0{,}1429$ & $1$ \\
+Fail R1 (Poor F1) & $2/7\approx 0{,}2857$ & $1$ \\
+Fail R2 (Poor F4) & $2/7\approx 0{,}2857$ & $1$ \\\bottomrule
+\end{tabular}
+\end{center}
+
+(Fail R2 trên toàn \(T\) phủ ID 4 và 9 vì cả hai có Feature 4 = Poor.)
+
+%--------------------------------------------------------------------
+\subsection*{(e) Xung đột luật}
+
+Một mẫu có thể thỏa **nhiều** luật cùng lúc (ví dụ ID 4: Fail theo R1 \emph{và} thỏa antecedent của R2 Fail). Cách xử lý thường dùng: \textbf{thứ tự ưu tiên} các luật (list có thứ tự), \textbf{bảng ưu tiên} chọn luật ``đặc biệt'' hơn, hoặc \textbf{sắp theo Accuracy/Coverage} trước khi áp luật đầu tiên khớp.
+
+%--------------------------------------------------------------------
+\subsection*{(f) Câu hỏi mở rộng (ý ngắn)}
+
+\textbf{PRISM thiên hướng rule-oriented} (từng luật tối ưu accuracy cục bộ) chứ không xây một cây toàn cục. \textbf{Khác ID3:} ID3 chia đệ quy toàn không gian; PRISM bọc tuần tự (sequential covering) từng lớp, mỗi luật ``gặm'' một phần dữ liệu rồi loại đi. PRISM thuộc họ \textbf{sequential covering} vì luật sau chỉ học trên phần còn lại sau khi các luật trước đã cover.
+
+%--------------------------------------------------------------------
+\subsection*{FOIL --- học luật Job Offer = Yes}
+
+\(P=2\) (ID 1,\,2), \(N=3\). Luật rỗng: \(p_0=2,\ n_0=3\).
+
+\[
+\mathrm{FOIL\text{-}Gain}=p_1\Bigl[\log_2\frac{p_1}{p_1+n_1}-\log_2\frac{p_0}{p_0+n_0}\Bigr].
+\]
+
+\textbf{Vòng 1:} literal có gain lớn nhất là \textbf{Interactiveness = Yes} và \textbf{Practical = Good} (đều \(p_1=2,\ n_1=2\), gain \(\approx 0{,}644\)); chọn \textbf{Interactiveness = Yes} (thứ tự bảng đề ưu tiên trước khi Practical Good).
+
+Sau bước một: \(p_0=n_0=2\) trên tập thỏa \emph{Yes} (ID 1,\,2,\,3,\,5).
+
+\textbf{Vòng 2:} \textbf{CGPA $<8$} có \(p_1=1,\ n_1=0\), gain \(=1{,}0\). Luật 1: \textbf{IF Interactiveness = Yes AND CGPA $<8$ THEN Job Offer = Yes} (chỉ ID 2).
+
+Loại ID 2 khỏi tập dương; còn ID 1. Trên \(\{1,3,4,5\}\): \(p_0=1,\ n_0=3\).
+
+\textbf{Luật 2 vòng 1:} \textbf{CGPA \(\ge 9\)} (gain \(=1{,}0\)). Sau đó \textbf{vòng 2: Practical = Good} thu còn ID 1 thuần dương.
+
+\medskip
+\noindent\textbf{Tập luật Yes:}
+\begin{itemize}\setlength\itemsep{0pt}
+  \item IF Interactiveness = Yes AND CGPA $<8$ THEN Job Offer = Yes.
+  \item IF CGPA $\ge 9$ AND Practical Knowledge = Good THEN Job Offer = Yes.
+\end{itemize}
