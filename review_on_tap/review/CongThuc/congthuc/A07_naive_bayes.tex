@@ -1,25 +1,62 @@
 \subsection*{A.8. Naive Bayes \& Laplace (§4.5, Bài tập 04)}
-\[
-\tilde P(c\mid\mathbf v)\propto P(c)\prod_j P(v_j\mid c)\quad\text{(so sánh bằng }\log\text{).}
-\]
 
-\textbf{Tiên nghiệm} (\(\alpha{=}1\)):
+\textbf{Posterior Naive Bayes:}
+\[
+\tilde P(c\mid\mathbf v)\propto P(c)\prod_j P(v_j\mid c).
+\]
+\ynghia{Phân lớp bằng quy tắc Bayes với giả định độc lập có điều kiện: xác suất hậu nghiệm tỉ lệ với tiên nghiệm nhân các likelihood từng đặc trưng; so sánh bằng log để tránh underflow.}
+\kyhieubatdau
+  \kh{c}{lớp (class)}
+  \kh{\mathbf v}{vector giá trị đặc trưng của mẫu}
+  \kh{v_j}{giá trị đặc trưng thứ \(j\)}
+  \kh{P(c)}{xác suất tiên nghiệm lớp \(c\)}
+  \kh{P(v_j\mid c)}{likelihood: \(P(\text{đặc trưng } j \mid c)\)}
+  \kh{\propto}{tỉ lệ (bỏ hằng số chuẩn hoá)}
+\kyhieuketthuc
+
+\textbf{Tiên nghiệm Laplace} (\(\alpha{=}1\)):
 \[
 P(c)=\frac{n_c+\alpha}{n+\alpha|\mathcal C|}.
 \]
+\ynghia{Ước lượng \(P(c)\) có smoothing Laplace (\(\alpha=1\)): tránh xác suất 0 khi lớp hiếm gặp trong train.}
+\kyhieubatdau
+  \kh{n_c}{số mẫu lớp \(c\)}
+  \kh{n}{tổng số mẫu}
+  \kh{\alpha}{tham số smoothing (Laplace: \(\alpha=1\))}
+  \kh{|\mathcal C|}{số lớp}
+\kyhieuketthuc
 
 \textbf{Rời rạc} (\(V\) giá trị khả dụng):
 \[
 P(v\mid c)=\frac{n_{v,c}+1}{n_c+V}.
 \]
+\ynghia{Likelihood đặc trưng rời rạc với Laplace +1: \(n_{v,c}\) là số lần giá trị \(v\) xuất hiện trong lớp \(c\).}
+\kyhieubatdau
+  \kh{v}{một giá trị cụ thể của đặc trưng}
+  \kh{n_{v,c}}{số mẫu lớp \(c\) có giá trị \(v\)}
+  \kh{V}{số giá trị khả dụng của đặc trưng (vocabulary size)}
+\kyhieuketthuc
 
 \textbf{Gaussian} (một chiều, lớp \(c\)):
 \[
-f(x\mid c)=\frac1{\sqrt{2\pi}\,s_c}\exp\Bigl(-\frac{(x-\mu_c)^2}{2s_c^2}\Bigr),
+f(x\mid c)=\frac1{\sqrt{2\pi}\,s_c}\exp\Bigl(-\frac{(x-\mu_c)^2}{2s_c^2}\Bigr).
 \]
-\(\mu_c,s_c\) là trung bình và độ lệch chuẩn mẫu trên lớp \(c\).
+\ynghia{Likelihood đặc trưng liên tục theo phân phối chuẩn; \(\mu_c,s_c\) ước lượng bằng trung bình và độ lệch chuẩn mẫu trên lớp \(c\).}
+\kyhieubatdau
+  \kh{f(x\mid c)}{mật độ xác suất của \(x\) given lớp \(c\)}
+  \kh{\mu_c}{trung bình mẫu lớp \(c\)}
+  \kh{s_c}{độ lệch chuẩn mẫu lớp \(c\)}
+  \kh{x}{giá trị đặc trưng liên tục}
+\kyhieuketthuc
 
 \textbf{Multinomial (bag-of-words):}
 \[
 P(w_i\mid c)=\frac{N_{i,c}+1}{N_c^{\mathrm{tok}}+V}.
 \]
+\ynghia{Xác suất từ \(w_i\) trong lớp \(c\) với Laplace smoothing; dùng cho text (đếm tần suất từ).}
+\kyhieubatdau
+  \kh{w_i}{từ (token) thứ \(i\) trong từ điển}
+  \kh{N_{i,c}}{số lần \(w_i\) xuất hiện trong tài liệu lớp \(c\)}
+  \kh{N_c^{\mathrm{tok}}}{tổng số token lớp \(c\)}
+  \kh{V}{kích thước từ điển}
+\kyhieuketthuc

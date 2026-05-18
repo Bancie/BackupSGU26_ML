@@ -1,24 +1,95 @@
 \subsection*{A.1. Khái niệm cơ bản (Ch.\,1)}
-\begin{itemize}[nosep]
-  \item Batch / mini-batch / SGD: cập nhật tham số theo gradient ước lượng trên toàn tập / lô / một mẫu.
-  \item Regularization (lý thuyết chung): cộng penalty vào loss, ví dụ \(\lambda\lVert\theta\rVert_2^2\) (ridge) hoặc \(\lambda\lVert\theta\rVert_1\) (lasso).
-\end{itemize}
+
+\textbf{Batch / mini-batch / SGD.}
+\ynghia{Cập nhật tham số mô hình bằng gradient: Batch dùng toàn tập, mini-batch dùng một lô nhỏ, SGD dùng một mẫu --- trade-off giữa độ ổn định gradient và tốc độ/lưu bộ nhớ.}
+\kyhieubatdau
+  \kh{\theta}{vector tham số mô hình cần học}
+  \kh{\lambda}{hệ số regularization (cường độ phạt)}
+\kyhieuketthuc
+
+\textbf{Regularization (penalty ridge/lasso):}
+\[
+\lambda\lVert\theta\rVert_2^2 \quad\text{(ridge)}, \qquad \lambda\lVert\theta\rVert_1 \quad\text{(lasso)}.
+\]
+\ynghia{Cộng hình phạt vào hàm loss để giảm overfitting: ridge thu nhỏ đồng đều các hệ số (\(L_2\)), lasso khuyến khích một số hệ số về 0 (\(L_1\)).}
+\kyhieubatdau
+  \kh{\lambda}{hệ số điều chỉnh mức phạt; càng lớn mô hình càng ``đơn giản''}
+  \kh{\theta}{vector tham số}
+  \kh{\lVert\theta\rVert_2^2}{tổng bình phương các thành phần của \(\theta\)}
+  \kh{\lVert\theta\rVert_1}{tổng giá trị tuyệt đối các thành phần của \(\theta\)}
+\kyhieuketthuc
 
 \subsection*{A.2. Thống kê \& tiền xử lý (Ch.\,2, Bài tập 01--02)}
 Với danh sách giá trị đã sắp tăng có \(n\) phần tử (bỏ qua missing nếu đề yêu cầu tính trên ô có số).
 
-\begin{itemize}[nosep]
-  \item Trung bình: \(\displaystyle \bar x=\frac1n\sum_i x_i\).
-  \item Trung vị: \(n\) lẻ \(\Rightarrow\) phần tử vị trí \(\frac{n+1}2\) (1-based); \(n\) chẵn: trung bình hai phần tử giữa.
-  \item Mốt: giá trị có tần số cao nhất (có thể không có mốt nếu mọi tần bằng 1).
-  \item \(Q_1,Q_3\), \(\mathrm{IQR}=Q_3-Q_1\); Tukey: ngoại lai nhẹ nếu \(x>Q_3+1{,}5\,\mathrm{IQR}\) (hoặc tương tự phía dưới).
-\end{itemize}
+\kyhieubatdau
+  \kh{n}{số quan sát (phần tử) được xét}
+  \kh{x_i}{giá trị thứ \(i\) sau khi sắp tăng}
+\kyhieuketthuc
 
-\emph{Rời rạc hoá chia đều tần số} (\(k\) lớp): chia \(n\) quan sát đã sắp thành nhóm có số phần tử gần bằng nhau.
+\textbf{Trung bình:}
+\[
+\bar x=\frac1n\sum_i x_i.
+\]
+\ynghia{Đo vị trí trung tâm của dữ liệu --- giá trị đại diện ``cân bằng'' nếu cộng/trừ các lệch so với trung bình.}
+\kyhieubatdau
+  \kh{\bar x}{trung bình mẫu}
+  \kh{x_i}{giá trị quan sát thứ \(i\)}
+  \kh{n}{số quan sát}
+\kyhieuketthuc
 
-\emph{Thang khoảng:} \(W=aV+b\) với \(a>0\) trên các mẫu được xét.
+\textbf{Trung vị.}
+\ynghia{Giá trị ở giữa khi sắp thứ tự; ít bị ảnh hưởng bởi ngoại lai hơn trung bình.}
+\kyhieubatdau
+  \kh{n}{số phần tử}
+  \kh{\frac{n+1}{2}}{vị trí phần tử giữa (đánh số 1-based) khi \(n\) lẻ}
+\kyhieuketthuc
 
-\emph{Min--Max} (fit trên tập huấn luyện, áp cho mẫu mới):
+\textbf{Mốt.}
+\ynghia{Giá trị xuất hiện nhiều nhất; phản ánh ``điểm đông'' nhất của phân phối rời rạc.}
+\kyhieubatdau
+  \kh{\text{tần số}}{số lần mỗi giá trị xuất hiện}
+\kyhieuketthuc
+
+\textbf{Quartile, IQR và quy tắc Tukey:}
+\[
+\mathrm{IQR}=Q_3-Q_1.
+\]
+\ynghia{\(Q_1,Q_3\) là quartile dưới/trên; IQR đo độ trải giữa 50\% dữ liệu trung tâm. Tukey gắn nhãn ngoại lai nhẹ nếu \(x>Q_3+1{,}5\,\mathrm{IQR}\) (hoặc tương tự phía dưới với \(Q_1\)).}
+\kyhieubatdau
+  \kh{Q_1}{quartile thứ nhất (25\%)}
+  \kh{Q_3}{quartile thứ ba (75\%)}
+  \kh{\mathrm{IQR}}{khoảng tứ phân vị}
+  \kh{x}{giá trị cần kiểm tra ngoại lai}
+\kyhieuketthuc
+
+\textbf{Rời rạc hoá chia đều tần số} (\(k\) lớp).
+\ynghia{Chia \(n\) quan sát đã sắp thành \(k\) nhóm có số phần tử gần bằng nhau --- dùng biến liên tục thành categorical cân bằng tần số.}
+\kyhieubatdau
+  \kh{k}{số lớp (bin) sau rời rạc hoá}
+  \kh{n}{tổng số quan sát}
+\kyhieuketthuc
+
+\textbf{Thang khoảng:}
+\[
+W=aV+b,\quad a>0.
+\]
+\ynghia{Biến đổi tuyến tính giữ thứ tự và khoảng cách tỉ lệ giữa các giá trị; \(a>0\) đảm bảo không đảo chiều.}
+\kyhieubatdau
+  \kh{V}{giá trị gốc}
+  \kh{W}{giá trị sau biến đổi}
+  \kh{a}{hệ số scale (\(a>0\))}
+  \kh{b}{hệ số dịch chuyển (offset)}
+\kyhieuketthuc
+
+\textbf{Min--Max} (fit trên tập huấn luyện, áp cho mẫu mới):
 \[
 x'=\frac{x-x_{\min}}{x_{\max}-x_{\min}}.
 \]
+\ynghia{Chuẩn hoá đặc trưng về khoảng \([0,1]\) theo min/max của tập huấn luyện; dùng cùng \(x_{\min},x_{\max}\) khi transform tập test.}
+\kyhieubatdau
+  \kh{x}{giá trị gốc của đặc trưng}
+  \kh{x'}{giá trị sau chuẩn hoá}
+  \kh{x_{\min}}{giá trị nhỏ nhất trên tập fit (train)}
+  \kh{x_{\max}}{giá trị lớn nhất trên tập fit (train)}
+\kyhieuketthuc

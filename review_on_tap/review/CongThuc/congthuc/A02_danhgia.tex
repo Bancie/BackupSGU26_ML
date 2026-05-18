@@ -1,6 +1,12 @@
 \subsection*{A.3. Đánh giá mô hình (Ch.\,3, Bài tập 01/08)}
 Confusion matrix: hàng = nhãn thực, cột = nhãn dự đoán.
 
+\kyhieubatdau
+  \kh{n}{tổng số mẫu}
+  \kh{\mathrm{TP}_k}{true positive lớp \(k\): thực và đoán đều là \(k\)}
+  \kh{\mathrm{TP},\mathrm{TN},\mathrm{FP},\mathrm{FN}}{true positive, true negative, false positive, false negative (nhị phân)}
+\kyhieuketthuc
+
 \paragraph{Đa lớp.}
 \begin{align*}
 \textit{accuracy} &= \frac{\sum_k \mathrm{TP}_k}{n},\\
@@ -8,6 +14,15 @@ Confusion matrix: hàng = nhãn thực, cột = nhãn dự đoán.
 \mathrm{Recall}_k=\frac{\mathrm{TP}_k}{\text{tổng hàng thực là } k},\\
 \mathrm{F1}_k &= \frac{2\,\mathrm{Precision}_k\,\mathrm{Recall}_k}{\mathrm{Precision}_k+\mathrm{Recall}_k}.
 \end{align*}
+\ynghia{Đo chất lượng phân lớp từng lớp và toàn cục: accuracy = tỉ lệ đoán đúng; precision = độ tin cậy khi đoán lớp \(k\); recall = tỉ lệ bắt được mẫu thực lớp \(k\); F1 = trung bình điều hoà precision và recall.}
+\kyhieubatdau
+  \kh{k}{chỉ số lớp}
+  \kh{\mathrm{TP}_k}{số mẫu thực và đoán đều thuộc lớp \(k\)}
+  \kh{n}{tổng số mẫu}
+  \kh{\mathrm{Precision}_k}{độ chính xác khi dự đoán lớp \(k\)}
+  \kh{\mathrm{Recall}_k}{độ bao phủ (sensitivity) lớp \(k\)}
+  \kh{\mathrm{F1}_k}{F1-score lớp \(k\)}
+\kyhieuketthuc
 
 \paragraph{Nhị phân (lớp dương).}
 \begin{align*}
@@ -18,20 +33,62 @@ Confusion matrix: hàng = nhãn thực, cột = nhãn dự đoán.
 \mathrm{F1}&=\frac{2\,\textit{precision}\,\textit{recall}}{\textit{precision}+\textit{recall}},\qquad
 \textit{prevalence}=\frac{\mathrm{TP}+\mathrm{FN}}{n}.
 \end{align*}
+\ynghia{Các metric chuẩn cho bài toán nhị phân: precision đo ``đoán dương đúng bao nhiêu''; recall (TPR) đo ``bắt được bao nhiêu dương thật''; specificity (TNR) đo ``bắt được bao nhiêu âm thật''; prevalence = tỉ lệ lớp dương trong tập.}
+\kyhieubatdau
+  \kh{\mathrm{TP}}{dương thật, đoán dương}
+  \kh{\mathrm{TN}}{âm thật, đoán âm}
+  \kh{\mathrm{FP}}{âm thật, đoán dương (false alarm)}
+  \kh{\mathrm{FN}}{dương thật, đoán âm (bỏ sót)}
+  \kh{\mathrm{TPR}}{true positive rate = recall}
+  \kh{\mathrm{TNR}}{true negative rate = specificity}
+  \kh{\textit{prevalence}}{tỉ lệ mẫu thuộc lớp dương thực tế}
+\kyhieuketthuc
 
 \paragraph{Hồi quy (Bài tập 08).}
-Phần dư: \(e_i=y_i-\hat y_i\) (hoặc quy ước đề có thể dùng \(\hat y_i-y_i\)).
+Phần dư:
+\[
+e_i=y_i-\hat y_i.
+\]
+\ynghia{Sai số dự báo tại mẫu \(i\); dùng làm cơ sở cho các metric hồi quy (quy ước đề có thể đảo dấu).}
+\kyhieubatdau
+  \kh{y_i}{giá trị thực}
+  \kh{\hat y_i}{giá trị dự báo}
+  \kh{e_i}{phần dư (residual)}
+\kyhieuketthuc
+
 \[
 SSE=\sum_i e_i^2,\quad
 MAE=\frac1n\sum_i|e_i|,\quad
 MSE=\frac1n\sum_i e_i^2,\quad
 RMSE=\sqrt{MSE}.
 \]
-RelMSE trên tập kiểm tra (mẫu số dùng \(\bar y\) huấn luyện theo đề):
+\ynghia{Đo độ lớn sai số: SSE/MSE/RMSE nhạy với lỗi lớn (bình phương); MAE trung bình trị tuyệt đối, robust hơn với ngoại lai.}
+\kyhieubatdau
+  \kh{SSE}{sum of squared errors --- tổng bình phương phần dư}
+  \kh{MAE}{mean absolute error}
+  \kh{MSE}{mean squared error}
+  \kh{RMSE}{căn bậc hai của MSE, cùng đơn vị với \(y\)}
+  \kh{n}{số mẫu}
+\kyhieuketthuc
+
+RelMSE và CV (tập kiểm tra):
 \[
 \mathrm{RelMSE}=\frac{\sum_i(y_i-\hat y_i)^2}{\sum_i(y_i-\bar y_{\mathrm{train}})^2},\qquad
 CV=\frac{RMSE}{\bar y_{\mathrm{train}}}.
 \]
+\ynghia{RelMSE so sánh SSE với baseline dự đoán hằng \(\bar y_{\mathrm{train}}\) (càng nhỏ càng tốt, \(<1\) tốt hơn baseline). CV (coefficient of variation) chuẩn hoá RMSE theo mức trung bình của \(y\).}
+\kyhieubatdau
+  \kh{\bar y_{\mathrm{train}}}{trung bình \(y\) trên tập huấn luyện (mẫu số RelMSE theo đề)}
+  \kh{RMSE}{root mean squared error trên tập đang đánh giá}
+\kyhieuketthuc
+
 \[
 R^2=1-\frac{SSE}{SST},\quad SST=\sum_i(y_i-\bar y)^2.
 \]
+\ynghia{Hệ số xác định: phần trăm biến thiên của \(y\) được mô hình giải thích so với baseline trung bình; \(R^2=1\) hoàn hảo, \(R^2=0\) ngang baseline.}
+\kyhieubatdau
+  \kh{R^2}{coefficient of determination}
+  \kh{SSE}{tổng bình phương phần dư của mô hình}
+  \kh{SST}{total sum of squares --- tổng bình phương lệch so với \(\bar y\)}
+  \kh{\bar y}{trung bình \(y\) trên tập đang tính}
+\kyhieuketthuc

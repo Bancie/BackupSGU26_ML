@@ -1,23 +1,65 @@
 \subsection*{A.7. Similarity-based learning (§4.4, Bài tập 05)}
+
 \textbf{Euclidean:}
 \[
 d(\mathbf{x},\mathbf{q})=\sqrt{\sum_\ell(x_\ell-q_\ell)^2}.
 \]
+\ynghia{Khoảng cách ``đường chim bay'' giữa hai vector trong không gian đặc trưng; càng nhỏ càng giống nhau.}
+\kyhieubatdau
+  \kh{\mathbf{x},\mathbf{q}}{vector đặc trưng của hai điểm}
+  \kh{x_\ell,q_\ell}{thành phần thứ \(\ell\)}
+  \kh{d(\mathbf{x},\mathbf{q})}{khoảng cách Euclidean}
+\kyhieuketthuc
 
-\textbf{Hamming} (nhị phân): \(\sum_i|u_i-v_i|\).
+\textbf{Hamming} (nhị phân):
+\[
+\sum_i|u_i-v_i|.
+\]
+\ynghia{Đếm số vị trí bit/đặc trưng nhị phân khác nhau; dùng khi dữ liệu 0/1.}
+\kyhieubatdau
+  \kh{u_i,v_i}{giá trị nhị phân tại vị trí \(i\) của hai vector}
+\kyhieuketthuc
 
-\textbf{k-NN:} \(K\) láng giềng gần nhất \(\Rightarrow\) bỏ phiếu đa số.
+\textbf{k-NN.}
+\ynghia{Tìm \(K\) láng giềng gần nhất (theo metric), gán nhãn bằng bỏ phiếu đa số (phân lớp) hoặc trung bình/trung vị nhãn (hồi quy).}
+\kyhieubatdau
+  \kh{K}{số láng giềng gần nhất}
+\kyhieuketthuc
 
-\textbf{Weighted k-NN:} trọng số \(w_i\propto 1/d_i\) (hoặc kernel); chọn lớp có tổng trọng số lớn nhất.
+\textbf{Weighted k-NN.}
+\ynghia{Láng giềng gần hơn có trọng số lớn hơn (vd.\ \(w_i\propto 1/d_i\)); chọn lớp có tổng trọng số cao nhất.}
+\kyhieubatdau
+  \kh{w_i}{trọng số láng giềng \(i\)}
+  \kh{d_i}{khoảng cách tới láng giềng \(i\)}
+\kyhieuketthuc
 
 \textbf{Nearest centroid:}
 \[
 \boldsymbol\mu_c=\frac1{|S_c|}\sum_{x\in S_c}x,\qquad
 \hat c=\arg\min_c d(\mathbf{x},\boldsymbol\mu_c).
 \]
+\ynghia{Tính tâm (trung bình) từng lớp, gán mẫu mới vào lớp có tâm gần nhất --- phân loại tuyến tính đơn giản.}
+\kyhieubatdau
+  \kh{\boldsymbol\mu_c}{centroid (tâm) lớp \(c\)}
+  \kh{S_c}{tập mẫu thuộc lớp \(c\)}
+  \kh{|S_c|}{số mẫu lớp \(c\)}
+  \kh{\hat c}{lớp dự đoán}
+  \kh{\mathbf{x}}{mẫu cần phân loại}
+\kyhieuketthuc
 
 \textbf{LWR (Locally Weighted Regression):}
 \[
 h(x)=\frac{\sum_i K(x,x_i)\,y_i}{\sum_i K(x,x_i)},
 \]
-với kernel Gaussian \(K(x,x_i)=\exp\bigl(-\|x-x_i\|^2/(2\tau^2)\bigr)\) (theo quy ước đề).
+với kernel Gaussian:
+\[
+K(x,x_i)=\exp\Bigl(-\frac{\|x-x_i\|^2}{2\tau^2}\Bigr).
+\]
+\ynghia{Hồi quy cục bộ: dự báo tại \(x\) là trung bình có trọng số các \(y_i\) gần \(x\); kernel Gaussian giảm trọng số theo khoảng cách.}
+\kyhieubatdau
+  \kh{h(x)}{giá trị dự báo tại điểm \(x\)}
+  \kh{K(x,x_i)}{trọng số kernel giữa \(x\) và mẫu huấn luyện \(x_i\)}
+  \kh{y_i}{nhãn/thực tại mẫu \(i\)}
+  \kh{\tau}{bandwidth --- độ rộng kernel (càng lớn càng ``mượt'')}
+  \kh{\|x-x_i\|^2}{bình phương khoảng cách Euclidean}
+\kyhieuketthuc

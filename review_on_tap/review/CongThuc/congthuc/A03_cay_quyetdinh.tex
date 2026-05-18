@@ -1,26 +1,59 @@
 \subsection*{A.4. Cây quyết định (§4.1, Bài tập 03)}
-\(p_c=n_c/N\) trong nút có \(N\) mẫu; \(\log\) là \(\log_2\) trừ khi đề chỉ định khác.
+
+\kyhieubatdau
+  \kh{S}{tập mẫu tại nút hiện tại}
+  \kh{N}{số mẫu trong nút}
+  \kh{n_c}{số mẫu thuộc lớp \(c\) trong nút}
+  \kh{p_c}{tỉ lệ lớp \(c\): \(p_c=n_c/N\)}
+  \kh{A}{thuộc tính (feature) dùng để tách}
+  \kh{v}{giá trị nhánh của \(A\)}
+  \kh{S_v}{tập con của \(S\) có \(A=v\)}
+  \kh{\log}{logarit cơ số 2 (\(\log_2\)) trừ khi đề chỉ định khác}
+\kyhieuketthuc
 
 \textbf{Entropy:}
 \[
 H(S)=-\sum_c p_c\log p_c.
 \]
+\ynghia{Đo độ ``hỗn loạn'' / không chắc chắn của phân phối lớp trong nút; \(H=0\) khi nút thuần một lớp, càng lớn càng hỗn hợp.}
+\kyhieubatdau
+  \kh{H(S)}{entropy của tập \(S\)}
+  \kh{p_c}{xác suất (tỉ lệ) lớp \(c\) trong nút}
+  \kh{c}{chỉ số lớp}
+\kyhieuketthuc
 
 \textbf{Information Gain (ID3/C4.5, tách đa nhánh):}
 \[
 H_{\text{after}}(A)=\sum_v \frac{|S_v|}{|S|}\,H(S_v),\qquad
 \mathrm{Gain}(S,A)=H(S)-H_{\text{after}}(A).
 \]
+\ynghia{Sau khi tách theo \(A\), entropy trung bình có trọng số là \(H_{\text{after}}\). Gain = mức giảm entropy; chọn thuộc tính có Gain lớn nhất.}
+\kyhieubatdau
+  \kh{H_{\text{after}}(A)}{entropy trung bình sau tách theo \(A\)}
+  \kh{\mathrm{Gain}(S,A)}{information gain khi dùng thuộc tính \(A\)}
+  \kh{|S_v|}{số mẫu trong nhánh \(v\)}
+  \kh{|S|}{tổng số mẫu tại nút}
+\kyhieuketthuc
 
 \textbf{Gini:}
 \[
 i(S)=1-\sum_c p_c^2,\qquad
 G_{\text{after}}(A)=\sum_v \frac{|S_v|}{|S|}\,i(S_v).
 \]
-Chọn \(\arg\min_A G_{\text{after}}(A)\).
+\ynghia{Chỉ số Gini đo ``tạp chất'' (impurity); \(i=0\) khi nút thuần. CART chọn thuộc tính/nhánh có \(G_{\text{after}}\) nhỏ nhất (\(\arg\min_A G_{\text{after}}(A)\)).}
+\kyhieubatdau
+  \kh{i(S)}{chỉ số Gini tại nút \(S\)}
+  \kh{G_{\text{after}}(A)}{Gini trung bình có trọng số sau tách theo \(A\)}
+\kyhieuketthuc
 
 \textbf{Lỗi phân loại có trọng số:}
 \[
 \mathrm{mis}(S)=1-\max_c\frac{n_c}{N},\qquad
 \mathrm{Err}_{\text{after}}(A)=\sum_v \frac{|S_v|}{|S|}\,\mathrm{mis}(S_v).
 \]
+\ynghia{Lỗi phân loại nếu gán tất cả mẫu trong nút vào lớp đa số; \(\mathrm{Err}_{\text{after}}\) là lỗi trung bình sau tách --- chọn tách làm giảm lỗi này.}
+\kyhieubatdau
+  \kh{\mathrm{mis}(S)}{classification error tại nút \(S\)}
+  \kh{\mathrm{Err}_{\text{after}}(A)}{lỗi trung bình sau tách theo \(A\)}
+  \kh{\max_c n_c/N}{tỉ lệ lớp chiếm đa số}
+\kyhieuketthuc

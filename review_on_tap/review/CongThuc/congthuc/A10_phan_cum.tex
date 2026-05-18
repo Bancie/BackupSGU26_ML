@@ -1,13 +1,41 @@
 \subsection*{A.11. Phân cụm (Ch.\,5)}
-\textbf{K-means:}
-\begin{enumerate}[label=(\arabic*), nosep]
-\item Gán: \(x\to\arg\min_j d(x,c_j)\).
-\item Cập nhật: \(c_j\leftarrow\mathrm{mean}\{x:x\text{ thuộc cụm }j\}\).
-\end{enumerate}
-Dừng khi gán hoặc tâm không đổi. Tie-break khoảng cách bằng nhau: quy ước trước (vd. cụm chỉ số nhỏ hơn).
+
+\textbf{K-means --- bước gán:}
+\[
+x\to\arg\min_j d(x,c_j).
+\]
+\ynghia{Gán mỗi điểm \(x\) vào cụm có tâm \(c_j\) gần nhất theo metric \(d\) (thường Euclidean).}
+\kyhieubatdau
+  \kh{x}{điểm dữ liệu}
+  \kh{c_j}{tâm cụm \(j\)}
+  \kh{d(x,c_j)}{khoảng cách từ \(x\) tới tâm cụm \(j\)}
+  \kh{j}{chỉ số cụm}
+  \kh{\arg\min_j}{chọn \(j\) làm cụm có khoảng cách nhỏ nhất}
+\kyhieuketthuc
+
+\textbf{K-means --- bước cập nhật:}
+\[
+c_j\leftarrow\mathrm{mean}\{x:x\text{ thuộc cụm }j\}.
+\]
+\ynghia{Cập nhật tâm mỗi cụm bằng trung bình các điểm đã gán vào cụm đó; lặp gán--cập nhật đến khi hội tụ.}
+\kyhieubatdau
+  \kh{c_j}{tâm cụm \(j\) mới}
+  \kh{\mathrm{mean}\{\cdot\}}{trung bình vector của các điểm trong cụm}
+\kyhieuketthuc
+
+\ynghia{Dừng khi phân gán hoặc tâm không đổi. Tie-break khoảng cách bằng nhau: quy ước trước (vd.\ chọn cụm chỉ số nhỏ hơn).}
 
 \textbf{Single linkage:}
 \[
 d_{\mathrm{single}}(U,V)=\min_{u\in U,v\in V} d(u,v).
 \]
-Ghép cặp có khoảng cách nhỏ nhất; độ cao trên dendrogram = khoảng cách bước hợp nhất.
+\ynghia{Khoảng cách giữa hai cụm trong phân cấp (hierarchical clustering): bằng khoảng cách nhỏ nhất giữa một cặp điểm thuộc hai cụm; ghép cặm có \(d_{\mathrm{single}}\) nhỏ nhất ở mỗi bước.}
+\kyhieubatdau
+  \kh{U,V}{hai tập/cụm điểm}
+  \kh{u,v}{điểm thuộc \(U\) và \(V\)}
+  \kh{d(u,v)}{khoảng cách giữa hai điểm}
+  \kh{d_{\mathrm{single}}(U,V)}{single linkage distance giữa \(U\) và \(V\)}
+  \kh{\min}{khoảng cách nhỏ nhất trong các cặp cross-cluster}
+\kyhieuketthuc
+
+\ynghia{Độ cao trên dendrogram tại bước hợp nhất bằng khoảng cách \(d_{\mathrm{single}}\) của cặp được ghép.}

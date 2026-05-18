@@ -1,31 +1,98 @@
 \subsection*{A.5. Hồi quy, OLS, GD \& regularization (Bài tập 07--08, §4.2)}
-Mô hình tuyến tính: \(\hat y_i=\beta_0+\beta_1 x_i\) hoặc \(\hat{\mathbf{y}}=\mathbf{X}\boldsymbol{\beta}\).
+
+Mô hình tuyến tính:
+\[
+\hat y_i=\beta_0+\beta_1 x_i, \qquad \hat{\mathbf{y}}=\mathbf{X}\boldsymbol{\beta}.
+\]
+\ynghia{Dự báo \(y\) bằng tổ hợp tuyến tính của đặc trưng; \(\beta_0\) là hệ số chặn (intercept), \(\beta_1\) là độ dốc (một biến) hoặc vector hệ số (đa biến).}
+\kyhieubatdau
+  \kh{\hat y_i}{giá trị dự báo mẫu \(i\)}
+  \kh{\beta_0}{intercept}
+  \kh{\beta_1}{hệ số góc (một biến)}
+  \kh{\mathbf{X}}{ma trận thiết kế (\(n\times p\))}
+  \kh{\boldsymbol{\beta}}{vector hệ số}
+  \kh{\hat{\mathbf{y}}}{vector dự báo}
+\kyhieuketthuc
 
 \textbf{OLS một biến (Bài tập 07):}
 \[
-SS_{xy}=\sum_i(x_i-\bar x)(y_i-\bar y),\quad SS_x=\sum_i(x_i-\bar x)^2,\qquad
+SS_{xy}=\sum_i(x_i-\bar x)(y_i-\bar y),\quad SS_x=\sum_i(x_i-\bar x)^2,
+\]
+\[
 \hat\beta_1=\frac{SS_{xy}}{SS_x},\quad \hat\beta_0=\bar y-\hat\beta_1\bar x.
 \]
+\ynghia{Ước lượng hệ số hồi quy tuyến tính bình phương tối thiểu (OLS) khi có một biến giải thích: \(\hat\beta_1\) là độ dốc, \(\hat\beta_0\) đi qua điểm \((\bar x,\bar y)\).}
+\kyhieubatdau
+  \kh{SS_{xy}}{tổng tích hiệu hiệu giữa \(x\) và \(y\) (độ lệch so với trung bình)}
+  \kh{SS_x}{tổng bình phương độ lệch của \(x\)}
+  \kh{\bar x,\bar y}{trung bình mẫu của \(x\) và \(y\)}
+  \kh{\hat\beta_1}{hệ số góc ước lượng}
+  \kh{\hat\beta_0}{intercept ước lượng}
+\kyhieuketthuc
 
 \textbf{Phương trình chuẩn ma trận:}
 \[
 \hat{\boldsymbol\beta}=(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{Y}.
 \]
+\ynghia{Nghiệm OLS dạng đóng cho hồi quy đa biến: vector hệ số tối thiểu hoá tổng bình phương phần dư.}
+\kyhieubatdau
+  \kh{\hat{\boldsymbol\beta}}{vector hệ số OLS}
+  \kh{\mathbf{X}^\top\mathbf{X}}{ma trận Gram}
+  \kh{\mathbf{Y}}{vector nhãn/thực \(y\)}
+\kyhieuketthuc
 
-\textbf{Hồi quy đa thức:} tạo cột \(x,x^2,\ldots\) rồi OLS như trên.
+\textbf{Hồi quy đa thức.}
+\ynghia{Mở rộng OLS bằng cách thêm cột \(x,x^2,\ldots\) vào \(\mathbf{X}\), rồi áp dụng công thức ma trận như trên.}
+\kyhieubatdau
+  \kh{x,x^2,\ldots}{các lũy thừa của biến gốc làm đặc trưng mới}
+\kyhieuketthuc
 
 \textbf{Batch GD (MSE, hệ số \(1/(2m)\) trong lời giải §4.2):}
 \[
-J=\frac1{2m}\sum_i(y_i-\hat y_i)^2,\quad
+J=\frac1{2m}\sum_i(y_i-\hat y_i)^2,
+\]
+\[
 \frac{\partial J}{\partial w}=-\frac1m\sum_i(y_i-\hat y_i)x_i,\quad
 \frac{\partial J}{\partial b}=-\frac1m\sum_i(y_i-\hat y_i),
 \]
 \[
 w\leftarrow w-\eta\frac{\partial J}{\partial w},\quad b\leftarrow b-\eta\frac{\partial J}{\partial b}.
 \]
+\ynghia{Học tham số bằng gradient descent trên MSE: cập nhật \(w,b\) theo hướng ngược gradient với tốc độ học \(\eta\).}
+\kyhieubatdau
+  \kh{J}{hàm loss (MSE có hệ số \(1/2m\))}
+  \kh{m}{số mẫu huấn luyện}
+  \kh{w,b}{trọng số và bias (một biến: \(w\) thay \(\beta_1\), \(b\) thay \(\beta_0\))}
+  \kh{\eta}{learning rate --- bước cập nhật}
+  \kh{\hat y_i}{dự báo \(w x_i + b\)}
+\kyhieuketthuc
 
-\textbf{Ridge:} \(\mathrm{Loss}=SSE+\lambda\sum_j a_j^2\).
+\textbf{Ridge:}
+\[
+\mathrm{Loss}=SSE+\lambda\sum_j a_j^2.
+\]
+\ynghia{Phạt \(L_2\) trên hệ số để giảm overfitting; thu nhỏ các \(a_j\) về 0 nhưng hiếm khi đúng bằng 0.}
+\kyhieubatdau
+  \kh{SSE}{sum of squared errors}
+  \kh{\lambda}{hệ số regularization}
+  \kh{a_j}{hệ số thứ \(j\) của mô hình}
+\kyhieuketthuc
 
-\textbf{Lasso:} \(\mathrm{Loss}=SSE+\lambda\sum_j|a_j|\).
+\textbf{Lasso:}
+\[
+\mathrm{Loss}=SSE+\lambda\sum_j|a_j|.
+\]
+\ynghia{Phạt \(L_1\); có thể đẩy một số hệ số về đúng 0 --- chọn đặc trưng tự động.}
+\kyhieubatdau
+  \kh{|a_j|}{giá trị tuyệt đối hệ số \(j\)}
+\kyhieuketthuc
 
-\textbf{Elastic Net:} \(\mathrm{Loss}=SSE+\lambda_1\sum_j|a_j|+\lambda_2\sum_j a_j^2\).
+\textbf{Elastic Net:}
+\[
+\mathrm{Loss}=SSE+\lambda_1\sum_j|a_j|+\lambda_2\sum_j a_j^2.
+\]
+\ynghia{Kết hợp ridge và lasso: vừa thu nhỏ hệ số vừa có thể sparse; \(\lambda_1\) điều \(L_1\), \(\lambda_2\) điều \(L_2\).}
+\kyhieubatdau
+  \kh{\lambda_1}{hệ số phạt \(L_1\)}
+  \kh{\lambda_2}{hệ số phạt \(L_2\)}
+\kyhieuketthuc

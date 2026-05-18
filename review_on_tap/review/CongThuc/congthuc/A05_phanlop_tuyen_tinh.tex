@@ -1,33 +1,82 @@
 \subsection*{A.6. Phân lớp tuyến tính, Perceptron, logistic (§4.3, Bài tập 07--08)}
-Nhãn \(t\in\{-1,+1\}\) hoặc \(y\in\{0,1\}\).
+
+\kyhieubatdau
+  \kh{t}{nhãn Perceptron: \(t\in\{-1,+1\}\)}
+  \kh{y}{nhãn logistic: \(y\in\{0,1\}\)}
+  \kh{w}{vector trọng số}
+  \kh{b}{bias (hệ số chặn)}
+  \kh{x,x_k}{vector đặc trưng (mẫu \(k\))}
+  \kh{\rho}{tốc độ học / bước cập nhật}
+\kyhieuketthuc
 
 \textbf{Sign classifier:}
 \[
 \hat y=\mathrm{sign}(w^\top x+b),\qquad
 \mathrm{sign}(z)=\begin{cases}+1,& z\ge 0,\\-1,& z<0.\end{cases}
 \]
+\ynghia{Phân lớp tuyến tính: gán nhãn theo dấu của tích vô hướng \(w^\top x+b\) (siêu phẳng phân tách).}
+\kyhieubatdau
+  \kh{\hat y}{nhãn dự đoán \(\in\{-1,+1\}\)}
+  \kh{w^\top x+b}{điểm số tuyến tính (margin thô trước sign)}
+  \kh{\mathrm{sign}(z)}{hàm dấu}
+\kyhieuketthuc
 
-\textbf{PLA (Perceptron):} mẫu đúng khi \(t_k(w^\top x_k+b)>0\); cập nhật trên mẫu sai:
-\(w\leftarrow w+\rho\,t\,x\), \(b\leftarrow b+\rho\,t\).
+\textbf{PLA (Perceptron Learning Algorithm).}
+\ynghia{Lặp qua mẫu sai và cập nhật siêu phẳng: mẫu đúng khi \(t_k(w^\top x_k+b)>0\); nếu sai thì \(w\leftarrow w+\rho\,t\,x\), \(b\leftarrow b+\rho\,t\).}
+\kyhieubatdau
+  \kh{t_k}{nhãn mẫu \(k\)}
+  \kh{\rho}{learning rate}
+  \kh{t}{nhãn mẫu đang cập nhật (trong công thức update)}
+\kyhieuketthuc
 
 \textbf{Hinge trên tập sai \(\mathcal Y\):}
 \[
-J=\sum_{k\in\mathcal Y}(-t_k)(w^\top x_k+b),\quad
-\frac{\partial J}{\partial w}=\sum_{k\in\mathcal Y}(-t_k)x_k,\quad
-\frac{\partial J}{\partial b}=\sum_{k\in\mathcal Y}(-t_k),
+J=\sum_{k\in\mathcal Y}(-t_k)(w^\top x_k+b),
 \]
-GD batch: \(w\leftarrow w-\rho\,\partial J/\partial w\), \(b\leftarrow b-\rho\,\partial J/\partial b\).
+\[
+\frac{\partial J}{\partial w}=\sum_{k\in\mathcal Y}(-t_k)x_k,\quad
+\frac{\partial J}{\partial b}=\sum_{k\in\mathcal Y}(-t_k).
+\]
+\ynghia{Loss hinge tổng trên các mẫu bị phân loại sai (\(\mathcal Y\)); gradient batch dùng để cập nhật \(w,b\) theo hướng giảm \(J\).}
+\kyhieubatdau
+  \kh{\mathcal Y}{tập chỉ số mẫu phân loại sai}
+  \kh{J}{hinge loss tổng}
+  \kh{(-t_k)}{hệ số dấu trong gradient (kéo siêu phẳng về phía mẫu đúng)}
+\kyhieuketthuc
 
-\textbf{Logistic:}
+\textbf{Logistic --- hàm sigmoid và xác suất:}
 \[
 \sigma(z)=\frac1{1+e^{-z}},\qquad P(y{=}1\mid x)=\sigma(w^\top x+b).
 \]
+\ynghia{Ánh xạ điểm số tuyến tính \(z=w^\top x+b\) sang xác suất lớp dương trong \((0,1)\).}
+\kyhieubatdau
+  \kh{\sigma(z)}{hàm sigmoid}
+  \kh{z}{logit thô \(=w^\top x+b\)}
+  \kh{P(y{=}1\mid x)}{xác suất lớp dương}
+\kyhieuketthuc
+
+\textbf{Odds và logit:}
 \[
 \text{odds}=\frac{p}{1-p},\qquad \text{logit}=\ln(\text{odds}).
 \]
+\ynghia{Odds = tỉ số xác suất dương/âm; logit = logarit odds --- trong logistic regression, logit bằng \(w^\top x+b\).}
+\kyhieubatdau
+  \kh{p}{xác suất lớp dương \(P(y=1\mid x)\)}
+  \kh{\text{odds}}{tỉ số cược (odds ratio)}
+  \kh{\text{logit}}{logarit tự nhiên của odds}
+  \kh{\ln}{logarit tự nhiên}
+\kyhieuketthuc
 
-\textbf{Cross-entropy (một mẫu, \(y_i\in\{0,1\}\), \(z_i=\hat p_i\)):}
+\textbf{Cross-entropy (một mẫu):}
 \[
 L_i=-\bigl[y_i\ln z_i+(1-y_i)\ln(1-z_i)\bigr],\qquad
 J=\sum_i L_i\ \text{ hoặc trung bình }J/m.
 \]
+\ynghia{Loss cho phân lớp nhị phân: phạt mạnh khi dự đoán xác suất \(z_i\) lệch xa nhãn \(y_i\); \(J\) là tổng hoặc trung bình trên \(m\) mẫu.}
+\kyhieubatdau
+  \kh{y_i}{nhãn thực \(\in\{0,1\}\)}
+  \kh{z_i}{xác suất dự đoán \(\hat p_i=\sigma(w^\top x_i+b)\)}
+  \kh{L_i}{cross-entropy mẫu \(i\)}
+  \kh{J}{loss tổng hoặc trung bình}
+  \kh{m}{số mẫu}
+\kyhieuketthuc

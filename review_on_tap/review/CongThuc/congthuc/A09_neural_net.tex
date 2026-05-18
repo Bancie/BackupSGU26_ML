@@ -1,24 +1,77 @@
 \subsection*{A.10. Neural network (§4.6, Bài tập 09)}
-\textbf{Perceptron / hàm bước:} \(s=\sum w_j x_j+b\); \(\tau(s)=+1\) nếu \(s\ge 0\) else \(-1\).
 
-\textbf{MLP (ví dụ):} \(h=\mathrm{ReLU}(W^{(1)}x+b^{(1)})\), \(z=W^{(2)}h+b^{(2)}\), \(y=\mathrm{softmax}(z)\).
+\textbf{Perceptron / hàm bước:}
+\[
+s=\sum_j w_j x_j+b,\qquad \tau(s)=\begin{cases}+1,& s\ge 0,\\-1,& s<0.\end{cases}
+\]
+\ynghia{Neuron đơn: tính tổng có trọng số \(s\), rồi kích hoạt bằng hàm bước \(\tau\) cho phân lớp nhị phân.}
+\kyhieubatdau
+  \kh{s}{activation (tổng tích vô hướng trước hàm kích hoạt)}
+  \kh{w_j}{trọng số kết nối vào thành phần \(x_j\)}
+  \kh{x_j}{đầu vào thứ \(j\)}
+  \kh{b}{bias}
+  \kh{\tau(s)}{hàm bước (step function)}
+\kyhieuketthuc
+
+\textbf{MLP (ví dụ):}
+\[
+h=\mathrm{ReLU}(W^{(1)}x+b^{(1)}),\quad z=W^{(2)}h+b^{(2)},\quad y=\mathrm{softmax}(z).
+\]
+\ynghia{Mạng nhiều lớp: lớp ẩn ReLU, lớp ra softmax cho phân lớp đa lớp (vector xác suất).}
+\kyhieubatdau
+  \kh{W^{(1)},b^{(1)}}{trọng số và bias lớp 1}
+  \kh{h}{vector kích hoạt lớp ẩn}
+  \kh{W^{(2)},b^{(2)}}{trọng số và bias lớp ra}
+  \kh{z}{logit đầu ra (trước softmax)}
+  \kh{y}{vector xác suất lớp}
+  \kh{\mathrm{ReLU}}{max\((0,\cdot)\) --- Rectified Linear Unit}
+  \kh{\mathrm{softmax}}{chuẩn hoá exp thành phân phối xác suất}
+\kyhieuketthuc
 
 \textbf{CNN --- kích thước đầu ra conv:}
 \[
-H_{\mathrm{out}}=\Bigl\lfloor\frac{H+2P-K}{S}\Bigr\rfloor+1
+H_{\mathrm{out}}=\Bigl\lfloor\frac{H+2P-K}{S}\Bigr\rfloor+1.
 \]
-(tương tự chiều rộng). Conv \emph{valid}: không padding.
+\ynghia{Tính chiều cao feature map sau lớp convolution (tương tự cho chiều rộng \(W\)). Conv \emph{valid}: \(P=0\) (không padding).}
+\kyhieubatdau
+  \kh{H_{\mathrm{out}}}{chiều cao đầu ra}
+  \kh{H}{chiều cao đầu vào}
+  \kh{P}{padding (số pixel đệm mỗi cạnh)}
+  \kh{K}{kích thước kernel (filter) theo chiều tương ứng}
+  \kh{S}{stride --- bước trượt kernel}
+  \kh{\lfloor\cdot\rfloor}{lấy phần nguyên (floor)}
+\kyhieuketthuc
 
 \textbf{Tham số:}
 \[
 N_{\mathrm{Conv2D}}=(K_h K_w C_{\mathrm{in}}+1)\,C_{\mathrm{out}},\qquad
 N_{\mathrm{Dense}}=n_{\mathrm{in}}n_{\mathrm{out}}+n_{\mathrm{out}}.
 \]
+\ynghia{Đếm số tham số huấn luyện: Conv2D = (kích thước kernel \(\times\) kênh vào + 1 bias) \(\times\) kênh ra; Dense = ma trận trọng số + bias từng neuron ra.}
+\kyhieubatdau
+  \kh{K_h,K_w}{chiều cao/rộng kernel}
+  \kh{C_{\mathrm{in}}}{số kênh đầu vào}
+  \kh{C_{\mathrm{out}}}{số filter (kênh đầu ra)}
+  \kh{n_{\mathrm{in}}}{số neuron đầu vào lớp Dense}
+  \kh{n_{\mathrm{out}}}{số neuron đầu ra lớp Dense}
+  \kh{+1}{một bias cho mỗi filter/neuron ra}
+\kyhieuketthuc
 
 \textbf{RNN:}
 \[
 s_t=\tanh(Ux_t+Ws_{t-1}+b),\qquad o_t=\mathrm{softmax}(Vs_t+c).
 \]
+\ynghia{RNN xử lý chuỗi: trạng thái ẩn \(s_t\) phụ thuộc input hiện \(x_t\) và trạng thái trước \(s_{t-1}\); đầu ra \(o_t\) là phân phối lớp tại bước \(t\).}
+\kyhieubatdau
+  \kh{t}{chỉ số bước thời gian}
+  \kh{x_t}{vector đầu vào bước \(t\)}
+  \kh{s_t}{hidden state bước \(t\)}
+  \kh{s_{t-1}}{hidden state bước trước}
+  \kh{U,W,V}{ma trận trọng số input, recurrent, output}
+  \kh{b,c}{bias hidden và output}
+  \kh{o_t}{đầu ra (logit/probability) bước \(t\)}
+  \kh{\tanh}{hàm kích hoạt giới hạn trong \((-1,1)\)}
+\kyhieuketthuc
 
 \textbf{LSTM} (\(\sigma\) sigmoid, \(\odot\) Hadamard, nối \([h_{t-1},x_t]\)):
 \begin{align*}
@@ -29,3 +82,19 @@ C_t&=f_t\odot C_{t-1}+i_t\odot\tilde C_t,\\
 o_t&=\sigma(W_o[h_{t-1},x_t]+b_o), &
 h_t&=o_t\odot\tanh(C_t).
 \end{align*}
+\ynghia{LSTM kiểm soát luồng thông tin qua các cổng: \(f_t\) quên cell state cũ, \(i_t\) ghi candidate mới \(\tilde C_t\), \(o_t\) đọc ra hidden \(h_t\); giúp học phụ thuộc dài hạn tốt hơn RNN thuần.}
+
+\kyhieubatdau
+  \kh{f_t}{forget gate --- mức ``giữ lại'' \(C_{t-1}\)}
+  \kh{i_t}{input gate --- mức ghi \(\tilde C_t\) vào cell}
+  \kh{\tilde C_t}{candidate cell state mới}
+  \kh{C_t}{cell state tại bước \(t\)}
+  \kh{o_t}{output gate --- mức phát \(h_t\) từ cell}
+  \kh{h_t}{hidden state (đầu ra LSTM) bước \(t\)}
+  \kh{h_{t-1}}{hidden state bước trước}
+  \kh{[h_{t-1},x_t]}{nối vector (concatenation)}
+  \kh{W_f,W_i,W_C,W_o}{ma trận trọng số từng cổng}
+  \kh{b_f,b_i,b_C,b_o}{bias từng cổng}
+  \kh{\sigma}{sigmoid \(\in(0,1)\) --- cổng như ``van'' 0--1}
+  \kh{\odot}{tích Hadamard (nhân từng phần tử)}
+\kyhieuketthuc

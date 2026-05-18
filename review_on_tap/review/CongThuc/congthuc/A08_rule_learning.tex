@@ -1,20 +1,49 @@
 \subsection*{A.9. Rule-based learning (Bài tập 06)}
-\textbf{PRISM:} chọn literal \(\ell\) tối đa hoá
+
+\kyhieubatdau
+  \kh{\ell}{literal (điều kiện đơn, vd.\ \texttt{A=red})}
+  \kh{c}{lớp mục tiêu của luật}
+  \kh{U}{tập mẫu chưa được cover}
+  \kh{T}{tập dữ liệu (training set)}
+  \kh{R}{luật IF--THEN đang xây dựng}
+\kyhieuketthuc
+
+\textbf{PRISM:}
 \[
 P(c\mid\ell)=\frac{\#\text{(thỏa }\ell\text{ và thuộc }c)}{\#\text{(thỏa }\ell)}.
 \]
-Hòa thì chọn literal cover nhiều mẫu hơn. Sau mỗi luật hoàn chỉnh, loại mẫu đã cover khỏi \(U\).
+\ynghia{Chọn literal \(\ell\) tối đa hoá xác suất lớp \(c\) trong các mẫu thỏa \(\ell\); hòa thì chọn literal cover nhiều mẫu hơn. Sau mỗi luật hoàn chỉnh, loại mẫu đã cover khỏi \(U\).}
+\kyhieubatdau
+  \kh{P(c\mid\ell)}{xác suất lớp \(c\) given literal \(\ell\)}
+  \kh{\#(\cdot)}{số mẫu thỏa điều kiện trong tập đang xét}
+\kyhieuketthuc
 
 \textbf{Coverage \& Accuracy luật} (trên \(|T|\)):
 \[
 \mathrm{Coverage}(R)=\frac{\#\text{(antecedent)}}{|T|},\qquad
 \mathrm{Accuracy}(R)=\frac{\#\text{(antecedent }\land\text{ consequent)}}{\#\text{(antecedent)}}.
 \]
+\ynghia{Coverage đo tỉ lệ mẫu bị luật ``chạm'' (thỏa phần IF); Accuracy đo trong số đó bao nhiêu thỏa cả IF và THEN (dự đoán đúng consequent).}
+\kyhieubatdau
+  \kh{\mathrm{Coverage}(R)}{độ phủ của luật \(R\)}
+  \kh{\mathrm{Accuracy}(R)}{độ chính xác có điều kiện của luật \(R\)}
+  \kh{|T|}{kích thước tập dữ liệu}
+  \kh{\text{antecedent}}{phần điều kiện IF}
+  \kh{\text{consequent}}{phần kết luận THEN}
+\kyhieuketthuc
 
-\textbf{FOIL-Gain} (lớp dương, \(p_0,n_0\) trước thêm \(\ell\); \(p_1,n_1\) sau):
+\textbf{FOIL-Gain} (lớp dương):
 \[
 \mathrm{Gain}_{\mathrm{FOIL}}(R,\ell)=p_1\Bigl[\log_2\frac{p_1}{p_1+n_1}-\log_2\frac{p_0}{p_0+n_0}\Bigr].
 \]
-Thêm literal có gain lớn nhất; lặp đến khi luật ``sạch'' hoặc hết literal khả dụng.
+\ynghia{Đo mức cải thiện ``chất lượng'' luật khi thêm literal \(\ell\): \(p_0,n_0\) là số dương/âm trước; \(p_1,n_1\) sau; chọn literal có gain lớn nhất.}
+\kyhieubatdau
+  \kh{p_0}{số mẫu lớp dương thỏa luật hiện tại (trước thêm \(\ell\))}
+  \kh{n_0}{số mẫu lớp âm thỏa luật hiện tại}
+  \kh{p_1}{số dương sau thêm \(\ell\)}
+  \kh{n_1}{số âm sau thêm \(\ell\)}
+  \kh{\log_2}{logarit cơ số 2}
+\kyhieuketthuc
 
-\textbf{Conflict resolution:} thứ tự luật, độ cụ thể, hoặc accuracy --- theo quy ước đề.
+\textbf{Conflict resolution.}
+\ynghia{Khi nhiều luật cùng áp dụng: ưu tiên theo thứ tự luật, độ cụ thể (số literal), hoặc accuracy --- theo quy ước đề bài.}
