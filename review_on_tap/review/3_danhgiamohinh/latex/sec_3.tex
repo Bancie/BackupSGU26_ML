@@ -1,0 +1,215 @@
+\section*{3. Đánh giá mô hình}
+
+\subsubsection*{Câu 3.1}
+
+Nhãn thực: $y=(A,B,C,A,B,C,A,B,C,A)$ ($n=10$).\\
+Nhãn dự đoán: $\hat y=(A,C,C,B,B,A,A,B,C,C)$.
+
+\medskip
+\textbf{(a) Ma trận nhầm lẫn (hàng là lớp thực tế, cột là lớp dự đoán).}
+
+Đếm từng cặp $(y_i,\hat y_i)$:
+\begin{center}
+\small
+\begin{tabular}{r|ccc}
+{} & $\hat=A$ & $\hat=B$ & $\hat=C$ \\
+\hline
+$A$ & $2$ & $1$ & $1$ \\
+$B$ & $0$ & $2$ & $1$ \\
+$C$ & $1$ & $0$ & $2$ \\
+\end{tabular}
+\end{center}
+Chẳng hạn có đúng $2$ mẫu thực là $A$ được dự đoán là $A$; có $1$ mẫu thực $A$ nhưng dự đoán $B$, v.v.
+
+\medskip
+\textbf{(b) Độ chính xác tổng thể.}
+
+Số mẫu dự đoán đúng là tổng các phần tử trên đường chéo:
+\[
+\text{accuracy}=\frac{2+2+2}{10}=\frac{6}{10}=0{,}6.
+\]
+
+\medskip
+\textbf{(c) Precision, Recall và F1 cho từng lớp.}
+
+Ký hiệu với một lớp $k$: $\text{TP}_k$ là số mẫu thực và dự đoán đều là $k$ (ô chéo tương ứng trong bảng trên); tổng mẫu thực thuộc $k$ là hàng của lớp $k$, tổng mẫu được dự đoán là $k$ là cột của $k$. Khi đó
+\[
+\text{Precision}_k=\frac{\text{TP}_k}{\text{tổng cột }\hat=k},\qquad
+\text{Recall}_k=\frac{\text{TP}_k}{\text{tổng hàng thực }=k},
+\]
+và $\text{F1}_k=\dfrac{2\,\text{Precision}_k\,\text{Recall}_k}{\text{Precision}_k+\text{Recall}_k}$.
+
+\begin{itemize}
+  \item Lớp $A$: có $4$ mẫu thực là $A$ nên $\text{Recall}_A=\dfrac{2}{4}=0{,}5$. Cột dự đoán $A$ có $2+0+1=3$ phần tử nên $\text{Precision}_A=\dfrac{2}{3}\approx 0{,}6667$.
+    Ta có $\text{F1}_A=\dfrac{2\cdot \frac23\cdot \frac12}{\frac23+\frac12}=\dfrac{4}{7}\approx 0{,}5714$.
+  \item Lớp $B$: $\text{TP}_B=2$. Hàng $B$ có $3$ phần tử, cột $\hat=B$ có $3$ phần tử $\Rightarrow\text{Recall}_B=\text{Precision}_B=\dfrac{2}{3}\approx 0{,}6667$.
+    Khi hai chỉ số bằng nhau ta cũng có $\text{F1}_B=\dfrac23\approx 0{,}6667$.
+  \item Lớp $C$: $\text{TP}_C=2$. Hàng thực $C$ có $3$ mẫu nên $\text{Recall}_C=\dfrac{2}{3}\approx 0{,}6667$. Cột $\hat=C$ có $4$ ô nên $\text{Precision}_C=\dfrac{2}{4}=0{,}5$.
+    Vậy $\text{F1}_C=\dfrac{2\cdot 0{,}5\cdot \frac23}{0{,}5+\frac23}=\dfrac{4}{7}\approx 0{,}5714$.
+\end{itemize}
+
+\subsubsection*{Câu 3.2}
+
+Nhị phân $\{P,N\}$, coi lớp dương là $P$.
+Nhãn thực: $PNPPNNPNNP$.
+Nhãn dự đoán: $PNNPPNPNNP$.
+
+\medskip
+\textbf{(a) Ma trận nhầm lẫn (hàng: thực, cột: dự đoán).}
+
+So sánh lần lượt từng vị trí:
+\begin{center}
+\small
+\begin{tabular}{r|cc}
+{} & đoán $P$ & đoán $N$ \\
+\hline
+thực $P$ & $4$ & $1$ \\
+thực $N$ & $1$ & $4$ \\
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{(b) TP, FP, FN, TN (với lớp dương $P$).}
+
+True Positive là thực $P$ và dự đoán $P$ $\Rightarrow\text{TP}=4$.
+False Negative: thực $P$ nhưng đoán $N$ $\Rightarrow\text{FN}=1$.
+False Positive: thực $N$ nhưng đoán $P$ $\Rightarrow\text{FP}=1$.
+True Negative: thực $N$ và đoán $N$ $\Rightarrow\text{TN}=4$.
+
+\medskip
+\textbf{(c) Accuracy, Precision, Recall, F1 (cho $P$).}
+
+Tổng số quan sát $n=\text{TP}+\text{TN}+\text{FP}+\text{FN}=10$, nên
+\[
+\text{accuracy}=\frac{\text{TP}+\text{TN}}{n}=\frac{4+4}{10}=0{,}8.
+\]
+Đối với lớp dương $P$,
+\[
+\text{precision}=\frac{\text{TP}}{\text{TP}+\text{FP}}=\frac{4}{5}=0{,}8,\qquad
+\text{recall}=\frac{\text{TP}}{\text{TP}+\text{FN}}=\frac{4}{5}=0{,}8.
+\]
+Điều chỉnh F1 của $P$:
+\[
+\text{F1}=\frac{2\cdot\text{precision}\cdot\text{recall}}{\text{precision}+\text{recall}}
+=\frac{2\cdot \frac45\cdot\frac45}{\frac85}=0{,}8.
+\]
+
+\subsubsection*{Câu 3.3}
+
+\textbf{Các luật (đánh giá theo thứ tự đã cho trong đề):}
+\begin{enumerate}[label=\arabic*., nosep]
+  \item Nếu thuộc tính \texttt{outlook} là \texttt{overcast} thì \texttt{play}=\texttt{yes}.
+  \item Ngược lại, nếu \texttt{windy}=\texttt{TRUE} thì \texttt{play}=\texttt{no}.
+  \item Ngược lại, nếu \texttt{outlook}=\texttt{sunny} thì \texttt{play}=\texttt{no}.
+  \item Ngược lại thì \texttt{play}=\texttt{yes}.
+\end{enumerate}
+
+Thuộc tính nhãn \texttt{play} của bảng dữ liệu gốc chỉ được dùng để đối chiếu nhãn thực; các thông số như độ ẩm hay nhiệt độ không xuất hiện trong bốn luật trên nên không cần tới các cột đó một khi đã biết các thông tin được liệt kê trong các luật.
+
+\medskip
+\textbf{(a) Dự đoán và đối chiếu nhãn thực.}
+
+\vspace{2pt}\noindent\textit{Áp dụng các luật trên một vài dòng.}\\
+Dòng 1: không phải \texttt{overcast}, không gió (\texttt{windy}=\texttt{FALSE}), trời \texttt{sunny}$ \Rightarrow $ tới luật 3$ \Rightarrow $ \texttt{no} (trùng với nhãn thực).\\
+Dòng 2: vẫn \texttt{sunny}, nhưng có gió$ \Rightarrow $ luật 2 được áp dụng trước và dừng$ \Rightarrow $ \texttt{no}.\\
+Các STT có \texttt{overcast} (3, 7, 12, 13) đều do luật 1 được dự báo \texttt{yes}.\\
+Các quan sát thuộc \texttt{rainy}, không có gió, chỉ được rơi xuống luật 4 và cho \texttt{yes}; đó là các dòng 4, 5, 10 (các ô còn lại đều đã thoát sớm ở luật khác như các dòng có gió, hoặc các dòng trời nắng không gió, v.v.).
+
+Kết quả đối chiếu từng dòng ($\checkmark$: trùng với nhãn thực):
+\begin{center}
+\footnotesize
+\begin{tabular}{c l c l}
+\toprule
+STT & outlook / windy (\texttt{T}/\texttt{F}) & thực tế \texttt{play} & dự đoán \\
+\midrule
+1 & sunny / F & no & no $\checkmark$ \\
+2 & sunny / T & no & no $\checkmark$ \\
+3 & overcast / F & yes & yes $\checkmark$ \\
+4 & rainy / F & yes & yes $\checkmark$ \\
+5 & rainy / F & yes & yes $\checkmark$ \\
+6 & rainy / T & no & no $\checkmark$ \\
+7 & overcast / T & yes & yes $\checkmark$ \\
+8 & sunny / F & no & no $\checkmark$ \\
+9 & sunny / F & yes & no \\
+10 & rainy / F & yes & yes $\checkmark$ \\
+11 & sunny / T & yes & no \\
+12 & overcast / T & yes & yes $\checkmark$ \\
+13 & overcast / F & yes & yes $\checkmark$ \\
+14 & rainy / T & no & no $\checkmark$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Chỗ dự báo sai lệch chỉ có hai ô:\\
+--- dòng 9: không overcast và không gió nhưng trời sunny$ \Rightarrow $ luật 3 kết luận \texttt{no} trong khi thực tế là có chơi \texttt{yes}.\\
+--- dòng 11: có gió$ \Rightarrow $ luật 2 báo ngay \texttt{no}; thực tế vẫn là \texttt{yes}.
+
+\medskip
+\textbf{(b) Ma trận nhầm lẫn (lớp dương là \texttt{yes}).}
+
+Hàng là nhãn thực của \texttt{play}, cột là nhãn dự đoán.
+
+\begin{center}
+\small
+\begin{tabular}{r|cc}
+{} & đoán \texttt{no} & đoán \texttt{yes} \\
+\hline
+thực \texttt{no} & $5$ & $0$ \\
+thực \texttt{yes} & $2$ & $7$ \\
+\end{tabular}
+\end{center}
+
+\textbf{(c) Accuracy, Precision, Recall (Sensitivity), Specificity và F1.}
+
+Trong không gian nhị phân có lớp dương \texttt{yes}:
+\[
+\text{TP}=7,\quad \text{FN}=2,\quad \text{FP}=0,\quad \text{TN}=5,\quad n=14.
+\]
+Độ chính xác là
+\[
+\text{accuracy}=\frac{\text{TP}+\text{TN}}{n}=\frac{12}{14}=\frac{6}{7}\approx 0{,}8571.
+\]
+Với nhãn \texttt{yes},
+\[
+\text{precision}=\frac{\text{TP}}{\text{TP}+\text{FP}}=\frac{7}{7}=1,\quad
+\text{recall}=\text{sensitivity}=\frac{\text{TP}}{\text{TP}+\text{FN}}=\frac{7}{9}\approx 0{,}7778.
+\]
+Không có mẫu nào thực tế \texttt{no} nhưng bị báo sai thành \texttt{yes} ($\mathrm{FP}=0$), nên
+\[
+\text{specificity}=\frac{\text{TN}}{\text{TN}+\text{FP}}=\frac{5}{5}=1.
+\]
+Cuối cùng F1 của lớp dương:
+\[
+\text{F1}=\frac{2\cdot 1\cdot \frac79}{1+\frac79}=\frac{14/9}{16/9}=\frac{7}{8}=0{,}875.
+\]
+
+\subsubsection*{Câu 3.4}
+
+Đã cho bảng tổng hợp với các ô $\text{TN}=50$, $\text{FP}=10$, $\text{FN}=5$, $\text{TP}=100$ và tổng $N=165$.
+
+Đặt tổng số mẫu thực tế không thuộc lớp dương $N^-=\text{TN}+\text{FP}=60$ và số thực tế thuộc lớp dương $N^+=\text{TP}+\text{FN}=105$.
+
+\medskip\textbf{Độ chính xác.}
+\[
+\text{accuracy}=\frac{\text{TP}+\text{TN}}{N}=\frac{150}{165}=\frac{10}{11}\approx 0{,}9091.
+\]
+\textbf{Tỉ lệ phân loại sai.}
+\[
+1-\text{accuracy}=\frac{15}{165}=\frac{1}{11}\approx 0{,}0909.
+\]
+\textbf{Các tỉ số gắn với các ô của ma trận:}
+\begin{align*}
+\text{TPR} &= \frac{\text{TP}}{\text{TP}+\text{FN}}=\frac{100}{105}=\frac{20}{21}\approx 0{,}9524,\\
+\text{FPR} &= \frac{\text{FP}}{\text{FP}+\text{TN}}=\frac{10}{60}=\frac16\approx 0{,}1667,\\
+\text{TNR} &= \frac{\text{TN}}{\text{TN}+\text{FP}}=\frac{50}{60}=\frac56\approx 0{,}8333.
+\end{align*}
+Ngoài ra, các tỉ số của lớp dương:
+\begin{align*}
+\text{precision}=\frac{\text{TP}}{\text{TP}+\text{FP}}=\frac{100}{110}=\frac{10}{11}\approx 0{,}9091,\\
+\text{recall}=\text{sensitivity}=\text{TPR}=\frac{20}{21},\qquad
+\text{specificity}=\text{TNR}=\frac56.
+\end{align*}
+Độ chiếm giữ các thực tế dương trong tập:
+\[
+\text{prevalence}=\frac{\text{TP}+\text{FN}}{N}=\frac{105}{165}=\frac{7}{11}\approx 0{,}6364.
+\]
