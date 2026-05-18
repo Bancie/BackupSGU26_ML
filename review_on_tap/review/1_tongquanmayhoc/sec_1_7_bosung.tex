@@ -1,0 +1,35 @@
+\section*{Câu hỏi bổ sung (đứng trước mục 1.8 trong đề ôn tập)}
+
+\paragraph{Câu 1.} So sánh k-means và hierarchical clustering.
+
+\medskip\noindent\textbf{Trả lời.}
+\begin{itemize}[nosep]
+\item \textbf{Bản chất:} k-means phân hoạch dữ liệu thành \textbf{$k$ cố định} cụm, tối thiểu hóa tổng bình phương trong cụm; phân cụm phân cấp xây \textbf{cây (dendrogram)} gom dần hoặc tách dần cụm, thường không cần chọn $k$ ngay từ đầu.
+\item \textbf{Dạng biên cụm:} k-means giả định cụm gần \textbf{``hình cầu''} quanh tâm; phân cấp có thể phù hợp hơn cụm \textbf{không lồi} trong một số phương án liên kết.
+\item \textbf{Chi phí và quy mô:} k-means thường nhanh trên dữ liệu lớn (đặc biệt mini-batch); nhiều thuật toán phân cấp đầy đủ có độ phức tạp cao hơn, khó mở rộng tập rất lớn.
+\item \textbf{Ổn định:} k-means nhạy khởi tạo; phân cấp một lần cho cấu trúc đầy đủ, nhưng thứ tự hoặc hàm liên kết cũng ảnh hưởng.
+\end{itemize}
+
+\paragraph{Câu 2.} So sánh Decision Tree và Random Forest.
+
+\medskip\noindent\textbf{Trả lời.}
+\begin{itemize}[nosep]
+\item \textbf{Cấu trúc:} một cây quyết định đơn là mô hình duy nhất, dễ diễn giải; \textbf{random forest} là \textbf{tập hợp} nhiều cây, mỗi cây huấn luyện trên \textbf{bootstrap} và/hoặc \textbf{chọn ngẫu nhiên tập con đặc trưng} tại mỗi nút, dự đoán cuối là bỏ phiếu hoặc trung bình.
+\item \textbf{Khái quát hóa:} rừng giảm overfitting và phương sai so với một cây sâu, thường \textbf{ổn định và chính xác} hơn trên dữ liệu thực; đổi lại kém diễn giải hơn.
+\item \textbf{Dữ liệu:} cả hai xử lý tốt đặc trưng hỗn hợp nếu triển khai hỗ trợ; rừng cần nhiều tài nguyên hơn (lưu trữ và suy luận nhiều cây).
+\end{itemize}
+
+\paragraph{Câu 3.} Khi nào nên dùng mô hình đơn giản thay vì mô hình phức tạp?
+
+\medskip\noindent\textbf{Trả lời.} Nên ưu tiên mô hình đơn giản khi:
+\begin{itemize}[nosep]
+\item Dữ liệu \textbf{ít} hoặc nhiễu, hai lớp gần tách tuyến tính---mô hình phức tạp dễ overfit.
+\item Cần \textbf{giải thích}, kiểm toán, hoặc triển khai nhẹ (độ trễ thấp, bộ nhớ nhỏ).
+\item Điểm cơ sở (baseline) phải rõ ràng để so sánh xứng đáng với mô hình lớn.
+\item Chi phí huấn luyện và bảo trì cao so với lợi ích dự kiến từ độ phức tạp.
+\end{itemize}
+Nguyên tắc thực hành là \textbf{bắt đầu đơn giản, chỉ phức tạp hóa khi có bằng chứng lợi ích} trên kiểm định/test hợp lệ.
+
+\paragraph{Câu 4.} Vì sao không tồn tại mô hình ``tốt nhất cho mọi bài toán''?
+
+\medskip\noindent\textbf{Trả lời.} Hiệu năng phụ thuộc \textbf{bài toán, dữ liệu, chi phí sai, và ràng buộc triển khai}. Không có định lý ``phổ quát tối ưu'': một mô hình mạnh ở dữ liệu có cấu trúc tuyến tính có thể yếu với dữ liệu phi tuyến sâu; thuật toán tốn nhiều mẫu có thể kém khi dữ liệu hiếm. Hơn nữa, \textbf{định lý ``No Free Lunch''} trong tối ưu hóa học máy cho rằng, trên mọi bài toán có thể mô tả một cách trung lập, không có thuật toán nào luôn vượt trội mọi thuật toán khác. Vì vậy cần \textbf{chọn và thử nghiệm} theo ngữ cảnh.

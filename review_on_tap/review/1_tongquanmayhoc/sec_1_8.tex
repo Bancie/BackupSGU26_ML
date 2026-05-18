@@ -1,0 +1,37 @@
+\section*{1.8. Các vấn đề khác}
+
+\paragraph{Câu 1.} Cho tập dữ liệu các cặp $(x,y)$ với $y$ chỉ nhận hai giá trị Có/Không. Nhận định loại bài toán máy học và nêu mô hình hoặc thuật toán phù hợp.
+
+\medskip\noindent\textbf{Trả lời.} Đây là bài toán \textbf{học có giám sát, phân lớp nhị phân}: mỗi mẫu có nhãn thuộc một trong hai lớp.
+
+Các hướng phù hợp (ví dụ): \textbf{hồi quy logistic}, \textbf{cây quyết định} / \textbf{rừng ngẫu nhiên}, \textbf{Naïve Bayes}, \textbf{máy vector hỗ trợ} (SVM), hoặc mạng nơ-ron nhỏ cho dữ liệu phi tuyến. Lựa chọn cụ thể phụ thuộc kích thước dữ liệu, khả năng tách lớp, nhu cầu xác suất đầu ra và khả năng diễn giải.
+
+\paragraph{Câu 2.} Hệ thống dự đoán giá nhà từ diện tích, số phòng, vị trí. Nhận định loại bài toán và dạng đầu ra của mô hình.
+
+\medskip\noindent\textbf{Trả lời.} Đây là \textbf{học có giám sát, hồi quy}: mục tiêu là dự đoán \textbf{giá}---biến số thực (hoặc đếm tiền làm trơn liên tục) từ đặc trưng đầu vào.
+
+\textbf{Dạng đầu ra:} một số thực $\hat{y}$ (giá dự báo) hoặc khoảng tin cậy nếu mô hình ước lượng thêm phân phối sai số.
+
+\paragraph{Câu 3.} Dữ liệu giao dịch ngân hàng \textbf{không có nhãn}, mục tiêu phát hiện nhóm khách hàng có hành vi tương tự. Nhận định bài toán và một thuật toán phù hợp.
+
+\medskip\noindent\textbf{Trả lời.} Đây là \textbf{học không giám sát}, cụ thể là \textbf{phân cụm} (clustering): tìm cấu trúc nhóm trong dữ liệu khi chưa biết nhãn nhóm.
+
+Thuật toán gợi ý: \textbf{k-means} (khi có ý niệm khoảng cách Euclidean trên đặc trưng đã chuẩn hóa), \textbf{DBSCAN} hoặc \textbf{tối ưu Gaussian mixture} khi cụm có hình dạng/kích thước khác nhau, hoặc \textbf{phân cụm phân cấp} khi cần biểu diễn cấu trúc đa mức---tùy giả định về dữ liệu và khối lượng tính toán.
+
+\paragraph{Câu 4.} Hệ thống học chơi cờ bằng tương tác môi trường, nhận thưởng/phạt sau mỗi hành động. Nhận định loại bài toán và đặc điểm cách học.
+
+\medskip\noindent\textbf{Trả lời.} Đây là \textbf{học tăng cường (reinforcement learning)}: tác tử chọn hành động, quan sát phản hồi môi trường và tín hiệu phần thưởng.
+
+\textbf{Đặc điểm chính:} tín hiệu huấn luyện là \textbf{thưởng trễ} (không phải nhãn đúng cho từng trạng thái ngay lập tức); mục tiêu tối ưu \textbf{phần thưởng tích lũy theo chính sách}; có \textbf{dò tìm--khai thác}; dữ liệu là \textbf{chuỗi tương tác} nên không độc lập như nhiều bài có giám sát cổ điển.
+
+\paragraph{Câu 5.} Tập dữ liệu lớn: lớp bình thường 95\%, lớp bất thường 5\%. Nhận định vấn đề chính và đề xuất hướng đánh giá mô hình phù hợp.
+
+\medskip\noindent\textbf{Trả lời.} Vấn đề chính là \textbf{mất cân bằng lớp nghiêm trọng}: nếu chỉ tối ưu accuracy, mô hình có thể \textbf{phớt lờ lớp hiếm} (bất thường) nhưng vẫn đạt tỷ lệ đúng cao trên tập chung.
+
+Hướng đánh giá phù hợp:
+\begin{itemize}[nosep]
+\item Ưu tiên các chỉ số theo lớp: \textbf{precision, recall, F1} của lớp bất thường; hoặc \textbf{Balanced accuracy}, \textbf{MCC}.
+\item Dùng \textbf{confusion matrix} để thấy rõ số lượng false negative (bỏ sót bất thường).
+\item Xem \textbf{đường PR và PR-AUC} (thường nhạy hơn ROC khi lớp hiếm).
+\item Chia tập \textbf{stratified} hoặc giữ tỷ lệ lớp ở validation/test; cân nhắc chi phí nghiệp vụ để chọn ngưỡng (ưu tiên recall nếu bỏ sót rất đắt).
+\end{itemize}

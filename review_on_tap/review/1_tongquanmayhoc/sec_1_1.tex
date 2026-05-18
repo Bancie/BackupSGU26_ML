@@ -1,0 +1,46 @@
+\section*{1.1. Cơ bản}
+
+\paragraph{Câu 1.} Máy học (Machine Learning) là gì? Phân biệt máy học với lập trình truyền thống.
+
+\medskip\noindent\textbf{Trả lời.} Máy học là lĩnh vực nghiên cứu và xây dựng các phương pháp cho phép máy tính rút ra quy luật hoặc quyết định hữu ích từ \emph{dữ liệu} thay vì do con người lập trình từng quy tắc cố định cho mọi tình huống.
+
+So với lập trình truyền thống, điểm khác cốt lõi nằm ở chỗ \textbf{ai} cung cấp logic xử lý:
+\begin{itemize}[nosep]
+\item \textbf{Lập trình truyền thống:} con người viết rõ quy tắc đầu vào--đầu ra; máy chỉ thực thi đúng những gì được mô tả.
+\item \textbf{Máy học:} con người thường chỉ cung cấp dữ liệu (và đôi khi nhãn) cùng một họ các mô hình và thuật toán tối ưu; máy \emph{ước lượng} quy luật từ dữ liệu.
+\end{itemize}
+Khi bài toán phức tạp, khó viết quy tắc tay (nhận diện giọng nói, hình ảnh), máy học thường phù hợp hơn; khi quy tắc nghiệp vụ rõ ràng và ít thay đổi, lập trình truyền thống có thể đơn giản và tin cậy hơn.
+
+\paragraph{Câu 2.} Một bài toán máy học thường gồm những thành phần nào (dữ liệu, mô hình, hàm mất mát, thuật toán học)?
+
+\medskip\noindent\textbf{Trả lời.} Thành phần thường gặp gồm:
+\begin{itemize}[nosep]
+\item \textbf{Dữ liệu:} tập mẫu mô tả đối tượng cần học (đặc trưng, nhãn nếu có).
+\item \textbf{Mô hình (model):} họ các hàm ánh xạ từ đặc trưng sang dự đoán, có tham số cần học.
+\item \textbf{Hàm mất mát (loss):} đo mức sai lệch giữa dự đoán và mục tiêu; định hướng cần cải thiện khi huấn luyện.
+\item \textbf{Thuật toán học (learning algorithm):} quy trình cập nhật tham số (ví dụ hạ gradient) nhằm giảm hàm mất mát (hoặc tối đa hóa hàm mục tiêu tương đương).
+\end{itemize}
+Ngoài ra trong thực tế còn cần \textbf{đánh giá} trên tập kiểm tra, \textbf{tiền xử lý} dữ liệu, và lựa chọn siêu tham số.
+
+\paragraph{Câu 3.} Thế nào là mô hình (model) trong máy học?
+
+\medskip\noindent\textbf{Trả lời.} Mô hình là khung toán học mô tả mối quan hệ giữa đặc trưng đầu vào và đầu ra cần dự đoán. Mô hình có \textbf{tham số} (học được từ dữ liệu) và có thể có \textbf{siêu tham số} do người thiết kế chọn trước. Ví dụ: mô hình tuyến tính, cây quyết định, mạng nơ-ron đều là các họ mô hình khác nhau.
+
+\paragraph{Câu 4.} Dữ liệu huấn luyện (training data) và dữ liệu kiểm tra (test data) khác nhau như thế nào?
+
+\medskip\noindent\textbf{Trả lời.}
+\begin{itemize}[nosep]
+\item \textbf{Huấn luyện:} dùng để ước lượng tham số mô hình (học quy luật).
+\item \textbf{Kiểm tra: tách biệt,} không tham gia huấn luyện; dùng để đánh giá khả năng \textbf{khái quát} (generalization) lên dữ liệu mới.
+\end{itemize}
+Nếu đánh giá trên cùng dữ liệu đã học, kết quả thường \textbf{lạc quan giả tạo} vì mô hình có thể ``nhớ'' nhiễu hoặc chi tiết riêng của tập huấn luyện.
+
+\paragraph{Câu 5.} Nhãn (label) là gì? Phân biệt bài toán có nhãn và không nhãn.
+
+\medskip\noindent\textbf{Trả lời.} \textbf{Nhãn} là giá trị mục tiêu đã biết cho từng mẫu (ví dụ: ``spam/không spam'', nhiệt độ dự báo, mã lỗi bệnh).
+
+Phân biệt:
+\begin{itemize}[nosep]
+\item \textbf{Có nhãn (supervised):} mỗi mẫu có cặp $(x,y)$; mục tiêu là học ánh xạ $x \mapsto y$ (phân lớp hoặc hồi quy).
+\item \textbf{Không nhãn (unsupervised):} chỉ có $x$; mục tiêu thường là tìm cấu trúc (cụm, giảm chiều, mật độ, luật kết hợp, \ldots).
+\end{itemize}

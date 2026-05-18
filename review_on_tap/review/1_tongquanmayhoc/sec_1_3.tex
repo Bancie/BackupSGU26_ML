@@ -1,0 +1,56 @@
+\section*{1.3. Mô hình và thuật toán cơ bản}
+
+\paragraph{Câu 1.} Perceptron là gì? Perceptron có những hạn chế nào?
+
+\medskip\noindent\textbf{Trả lời.} Perceptron (đơn thần kinh, kết hợp hàm kích hoạt bước) là mô hình phân lớp \textbf{nhị phân tuyến tính}: nó học một \textbf{siêu phẳng} tách hai lớp bằng cập nhật trọng số khi gặp mẫu phân loại sai.
+
+\textbf{Hạn chế chính:}
+\begin{itemize}[nosep]
+\item Chỉ tách được dữ liệu \textbf{tuyến tính tách được} (linearly separable); với dữ liệu không tách tuyến tính, thuật toán cổ điển có thể không hội tụ ổn định.
+\item Không trực tiếp cho \textbf{xác suất lớp}; biên quyết định ``cứng''.
+\item Bài toán đa lớp cần mở rộng (one-vs-rest, \ldots).
+\end{itemize}
+
+\paragraph{Câu 2.} Hồi quy tuyến tính (Linear Regression) là gì?
+
+\medskip\noindent\textbf{Trả lời.} Hồi quy tuyến tính mô hình hóa mục tiêu $y$ như tổ hợp \textbf{tuyến tính} của đặc trưng (có thể kèm hệ số chặn): $\hat{y} = \mathbf{w}^{\top}\mathbf{x} + b$. Tham số thường được ước lượng bằng cách \textbf{tối thiểu hóa sai số bình phương trung bình} (bình phương độ lệch giữa $\hat{y}$ và $y$ trên tập huấn luyện). Đây là mô hình \textbf{cơ sở} cho nhiều phương pháp hồi quy phức tạp hơn (ridge, lasso, mạng nơ-ron với đầu ra tuyến tính).
+
+\paragraph{Câu 3.} K-means là gì? Thuật toán k-means hoạt động như thế nào?
+
+\medskip\noindent\textbf{Trả lời.} K-means là thuật toán \textbf{phân cụm} chia $n$ mẫu thành $k$ cố định sao cho tổng bình phương khoảng cách trong cụm tới \textbf{tâm cụm} nhỏ.
+
+\textbf{Cách làm lặp (Lloyd):}
+\begin{enumerate}[nosep,label=\arabic*.]
+\item Khởi tạo $k$ tâm (ngẫu nhiên hoặc k-means++).
+\item \textbf{Gán cụm:} mỗi điểm gắn vào tâm gần nhất.
+\item \textbf{Cập nhật tâm:} tâm mới là trung bình các điểm trong cụm.
+\item Lặp đến khi không đổi cụm (hoặc đủ vòng lặp).
+\end{enumerate}
+Kết quả phụ thuộc khởi tạo và giá trị $k$; hàm mục tiêu là \textbf{lõi cục bộ} nên nhiều lần chạy khác nhau có thể cho cụm khác nhau.
+
+\paragraph{Câu 4.} Cây quyết định (Decision Tree) là gì? Ưu và nhược điểm của cây quyết định.
+
+\medskip\noindent\textbf{Trả lời.} Cây quyết định là mô hình dự đoán biểu diễn bằng \textbf{cây}: mỗi nút trong kiểm tra một điều kiện trên đặc trưng, nhánh dẫn tới nút con, lá gán nhãn hoặc giá trị dự đoán.
+
+\textbf{Ưu điểm:}
+\begin{itemize}[nosep]
+\item Dễ diễn giải trực quan; chọn lọc đặc trưng tự nhiên qua cấu trúc cây.
+\item Ít cần chuẩn hóa đặc trưng (so với nhiều mô hình tuyến tính / khoảng cách).
+\item Xử lý được đặc trưng hỗn hợp (số, phân loại) tùy cách triển khai.
+\end{itemize}
+\textbf{Nhược điểm:}
+\begin{itemize}[nosep]
+\item Dễ \textbf{overfitting} nếu cây quá sâu.
+\item Biên quyết định trục-song-song hạn chế (cây thường xây bằng cắt song song với trục)---khó mô hình hóa biên phức tạp đơn cây nông.
+\item Ổn định kém so với \textbf{tập hợp} cây (ví dụ rừng) nếu dữ liệu nhiễu nhẹ cũng đổi cấu trúc.
+\end{itemize}
+
+\paragraph{Câu 5.} Naïve Bayes là gì? Giả định ``naïve'' trong Naïve Bayes là gì?
+
+\medskip\noindent\textbf{Trả lời.} Naïve Bayes là bộ phân lớp dựa trên định lý Bayes, ước lượng xác suất lớp hậu nghiệm $P(y\mid \mathbf{x})$ thông qua $P(\mathbf{x}\mid y)$ và $P(y)$.
+
+\textbf{Giả định ``naïve''} là các đặc trưng \textbf{độc lập có điều kiện} khi đã biết lớp:
+\[
+P(\mathbf{x}\mid y) = \prod_j P(x_j \mid y).
+\]
+Giả định này thường \textbf{không đúng} trong thực tế nhưng giúp ước lượng với ít tham số và tính nhanh; vẫn hiệu quả ở nhiều bài toán văn bản (đặc trưng túi từ).

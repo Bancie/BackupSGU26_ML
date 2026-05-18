@@ -1,0 +1,12 @@
+\section*{1.7. So sánh và nhận xét}
+
+\paragraph{Câu.} So sánh Perceptron và Logistic Regression.
+
+\medskip\noindent\textbf{Trả lời.} Cả hai đều là mô hình \textbf{tuyến tính} quyết định biên phân chia dựa trên tổ hợp tuyến tính $w^\top x + b$, thường cho \textbf{phân lớp nhị phân}.
+
+Điểm khác chủ yếu:
+\begin{itemize}[nosep]
+\item \textbf{Hàm mất mát và đầu ra:} Perceptron cổ điển dùng ngưỡng 0/1 và quy tắc cập nhật sai lầm; logistic regression dùng hàm sigmoid cho \textbf{xác suất} $P(y{=}1\mid x)$ và thường tối ưu \textbf{log-loss} (hợp lý cực đại).
+\item \textbf{Xác suất:} logistic regression trực tiếp cho điểm xác suất, tiện ngưỡng hóa và hiệu chỉnh xác suất; perceptron cổ điển không.
+\item \textbf{Khả năng tối ưu:} logistic regression với log-loss là bài toán lồi mượt hơn (thuận lợi cho gradient descent); perceptron phụ thuộc khả năng tách tuyến tính trong biến thể cổ điển.
+\end{itemize}

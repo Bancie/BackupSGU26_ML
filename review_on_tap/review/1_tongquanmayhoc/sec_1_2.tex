@@ -1,0 +1,41 @@
+\section*{1.2. Các loại bài toán máy học}
+
+\paragraph{Câu 1.} Phân biệt học có giám sát, học không giám sát và học tăng cường.
+
+\medskip\noindent\textbf{Trả lời.}
+\begin{itemize}[nosep]
+\item \textbf{Học có giám sát:} dữ liệu gồm nhãn; mô hình học ánh xạ từ đặc trưng đến nhãn. Kiểu đầu ra: nhãn rời rạc (phân lớp) hoặc liên tục (hồi quy).
+\item \textbf{Học không giám sát:} dữ liệu không có nhãn; tập trung vào cấu trúc nội tại (phân cụm, giảm chiều, mô hình sinh, phát hiện bất thường theo mật độ, \ldots).
+\item \textbf{Học tăng cường:} tác tử tương tác với \textbf{môi trường} qua hành động; nhận tín hiệu thưởng/phạt; mục tiêu học \textbf{chính sách} tối đa hóa phần thưởng tích lũy theo thời gian. Điểm khác có giám sát là tín hiệu thường \textbf{thưa, trễ} và phụ thuộc chuỗi hành động.
+\end{itemize}
+
+\paragraph{Câu 2.} Cho ví dụ thực tế cho từng loại bài toán máy học.
+
+\medskip\noindent\textbf{Trả lời.}
+\begin{itemize}[nosep]
+\item \textbf{Có giám sát:} phát hiện gian lận thẻ khi có nhãn giao dịch ``gian lận/tốt''; dự báo mưa theo ảnh vệ tinh có đo thực địa.
+\item \textbf{Không giám sát:} phân nhóm khách hàng theo lịch sử mua hàng khi chưa gắn nhãn nhóm; giảm chiều dữ liệu gene để trực quan hóa.
+\item \textbf{Tăng cường:} huấn luyện robot đi bộ trong mô phỏng; chơi cờ với phần thưởng thắng/thua; điều khiển hệ thống tiết kiệm năng lượng với chi phí chạy máy.
+\end{itemize}
+
+\paragraph{Câu 3.} Phân biệt bài toán phân lớp (classification) và hồi quy (regression).
+
+\medskip\noindent\textbf{Trả lời.} Cả hai đều thuộc học có giám sát, nhưng \textbf{dạng nhãn} khác nhau:
+\begin{itemize}[nosep]
+\item \textbf{Phân lớp:} nhãn rời rạc (lớp); mô hình dự đoán lớp hoặc phân phối xác suất trên các lớp.
+\item \textbf{Hồi quy:} nhãn (mục tiêu) là số thực (hoặc vector số); mô hình dự đoán giá trị số (ví dụ giá nhà, nồng độ).
+\end{itemize}
+Ngưỡng hóa đầu ra hồi quy thành khoảng rời rạc đôi khi được dùng trong thực tế, nhưng về bản chất bài toán vẫn được xếp theo loại nhãn gốc.
+
+\paragraph{Câu 4.} Phân biệt clustering và classification.
+
+\medskip\noindent\textbf{Trả lời.}
+\begin{itemize}[nosep]
+\item \textbf{Phân lớp:} học có giám sát; \textbf{có nhãn lớp} cho tập huấn luyện; mục tiêu gán lớp cho mẫu mới theo nhãn hiện có.
+\item \textbf{Phân cụm (clustering):} học không giám sát; \textbf{không có nhãn}; mục tiêu tìm nhóm mẫu tương đồng (cụm) dựa trên khoảng cách hoặc mật độ.
+\end{itemize}
+Kết quả cụm không nhất thiết trùng với ``lớp nghiệp vụ''; cần diễn giải hoặc đối chiếu thêm với chuyên môn.
+
+\paragraph{Câu 5.} Bài toán dự đoán giá nhà thuộc loại bài toán nào? Vì sao?
+
+\medskip\noindent\textbf{Trả lời.} Đây là bài toán \textbf{hồi quy trong học có giám sát}. Mục tiêu là dự đoán \textbf{giá nhà}---một biến liên tục (hoặc rất nhiều mức giá khác nhau)---từ các đặc trưng đầu vào (diện tích, vị trí, \ldots), khi đã có lịch sử các cặp đặc trưng--giá thực tế để huấn luyện.

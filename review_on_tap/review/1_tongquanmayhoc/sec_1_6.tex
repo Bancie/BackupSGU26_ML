@@ -1,0 +1,38 @@
+\section*{1.6. Dữ liệu và tiền xử lý}
+
+\paragraph{Câu 1.} Tiền xử lý dữ liệu (data preprocessing) là gì?
+
+\medskip\noindent\textbf{Trả lời.} Tiền xử lý là các bước biến đổi dữ liệu thô trước khi huấn luyện hoặc suy luận nhằm: làm sạch, chuẩn hóa thang đo, mã hóa biến phân loại, xử lý giá trị ngoại lai, giảm nhiễu, và đôi khi tạo đặc trưng mới. Mục tiêu là giúp thuật toán học \textbf{ổn định, công bằng giữa đặc trưng, và hiệu quả} hơn.
+
+\paragraph{Câu 2.} Xử lý dữ liệu thiếu (missing data) như thế nào?
+
+\medskip\noindent\textbf{Trả lời.} Phụ thuộc \textbf{cơ chế thiếu} (MCAR/MAR/MNAR) và tỉ lệ thiếu. Các hướng phổ biến:
+\begin{itemize}[nosep]
+\item \textbf{Loại bỏ} mẫu hoặc đặc trưng thiếu nhiều nếu còn đủ dữ liệu.
+\item \textbf{Điền giá trị:} dùng trung bình, median, mode, hoặc ước lượng thiếu bằng mô hình trên tập huấn luyện.
+\item \textbf{Mã hóa cờ ``thiếu''} như một tín hiệu bổ sung khi việc thiếu mang thông tin.
+\end{itemize}
+Quan trọng là \textbf{chỉ ước lượng} quy tắc điền/thay thế trên tập huấn luyện, rồi \textbf{áp dụng cùng quy tắc} cho tập kiểm tra, tránh để thông tin từ tập kiểm tra lọt ngược vào bước tiền xử lý.
+
+\paragraph{Câu 3.} Chuẩn hóa (normalization) và chuẩn hóa Z-score khác nhau như thế nào?
+
+\medskip\noindent\textbf{Trả lời.}
+\begin{itemize}[nosep]
+\item \textbf{Min--max normalization:} đưa giá trị về khoảng cố định (thường $[0,1]$) theo min/max trên tập huấn luyện. Phụ thuộc \textbf{nhiễu đuôi} và khoảng biến thiên.
+\item \textbf{Z-score (standardization):} trừ trung bình, chia độ lệch chuẩn: đưa về thang có trung bình $\approx 0$, phương sai $\approx 1$. Ít phụ thuộc min/max cực trị hơn so với min--max nhưng vẫn nhạy outlier nếu không xử lý.
+\end{itemize}
+Cả hai đều giúp các thuật toán dựa trên khoảng cách hoặc gradient không bị một đặc trưng quy mô lớn át đặc trưng khác.
+
+\paragraph{Câu 4.} Tại sao cần chia dữ liệu thành training / validation / test?
+
+\medskip\noindent\textbf{Trả lời.}
+\begin{itemize}[nosep]
+\item \textbf{Huấn luyện:} học tham số mô hình.
+\item \textbf{Kiểm định (validation):} chọn siêu tham số, so sánh biến thể mô hình, dừng sớm---\textbf{không} dùng để báo cáo khả năng khái quát cuối cùng nếu đã lặp nhiều lần ``nhìn'' vào nó.
+\item \textbf{Kiểm tra (test):} đánh giá một lần (hoặc rất hạn chế) khi đã khóa pipeline; ước lượng hiệu năng thực tế trên dữ liệu chưa tham gia huấn luyện/chọn mô hình.
+\end{itemize}
+Chia tách giúp \textbf{giảm đánh giá quá lạc quan} do overfitting lên cùng dữ liệu.
+
+\paragraph{Câu 5.} Feature engineering là gì?
+
+\medskip\noindent\textbf{Trả lời.} Feature engineering là tạo, biến đổi, kết hợp đặc trưng để biểu diễn bài toán rõ ràng hơn với mô hình (ví dụ log-transform biến lệch, tạo tỷ lệ giữa hai biến, mã hóa thứ tự có ý nghĩa, trích bit ngày giờ). Đây thường là bước \textbf{tác động lớn} tới hiệu năng trong thực tế.

@@ -1,0 +1,41 @@
+\section*{1.4. Huấn luyện mô hình và tối ưu}
+
+\paragraph{Câu 1.} Hàm mất mát (loss function) là gì? Vai trò của hàm loss trong quá trình học.
+
+\medskip\noindent\textbf{Trả lời.} Hàm mất mát đo mức ``sai'' của mô hình trên dữ liệu (một mẫu hoặc cả tập), thường là hàm của tham số mô hình. Ví dụ: bình phương sai số cho hồi quy, log-loss cho phân lớp.
+
+\textbf{Vai trò:} định nghĩa \textbf{mục tiêu tối ưu} trong huấn luyện---thuật toán học cố gắng tìm tham số làm \textbf{giảm} tổng mất mát (hoặc kỳ vọng mất mát), từ đó kéo dự đoán gần nhãn hoặc mục tiêu hơn.
+
+\paragraph{Câu 2.} Gradient Descent là gì? Phân biệt batch, mini-batch và stochastic gradient descent.
+
+\medskip\noindent\textbf{Trả lời.} Gradient Descent là phương pháp tối ưu lặp: cập nhật tham số theo hướng \textbf{ngược gradient} của hàm mục tiêu (mất mát) để giảm giá trị hàm.
+
+Phân biệt theo \textbf{kích thước mẫu} dùng để tính gradient mỗi bước:
+\begin{itemize}[nosep]
+\item \textbf{Batch GD:} dùng toàn bộ tập huấn luyện mỗi bước; ước lượng gradient ổn định nhưng tốn chi phí khi dữ liệu lớn.
+\item \textbf{Mini-batch GD:} dùng một \textbf{lô nhỏ} mẫu; cân bằng giữa ổn định và tốc độ, phổ biến trong huấn luyện sâu.
+\item \textbf{SGD (thuần):} mỗi bước dùng \textbf{một} mẫu (hoặc vài mẫu); nhiễu gradient lớn nhưng có thể thoát vùng lồi nhạt, cập nhật rất nhanh trên tập lớn.
+\end{itemize}
+
+\paragraph{Câu 3.} Learning rate là gì? Điều gì xảy ra khi learning rate quá lớn hoặc quá nhỏ?
+
+\medskip\noindent\textbf{Trả lời.} \textbf{Learning rate} (tốc độ học) là hệ số nhân cho bước cập nhật theo hướng gradient. Nó điều khiển \textbf{độ lớn} mỗi bước di chuyển trong không gian tham số.
+
+\begin{itemize}[nosep]
+\item \textbf{Quá lớn:} bước nhảy mạnh, dễ \textbf{dao động} quanh điểm tối ưu hoặc \textbf{phát tán} (loss tăng, không hội tụ).
+\item \textbf{Quá nhỏ:} hội tụ chậm, dễ kẹt ở vùng \textbf{gradient nhỏ}, tốn thời gian huấn luyện.
+\end{itemize}
+
+\paragraph{Câu 4.} Overfitting và underfitting là gì?
+
+\medskip\noindent\textbf{Trả lời.}
+\begin{itemize}[nosep]
+\item \textbf{Underfitting:} mô hình \textbf{quá đơn giản} so với dữ liệu; không nắm được quy luật cốt lõi, nên sai cả trên tập huấn luyện và tập kiểm tra.
+\item \textbf{Overfitting:} mô hình \textbf{quá phức tạp} hoặc học quá kỹ; khớp nhiễu và chi tiết riêng của tập huấn luyện, khiến \textbf{lỗi trên tập kiểm tra} tệ dù lỗi huấn luyện nhỏ.
+\end{itemize}
+
+\paragraph{Câu 5.} Regularization là gì? Vì sao cần regularization?
+
+\medskip\noindent\textbf{Trả lời.} \textbf{Regularization} là kỹ thuật thêm \textbf{độ phạt} vào hàm mục tiêu nhằm hạn chế mô hình quá phức tạp (thường phạt độ lớn trọng số, ví dụ $L_2$ ridge, $L_1$ lasso).
+
+\textbf{Lý do cần thiết:} giúp cải thiện \textbf{khái quát}, giảm overfitting, ổn định nghiệm khi dữ liệu nhiễu hoặc đa cộng tuyến; đôi khi đồng thời chọn lọc đặc trưng (lasso).

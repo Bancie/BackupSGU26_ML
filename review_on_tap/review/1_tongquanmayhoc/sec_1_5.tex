@@ -1,0 +1,41 @@
+\section*{1.5. Đánh giá mô hình}
+
+\paragraph{Câu 1.} Accuracy là gì? Khi nào accuracy không phù hợp để đánh giá mô hình?
+
+\medskip\noindent\textbf{Trả lời.} \textbf{Accuracy} (độ chính xác tổng thể) là tỷ lệ dự đoán đúng trên tổng số mẫu.
+
+Accuracy \textbf{kém tin cậy} khi:
+\begin{itemize}[nosep]
+\item Dữ liệu \textbf{mất cân bằng lớp} (một lớp chiếm đa số lớn)---mô hình ``luôn đoán lớp đa số'' vẫn accuracy cao.
+\item Chi phí \textbf{sai khác nhau giữa các kiểu lỗi} (ví dụ bỏ sót bệnh nghiêm trọng đắt hơn báo động giả).
+\item Cần biết chất lượng \textbf{từng lớp} thay vì chỉ tỷ lệ đúng chung.
+\end{itemize}
+
+\paragraph{Câu 2.} Ma trận nhầm lẫn (confusion matrix) là gì?
+
+\medskip\noindent\textbf{Trả lời.} Ma trận nhầm lẫn là bảng đếm (hoặc tỷ lệ) so sánh \textbf{nhãn thực} và \textbf{nhãn dự đoán} trong phân lớp. Với phân lớp nhị phân, các ô thường gồm \textbf{true positive, true negative, false positive, false negative}. Ma trận cho thấy mô hình nhầm theo \textbf{hướng nào} (ghi nhận nhầm lớp dương, bỏ sót lớp dương, \ldots).
+
+\paragraph{Câu 3.} Precision, Recall, F1-score là gì? Khi nào nên ưu tiên Recall hơn Precision?
+
+\medskip\noindent\textbf{Trả lời.} Với lớp dương quan tâm:
+\begin{itemize}[nosep]
+\item \textbf{Precision} (độ chính xác dương): trong số mẫu d báo dương, bao nhiêu thật sự dương. Đo ``tin cậy khi báo có''.
+\item \textbf{Recall} (độ phủ, sensitivity): trong số mẫu thật dương, bao nhiêu được tìm ra. Đo ``khả năng không bỏ sót dương''.
+\item \textbf{F1-score:} trung bình điều hòa của precision và recall, cân bằng hai mặt.
+\end{itemize}
+\textbf{Ưu tiên recall hơn} khi chi phí \textbf{bỏ sót dương} rất cao, ví dụ sàng lọc bệnh nguy hiểm, phát hiện xâm nhập: ta chấp nhận nhiều cảnh báo nhầm hơn là bỏ qua tình huống dương thật.
+
+\paragraph{Câu 4.} Phân biệt Sensitivity và Specificity.
+
+\medskip\noindent\textbf{Trả lời.} Trong phân lớp nhị phân (thường ``có tình trạng'' vs ``không''):
+\begin{itemize}[nosep]
+\item \textbf{Sensitivity (độ nhạy):} tỷ lệ \textbf{thật dương} được nhận ra đúng---trùng \textbf{recall} của lớp dương (TP/(TP+FN)).
+\item \textbf{Specificity (độ đặc hiệu):} tỷ lệ \textbf{thật âm} được nhận ra đúng (TN/(TN+FP)). Đo khả năng tránh báo động sai trên lớp âm.
+\end{itemize}
+Hai chỉ số bổ sung cho nhau khi cần cân nhắc \textbf{cả hai loại sai lệch}.
+
+\paragraph{Câu 5.} ROC curve và AUC là gì?
+
+\medskip\noindent\textbf{Trả lời.} \textbf{Đường cong ROC} là đồ thị mô tả đổi ngược giữa \textbf{tỷ lệ dương thật} (độ nhạy, recall) và \textbf{tỷ lệ dương giả} trên lớp âm thật, khi ta thay đổi \textbf{ngưỡng} phân lớp của mô hình cho điểm xếp hạng.
+
+\textbf{AUC (area under ROC)} là diện tích dưới đường ROC; tóm tắt hiệu năng trên nhiều ngưỡng. AUC gần 1 nghĩa là mô hình có khả năng \textbf{phân hạng} tốt (dương thường có điểm cao hơn âm); AUC $\approx 0{,}5$ gần như ngẫu nhiên. AUC có thể lạc quan khi mất cân bằng lớp nặng; khi đó cần thêm \textbf{PR curve / PR-AUC}.
