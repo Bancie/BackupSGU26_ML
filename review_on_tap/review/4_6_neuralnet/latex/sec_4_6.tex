@@ -1,0 +1,115 @@
+\section*{Bài tập 4.6 --- Mô hình Neural Network}
+
+%--------------------------------------------------------------------
+\subsection*{Câu 4.6.1 --- Perceptron cho đường biên}
+
+Đường cho trước $x_2 = -\tfrac{3}{2}x_1 + 3$. Đưa về dạng $\mathbf{w}^\top\mathbf{x}+b=0$ (nhân hai vế cho gọn):
+\[
+\tfrac{3}{2}x_1 + x_2 - 3 = 0.
+\]
+Có thể chọn $\mathbf{w} = \bigl(\tfrac{3}{2},\,1\bigr)^\top$, $b=-3$, hoặc nhân $2$: $\mathbf{w}=(3,2)^\top$, $b=-6$.\\
+Hàm bước $\tau(s)=+1$ nếu $s\ge 0$, $-1$ nếu $s<0$; đầu ra $y=\tau(\mathbf{w}^\top\mathbf{x}+b)$.
+
+%--------------------------------------------------------------------
+\subsection*{Câu 4.6.2}
+
+\paragraph{(a)} Trong mạch có bias $-3$, trọng số $x_1$ là $2$, $x_2$ là $1$ (ký hiệu tuyến tính $2x_1+x_2-3$), nên đường biên
+\[
+2x_1 + x_2 - 3 = 0.
+\]
+
+\paragraph{(b)} Với $\mathbf{x}^{(1)}=(-1,0)$: $s = 2(-1)+0-3=-5<0 \Rightarrow y=-1$.\\
+Với $\mathbf{x}^{(2)}=(2,0)$: $s=4+0-3=1\ge 0 \Rightarrow y=+1$.
+
+\paragraph{(c)} Đường qua $(2,0)$ và $(0,-1)$ thỏa $x_1-2x_2-2=0$. Viết theo thứ tự hệ số bias, $x_1$, $x_2$: lấy $w_0=-2$, $w_1=1$, $w_2=-2$ (tức $-2+x_1-2x_2=0$, cùng đường).
+
+\paragraph{(d)} \textbf{OR:} các điểm $(1,0)$, $(0,1)$, $(1,1)$ nhãn $+1$, $(0,0)$ nhãn $-1$.\\
+Chọn $s = -\tfrac{1}{2}+x_1+x_2$: tại $(0,0)$ có $s=-\tfrac{1}{2}$; tại $(1,0)$, $(0,1)$ có $s=\tfrac{1}{2}$; tại $(1,1)$ có $s=\tfrac{3}{2}$ — đúng bảng OR.\\
+\textbf{AND:} chỉ $(1,1)$ nhãn $+1$. Với $s=-\tfrac{3}{2}+x_1+x_2$ thì $(0,0),(1,0),(0,1)$ cho $s<0$ và $(1,1)$ cho $s=\tfrac{1}{2}\ge 0$.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\linewidth]{figures/fig_or_and.pdf}
+  \caption{Đường biên minh họa cho OR và AND.}
+\end{figure}
+
+%--------------------------------------------------------------------
+\subsection*{Câu 4.6.3 --- OR và GD batch trên tập sai}
+
+Bốn mẫu $(x_1,x_2)\in\{0,1\}^2$ với $(0,0)\mapsto -1$ và ba mẫu còn lại $\mapsto +1$ được tách đúng hoàn toàn bởi $s=-\tfrac{1}{2}+x_1+x_2$ như đã kiểm tra ở Câu~4.6.2(d).
+
+\paragraph{(a)} Với $J(\mathbf{w},b)=\sum_{i\in Y}(-t_i)\bigl(\mathbf{w}^\top\mathbf{x}_i+b\bigr)$ ($Y$ là tập mẫu bị phân lớp sai),
+\[
+\frac{\partial J}{\partial \mathbf{w}}=\sum_{i\in Y}(-t_i)\mathbf{x}_i,\qquad
+\frac{\partial J}{\partial b}=\sum_{i\in Y}(-t_i).
+\]
+Cập nhật gradient (bước $\rho>0$): $\mathbf{w}\leftarrow \mathbf{w}-\rho\,\partial J/\partial\mathbf{w}$, $b\leftarrow b-\rho\,\partial J/\partial b$.
+
+\paragraph{(b)} \emph{Batch:} lặp cho đến khi không còn mẫu sai: mỗi vòng tìm hết chỉ số sai, gom vào $Y$; nếu $Y=\varnothing$ thì dừng; nếu không, cập nhật một lần từ toàn bộ $Y$ như trên.
+
+\paragraph{(c)} Đường ngang $x_2=\tfrac{1}{2}$ viết được $0\cdot x_1 + 1\cdot x_2 - \tfrac{1}{2}=0$, nên khởi tạo $\mathbf{w}(0)=(0,1)^\top$, $b(0)=-\tfrac{1}{2}$.
+
+\paragraph{(d)} Với $\rho=0{,}4$, bước khởi tạo chỉ sai mẫu $(1,0)$ nhãn $+1$. Ta có $\partial J/\partial\mathbf{w}=(-1,0)^\top$, $\partial J/\partial b=-1$, nên
+\[
+\mathbf{w}(1)=\mathbf{w}(0)-\rho(-1,0)^\top=\bigl(\tfrac{2}{5},\,1\bigr)^\top,\qquad
+b(1)=-\tfrac{1}{2}-\rho(-1)=-\tfrac{1}{10},
+\]
+và lúc này mọi mẫu đều đúng. Các đường phân cách ở từng bước được vẽ trong hình sau.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.62\linewidth]{figures/fig_perceptron_gd.pdf}
+  \caption{Các đường trước và sau một bước GD batch ($\rho=0{,}4$).}
+\end{figure}
+
+%--------------------------------------------------------------------
+\subsection*{Câu 4.6.4 --- Lan truyền thuận MLP}
+
+Đầu vào $(x_1,x_2)=(1,1)$, hàm $\tau$ là dấu ($\ge 0$ thì $+1$, ngược lại $-1$).\\
+Neuron~1: $s_1=-\tfrac{1}{2}+1+1=\tfrac{3}{2}\ge 0 \Rightarrow +1$.\\
+Neuron~2: $s_2=\tfrac{3}{2}-1-1=-\tfrac{1}{2}<0 \Rightarrow -1$.\\
+Neuron~3: $s_3=-1+(+1)+(-1)=-1<0 \Rightarrow -1$.
+
+%--------------------------------------------------------------------
+\subsection*{Câu 4.6.5 --- Hồi quy tuyến tính một chiều}
+
+Bốn điểm $(0,1)$, $(1,3)$, $(2,5)$, $(3,7)$ nằm trên $y=2x+1$. Đặt $m=4$, $J(w,b)=\dfrac{1}{2m}\sum_{i=1}^4\bigl(y_i-wx_i-b\bigr)^2$.
+
+\paragraph{(a)} Đạo hàm
+\[
+\frac{\partial J}{\partial w}=-\frac{1}{m}\sum_{i=1}^m\bigl(y_i-wx_i-b\bigr)x_i,\qquad
+\frac{\partial J}{\partial b}=-\frac{1}{m}\sum_{i=1}^m\bigl(y_i-wx_i-b\bigr).
+\]
+Cập nhật batch GD: $w\leftarrow w-\rho\,\partial J/\partial w$, $b\leftarrow b-\rho\,\partial J/\partial b$.
+
+\paragraph{(b)} Thuật toán: khởi tạo $w,b$; lặp cho đến khi đủ số vòng hoặc đạt tiêu chí dừng — mỗi vòng tính $\partial J/\partial w$, $\partial J/\partial b$ trên cả $m$ mẫu rồi cập nhật một lần như trên.
+
+Tại khởi tạo của mục~(c) ($w=0$, $b=1$ nên $\hat y\equiv 1$), phần dư $(y_i-\hat y_i)$ lần lượt là $0,2,4,6$, nên
+\[
+\frac{\partial J}{\partial w}=-\tfrac{1}{4}(0+2+8+18)=-7,\qquad
+\frac{\partial J}{\partial b}=-\tfrac{1}{4}(0+2+4+6)=-3,
+\]
+và $J=\dfrac{1}{8}(0^2+2^2+4^2+6^2)=\dfrac{56}{8}=7$.
+
+\paragraph{(c)} Đường nằm ngang $\hat y=1$ ứng $w(0)=0$, $b(0)=1$.
+
+\paragraph{(d)} Với $\rho=0{,}1$, ba vòng cập nhật sau khởi tạo cho:
+\begin{center}
+\begin{tabular}{@{}rlll@{}}
+Vòng & $w$ & $b$ & $J$ \\ \hline
+$0$ & $0$ & $1$ & $7$ \\
+$1$ & $0{,}7$ & $1{,}3$ & $2{,}4175$ \\
+$2$ & $1{,}11$ & $1{,}465$ & $0{,}8735125$ \\
+$3$ & $1{,}35175$ & $1{,}552$ & $\approx 0{,}3510$
+\end{tabular}
+\end{center}
+(chữ số đầy đủ sau vòng $3$: $J\approx 0{,}3510001$).
+
+\paragraph{(e)} Hình~\ref{fig:reg46} minh họa các đường hồi quy sau mỗi lần cập nhật so với dữ liệu.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\linewidth]{figures/fig_regression_gd.pdf}
+  \caption{Các đường $\hat y=wx+b$ qua các vòng GD ($\rho=0{,}1$).}
+  \label{fig:reg46}
+\end{figure}
