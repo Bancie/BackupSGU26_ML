@@ -207,6 +207,9 @@ tools/mcp/
 # FAISS / embedding index cache (mcp/eda.py)
 **/.eda_faiss_index/
 
+# macOS
+.DS_Store
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
