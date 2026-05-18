@@ -1,0 +1,31 @@
+\subsection*{A.10. Neural network (§4.6, Bài tập 09)}
+\textbf{Perceptron / hàm bước:} \(s=\sum w_j x_j+b\); \(\tau(s)=+1\) nếu \(s\ge 0\) else \(-1\).
+
+\textbf{MLP (ví dụ):} \(h=\mathrm{ReLU}(W^{(1)}x+b^{(1)})\), \(z=W^{(2)}h+b^{(2)}\), \(y=\mathrm{softmax}(z)\).
+
+\textbf{CNN --- kích thước đầu ra conv:}
+\[
+H_{\mathrm{out}}=\Bigl\lfloor\frac{H+2P-K}{S}\Bigr\rfloor+1
+\]
+(tương tự chiều rộng). Conv \emph{valid}: không padding.
+
+\textbf{Tham số:}
+\[
+N_{\mathrm{Conv2D}}=(K_h K_w C_{\mathrm{in}}+1)\,C_{\mathrm{out}},\qquad
+N_{\mathrm{Dense}}=n_{\mathrm{in}}n_{\mathrm{out}}+n_{\mathrm{out}}.
+\]
+
+\textbf{RNN:}
+\[
+s_t=\tanh(Ux_t+Ws_{t-1}+b),\qquad o_t=\mathrm{softmax}(Vs_t+c).
+\]
+
+\textbf{LSTM} (\(\sigma\) sigmoid, \(\odot\) Hadamard, nối \([h_{t-1},x_t]\)):
+\begin{align*}
+f_t&=\sigma(W_f[h_{t-1},x_t]+b_f), &
+i_t&=\sigma(W_i[h_{t-1},x_t]+b_i),\\
+\tilde C_t&=\tanh(W_C[h_{t-1},x_t]+b_C), &
+C_t&=f_t\odot C_{t-1}+i_t\odot\tilde C_t,\\
+o_t&=\sigma(W_o[h_{t-1},x_t]+b_o), &
+h_t&=o_t\odot\tanh(C_t).
+\end{align*}

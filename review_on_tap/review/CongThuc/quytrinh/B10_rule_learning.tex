@@ -1,0 +1,10 @@
+\subsection*{B.10. PRISM \& FOIL}
+\textit{Công thức: A.9.}
+\begin{enumerate}
+  \item \textbf{PRISM} (theo lớp \(c\)): trên tập \(U\) hiện tại, với mỗi literal tính \(P(c\mid\ell)\); chọn max (tie-break cover).
+  \item Thêm literal vào luật; khi luật hoàn chỉnh, loại mẫu đã cover; lặp cho đến hết mẫu dương (hoặc âm).
+  \item Tính Coverage/Accuracy từng luật trên \(|T|\) nếu đề hỏi.
+  \item \textbf{FOIL}: khởi tạo luật rỗng; mỗi vòng tính FOIL-Gain cho literal khả dụng (\(p_1,n_1\) sau lọc); thêm literal gain max.
+  \item Dừng khi luật không còn mẫu âm trong tập lọc; lặp cho mẫu dương chưa cover; default rule nếu đề có.
+  \item Conflict resolution: áp thứ tự/độ cụ thể theo quy ước đề.
+\end{enumerate}

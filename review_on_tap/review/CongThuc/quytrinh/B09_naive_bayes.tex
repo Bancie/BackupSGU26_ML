@@ -1,0 +1,8 @@
+\subsection*{B.9. Naive Bayes + Laplace}
+\textit{Công thức: A.8.}
+\begin{enumerate}
+  \item Đếm \(n,n_c\); Laplace tiên nghiệm và likelihood rời rạc (\(n_{v,c}+1)/(n_c+V)\).
+  \item Biến liên tục: \(\mu_c,s_c\) mỗi lớp, log mật độ Gaussian.
+  \item Mẫu mới: cộng \(\log P(c)+\sum_j\log P(v_j\mid c)\); bỏ thuộc tính thiếu nếu đề nói không quan sát.
+  \item Multinomial: nhân (log) theo tần suất token; chọn lớp có score lớn nhất.
+\end{enumerate}

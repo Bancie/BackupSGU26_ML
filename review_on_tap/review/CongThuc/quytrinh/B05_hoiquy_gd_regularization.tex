@@ -1,0 +1,8 @@
+\subsection*{B.5. Batch GD \& regularization}
+\textit{Công thức: A.5.}
+\begin{enumerate}
+  \item Viết \(J\) và \(\partial J/\partial w\), \(\partial J/\partial b\) tại tham số hiện tại.
+  \item Cập nhật \(w\leftarrow w-\eta\partial J/\partial w\), \(b\leftarrow b-\eta\partial J/\partial b\); lặp nếu đề yêu cầu nhiều vòng.
+  \item Ridge/Lasso/Elastic Net: tính SSE và penalty riêng, cộng thành Loss tổng.
+  \item Giải thích ngắn: penalty lớn \(\Rightarrow\) hệ số nhỏ hơn, giảm overfitting (Lasso có thể đưa hệ số về 0).
+\end{enumerate}

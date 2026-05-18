@@ -1,0 +1,20 @@
+\subsection*{A.9. Rule-based learning (Bài tập 06)}
+\textbf{PRISM:} chọn literal \(\ell\) tối đa hoá
+\[
+P(c\mid\ell)=\frac{\#\text{(thỏa }\ell\text{ và thuộc }c)}{\#\text{(thỏa }\ell)}.
+\]
+Hòa thì chọn literal cover nhiều mẫu hơn. Sau mỗi luật hoàn chỉnh, loại mẫu đã cover khỏi \(U\).
+
+\textbf{Coverage \& Accuracy luật} (trên \(|T|\)):
+\[
+\mathrm{Coverage}(R)=\frac{\#\text{(antecedent)}}{|T|},\qquad
+\mathrm{Accuracy}(R)=\frac{\#\text{(antecedent }\land\text{ consequent)}}{\#\text{(antecedent)}}.
+\]
+
+\textbf{FOIL-Gain} (lớp dương, \(p_0,n_0\) trước thêm \(\ell\); \(p_1,n_1\) sau):
+\[
+\mathrm{Gain}_{\mathrm{FOIL}}(R,\ell)=p_1\Bigl[\log_2\frac{p_1}{p_1+n_1}-\log_2\frac{p_0}{p_0+n_0}\Bigr].
+\]
+Thêm literal có gain lớn nhất; lặp đến khi luật ``sạch'' hoặc hết literal khả dụng.
+
+\textbf{Conflict resolution:} thứ tự luật, độ cụ thể, hoặc accuracy --- theo quy ước đề.

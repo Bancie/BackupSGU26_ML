@@ -1,0 +1,26 @@
+\subsection*{A.4. Cây quyết định (§4.1, Bài tập 03)}
+\(p_c=n_c/N\) trong nút có \(N\) mẫu; \(\log\) là \(\log_2\) trừ khi đề chỉ định khác.
+
+\textbf{Entropy:}
+\[
+H(S)=-\sum_c p_c\log p_c.
+\]
+
+\textbf{Information Gain (ID3/C4.5, tách đa nhánh):}
+\[
+H_{\text{after}}(A)=\sum_v \frac{|S_v|}{|S|}\,H(S_v),\qquad
+\mathrm{Gain}(S,A)=H(S)-H_{\text{after}}(A).
+\]
+
+\textbf{Gini:}
+\[
+i(S)=1-\sum_c p_c^2,\qquad
+G_{\text{after}}(A)=\sum_v \frac{|S_v|}{|S|}\,i(S_v).
+\]
+Chọn \(\arg\min_A G_{\text{after}}(A)\).
+
+\textbf{Lỗi phân loại có trọng số:}
+\[
+\mathrm{mis}(S)=1-\max_c\frac{n_c}{N},\qquad
+\mathrm{Err}_{\text{after}}(A)=\sum_v \frac{|S_v|}{|S|}\,\mathrm{mis}(S_v).
+\]

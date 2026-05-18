@@ -1,0 +1,10 @@
+\subsection*{B.11. MLP / CNN / RNN / LSTM}
+\textit{Công thức: A.10.}
+\begin{enumerate}
+  \item Perceptron: đưa đường thẳng về \(w^\top x+b=0\); kiểm tra điểm bằng \(\tau(s)\).
+  \item MLP forward: tính lần lượt từng lớp (ReLU/softmax theo đề); ghi kích thước ma trận trọng số.
+  \item CNN: áp công thức \(H_{\mathrm{out}}\) cho conv; tích chập valid tay nếu đề cho ma trận nhỏ; max-pool lấy max vùng.
+  \item Đếm tham số Conv2D và Dense theo công thức; lập bảng kích thước tensor qua các tầng.
+  \item RNN: tính \(s_t\), \(o_t\) tuần tự theo thời gian.
+  \item LSTM: tính \(f_t,i_t,\tilde C_t,C_t,o_t,h_t\) theo thứ tự công thức cổng.
+\end{enumerate}

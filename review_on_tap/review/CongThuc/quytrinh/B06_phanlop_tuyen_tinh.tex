@@ -1,0 +1,9 @@
+\subsection*{B.6. Sign / hinge / Perceptron (PLA)}
+\textit{Công thức: A.6.}
+\begin{enumerate}
+  \item Tính \(s_k=w^\top x_k+b\); kiểm tra \(\hat y_k=\mathrm{sign}(s_k)\) hoặc điều kiện PLA \(t_k s_k>0\).
+  \item Xác định tập sai \(\mathcal Y\) hoặc mẫu sai đầu tiên theo thứ tự đề.
+  \item Hinge batch: tính \(\partial J\), cập nhật \(w\leftarrow w-\rho\partial J/\partial w\) (dấu trừ).
+  \item Rosenblatt một mẫu: \(w\leftarrow w+\rho t x\), \(b\leftarrow b+\rho t\) (dấu cộng).
+  \item Viết đường ranh giới \(w^\top x+b=0\) sau cập nhật.
+\end{enumerate}

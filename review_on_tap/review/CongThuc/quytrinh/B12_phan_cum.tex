@@ -1,0 +1,9 @@
+\subsection*{B.12. K-means \& phân cụm phân cấp}
+\textit{Công thức: A.11.}
+\begin{enumerate}
+  \item Khởi tạo tâm \(C_j^{(0)}\) theo đề.
+  \item Gán: mỗi điểm vào tâm gần nhất (Euclidean); ghi quy tắc phá hoà nếu bằng nhau.
+  \item Cập nhật tâm = trung bình điểm trong cụm; lặp đến hội tụ.
+  \item Single linkage: ma trận khoảng cách điểm--điểm; ghép min; cập nhật \(d_{\mathrm{single}}\) giữa cụm mới và các cụm còn lại.
+  \item Ghi độ cao từng bước trên dendrogram.
+\end{enumerate}

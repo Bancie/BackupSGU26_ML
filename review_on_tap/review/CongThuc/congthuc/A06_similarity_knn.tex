@@ -1,0 +1,23 @@
+\subsection*{A.7. Similarity-based learning (§4.4, Bài tập 05)}
+\textbf{Euclidean:}
+\[
+d(\mathbf{x},\mathbf{q})=\sqrt{\sum_\ell(x_\ell-q_\ell)^2}.
+\]
+
+\textbf{Hamming} (nhị phân): \(\sum_i|u_i-v_i|\).
+
+\textbf{k-NN:} \(K\) láng giềng gần nhất \(\Rightarrow\) bỏ phiếu đa số.
+
+\textbf{Weighted k-NN:} trọng số \(w_i\propto 1/d_i\) (hoặc kernel); chọn lớp có tổng trọng số lớn nhất.
+
+\textbf{Nearest centroid:}
+\[
+\boldsymbol\mu_c=\frac1{|S_c|}\sum_{x\in S_c}x,\qquad
+\hat c=\arg\min_c d(\mathbf{x},\boldsymbol\mu_c).
+\]
+
+\textbf{LWR (Locally Weighted Regression):}
+\[
+h(x)=\frac{\sum_i K(x,x_i)\,y_i}{\sum_i K(x,x_i)},
+\]
+với kernel Gaussian \(K(x,x_i)=\exp\bigl(-\|x-x_i\|^2/(2\tau^2)\bigr)\) (theo quy ước đề).

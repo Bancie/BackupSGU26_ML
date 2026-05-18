@@ -1,0 +1,31 @@
+\subsection*{A.5. Hồi quy, OLS, GD \& regularization (Bài tập 07--08, §4.2)}
+Mô hình tuyến tính: \(\hat y_i=\beta_0+\beta_1 x_i\) hoặc \(\hat{\mathbf{y}}=\mathbf{X}\boldsymbol{\beta}\).
+
+\textbf{OLS một biến (Bài tập 07):}
+\[
+SS_{xy}=\sum_i(x_i-\bar x)(y_i-\bar y),\quad SS_x=\sum_i(x_i-\bar x)^2,\qquad
+\hat\beta_1=\frac{SS_{xy}}{SS_x},\quad \hat\beta_0=\bar y-\hat\beta_1\bar x.
+\]
+
+\textbf{Phương trình chuẩn ma trận:}
+\[
+\hat{\boldsymbol\beta}=(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{Y}.
+\]
+
+\textbf{Hồi quy đa thức:} tạo cột \(x,x^2,\ldots\) rồi OLS như trên.
+
+\textbf{Batch GD (MSE, hệ số \(1/(2m)\) trong lời giải §4.2):}
+\[
+J=\frac1{2m}\sum_i(y_i-\hat y_i)^2,\quad
+\frac{\partial J}{\partial w}=-\frac1m\sum_i(y_i-\hat y_i)x_i,\quad
+\frac{\partial J}{\partial b}=-\frac1m\sum_i(y_i-\hat y_i),
+\]
+\[
+w\leftarrow w-\eta\frac{\partial J}{\partial w},\quad b\leftarrow b-\eta\frac{\partial J}{\partial b}.
+\]
+
+\textbf{Ridge:} \(\mathrm{Loss}=SSE+\lambda\sum_j a_j^2\).
+
+\textbf{Lasso:} \(\mathrm{Loss}=SSE+\lambda\sum_j|a_j|\).
+
+\textbf{Elastic Net:} \(\mathrm{Loss}=SSE+\lambda_1\sum_j|a_j|+\lambda_2\sum_j a_j^2\).

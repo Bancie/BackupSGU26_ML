@@ -1,0 +1,10 @@
+\subsection*{B.8. k-NN, weighted, centroid, LWR, Hamming}
+\textit{Công thức: A.7.}
+\begin{enumerate}
+  \item Mã hoá đặc trưng; Min--Max nếu đề yêu cầu (fit trên train).
+  \item Tính khoảng cách (Euclidean hoặc Hamming) tới mọi điểm huấn luyện; sắp tăng.
+  \item k-NN: lấy \(K\) láng giềng, bỏ phiếu đa số (thử \(K\) khác nếu đề nhắc).
+  \item Weighted k-NN: \(w_i\propto 1/d_i\), cộng trọng số theo lớp.
+  \item Nearest centroid: tính \(\mu_c\), chọn \(\arg\min_c d(x,\mu_c)\).
+  \item LWR: tính trọng số kernel tại \(x\), \(h(x)=\sum w_i y_i/\sum w_i\).
+\end{enumerate}

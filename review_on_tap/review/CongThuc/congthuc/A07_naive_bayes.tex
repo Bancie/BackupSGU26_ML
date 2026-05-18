@@ -1,0 +1,25 @@
+\subsection*{A.8. Naive Bayes \& Laplace (§4.5, Bài tập 04)}
+\[
+\tilde P(c\mid\mathbf v)\propto P(c)\prod_j P(v_j\mid c)\quad\text{(so sánh bằng }\log\text{).}
+\]
+
+\textbf{Tiên nghiệm} (\(\alpha{=}1\)):
+\[
+P(c)=\frac{n_c+\alpha}{n+\alpha|\mathcal C|}.
+\]
+
+\textbf{Rời rạc} (\(V\) giá trị khả dụng):
+\[
+P(v\mid c)=\frac{n_{v,c}+1}{n_c+V}.
+\]
+
+\textbf{Gaussian} (một chiều, lớp \(c\)):
+\[
+f(x\mid c)=\frac1{\sqrt{2\pi}\,s_c}\exp\Bigl(-\frac{(x-\mu_c)^2}{2s_c^2}\Bigr),
+\]
+\(\mu_c,s_c\) là trung bình và độ lệch chuẩn mẫu trên lớp \(c\).
+
+\textbf{Multinomial (bag-of-words):}
+\[
+P(w_i\mid c)=\frac{N_{i,c}+1}{N_c^{\mathrm{tok}}+V}.
+\]

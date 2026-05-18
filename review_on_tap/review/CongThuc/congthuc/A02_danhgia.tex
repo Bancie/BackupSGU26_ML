@@ -1,0 +1,37 @@
+\subsection*{A.3. Đánh giá mô hình (Ch.\,3, Bài tập 01/08)}
+Confusion matrix: hàng = nhãn thực, cột = nhãn dự đoán.
+
+\paragraph{Đa lớp.}
+\begin{align*}
+\textit{accuracy} &= \frac{\sum_k \mathrm{TP}_k}{n},\\
+\mathrm{Precision}_k &= \frac{\mathrm{TP}_k}{\text{tổng cột đoán là } k},\qquad
+\mathrm{Recall}_k=\frac{\mathrm{TP}_k}{\text{tổng hàng thực là } k},\\
+\mathrm{F1}_k &= \frac{2\,\mathrm{Precision}_k\,\mathrm{Recall}_k}{\mathrm{Precision}_k+\mathrm{Recall}_k}.
+\end{align*}
+
+\paragraph{Nhị phân (lớp dương).}
+\begin{align*}
+\textit{accuracy} &= \frac{\mathrm{TP}+\mathrm{TN}}{n},\qquad
+\textit{precision}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}},\\
+\textit{recall}=\mathrm{TPR}&=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}},\qquad
+\textit{specificity}=\mathrm{TNR}=\frac{\mathrm{TN}}{\mathrm{TN}+\mathrm{FP}},\\
+\mathrm{F1}&=\frac{2\,\textit{precision}\,\textit{recall}}{\textit{precision}+\textit{recall}},\qquad
+\textit{prevalence}=\frac{\mathrm{TP}+\mathrm{FN}}{n}.
+\end{align*}
+
+\paragraph{Hồi quy (Bài tập 08).}
+Phần dư: \(e_i=y_i-\hat y_i\) (hoặc quy ước đề có thể dùng \(\hat y_i-y_i\)).
+\[
+SSE=\sum_i e_i^2,\quad
+MAE=\frac1n\sum_i|e_i|,\quad
+MSE=\frac1n\sum_i e_i^2,\quad
+RMSE=\sqrt{MSE}.
+\]
+RelMSE trên tập kiểm tra (mẫu số dùng \(\bar y\) huấn luyện theo đề):
+\[
+\mathrm{RelMSE}=\frac{\sum_i(y_i-\hat y_i)^2}{\sum_i(y_i-\bar y_{\mathrm{train}})^2},\qquad
+CV=\frac{RMSE}{\bar y_{\mathrm{train}}}.
+\]
+\[
+R^2=1-\frac{SSE}{SST},\quad SST=\sum_i(y_i-\bar y)^2.
+\]

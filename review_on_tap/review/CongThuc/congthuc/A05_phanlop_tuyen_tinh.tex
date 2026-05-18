@@ -1,0 +1,33 @@
+\subsection*{A.6. Phân lớp tuyến tính, Perceptron, logistic (§4.3, Bài tập 07--08)}
+Nhãn \(t\in\{-1,+1\}\) hoặc \(y\in\{0,1\}\).
+
+\textbf{Sign classifier:}
+\[
+\hat y=\mathrm{sign}(w^\top x+b),\qquad
+\mathrm{sign}(z)=\begin{cases}+1,& z\ge 0,\\-1,& z<0.\end{cases}
+\]
+
+\textbf{PLA (Perceptron):} mẫu đúng khi \(t_k(w^\top x_k+b)>0\); cập nhật trên mẫu sai:
+\(w\leftarrow w+\rho\,t\,x\), \(b\leftarrow b+\rho\,t\).
+
+\textbf{Hinge trên tập sai \(\mathcal Y\):}
+\[
+J=\sum_{k\in\mathcal Y}(-t_k)(w^\top x_k+b),\quad
+\frac{\partial J}{\partial w}=\sum_{k\in\mathcal Y}(-t_k)x_k,\quad
+\frac{\partial J}{\partial b}=\sum_{k\in\mathcal Y}(-t_k),
+\]
+GD batch: \(w\leftarrow w-\rho\,\partial J/\partial w\), \(b\leftarrow b-\rho\,\partial J/\partial b\).
+
+\textbf{Logistic:}
+\[
+\sigma(z)=\frac1{1+e^{-z}},\qquad P(y{=}1\mid x)=\sigma(w^\top x+b).
+\]
+\[
+\text{odds}=\frac{p}{1-p},\qquad \text{logit}=\ln(\text{odds}).
+\]
+
+\textbf{Cross-entropy (một mẫu, \(y_i\in\{0,1\}\), \(z_i=\hat p_i\)):}
+\[
+L_i=-\bigl[y_i\ln z_i+(1-y_i)\ln(1-z_i)\bigr],\qquad
+J=\sum_i L_i\ \text{ hoặc trung bình }J/m.
+\]

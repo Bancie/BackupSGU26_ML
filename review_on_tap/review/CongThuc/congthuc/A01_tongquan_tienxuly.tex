@@ -1,0 +1,24 @@
+\subsection*{A.1. Khái niệm cơ bản (Ch.\,1)}
+\begin{itemize}[nosep]
+  \item Batch / mini-batch / SGD: cập nhật tham số theo gradient ước lượng trên toàn tập / lô / một mẫu.
+  \item Regularization (lý thuyết chung): cộng penalty vào loss, ví dụ \(\lambda\lVert\theta\rVert_2^2\) (ridge) hoặc \(\lambda\lVert\theta\rVert_1\) (lasso).
+\end{itemize}
+
+\subsection*{A.2. Thống kê \& tiền xử lý (Ch.\,2, Bài tập 01--02)}
+Với danh sách giá trị đã sắp tăng có \(n\) phần tử (bỏ qua missing nếu đề yêu cầu tính trên ô có số).
+
+\begin{itemize}[nosep]
+  \item Trung bình: \(\displaystyle \bar x=\frac1n\sum_i x_i\).
+  \item Trung vị: \(n\) lẻ \(\Rightarrow\) phần tử vị trí \(\frac{n+1}2\) (1-based); \(n\) chẵn: trung bình hai phần tử giữa.
+  \item Mốt: giá trị có tần số cao nhất (có thể không có mốt nếu mọi tần bằng 1).
+  \item \(Q_1,Q_3\), \(\mathrm{IQR}=Q_3-Q_1\); Tukey: ngoại lai nhẹ nếu \(x>Q_3+1{,}5\,\mathrm{IQR}\) (hoặc tương tự phía dưới).
+\end{itemize}
+
+\emph{Rời rạc hoá chia đều tần số} (\(k\) lớp): chia \(n\) quan sát đã sắp thành nhóm có số phần tử gần bằng nhau.
+
+\emph{Thang khoảng:} \(W=aV+b\) với \(a>0\) trên các mẫu được xét.
+
+\emph{Min--Max} (fit trên tập huấn luyện, áp cho mẫu mới):
+\[
+x'=\frac{x-x_{\min}}{x_{\max}-x_{\min}}.
+\]

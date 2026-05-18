@@ -1,0 +1,13 @@
+\subsection*{A.11. Phân cụm (Ch.\,5)}
+\textbf{K-means:}
+\begin{enumerate}[label=(\arabic*), nosep]
+\item Gán: \(x\to\arg\min_j d(x,c_j)\).
+\item Cập nhật: \(c_j\leftarrow\mathrm{mean}\{x:x\text{ thuộc cụm }j\}\).
+\end{enumerate}
+Dừng khi gán hoặc tâm không đổi. Tie-break khoảng cách bằng nhau: quy ước trước (vd. cụm chỉ số nhỏ hơn).
+
+\textbf{Single linkage:}
+\[
+d_{\mathrm{single}}(U,V)=\min_{u\in U,v\in V} d(u,v).
+\]
+Ghép cặp có khoảng cách nhỏ nhất; độ cao trên dendrogram = khoảng cách bước hợp nhất.
