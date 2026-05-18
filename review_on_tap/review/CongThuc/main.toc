@@ -1,0 +1,7 @@
+\babel@toc {vietnamese}{}\relax 
+\contentsline {paragraph}{Đa lớp.}{2}{}%
+\contentsline {paragraph}{Nhị phân (lớp dương \(P\) coi trong đề):}{3}{}%
+\contentsline {paragraph}{Tiên nghiệm.}{4}{}%
+\contentsline {paragraph}{Rời rạc có \(V\) giá trị khả dĩ của thuộc tính trong lớp \(c\) (hay \(|\mathcal {V}|\) cấu hình của thuộc tính):}{4}{}%
+\contentsline {paragraph}{Gaussian liên tục trong mỗi lớp \(c\) (một chiều):}{5}{}%
+\contentsline {paragraph}{Multinomial trên bag-of-words:}{5}{}%
