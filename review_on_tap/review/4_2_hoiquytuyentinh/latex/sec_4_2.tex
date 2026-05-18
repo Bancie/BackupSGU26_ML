@@ -1,0 +1,57 @@
+\section*{Câu 4 --- §\,4.2 Mô hình hồi quy tuyến tính}
+
+Cho các điểm dữ liệu $(x,y)$: $(1,2),(2,3),(3,5),(4,4),(5,6)$, $m=5$, mô hình $\hat y_i=w x_i+b$.
+Khởi tạo $w^{(0)}=b^{(0)}=0$, hàm chi phí
+\[
+J(w,b)=\frac{1}{2m}\sum_{i=1}^m \bigl(y_i-(w x_i+b)\bigr)^2,
+\]
+và huấn luyện bằng Batch Gradient Descent với $\eta=0{,}1$.
+
+\paragraph{(a) Biểu thức $J$, $\partial J/\partial w$, $\partial J/\partial b$}
+
+Đặt $\hat y_i=w x_i+b$. Ta có
+\[
+J(w,b)=\frac{1}{2m}\sum_{i=1}^m (y_i-\hat y_i)^2.
+\]
+Đạo hàm riêng (theo quy tắc chuỗi và lấy trung bình trên $m$ mẫu):
+\[
+\frac{\partial J}{\partial w}
+=-\frac{1}{m}\sum_{i=1}^m (y_i-\hat y_i)\,x_i,\qquad
+\frac{\partial J}{\partial b}
+=-\frac{1}{m}\sum_{i=1}^m (y_i-\hat y_i).
+\]
+Với $m=5$ của đề, các tổng trên chạy $i=1,\ldots,5$ với các cặp $(x_i,y_i)$ đã cho.
+
+\paragraph{(b) Một bước Gradient Descent: $w^{(1)}$, $b^{(1)}$}
+
+Tại $w=b=0$ thì $\hat y_i=0$ với mọi $i$, nên $y_i-\hat y_i=y_i$.
+\[
+\sum_{i=1}^5 (y_i-\hat y_i)x_i
+=2\cdot 1+3\cdot 2+5\cdot 3+4\cdot 4+6\cdot 5
+=2+6+15+16+30=69,
+\]
+\[
+\sum_{i=1}^5 (y_i-\hat y_i)=2+3+5+4+6=20.
+\]
+Do đó
+\[
+\frac{\partial J}{\partial w}\Big|_{0,0}=-\frac{69}{5},\qquad
+\frac{\partial J}{\partial b}\Big|_{0,0}=-\frac{20}{5}=-4.
+\]
+Giá trị chi phí lúc đó:
+\[
+J(0,0)=\frac{1}{10}\sum_{i=1}^5 y_i^2
+=\frac{1}{10}(4+9+25+16+36)=\frac{90}{10}=9.
+\]
+Cập nhật một bước với $\eta=0{,}1$:
+\[
+w^{(1)}=0-0{,}1\cdot\Bigl(-\frac{69}{5}\Bigr)=\frac{69}{50}=1{,}38,\qquad
+b^{(1)}=0-0{,}1\cdot(-4)=0{,}4.
+\]
+
+\paragraph{(c) Dự đoán $y$ khi $x=6$ sau bước cập nhật thứ nhất}
+
+Mô hình sau bước một là $\hat y=w^{(1)}x+b^{(1)}$, vậy
+\[
+\hat y(6)=1{,}38\cdot 6+0{,}4=8{,}28+0{,}4=8{,}68.
+\]
