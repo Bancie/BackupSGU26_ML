@@ -1,0 +1,177 @@
+\section*{Câu 1 --- OLS đơn}
+Dữ liệu $(x,y)$: $(1;1{,}2),(2;1{,}8),(3;2{,}6),(4;3{,}2),(5;3{,}8)$. Mô hình $y=a_0+a_1x$.
+
+\paragraph{(a)} Có $n=5$,
+\[
+\bar x=3,\quad \bar y=\frac{12{,}6}{5}=2{,}52,\quad \overline{x^2}=\frac{55}{5}=11,\quad \overline{xy}=\frac{44{,}4}{5}=8{,}88.
+\]
+
+\paragraph{(b)} Hệ số dốc
+\[
+a_1=\frac{\overline{xy}-\bar x\,\bar y}{\overline{x^2}-\bar x^2}
+=\frac{8{,}88-7{,}56}{11-9}=0{,}66.
+\]
+
+\paragraph{(c)} Hệ số chặn $a_0=\bar y-a_1\bar x=2{,}52-0{,}66\cdot 3=0{,}54$.
+
+\paragraph{(d)} Phương trình: $\hat y=0{,}54+0{,}66x$.
+
+\paragraph{(e)} Tuần $7$: $\hat y=0{,}54+0{,}66\cdot 7=5{,}16$.
+Tuần $9$: $\hat y=0{,}54+0{,}66\cdot 9=6{,}48$.
+
+\section*{Câu 2 --- Sai số của mô hình $\hat y=0{,}54+0{,}66x$}
+$\hat y$: $1{,}2$, $1{,}86$, $2{,}52$, $3{,}18$, $3{,}84$.
+
+\paragraph{(b)} Theo đề, $e_i=y_i-\hat y_i$: $0$, $-0{,}06$, $0{,}08$, $0{,}02$, $-0{,}04$.
+
+\paragraph{(c)} $SSE=\sum e_i^2=0{,}012$.
+
+\paragraph{(d)} SSE rất nhỏ so với quy mô dữ liệu; các phần dư gần $0$ nên mô hình này khớp tốt năm điểm đã cho.
+
+\section*{Câu 3 --- MAE, MSE, RMSE}
+Phần dư $y_i-\hat y_i$: $5$, $-10$, $2$, $5$.
+
+\paragraph{(a)} $|e_i|$: $5$, $10$, $2$, $5$.
+
+\paragraph{(b)} $MAE=\frac{1}{4}(5+10+2+5)=5{,}5$.
+
+\paragraph{(c)} $MSE=\frac{1}{4}(25+100+4+25)=\frac{154}{4}=38{,}5$.
+
+\paragraph{(d)} $RMSE=\sqrt{MSE}=\sqrt{38{,}5}\approx 6{,}205$.
+
+\paragraph{(e)} Sai số trung bình theo giá trị tuyệt đối khoảng $5{,}5$ đơn vị; RMSE lớn hơn vì mẫu thứ hai lệch $10$ đơn vị nên bình phương kéo MSE lên.
+
+\section*{Câu 4 --- RelMSE và CV}
+Tập huấn luyện $y$: $80,90,100,110,120$. Tập kiểm tra $(y;\hat y)$: $(80;75)$, $(75;85)$.
+
+\paragraph{(a)} $\bar y_{\text{huấn}}=100$.
+
+\paragraph{(b)} Tử số $\sum (y_i-\hat y_i)^2=5^2+10^2=125$. Mẫu số (dùng $\bar y$ huấn luyện) $(80-100)^2+(75-100)^2=1025$.
+\[
+RelMSE=\frac{125}{1025}=\frac{5}{41}\approx 0{,}122.
+\]
+
+\paragraph{(c)} Trên tập kiểm tra, $MSE=\frac{125}{2}=62{,}5$, $RMSE=\sqrt{62{,}5}\approx 7{,}906$.
+\[
+CV=\frac{RMSE}{\bar y_{\text{huấn}}}\approx \frac{7{,}906}{100}\approx 0{,}079.
+\]
+
+\paragraph{(d)} RelMSE nhỏ hơn $1$ cho thấy sai số dự báo còn nhỏ hơn phần biến thiên quanh trung bình huấn luyện; CV khoảng $8\%$ so với quy mô trung bình — mô hình có tín hiệu dự báo hợp lý trên hai mẫu kiểm tra này (mẫu ít nên nhận xét mang tính minh họa).
+
+\section*{Câu 5 --- Hồi quy ma trận $y=a_0+a_1x$}
+Chồng dữ liệu:
+\[
+X=\begin{bmatrix}1&1\\1&2\\1&3\\1&4\end{bmatrix},\quad
+Y=\begin{bmatrix}1\\3\\4\\8\end{bmatrix}.
+\]
+\[
+X^\top X=\begin{bmatrix}4&10\\10&30\end{bmatrix},\quad
+(X^\top X)^{-1}=\begin{bmatrix}1{,}5&-0{,}5\\-0{,}5&0{,}2\end{bmatrix},\quad
+X^\top Y=\begin{bmatrix}16\\51\end{bmatrix}.
+\]
+Giải $a=(X^\top X)^{-1}X^\top Y$ được $a_0=-1{,}5$, $a_1=2{,}2$. Vậy $\hat y=-1{,}5+2{,}2x$.
+
+\section*{Câu 6 --- Hồi quy đa biến}
+\[
+X=\begin{bmatrix}1&1&4\\1&2&5\\1&3&8\\1&4&2\end{bmatrix},\quad
+Y=\begin{bmatrix}1\\6\\8\\12\end{bmatrix}.
+\]
+\[
+X^\top X=\begin{bmatrix}4&10&19\\10&30&46\\19&46&109\end{bmatrix},\quad
+X^\top Y=\begin{bmatrix}27\\85\\122\end{bmatrix}.
+\]
+\[
+\hat a\approx(-1{,}699;\;3{,}484;\;-0{,}0546)^\top.
+\]
+Với $(x_1,x_2)=(5,6)$: $\hat y\approx 15{,}391$.
+
+\section*{Câu 7 --- Đa thức bậc hai}
+Bảng tổng: $n=4$, $\sum x=10$, $\sum y=29$, $\sum x^2=30$, $\sum x^3=100$, $\sum x^4=354$, $\sum xy=96$, $\sum x^2y=338$.
+
+Hệ chuẩn
+\[
+\begin{bmatrix}4&10&30\\10&30&100\\30&100&354\end{bmatrix}
+\begin{bmatrix}a_0\\a_1\\a_2\end{bmatrix}
+=
+\begin{bmatrix}29\\96\\338\end{bmatrix}.
+\]
+Giải được $a_0=-0{,}75$, $a_1=0{,}95$, $a_2=0{,}75$. Vậy $\hat y=-0{,}75+0{,}95x+0{,}75x^2$.
+
+Với $x=5$: $\hat y=-0{,}75+4{,}75+18{,}75=22{,}75$.
+
+\section*{Câu 8 --- Logistic}
+$p(x)=\dfrac{1}{1+\exp(-(-4+0{,}08x))}$.
+
+\paragraph{(a)--(c)} $x=40$: $z=-0{,}8$, $p\approx 0{,}310$. $x=60$: $z=0{,}8$, $p\approx 0{,}690$. $x=80$: $z=2{,}4$, $p\approx 0{,}917$.
+
+\paragraph{(d)} Ngưỡng $0{,}5$: $40$ điểm $\rightarrow$ rớt; $60$ và $80$ điểm $\rightarrow$ đậu.
+
+\section*{Câu 9 --- Odds và logit}
+\paragraph{(a)--(b)} Với $p=0{,}2$: $\text{odds}=0{,}25$, $\text{logit}=\ln 0{,}25\approx -1{,}386$.
+Với $p=0{,}5$: $\text{odds}=1$, $\text{logit}=0$.
+Với $p=0{,}8$: $\text{odds}=4$, $\text{logit}=\ln 4\approx 1{,}386$.
+
+\paragraph{(c)} Khi $p$ tăng, odds tăng (từ $0{,}25$ lên $1$ rồi $4$); logit đồng biến theo $p$ (âm $\rightarrow 0\rightarrow$ dương).
+
+\section*{Câu 10 --- Logistic hai biến}
+$z=-3+0{,}04x_1+0{,}06x_2$, $p=\sigma(z)$.
+
+\paragraph{(a)--(b)} A $(60,50)$: $z=2{,}4$, $p\approx 0{,}917$. B $(70,80)$: $z=4{,}6$, $p\approx 0{,}990$. C $(40,45)$: $z=1{,}3$, $p\approx 0{,}786$. D $(90,85)$: $z=5{,}7$, $p\approx 0{,}997$.
+
+\paragraph{(c)} Ngưỡng $0{,}5$: cả bốn sinh viên đều có $p\ge 0{,}5$ nên được xếp trúng tuyển theo quy tắc này.
+
+\paragraph{(d)} Ngưỡng $0{,}8$: A, B, D có $p\ge 0{,}8$; C ($\approx 0{,}786$) chưa đạt.
+
+\section*{Câu 11 --- $R^2$}
+$\bar y=20$, $SST=\sum (y_i-\bar y)^2=250$, $SSE=\sum (y_i-\hat y_i)^2=14$.
+\[
+R^2=1-\frac{SSE}{SST}=1-\frac{14}{250}=\frac{236}{250}=0{,}944.
+\]
+
+\paragraph{(e)} Khoảng $94{,}4\%$ biến thiên của $y$ được giải thích bởi mô hình (theo định nghĩa trên); phần còn lại là sai số dư.
+
+\section*{Câu 12 --- Ridge}
+$SSE=40$, $a_1=3$, $\lambda=2$, $Loss_{Ridge}=SSE+\lambda a_1^2$.
+
+\paragraph{(a)} Penalty $=2\cdot 9=18$.
+
+\paragraph{(b)} Tổng loss $=40+18=58$.
+
+\paragraph{(c)} Nếu $\lambda=5$: penalty $=5\cdot 9=45$, tổng loss $=85$ (tăng vì hệ số phạt lớn hơn).
+
+\paragraph{(d)} Thêm hạng phạt $\lambda a_1^2$ kéo hệ số về gần $0$, giảm độ phức tạp tham số nên thường giúp mô hình ít ``khớp nhiễu'' trên tập huấn luyện (giảm overfitting).
+
+\section*{Câu 13 --- Lasso}
+$SSE=40$, $|a_1|+|a_2|+|a_3|=3+2+0{,}5=5{,}5$, $\lambda=2$.
+
+\paragraph{(a)} Tổng giá trị tuyệt đối hệ số $=5{,}5$.
+
+\paragraph{(b)} Penalty Lasso $=2\cdot 5{,}5=11$.
+
+\paragraph{(c)} Loss $=40+11=51$.
+
+\paragraph{(d)} Phạt $L_1$ tạo thành phần ``góc'' ở $0$ nên một số hệ số có thể bị kéo về đúng $0$ --- tương đương loại biến, hỗ trợ chọn đặc trưng.
+
+\section*{Câu 14 --- Elastic Net}
+$SSE=50$, $a=(2,-1,3)^\top$, $\lambda_1=1$, $\lambda_2=0{,}5$, $Loss=SSE+\lambda_1\sum|a_i|+\lambda_2\sum a_i^2$.
+
+\paragraph{(a)} $\lambda_1\sum|a_i|=1\cdot(2+1+3)=6$.
+
+\paragraph{(b)} $\sum a_i^2=4+1+9=14$, $\lambda_2\sum a_i^2=0{,}5\cdot 14=7$.
+
+\paragraph{(c)} Tổng loss $=50+6+7=63$.
+
+\paragraph{(d)} Dùng khi vừa muốn thu gọn hệ số (như Lasso) vừa muốn phạt bình phương ổn định như Ridge, đặc biệt khi nhiều biến tương quan mạnh.
+
+\section*{Câu 15 --- Bài tập tổng hợp}
+Dữ liệu $(x,y)$: $(2;20),(3;25),(5;35),(7;45),(9;55)$.
+
+\paragraph{(a)} OLS cho $\hat y=a_0+a_1x$: $\bar x=5{,}2$, $\bar y=36$, tính tương tự Câu 1 được $a_1=5$, $a_0=10$. Mô hình $\hat y=10+5x$.
+
+\paragraph{(b)} $x=10$: $\hat y=60$.
+
+\paragraph{(c)} Các điểm nằm đúng trên đường thẳng nên phần dư (lý thuyết) bằng $0$; $MAE=MSE=RMSE=0$.
+
+\paragraph{(d)} $R^2=1$ (khớp hoàn hảo trên tập đã cho).
+
+\paragraph{(e)} Quan hệ gần tuyến tính đồng biến mạnh: tăng chi phí quảng cáo thì doanh số tăng tỷ lệ với hệ số $5$ (theo mô hình ước lượng).
