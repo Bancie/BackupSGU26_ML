@@ -1,0 +1,179 @@
+\section*{Phần A --- Công thức cần nhớ}
+
+\subsection*{1. Khái niệm cơ bản (Ch.\,1 --- lược trích có công thức nhẹ)}
+\begin{itemize}[nosep]
+  \item Batch / mini-batch / SGD: cập nhật tham số theo gradient ước lượng trên toàn tập / lô / một mẫu.
+  \item Regularization: thường cộng thêm \(\lambda\lVert \theta\rVert_{1\text{ hoặc }2}^2\) vào loss (ridge/lasso trong lý thuyết chung).
+\end{itemize}
+
+\subsection*{2. Thống kê \& tiền xử lý (Ch.\,2)}
+Với danh sách giá trị đã sắp tăng có \(n\) phần tử.
+
+\begin{itemize}[nosep]
+  \item Trung bình mẫu: \(\displaystyle \bar x=\frac1n\sum_i x_i\).
+  \item Trung vị: \(n\) lẻ \(\Rightarrow\) phần tử vị trí \(\frac{n+1}2\) (đếm \(1\)-based); \(n\) chẵn: thường lấy trung bình hai phần tử giữa.
+  \item Mốt: giá trị có tần số cao nhất (có thể nhiều mốt).
+  \item Tứ phân vị: \(Q_1,Q_3\) theo một quy ước vị trí (đề có thể cho phép hai cách: vị trí nguyên \((n+1)/4\) hoặc nội suy tuyến tính giữa hai quan sát kề).
+  \item Khoảng tứ phân vị: \(\mathrm{IQR}=Q_3-Q_1\).
+  \item Tukey (ngoại lai nhẹ): \(x> Q_3+1{,}5\,\mathrm{IQR}\) (hoặc tương tự phía dưới \(Q_1\)).
+\end{itemize}
+
+\emph{Rời rạc hóa chia đều tần số} \(k\) lớp: chia \(n\) quan sát đã sắp thành nhóm có số phần tử gần bằng nhau (\(\lfloor n/k\rfloor,\ldots\) còn dư chia cho nhóm nhỏ nhất có thể), mỗi nhóm \(\to\) một nhãn rời rạc.
+
+\emph{Thang đo (interval):} \(W\) cùng thông tin thang khoảng với \(V\) khi \(\exists\,a>0,b:\; W=aV+b\) trên các mẫu được xét.
+
+\subsection*{3. Đánh giá mô hình (Ch.\,3)}
+Confusion matrix: hàng = nhãn thực, cột = nhãn dự đoán (giữ cố định quy ước đề).
+
+\paragraph{Đa lớp.}
+Với lớp \(k\): \(\mathrm{TP}_k\) ô chéo; hàng là tần \(k\) trong thực tế; cột là số được dự đoán là \(k\).
+\begin{align*}
+\textit{accuracy} &= \frac{\sum_k \mathrm{TP}_k}{n},\\
+\mathrm{Precision}_k &= \frac{\mathrm{TP}_k}{\text{tổng cột đoán là } k},\qquad
+\mathrm{Recall}_k=\frac{\mathrm{TP}_k}{\text{tổng hàng thực là } k},\\
+\mathrm{F1}_k &= \frac{2\,\mathrm{Precision}_k\,\mathrm{Recall}_k}{\mathrm{Precision}_k+\mathrm{Recall}_k}.
+\end{align*}
+
+\paragraph{Nhị phân (lớp dương \(P\) coi trong đề):}
+Đếm \(\mathrm{TP},\mathrm{FN},\mathrm{FP},\mathrm{TN}\), \(n\) tổng mẫu.
+\begin{align*}
+\textit{accuracy} &= \frac{\mathrm{TP}+\mathrm{TN}}{n},\qquad 1-\textit{accuracy}=\frac{\mathrm{FP}+\mathrm{FN}}{n},\\
+\textit{precision} &= \frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}},\qquad
+\textit{recall}=\textit{sensitivity}=\mathrm{TPR}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}},\\
+\textit{specificity}=\mathrm{TNR} &= \frac{\mathrm{TN}}{\mathrm{TN}+\mathrm{FP}},\qquad
+\mathrm{FPR}=\frac{\mathrm{FP}}{\mathrm{TN}+\mathrm{FP}},\\
+\mathrm{F1}&=\frac{2\,\textit{precision}\,\textit{recall}}{\textit{precision}+\textit{recall}},\qquad
+\textit{prevalence}=\frac{\mathrm{TP}+\mathrm{FN}}{n}.
+\end{align*}
+
+\subsection*{4. Cây quyết định (§4.1)}
+Đặt \(p_c=n_c/N\) là tần nhãn lớp \(c\) trong nút có \(N\) mẫu. Trong các bài ôn \(\log\) là \(\log_2\) trừ khi đề chỉ định khác.
+
+\textbf{Entropy:}
+\begin{equation*}
+H(S) = -\sum_c p_c\log p_c,\qquad 0\le H\le \log_2(\text{số nhãn khác không trong nút})\le \log_2 C.
+\end{equation*}
+
+\textbf{Information Gain / ID3 hay C4.5 (chia đa nhánh theo từng giá trị thuộc tính \(A\)):}
+\[
+H_{\text{sau tách}(A)}
+=\sum_v \frac{|S_v|}{|S|}\, H(S_v),\qquad
+\mathrm{Gain}(S,A)=H(S)-H_{\text{sau tách}(A)}.
+\]
+
+\textbf{Impurity Gini (một nút):}
+\begin{equation*}
+i(S)=1-\sum_c p_c^2\in[0,\,1-\tfrac1C].
+\end{equation*}
+Gini có trọng số sau khi cắt theo \(A\):
+\[
+G_{\text{sau tách}(A)}=\sum_v \frac{|S_v|}{|S|}\, i(S_v).
+\]
+Chọn thuộc tính \(\arg\max_A\bigl(i(S)-G_{\text{sau tách}(A)}\bigr)=\arg\min_A G_{\text{sau tách}(A)}\).
+
+\textbf{Lỗi phân loại có trọng số.}
+Lỗi tại nút: \(\textit{mis}(S)=1-\max_c(n_c/N)\).
+Sau khi tách \(A:\)
+\[
+\mathrm{Error}_{\text{sau tách}(A)}
+=\sum_v \frac{|S_v|}{|S|}\,\textit{mis}(S_v).
+\]
+Chọn thuộc tính làm \(\mathrm{Error}_{\text{sau tách}}\) \emph{nhỏ nhất} (tức giảm lỗi có trọng số nhiều nhất so với lỗi tại nút gốc hiện tại).
+
+\subsection*{5. Hồi quy tuyến tính \& batch GD (§4.2, §4.6.5)}
+Mô hình \(\hat y_i = w\,x_i + b\) (một chiều) hay \(\hat{\mathbf{y}}=\mathbf{X}\boldsymbol{\theta}\) (đa chiều, cùng ý).
+
+Hàm chi phí (lời giải dùng hệ số \(1/(2m)\)):
+\[
+J(w,b)=\frac1{2m}\sum_{i=1}^m (y_i-\hat y_i)^2.
+\]
+Gradient (batch):
+\[
+\frac{\partial J}{\partial w}
+=-\frac1m\sum_i (y_i-\hat y_i)x_i,\qquad
+\frac{\partial J}{\partial b}
+=-\frac1m\sum_i (y_i-\hat y_i).
+\]
+\textbf{Cập nhật §4.2} (learning rate \(\eta\)):
+\(w\leftarrow w-\eta\frac{\partial J}{\partial w}\), \(b\leftarrow b-\eta\frac{\partial J}{\partial b}\).
+
+\subsection*{6. Phân lớp tuyến tính, Perceptron, hinge trên tập sai}
+Nhãn \(t\in\{-1,+1\}\). Đầu vào \(\mathbf{x}\) (ấn thêm \(\tilde{x}=[1,x^\top]^\top\) nếu gộp bias).
+
+\textbf{Đường quyết định \& hàm bước:}
+\(s=w^\top x+b\) (hay \(\mathbf{w}^\top\tilde{\mathbf{x}}\)),
+\[
+\mathrm{sign}(z)=\begin{cases}+1,& z\ge 0,\\-1,& z<0.\end{cases}
+\]
+
+\textbf{Chi phí trên các mẫu sai \(\mathcal Y\):}
+\(J=\sum_{k\in \mathcal Y}(-t_k)(w^\top x_k+b)\).
+\[
+\frac{\partial J}{\partial w}=\sum_{k\in\mathcal Y}(-t_k)\,x_k,\qquad
+\frac{\partial J}{\partial b}=\sum_{k\in\mathcal Y}(-t_k).
+\]
+Gradient Descent một bước (§4.6.3,với \(\rho\)):
+\(w\leftarrow w-\rho\,\partial J/\partial w,\; b\leftarrow b-\rho\,\partial J/\partial b\) (quan trọng: dấu \textbf{-} \(\rho\cdot\) gradient).
+
+\textbf{Thuật toán Rosenblatt (Perceptron) --- §4.3:} một bước trên một mẫu sai được chọn có hệ thức tương đương
+\(w\leftarrow w+\rho\, t\, x,\quad b\leftarrow b+\rho\, t\) (với \(\rho>0\) --- so với hinge batch trên chỉ là cách học hai kiểu \emph{đã dùng riêng} trong các câu lời giải).
+
+\subsection*{7. k-Nearest Neighbors (§4.4)}
+Mã hoá phân loại nhị giá trị \(\to \{0,1\}\); vector \(\mathbf{x}=(x_1,\ldots,x_d)\) (tuỳ bài ôn).
+
+\textbf{Khoảng cách Euclidean:}
+\[
+d(\mathbf{x},\mathbf{q})=\sqrt{\sum_{\ell}(x_\ell-q_\ell)^2},\qquad d^2(\mathbf{x},\mathbf{q})=\sum_\ell(x_\ell-q_\ell)^2.
+\]
+Chọn \(K\) láng giềng có \(d\) nhỏ nhất \(\Rightarrow\) bỏ phiếu đa số nhãn.
+
+\subsection*{8. Naive Bayes \& Laplace (§4.5)}
+Độc lập có điều kiện: \(\tilde P(c\mid \mathbf{v})\propto P(c)\prod_j P(v_j\mid c)\) (hay so sánh bằng \(\log\) để tránh underflow).
+
+\paragraph{Tiên nghiệm.}
+Với \(\alpha=1\) (Laplace) và \(|\mathcal{C}|\) số lớp:
+\(P(c)=\dfrac{n_c+\alpha}{n+\alpha|\mathcal{C}|}\).
+
+\paragraph{Rời rạc có \(V\) giá trị khả dĩ của thuộc tính trong lớp \(c\) (hay \(|\mathcal{V}|\) cấu hình của thuộc tính):}
+\[
+P(v\mid c)=\frac{\#\{v\text{ trong } c\}+1}{n_c+V}.
+\]
+Nếu chỉ có 2 giá trị (đếm \(|\mathcal{V}|=2\) ở mẫu): mẫu số có thể có dạng \(n_c+| \mathcal{V}|\)-xem lời giải ví dụ Gia đình (Có/Không) với chia cho \(n_c+2\).
+
+\paragraph{Gaussian liên tục trong mỗi lớp \(c\) (một chiều):}
+\begin{align*}
+f(x\mid c) &= \frac{1}{\sqrt{2\pi}\, s_c}\exp\Bigl(-\frac{(x-\mu_c)^2}{2s_c^2}\Bigr).
+\end{align*}
+Trong các bài ôn: \(\mu_c\) là trung bình mẫu trên các điểm thuộc \(c\); \(s_c\) là độ lệch chuẩn mẫu (chia \(n_c-1\) khi \(n_c>1\)).
+Ghi \(\log\) tiên nghiệm và \(\sum \log f(\cdot)+\sum_{\text{rời rạc}}\log P(\cdot\mid c)\), chọn \(\arg\max\) (hoặc tương đương chọn \(\arg\max\) tích).
+
+\paragraph{Multinomial trên bag-of-words:}
+\[
+P(w_i\mid c)=\frac{N_{i,c}+1}{N^{\mathrm{tok}}_{c}+V},\qquad
+N_{i,c}=\text{lần xuất hiện của }w_i\text{ trong các văn bản lớp }c .
+\]
+\(V\) = kích thước từ điển (ví dụ \(7\) trong bài ôn đó).
+
+\subsection*{9. Neural network rất nhỏ (§4.6)}
+\textit{Tính độ kích thích} \(s\) bằng trọng số của các đầu vào cộng bias như trong mạch;\\
+hàm bước \(\tau\) thường là \(\tau(s)=+1\) nếu \(s\ge 0\) ngược lại \(-1\) (đúng theo đề bài ôn).
+
+OR: có thể dùng \(s=-\tfrac12+x_1+x_2\) (trong ôn của repo).\\
+AND có thể: \(s=-\tfrac32+x_1+x_2\).
+
+MLP ví dụ: tính từng neuron lớp \(\ell\) rồi lớp ra theo các trọng số đề cho --- thứ tự đúng theo luồng số của mạch.
+
+\subsection*{10. Phân cụm (Ch.\,5)}
+
+\textbf{K-means:} hai bước lặp
+\begin{enumerate}[label=(\arabic*)]
+\item Gán: mẫu \(\to\) tâm gần nhất theo Euclidean.
+\item Cập nhật: \(\displaystyle c_j\leftarrow\text{mean}\{x:x\text{ được gán nút }j\}\).
+\end{enumerate}
+Tiêu chí dừng: không đổi gán \(\lor\) không đổi tâm (trên bài tay). Tie-break \(\arg\min\) khoảng cách bằng nhau: quy định trước (ví dụ chọn chỉ số cụm nhỏ nhất).
+
+\textbf{Agglomerative single linkage (độ cao dendrogram là khoảng cách hai cụm hợp nhất):}
+\[
+d_\mathrm{single}(U,V)=\min_{u\in U,\,v\in V} d(u,v).
+\]
+Ghép hai cụm có khoảng cách \(\min\) trước, lặp cho đến một cụm.

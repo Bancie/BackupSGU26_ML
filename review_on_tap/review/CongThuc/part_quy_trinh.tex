@@ -1,0 +1,91 @@
+\section*{Phần B --- Quy trình làm bài theo dạng (bám các lời giải .tex trong repo)}
+
+\subsection*{B.1. Chương 2 --- Tiền xử lý}
+\begin{enumerate}
+  \item Sắp các giá trị một chiều tăng dần.
+  \item Tính trung bình, trung vị, mốt; ghi rõ có nhiều mốt nếu các giá trị có cùng tần suất cực đại.
+  \item Tính \(Q_1\), \(Q_3\), \(\mathrm{IQR}\); ghi rõ quy ước vị phân vị (vị trí nguyên hoặc nội suy giữa hai quan sát kề) vì các bài ôn có thể dùng hai cách.
+  \item Boxplot \& ngoại lai Tukey: năm số tóm tắt, \(\mathrm{IQR}\), so sánh với \(Q_{1,3}+1{,}5\,\mathrm{IQR}\).
+  \item \emph{Rời rạc hoá chia đều tần số} (\(k\) nhóm): lấy dãy đã sắp, chia thành các khúc có số điểm gần bằng nhau như các bài ôn (ví dụ \(q{+}\cdots\) với chia nguyên của \(n/k\)).
+    \footnote{Các mục công thức chính xem Phần~A.}
+  \item Thang đo khoảng: chứng minh tồn tại \(a{>}0\), \(b\) sao cho \(W=aV+b\) trên các cặp được cho hoặc bác bỏ nếu dãy không cùng phép affine tăng.
+\end{enumerate}
+
+\subsection*{B.2. Chương 3 --- Đánh giá mô hình}
+\begin{enumerate}
+  \item Nếu đề cho dãy luật có thứ tự \texttt{if}-\texttt{elseif}: áp đúng thứ tự trên mỗi mẫu rồi đối chiếu nhãn thực.
+  \item Lập confusion matrix (hàng: thực, cột: đoán) bằng cách đếm từng cặp \((y_i,\hat{y}_i)\).
+  \item Nhị phân với một lớp dương quy định: đếm \(\mathrm{TP},\mathrm{FN},\mathrm{FP},\mathrm{TN}\) rồi thế vào các công thức ở Phần~A.
+  \item Đa lớp: accuracy tổng thể \(\sum_k \mathrm{TP}_k / n\) và chỉ số theo lớp \(k\) như trong Phần~A.\@
+\end{enumerate}
+
+\subsection*{B.3. §\,4.1 --- Cây quyết định}
+\begin{enumerate}
+  \item Tại nút \(S\): ghi các mẫu và các đặc trưng được phép chia.
+  \item Với từng đặc trưng có giá trị rời rạc trong \(S\), tách thành vài nhánh \(\{S_v\}\) theo đủ các giá trị xuất hiện.
+  \item Tính chỉ báo của đề: Entropy của \(S\), Gain cho mỗi đặc trưng \(\mathrm{Gain}(S,A)=H(S)-\sum_v \frac{|S_v|}{|S|}\,H(S_v)\); hoặc Gini có trọng số; hoặc lỗi phân có trọng số.
+  \item Chọn thuộc tính theo chỉ báo đề cho: \(\mathrm{Gain}\) lớn nhất hoặc Gini có trọng số nhỏ nhất hoặc lỗi có trọng số nhỏ nhất.
+  \item Lặp lại trên từng nhánh chứa mẫu chưa thuần nhãn \(\land\) vẫn còn đặc trưng dùng được; đặt lá khi chỉ một nhãn còn lại (hoặc hết chia theo ôn tay).
+\end{enumerate}
+\noindent\textbf{Dự báo mẫu mới:} đưa các giá trị đặc trưng vào các luật if--then từng bước từ gốc của cây xuống lá. Trường hợp đề chỉ cho dãy luật if--elseif có thứ tự cố định thì luôn so khớp từ trên xuống và dừng ở luật đầu thoả như phần Đánh giá.
+
+\subsection*{B.4. §\,4.2 --- Hồi quy tuyến tính + batch GD}
+\begin{enumerate}
+  \item Xác định \(m\) và \(\hat{y}_i=wx_i+b\); \(J=\dfrac{1}{2m}\sum_i (y_i-\hat{y}_i)^2\).
+  \item Tại \((w^{(t)}, b^{(t)})\): tính các dự báo \& phần dư \(y_i-\hat{y}_i\).
+  \item \(\partial J/\partial w\), \(\partial J/\partial b\) theo Phần~A.
+  \item Cập nhật \(w\leftarrow w-\eta\,\partial J/\partial w\), \(b\leftarrow b-\eta\,\partial J/\partial b\) (\(\eta\) của đề; đổi \(\eta\) \(\leftrightarrow\) \(\rho\) theo notation đề ôn tay).
+\end{enumerate}
+
+\subsection*{B.5. §\,4.3 --- Phân lớp tuyến tính (sign) + hinge trên tập sai + Perceptron}
+\begin{enumerate}
+  \item Tính \(s_k=w^\top x_k+b\) rồi \(\hat{y}_k=\mathrm{sign}(s_k)\); so với \(t_k\) để tìm các mẫu sai.
+  \item Chi phí chỉ trên tập sai \(\mathcal{Y}\): lấy \(\partial J/\partial w\), \(\partial J/\partial b\) theo Phần~A.
+  \item Với gradient trên tập sai (§\,4.6.3): \(w\leftarrow w-\rho\,\partial J/\partial w\), \(b\leftarrow b-\rho\,\partial J/\partial b\).
+  \item Với Perceptron một mẫu (§\,4.3): chọn mẫu sai theo thứ tự đề; \(w\leftarrow w+\rho\,t\,x\), \(b\leftarrow b+\rho\,t\).
+\end{enumerate}
+
+\subsection*{B.6. §\,4.4 --- \(k\)-NN}
+\begin{enumerate}
+  \item Mã hoá thuộc tính rời rạc theo quy ước đề (vd. Có/Không \(\to 0/1\)); xây \(\mathbf{x},\mathbf{q}\) cùng số chiều.
+  \item Tính \(d^2(\mathbf{x},\mathbf{q})\) rồi sắp tăng \(d\); lấy \(K\) láng giềng nhỏ nhất.
+  \item Bỏ phiếu nhãn đa số; có thể nhắc lại với \(K'\) khác nếu đề hoặc nhận xét yêu cầu.
+\end{enumerate}
+
+\subsection*{B.7. §\,4.5 --- Naive Bayes + Laplace}
+\begin{enumerate}
+  \item Đếm \(n,n_c\) và số nhãn; Laplace \(\alpha{=}1\): \(P(c)=\dfrac{n_c+\alpha}{n+\alpha|\mathcal{C}|}\); với thuộc tính rời rạc có \(V\) giá trị khả dụng, dùng \(\dfrac{n_{v,c}+1}{n_c+V}\) với \(n_{v,c}\) là số lần thấy \(v\) trong lớp \(c\) (theo các ôn 4.5).
+  \item Gaussian: tính \(\mu_c,s_c\) trong từng lớp; lấy log mật độ tại mỗi biến liên tục.
+  \item Nhận các thể hiện mới: cộng \(\log P(c)+\sum \log P(v_j\mid c)\) (bỏ qua thuộc tính thiếu nếu đề nói không quan sát).
+  \item Chọn lớp có log-score lớn hơn.
+  \item Multinomial (email): tiên nghiệm lớp; mỗi token \(P(w_i\mid c)=(\text{đếm}+1)/(N_c+V)\); nhân (log) theo tần suất bộ đếm của văn bản cần phân lớp.
+\end{enumerate}
+
+\subsection*{B.8. §\,4.6 --- Perceptron / MLP tí hon}
+\begin{enumerate}
+  \item Viết đường biên dạng \(\mathbf{w}^\top \mathbf{x}+b=0\) từ đề đồ họa/phương trình.
+  \item Thay điểm vào \(\tau(s)\): \(+1\) nếu \(s\ge 0\) ngược lại \(-1\) (hay quy định đề).
+  \item MLP không ẩn: tính tuần tự theo chỉ báo các nút từ trái-phải theo các trọng số đề.
+  \item OR/AND trong \(\{0,1\}^2\): chỉ ra \(\mathbf{w},b\) sao \(\tau(\mathbf{w}^\top\mathbf{x}+b)\) khớp bảng (so với ví dụ \(-\tfrac12+x_1+x_2\) cho OR trong lời giải đã ôn).
+\end{enumerate}
+
+\subsection*{B.9. Chương 5 --- \(K\)-means}
+\begin{enumerate}
+  \item Khởi tạo các tâm \(C_j^{(0)}\) theo đề (\(j{=}1,\ldots,K\)).
+  \item Bước \emph{gán}: mỗi điểm vào cụm của tâm gần Euclidean nhất (nếu hai khoảng cách bằng nhau, ghi rõ quy tắc phá hoà, vd. chọn cụm có chỉ số nhỏ hơn).
+  \item Bước \emph{cập nhật}: tâm mới = trung bình toạ độ của điểm trong cụm.
+  \item Lặp đến khi gán không đổi hoặc các tâm không đổi (trên bài tay); ghi kết quả cụm cuối \& tâm.
+\end{enumerate}
+
+\subsection*{B.10. Chương 5 --- Phân cụm phân cấp (single linkage)}
+\begin{enumerate}
+  \item Tính ma trận khoảng cách đôi một giữa các điểm.
+  \item Tìm cặp có khoảng cách nhỏ nhất để ghép thành cụm ở bước hiện tại; độ cao nối trên dendrogram thường bằng khoảng cách của bước đó trong các bài ôn.
+  \item Sau khi ghép hai cụm \(U\) và \(V\), với mọi cụm \(W\) còn lại: cập nhật
+  \[
+    d_{\mathrm{single}}(U{\cup}V,W)=\min\bigl\{d_{\mathrm{single}}(U,W),\, d_{\mathrm{single}}(V,W)\bigr\}.
+  \]
+  \item Lặp cho đến khi còn một cụm.
+\end{enumerate}
+
+
